@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JacketPages Bills</title>
+    <link href="bills.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <form name = "billForm" method="post">
+      <h1>JacketPages Bills</h1>
+      <p>
+        <label for="title">
+          <span>Title: </span>
+        </label>
+        <input type="text" id="title" name="title">
+      </p>
+      <p>
+        <label for="description">
+          <span>Description: </span>
+        </label>
+        <!-- <input type="text" id="description" name="desc"> -->
+        <textarea id="description" class="text" name="description" form="billForm"></textarea>
+      </p>
+      <p>
+        <label for="fundraising">
+          <span>Fundraising Description: </span>
+        </label>
+        <input type="text" id="fundraising" name="fundraising">
+      </p>
+      <p>
+        <label for="type">
+          <span>Type: </span>
+        </label>
+        <input type="text" id="type" name="type">
+      </p>
+      <p>
+        <label for="category">
+          <span>Category: </span>
+        </label>
+        <input type="text" id="category" name="category">
+      </p>
+      <p>
+        <!-- auto-populated??? -->
+        <label for="org">
+          <span>Organization: </span>
+        </label>
+        <input type="text" id="org" name="organization">
+      </p>
+      <p>
+        <label for="dues">
+          <span>Dues: </span>
+        </label>
+        <input type="number" id="dues" name="dues">
+      </p>
+      <p>
+        <label for="under">
+          <span>Number of undergrad members: </span>
+        </label>
+        <input type="number" id="under" name="undergradNum">
+      </p>
+      <p>
+        <label for="grad">
+          <span>Number of grad members: </span>
+        </label>
+        <input type="number" id="grad" name="gradNum">
+      </p>
+      <p>
+        <label for="underAuth">
+          <span>Undergrad author: </span>
+        </label>
+        <input type="text" id="underAuth" name="underAuth">
+      </p>
+      <p>
+        <label for="gradAuth">
+          <span>Grad author: </span>
+        </label>
+        <input type="text" id="gradAuth" name="gradAuth">
+      </p>
+
+      <div id="lineItems">
+        <div class="section">
+          <b>Line Items:</b><br>
+          <div id="items-inner">
+            <p>
+              <label for="lineName">
+                <span>Name: </span>
+              </label>
+              <input type="text" id="lineName" name="lineName">
+            </p>
+            <p>
+              <label for="cost">
+                <span>Cost: </span>
+              </label>
+              <input type="number" id="cost" name="cost" onkeyup="calculateTotal()">
+            </p>
+            <p>
+              <label for="quantity">
+                <span>Quantity: </span>
+              </label>
+              <input type="number" id="quantity" name="quantity" onkeyup="calculateTotal()">
+            </p>
+            <p>
+              <label for="totalCost">
+                <span>Total cost: </span>
+              </label>
+              <input type="number" id="totalCost" name="totalCost" readonly>
+            </p>
+            <p>
+              <label for="request">
+                <span>Requesting: </span>
+              </label>
+              <!-- below also calculated but editable -->
+              <input type="number" id="request" name="requested">
+            </p>
+            <p>
+              <label for="account">
+                <span>Account: </span>
+              </label>
+              <input type="text" id="account" name="account">
+            </p>
+
+            <p><a href="#" class='remove'>Remove Section</a></p>
+            <!-- up/down? add/delete? -->
+          </div>
+        </div>
+      </div>
+
+      <p><a href="#" class='addsection'>Add Section</a></p>
+
+      <div id="submit">
+        <input type="submit" value="Submit">
+      </div>
+
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="bill.js"></script>
+  </body>
+</html>
