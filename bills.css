@@ -1,6 +1,6 @@
 h1 {
-  margin-top: 0;
-  text-align: center;
+    margin-top: 0;
+    text-align: center;
 }
 
 form {
@@ -18,7 +18,8 @@ label span {
     vertical-align: middle;
 }
 
-input, textarea {
+input,
+textarea {
     font: 1em serif;
     width: 250px;
     margin-left: 10px;
@@ -35,5 +36,5 @@ textarea {
 }
 
 #submit {
-  text-align: center;
+    text-align: center;
 }

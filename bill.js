@@ -48,7 +48,8 @@ $('body').on('click', '.addsection', function () {
         }).end()
 
         //inject new section
-        .appendTo('#lineItems');
+        //.appendTo('#lineItems');
+    $('#lineItems').append(section);
     return false;
 });
 
@@ -63,4 +64,39 @@ $('#lineItems').on('click', '.remove', function () {
     return false;
 });
 
+$('#lineItems').on('click', '.down', function() {
+    var selected = 0; 
+    var itemlist = $('#lineItems'); 
+    //finds # of lineitem sections
+    var len = $(itemlist).children().length; 
+    
+    //finds position of section in lineitem 
+    selected = $(this).parent().parent().index();  
+ 
+    if(selected < len)
+        {
+            //swaps sections 
+            jQuery($(itemlist).children().eq(selected+1)).after(jQuery($(itemlist).children().eq(selected)));
+         	selected=selected+1;
+     	}
+    
+    return false; 
+});
 
+$('#lineItems').on('click', '.up', function() {
+    var selected = 0; 
+    var itemlist = $('#lineItems'); 
+    //finds # of lineitem sections 
+    var len = $(itemlist).children().length; 
+
+    //finds position of section in lineitem 
+    selected = $(this).parent().parent().index(); 
+ 
+    if(selected>0)
+        {
+            jQuery($(itemlist).children().eq(selected - 1)).before(jQuery($(itemlist).children().eq(selected)));
+         	selected=selected-1;
+     	}
+    
+    return false; 
+}); 
