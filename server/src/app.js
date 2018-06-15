@@ -8,9 +8,14 @@ app.use(morgan("combine"));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.listen(process.env.PORT || 8081);
-app.get("/status", (req, res) => {
+app.get("/bills", (req, res) => {
     res.send({
-        message: "hello world"
-    });
+            data: [
+        { data1: "hello", data2: "world"},
+        { data1: "hello", data2: "world"},
+        { data1: "hello", data2: "world"},
+        { data1: "hello", data2: "world"},
+        { data1: "hello", data2: "world"}
+    ]});
 });
+app.listen(process.env.PORT || 8081);
