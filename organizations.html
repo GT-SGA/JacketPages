@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        <title>JacketPages | Organizations</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script><link rel="stylesheet" type="text/css" href="/css/jquery-ui-1.10.3.custom.css" /><link rel="stylesheet" type="text/css" href="/css/reset.css" /><link rel="stylesheet" type="text/css" href="/css/default.css" /><link rel="stylesheet" type="text/css" href="/css/fonts.css" /><link rel="stylesheet" type="text/css" href="/css/typography.css" /><link rel="stylesheet" type="text/css" href="/css/layout.css" /><link rel="stylesheet" type="text/css" href="/css/blocks.css" /><link rel="stylesheet" type="text/css" href="/css/content.css" /><link rel="stylesheet" type="text/css" href="/css/editor.css" /><link rel="stylesheet" type="text/css" href="/css/static.css" /><link rel="stylesheet" type="text/css" href="/css/icing.css" /><link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />        <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+        <script type="text/javascript">
+			// @TODO Generate this script using the HTML and Js helpers
+			$(document).ready(function() {
+				/**
+				 * Bind the top unorder lists to the open and close functions
+				 */
+				$('.utilityMenu li').bind('mouseover', openSubMenu);
+				$('.utilityMenu ul').bind('mouseout', closeSubMenu);
+				/**
+				 * Find the nested unordered lists and make them visible or hidden depending
+				 * on the event.
+				 */
+				function openSubMenu() {
+					$(this).find('ul').css('visibility', 'visible');
+				};
+
+				function closeSubMenu() {
+					$(this).find('ul').css('visibility', 'hidden');
+				};
+
+			});
+
+			function openHelp() {
+				$("#help").attr("style", "");
+			}
+
+			function closeHelp() {
+				$("#help").attr("style", "display:none;");
+			}
+
+        </script>
+		<script>
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] ||
+				function() {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', 'UA-43065423-1', 'gatech.edu');
+			ga('send', 'pageview');
+
+</script>
+    </head>
+    <body>
+
+		<div id="masthead">
+		  
+		  <div id="identity" class="clearfix">
+		    <div id="identity-wrapper">
+		      <h1 id="gt-logo">
+		        <a href="/" rel="home" title="Georgia Tech" >
+		        	<img src="/img/logo-gt.png" alt="Georgia Tech" />		        </a>    
+		      </h1>
+		      <h1 id="jp-logo">
+		      	<a href="/" rel="home" title="JacketPages">
+		      		<img src="/img/jacketpages.png" alt="Jacket Pages" />		      	</a> 
+		      </h1>
+		    </div>
+		  </div><!-- /#identity -->
+		
+		  <div id="primary-menus">
+		    <div id="primary-menus-wrapper" class="clearfix">
+		      <a id="primary-menus-toggle" class="hide-for-desktop"><span>Menu</span></a>
+		      <div id="primary-menus-off-canvas" class="off-canvas">
+		        <a id="primary-menus-close" class="hide-for-desktop"><span>Close</span></a>
+		        
+		        <div id="nav">
+		          <div id="main-menu-wrapper"><ul class="menu"><li class="expanded first">
+	<a href="/users/view/22047"><span>My Account</span></a>	<ul class="menu">
+		<li class="leaf first">
+			<a href="/users/view/22047">Account Profile</a>		</li>
+		<li class="leaf">
+			<a href="/users/logout">Logout</a>		</li>
+		<li class="leaf last">
+			<a href="/">JacketPages Home</a>		</li>
+	</ul>
+	
+</li><li class="expanded">
+	<a href="/bills"><span>Bills</span></a>	<ul class="menu">
+		<li class="leaf first">
+			<a href="/bills/add">Submit Bill</a>		</li>
+		<li class="leaf">
+			<a href="/bills/my_bills">View My Bills</a>		</li>
+		<li class="leaf last">
+			<a href="/bills">View All Bills</a>		</li>
+	</ul>
+			
+</li><li class="expanded">
+<a href="/organizations"><span>Organizations</span></a><!--<ul class="menu">
+	<li class="leaf first ">
+	</li>
+	
+	<li class="leaf">
+			</li>
+	<li class="leaf">
+		</li>
+	<li class="leaf last ">
+	</li>
+
+</ul>--></li><li class="expanded">
+<a href="/sga_people"><span>Student Government</span></a><ul class="menu">
+	<li class="leaf first">
+		<a href="/sga_people">View SGA Members</a>	</li>
+
+
+
+</ul></li><li class="expanded"></li><li class="leaf last"><a href="#" onclick="openHelp()">Help</a></li></ul></div>	<div id="action-items-wrapper"><div id="action-items"><ul>
+	<li class="first active">
+		<a href="/bills/add" class="active">Submit Bill</a>	</li>
+	<li class="active">
+		<a href="/users/logout" class="active">Logout</a>	</li>
+</ul>
+</div></div>		        </div>
+		        
+		        <div id="utility">
+		          <div class="row clearfix">
+		          
+		            <div id="utility-links">
+		              <!-- utility-links -->
+		              <ul class="menu">
+		                <li class="mothership ulink"><a href="http://www.gatech.edu">Georgia Tech Home</a></li>
+		                <li class="campus-map ulink"><a href="http://www.map.gatech.edu">Map</a></li>
+		                <li class="directories ulink"><a href="http://www.gatech.edu/directory">Directory</a></li>
+		                <li class="offices ulink"><a href="http://www.gatech.edu/departments">Offices</a></li>
+		              </ul>
+		            </div>
+		            
+		            <!--
+		            <div id="social-media-links-wrapper">
+		              <ul id="social-media-links">
+		                <li class="first"><a href="https://www.facebook.com/georgiatech" title="Facebook" class="facebook">Facebook</a></li>
+		                <li><a href="http://www.flickr.com/photos/georgiatech" title="Flickr" class="flickr">Flickr</a></li>
+		                <li><a href="https://plus.google.com/+georgiatech/posts" title="Google Plus" class="googleplus">Google Plus</a></li>
+		                <li><a href="http://www.linkedin.com/company/3558" title="LinkedIn" class="linkedin">LinkedIn</a></li>
+		                <li><a href="http://pinterest.com/georgiatech/" title="Pinterest" class="pinterest">Pinterest</a></li>
+		                <li><a href="http://gatech.edu/rss" title="RSS" class="rss">RSS</a></li>
+		                <li><a href="https://twitter.com/georgiatech" title="Twitter" class="twitter">Twitter</a></li>
+		                <li class="last"><a href="http://www.youtube.com/georgiatech" title="YouTube" class="youtube">YouTube</a></li>
+		              </ul>
+		            </div>
+		            
+		            /#social-media -->
+		            
+		          </div>
+		        </div><!-- /#utility -->
+		      </div>
+		      
+		      <!--<div id="site-search">
+						      </div>-->
+		      
+		    </div><!-- /#primary-menus-wrapper -->
+		    
+		    
+<div id="breadcrumb" class="hide-for-mobile">
+	<div class="row clearfix">
+		<ul style="float: right">
+			<li class="last">
+				<a>Welcome, Jon King</a>
+			</li>
+		</ul>
+	<ul><li class="breadcrumb-item first"><a href="/">Home</a></li><li class="breadcrumb-item last"><a href="/organizations">All Organizations</a></li></ul>	</div>
+</div><!-- /#breadcrumb -->		    
+		  </div><!-- /#primary-menus -->
+		    
+		</div><!-- /#masthead -->
+
+        
+        <div id="content">
+        <div class="clearfix">
+			<div class="ui-overlay" id="help" style="display:none;">
+				<div class="ui-widget-overlay"></div>
+				<div class="ui-corner-all" id="overlay" style="width: 100%; height: 600px; position: absolute;overflow-y:scroll; margin-top:10px;">
+					<button onclick="closeHelp()" style="float:right;" type="submit">X</button><div class='helppage' style='margin-left: 10px; margin-right:10px;'>
+<h1>Submitting SGA Bills</h1>
+<h2>Introduction</h2>
+<p>The following will help you to prepare and to learn the process that is required to obtain funding from, or pass a resolution with, the Student Government Association (SGA) at Georgia Tech.<br />
+The Student Government’s legislative structure consists of a body of undergraduate students (Undergraduate House of Representatives or UHR) and of a body of graduate students (Graduate Student Senate or GSS). The passing of a “joint” bill requires consideration of a bill in each body and is subject to passing by an “enactment ratio.” Mostly all financial requests by student organizations will be classified as a joint bill. The enactment ratio is a mathematical calculation to determine whether a bill passes both bodies of SGA. It ensures that undergraduate and graduates are represented proportionally since undergraduates represent more of the student body and contribute more money to SGA from the Student Activity Fee.<br />
+The money that SGA allocates to organizations comes from the “Student Activity Fee” line that shows up on the tuition and fee assessment paid by each student every semester. This money is then budgeted to many different organizations with the Student Center and the Campus Recreation Center receiving approximately 70% of that budget. At the end of the year, the money that has not been spent is placed into several accounts that can then be allocated to different groups for special one-time items.
+Student Government has a set of policies and priorities that it follows with regards to funding requests.<br />
+Please keep in mind that SGA has a set amount of money that it can spend in one year. SGA attempts to wisely spend that set of money on the organizations with most demonstrated need and on those bills that will benefit the majority of campus. Not every request will end in success.</p>
+<h2>The Process</h2>
+<p>The process begins with a student organization that needs additional funding for an event and turns to SGA for financial assistance. SGA should serve as the organization’s last resort after all other funding options have been exhausted. Next, the organization will contact an undergraduate Representative and a graduate Senator of SGA and ask those members to author their bill. A complete list of senators and representatives can be found at <a href='http://jacketpages.gatech.edu/sga_people'>http://jacketpages.gatech.edu/sga_people</a>. A bill form (further explained in “How to Submit an SGA Bill”) requesting general information about the organization or student will be completed and a bill will be drafted to include the organization’s idea for an event and an itemized list of requested items.<br />
+If the bill is submitted and reviewed by the authors by 8am on Monday, the bill will appear in New Business on the agenda at the SGA meeting that following Tuesday. The Joint Finance Committee (JFC) will review the bill at its weekly meeting that Thursday; a representative from the organization will be invited to the meeting to speak on behalf of the organization. The Joint Finance Committee will suggest changes based on SGA funding policies (a copy of JFC Policy can be found in the back of this binder). The next Tuesday, the bill will move into Old Business where it will be discussed and voted on. After both legislative bodies discuss the bill and the enactment ratio is reached, the funds will be allocated to the organization. Please see the policy of the Student Organization Finance Office (in the back of this binder) for information on reimbursements and purchases.</p>
+<p style='font-style:italic; font-weight:bold;'>Be sure to begin working on bills for events and activities at least four (4) weeks before the event!
+</p>
+<h2>Step by Step Process Checklist:</h2>
+<ul style='padding-left:40px;'>
+	<li>Before contacting a potential author, draft your bill with itemized costs according to the Joint Finance Committee policy, available at <a href='http://sga.gatech.edu/JFC'>http://sga.gatech.edu/JFC</a>.</li>
+	<li>Find authors, both an undergraduate and a graduate. A complete list of representatives and senators can be found at <a href='http://jacketpages.gatech.edu/sga_people'>http://jacketpages.gatech.edu/sga_people</a>. Be sure to include your bill and extra information when making contact.</li>
+	<li>Bills must be submitted and reviewed by both authors online by 8am on Monday in order for them to be placed in New Business on Tuesday.</li>
+	<li>After appearing in New Business, the bill submitted or a representative from the organization will need to attend a meeting with the Joint Finance Committee (an invitation will be sent to the bill submitter)</li>
+	<li>After the meeting with the JFC has been attended and the JFC has made their recommendations, the bill will move to Old Business and be voted on the following week. Note: this is one week after that bill was in New Business.</li>
+	<li>You should attend the meeting when your bill appears on the agenda in Old Business. This includes the Graduate Student Senate meeting at 11am on Tuesdays and the Undergraduate House of Representatives meetings at 7pm on Tuesdays, both in the Student Services Building (Flag Building), room 117. You will be asked to present the bill to the body or answer questions from senators/representatives.</li>
+	<li>If your bill passes, please see the policy of the Student Organization Finance Office about reimbursements and purchases. It if fails, you will have the opportunity to revise and resubmit.</li>
+
+</ul>
+</div>
+</div>
+			</div>
+
+						
+
+<div class="links left-nav" id="sidebar">
+        <ul></ul></div>
+
+<div id="middle">
+    <div id="page_title">Organizations</div>
+    
+<div id="alphabet">
+	<div id="leftHalf">
+		<form action="/organizations" id="OrganizationIndexForm" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"/></div><div class="input text"><label for="search" style="display:inline">Search</label><input name="data[Organization][keyword]" id="search" style="display:inline" type="text"/></div></form>		<div id="div_choices" class="autocomplete"></div>
+	</div>
+	<div id="rightHalf">
+		<ul>
+			<li>
+<a href="/organizations/index/a">A</a>&nbsp</li>
+<li>
+<a href="/organizations/index/b">B</a>&nbsp</li>
+<li>
+<a href="/organizations/index/c">C</a>&nbsp</li>
+<li>
+<a href="/organizations/index/d">D</a>&nbsp</li>
+<li>
+<a href="/organizations/index/e">E</a>&nbsp</li>
+<li>
+<a href="/organizations/index/f">F</a>&nbsp</li>
+<li>
+<a href="/organizations/index/g">G</a>&nbsp</li>
+<li>
+<a href="/organizations/index/h">H</a>&nbsp</li>
+<li>
+<a href="/organizations/index/i">I</a>&nbsp</li>
+<li>
+<a href="/organizations/index/j">J</a>&nbsp</li>
+<li>
+<a href="/organizations/index/k">K</a>&nbsp</li>
+<li>
+<a href="/organizations/index/l">L</a>&nbsp</li>
+<li>
+<a href="/organizations/index/m">M</a>&nbsp</li>
+<li>
+<a href="/organizations/index/n">N</a>&nbsp</li>
+<li>
+<a href="/organizations/index/o">O</a>&nbsp</li>
+<li>
+<a href="/organizations/index/p">P</a>&nbsp</li>
+<li>
+<a href="/organizations/index/q">Q</a>&nbsp</li>
+<li>
+<a href="/organizations/index/r">R</a>&nbsp</li>
+<li>
+<a href="/organizations/index/s">S</a>&nbsp</li>
+<li>
+<a href="/organizations/index/t">T</a>&nbsp</li>
+<li>
+<a href="/organizations/index/u">U</a>&nbsp</li>
+<li>
+<a href="/organizations/index/v">V</a>&nbsp</li>
+<li>
+<a href="/organizations/index/w">W</a>&nbsp</li>
+<li>
+<a href="/organizations/index/x">X</a>&nbsp</li>
+<li>
+<a href="/organizations/index/y">Y</a>&nbsp</li>
+<li>
+<a href="/organizations/index/z">Z</a>&nbsp</li>
+<li>
+<a href="/organizations">ALL</a>			</li>
+		</ul>
+	</div>
+</div>
+<div id='forupdate'>
+	<table class="listing"><tr class="links"><th></th> <th><a href="/organizations/index/sort:NAME/direction:asc" id="link-1097749812">Name</a></th> <th>Description</th></tr><tr><td><a href="/organizations/view/27850">A Cappella</a></td> <td><a href="https://orgsync.com/142413/chapter" class="button" target="_blank">https://orgsync.com/142413/chapter</a></td></tr><tr><td><a href="/organizations/view/27771">Aarohi</a></td> <td><a href="https://orgsync.com/136488/chapter" class="button" target="_blank">https://orgsync.com/136488/chapter</a></td></tr><tr><td><a href="/organizations/view/27868">Academic Quizbowl Team</a></td> <td><a href="https://orgsync.com/135855/chapter" class="button" target="_blank">https://orgsync.com/135855/chapter</a></td></tr><tr><td><a href="/organizations/view/28228">Aerospace Design-Build-Fly Club</a></td> <td><a href="https://orgsync.com/135856/chapter" class="button" target="_blank">https://orgsync.com/135856/chapter</a></td></tr><tr><td><a href="/organizations/view/27772">African American Student Union</a></td> <td><a href="https://orgsync.com/137873/chapter" class="button" target="_blank">https://orgsync.com/137873/chapter</a></td></tr><tr><td><a href="/organizations/view/27775">African Student Association</a></td> <td><a href="https://orgsync.com/142406/chapter" class="button" target="_blank">https://orgsync.com/142406/chapter</a></td></tr><tr><td><a href="/organizations/view/27945">AIESEC</a></td> <td><a href="https://orgsync.com/135787/chapter" class="button" target="_blank">https://orgsync.com/135787/chapter</a></td></tr><tr><td><a href="/organizations/view/33324">Airsoft Club at Georgia Tech</a></td> <td><a href="https://orgsync.com/135869/chapter" class="button" target="_blank">https://orgsync.com/135869/chapter</a></td></tr><tr><td><a href="/organizations/view/28105">Alpha Chi Omega</a></td> <td><a href="https://orgsync.com/136062/chapter" class="button" target="_blank">https://orgsync.com/136062/chapter</a></td></tr><tr><td><a href="/organizations/view/28128">Alpha Gamma Delta</a></td> <td><a href="https://orgsync.com/135730/chapter" class="button" target="_blank">https://orgsync.com/135730/chapter</a></td></tr><tr><td><a href="/organizations/view/28017">Alpha Kappa Psi</a></td> <td><a href="https://orgsync.com/135761/chapter" class="button" target="_blank">https://orgsync.com/135761/chapter</a></td></tr><tr><td><a href="/organizations/view/28180">Alpha Phi</a></td> <td><a href="https://orgsync.com/136408/chapter" class="button" target="_blank">https://orgsync.com/136408/chapter</a></td></tr><tr><td><a href="/organizations/view/28147">Alpha Phi Alpha</a></td> <td><a href="https://orgsync.com/136457/chapter" class="button" target="_blank">https://orgsync.com/136457/chapter</a></td></tr><tr><td><a href="/organizations/view/27946">Alpha Phi Omega</a></td> <td><a href="https://orgsync.com/135858/chapter" class="button" target="_blank">https://orgsync.com/135858/chapter</a></td></tr><tr><td><a href="/organizations/view/28155">Alpha Tau Omega</a></td> <td><a href="https://orgsync.com/136467/chapter" class="button" target="_blank">https://orgsync.com/136467/chapter</a></td></tr><tr><td><a href="/organizations/view/44653">Alternative Service Breaks</a></td> <td><a href="https://orgsync.com/135731/chapter" class="button" target="_blank">https://orgsync.com/135731/chapter</a></td></tr><tr><td><a href="/organizations/view/28243">American Helicopter Society @ GT</a></td> <td><a href="https://orgsync.com/135782/chapter" class="button" target="_blank">https://orgsync.com/135782/chapter</a></td></tr><tr><td><a href="/organizations/view/28018">American Institute of Aeronautics and Astronautics</a></td> <td><a href="https://orgsync.com/135920/chapter" class="button" target="_blank">https://orgsync.com/135920/chapter</a></td></tr><tr><td><a href="/organizations/view/28214">American Institute of Architecture Students</a></td> <td><a href="https://orgsync.com/143330/chapter" class="button" target="_blank">https://orgsync.com/143330/chapter</a></td></tr><tr><td><a href="/organizations/view/28019">American Medical Student Association</a></td> <td><a href="https://orgsync.com/136399/chapter" class="button" target="_blank">https://orgsync.com/136399/chapter</a></td></tr></table> <div class="paging">
+    <span class="disabled">&lt;&lt; previous</span>    |
+    <span class="current">1</span> | <span><a href="/organizations/index/page:2" id="link-1482037108">2</a></span> | <span><a href="/organizations/index/page:3" id="link-1760364277">3</a></span> | <span><a href="/organizations/index/page:4" id="link-882249109">4</a></span> | <span><a href="/organizations/index/page:5" id="link-160573248">5</a></span> | <span><a href="/organizations/index/page:6" id="link-343958770">6</a></span> | <span><a href="/organizations/index/page:7" id="link-148034854">7</a></span> | <span><a href="/organizations/index/page:8" id="link-1633740037">8</a></span> | <span><a href="/organizations/index/page:9" id="link-669513032">9</a></span>    |
+    <span class="next"><a href="/organizations/index/page:2" id="link-1482967044" rel="next">next &gt;&gt;</a></span>    <br>
+    <br>
+    Page 1 of 13, showing 20 records out of
+243 total, starting on record 1, ending on 20<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function () {$("#link-1097749812").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/sort:NAME\/direction:asc"});
+return false;});
+$("#link-1482037108").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/page:2"});
+return false;});
+$("#link-1760364277").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/page:3"});
+return false;});
+$("#link-882249109").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/page:4"});
+return false;});
+$("#link-160573248").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/page:5"});
+return false;});
+$("#link-343958770").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/page:6"});
+return false;});
+$("#link-148034854").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/page:7"});
+return false;});
+$("#link-1633740037").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/page:8"});
+return false;});
+$("#link-669513032").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/page:9"});
+return false;});
+$("#link-1482967044").bind("click", function (event) {$.ajax({beforeSend:function (XMLHttpRequest) {$("#listing").fadeOut();}, complete:function (XMLHttpRequest, textStatus) {$("#listing").fadeIn();}, dataType:"html", evalScripts:true, indicator:"#indicator", success:function (data, textStatus) {$("#forupdate").html(data);}, url:"\/organizations\/index\/page:2"});
+return false;});});
+//]]>
+</script></div></div>
+<script type="text/javascript">
+	$(function() {
+var avaliableTags = [{"label":"A Cappella","id":27850},{"label":"Aarohi","id":27771},{"label":"Academic Quizbowl Team","id":27868},{"label":"Aerospace Design-Build-Fly Club","id":28228},{"label":"African American Student Union","id":27772},{"label":"African Student Association","id":27775},{"label":"AIESEC","id":27945},{"label":"Airsoft Club at Georgia Tech","id":33324},{"label":"Alpha Chi Omega","id":28105},{"label":"Alpha Gamma Delta","id":28128},{"label":"Alpha Kappa Psi","id":28017},{"label":"Alpha Phi","id":28180},{"label":"Alpha Phi Alpha","id":28147},{"label":"Alpha Phi Omega","id":27946},{"label":"Alpha Tau Omega","id":28155},{"label":"Alternative Service Breaks","id":44653},{"label":"American Helicopter Society @ GT","id":28243},{"label":"American Institute of Aeronautics and Astronautics","id":28018},{"label":"American Institute of Architecture Students","id":28214},{"label":"American Medical Student Association","id":28019},{"label":"American Nuclear Society GT Student Section","id":28020},{"label":"American Red Cross Club","id":27948},{"label":"American Society for Engineering Education","id":44660},{"label":"Art Matters","id":44992},{"label":"Asha for Education","id":44905},{"label":"Asian American Student Association","id":28229},{"label":"Asian Christian Fellowship - InterVarsity","id":28112},{"label":"Association of Environmental Engineers and Scientists","id":28048},{"label":"Astronomy Club","id":27871},{"label":"Atl Tanishq","id":44991},{"label":"Badminton Club at GT","id":27872},{"label":"Ballroom Dance Club at Georgia Tech","id":27873},{"label":"Band Club @ Georgia Tech","id":27857},{"label":"BAPS Campus Fellowship","id":28208},{"label":"Barbell Club at Georgia Tech","id":44791},{"label":"Best Buddies","id":44703},{"label":"Bethel Campus Fellowship","id":28257},{"label":"Bhangra at GT","id":44980},{"label":"Biomedical Engineering Society","id":28050},{"label":"Black Graduate Students Association","id":27779},{"label":"Blueprint","id":27851},{"label":"Bowling Club","id":44975},{"label":"Brazilian Student Association","id":27780},{"label":"BuzzStudios","id":27852},{"label":"Campus Freethinkers","id":27822},{"label":"Campus Recreation Center (CRC)","id":44735},{"label":"CanSat Club","id":28230},{"label":"Caribbean Students Association","id":27781},{"label":"Chamber Choir","id":28102},{"label":"Chess Club at Georgia Tech","id":27878},{"label":"China Care Club","id":28274},{"label":"Chinese Friendship Association","id":27782},{"label":"Chinese Student Association","id":27783},{"label":"Christian Campus Fellowship","id":28189},{"label":"Circle K","id":27957},{"label":"Climbing Club","id":28244},{"label":"Club Tennis","id":27920},{"label":"College Democrats","id":27958},{"label":"Collegiate Panhellenic Council","id":27943},{"label":"Community Service Council","id":40405},{"label":"Cordao de Ouro Capoeira","id":44816},{"label":"Cricket Club","id":27880},{"label":"Cycling","id":27881},{"label":"D.R.E.A.M. (Designing with Real Engineers And Mentors)","id":44979},{"label":"Dance Association","id":27882},{"label":"Dance Company at Georgia Tech","id":44757},{"label":"DanceTech","id":27883},{"label":"Debate Team","id":27963},{"label":"Delta Phi Lambda Sorority, Inc.","id":28120},{"label":"Delta Sigma Pi","id":44883},{"label":"DramaTech Theatre","id":27855},{"label":"Eco Marathon","id":44989},{"label":"Egyptian Student Association (ESA)","id":44977},{"label":"Electro-Chemical Society","id":44997},{"label":"Enchanted Encounters","id":44994},{"label":"Energy Club at Georgia Tech","id":28261},{"label":"Engineering World Health","id":27965},{"label":"Engineers for a Sustainable World at Georgia Tech","id":28296},{"label":"Engineers Without Borders- Georgia Tech","id":27966},{"label":"Enterprise to Empower","id":33836},{"label":"Equestrian Club","id":27885},{"label":"Erato","id":27856},{"label":"Esports at Georgia Tech","id":36070},{"label":"FirstGen","id":44998},{"label":"For the Kids","id":27962},{"label":"Foundation for International Medical Relief of Children","id":27971},{"label":"Freshman Council","id":27973},{"label":"Fulbright Student Association","id":28058},{"label":"Gamers Guild","id":28103},{"label":"Georgia Outreach: Advancing the Lives of the Special-needs","id":33374},{"label":"Global Jackets","id":27784},{"label":"Global Medical Missions Alliance","id":44971},{"label":"God's Influence Flowing Through Every Disciple","id":27829},{"label":"Golf Club","id":27887},{"label":"Graduate Business Council","id":27977},{"label":"Graduate Student Government Association","id":27751},{"label":"Greek Programming Board","id":44771},{"label":"Greek Sustainability Committee","id":44985},{"label":"GT Motorsports","id":27893},{"label":"GT Off-road","id":27892},{"label":"GT Pulse","id":44728},{"label":"GT Solar Racing","id":27911},{"label":"Gymnastics","id":28129},{"label":"Habitat for Humanity","id":44659},{"label":"Hapkido","id":44811},{"label":"Hillel","id":27831},{"label":"Hispanic Scholarship Fund","id":27980},{"label":"Hong Kong Student Association","id":27793},{"label":"Honor Advisory Council","id":27981},{"label":"Human Factors and Ergonomics Society","id":28060},{"label":"HyTech Racing","id":44686},{"label":"Ice Hockey Club","id":27888},{"label":"India Club at Georgia Tech","id":27794},{"label":"Indonesian Student Association","id":27795},{"label":"Infinite Harmony","id":27859},{"label":"Institute of Electrical and Electronics Engineers","id":28204},{"label":"Institute of Industrial Engineers","id":28071},{"label":"Institute of Transportation Engineers","id":44987},{"label":"Interfraternity Council","id":27941},{"label":"Invention Studio","id":44999},{"label":"Iranian Student Association","id":27796},{"label":"Jacket Films","id":44923},{"label":"JOULE","id":44718},{"label":"Junior STEM","id":44746},{"label":"Kappa Sigma","id":28160},{"label":"Kayak and Canoe Club","id":27876},{"label":"Korean Undergraduate Student Association","id":27798},{"label":"League of Legends at Georgia Tech","id":44697},{"label":"Liberty in North Korea","id":44675},{"label":"Management Information Systems Club","id":44772},{"label":"Marksmanship Club","id":27891},{"label":"Medical Device Entrepreneurship Association at Georgia Tech","id":44717},{"label":"Men's Club Lacrosse","id":28131},{"label":"Men's Club Soccer","id":27909},{"label":"Men's Rugby","id":27903},{"label":"Men's Ultimate Frisbee","id":27923},{"label":"Men's Water Polo Club","id":27927},{"label":"Mens Club Volleyball","id":27925},{"label":"Mobilizing Opportunities for Volunteer Experiences","id":27990},{"label":"Mock Trial","id":27989},{"label":"Molecular Gastronomists","id":44978},{"label":"Musician's Network","id":27894},{"label":"Muslim Students Association","id":27837},{"label":"N\/A","id":44654},{"label":"National Organization of Minority Architecture Students","id":28077},{"label":"National Pan-Hellenic Council","id":27942},{"label":"National Society of Black Engineers","id":28078},{"label":"North Avenue Review","id":28205},{"label":"Omega Phi Alpha","id":28116},{"label":"Omicron Delta Kappa","id":28035},{"label":"One Voice Atlanta","id":27992},{"label":"Outdoor Recreation","id":28104},{"label":"Paintball Club","id":27896},{"label":"Pakistani Student Association","id":27805},{"label":"Pending - Moneythink","id":44864},{"label":"Pending - Photography Club","id":27897},{"label":"Pending- Spanish Speaking Organization","id":27811},{"label":"Phi Sigma Pi","id":44988},{"label":"Presidents' Council Governing Board","id":27940},{"label":"Pride Alliance","id":27806},{"label":"Promoting Orthotics and Prosthetics","id":28086},{"label":"Public Speaking Club","id":27995},{"label":"Qurbani","id":27808},{"label":"Ramblin' Raas","id":27899},{"label":"Ramblin' Reck Club","id":27898},{"label":"Ramblin' Rocket Club","id":27900},{"label":"Residence Hall Association","id":27754},{"label":"RoboJackets","id":27901},{"label":"Roller Hockey","id":44893},{"label":"Roosevelt Institute","id":27999},{"label":"Runnin' Wreck","id":27904},{"label":"Sailing Club","id":27905},{"label":"Satrangi","id":45000},{"label":"Scheller Marketing Association","id":28206},{"label":"Scheller Marketing Association","id":44927},{"label":"Sigma Beta Rho Fraternity Inc.","id":28123},{"label":"Sigma Gamma Tau","id":44993},{"label":"Sigma Sigma Rho","id":28124},{"label":"Society of Asian Scientists and Engineers","id":28267},{"label":"Society of Hispanic Professional Engineers @ GT","id":28087},{"label":"Society of Physics Students","id":28088},{"label":"Society of Women Engineers","id":28089},{"label":"Sport Parachute Club","id":28132},{"label":"Squash Club","id":44984},{"label":"Starter Bikes","id":44842},{"label":"Sting Hunger","id":44853},{"label":"Student Affiliates of the American Chemical Society","id":28215},{"label":"Student Center","id":28101},{"label":"Student Center Programs Council","id":27913},{"label":"Student Construction Association","id":28106},{"label":"Student Government Association","id":44818},{"label":"Student Planning Association","id":28092},{"label":"Student Publications","id":44990},{"label":"Students Organizing for Sustainability","id":28007},{"label":"Surf Club","id":27914},{"label":"Swim Club @ GT","id":27916},{"label":"Symphony Orchestra","id":27864},{"label":"Taal Tadka","id":28298},{"label":"Table Tennis Association at Georgia Tech","id":27918},{"label":"Taiwanese American Student Association","id":27812},{"label":"Tau Alpha Omega","id":27845},{"label":"Tau Beta Pi","id":28043},{"label":"Tau Beta Sigma","id":28044},{"label":"TEAM Buzz","id":28009},{"label":"Tech Beautification Day","id":28010},{"label":"Tech The Halls","id":44727},{"label":"TechList","id":44822},{"label":"Tekstyles","id":27919},{"label":"The Agency","id":45001},{"label":"The Technique","id":27866},{"label":"The Tower","id":28210},{"label":"The Veritas Forum","id":27847},{"label":"Trailblazers","id":28011},{"label":"Transfer Student Association","id":44799},{"label":"Triathlon Club at Georgia Tech","id":27922},{"label":"Turkish Student Organization","id":27814},{"label":"Undergraduate Consulting Club","id":28012},{"label":"Undergraduate Operations Management Society","id":44946},{"label":"Underwater Hockey","id":27917},{"label":"UNICEF at Georgia Tech","id":44677},{"label":"Unicycling Club","id":44986},{"label":"Unmanned Flying Club","id":44884},{"label":"Vietnamese Student Association","id":27816},{"label":"Waterski and Wakeboard at Georgia Tech","id":27928},{"label":"Women in Architecture","id":44995},{"label":"Women in Architecture","id":44996},{"label":"Women's Club Basketball","id":27929},{"label":"Women's Club Lacrosse","id":27890},{"label":"Women's Club Soccer at Georgia Tech","id":27910},{"label":"Women's Club Volleyball @ GT","id":27931},{"label":"Women's Rugby at Georgia Tech","id":27930},{"label":"Women's Ultimate Frisbee","id":27924},{"label":"Women's Water Polo","id":44919},{"label":"Wreck Racing","id":27932},{"label":"Wreckless","id":41923},{"label":"WREK Radio","id":27867},{"label":"Wrestling Club","id":27933},{"label":"Yellow Jacket Archery Club","id":27935},{"label":"Yellow Jacket Baseball Club","id":27936},{"label":"Yellow Jacket Fencing Club","id":28113},{"label":"Yellow Jacket Flying Club","id":27937},{"label":"Yellow Jacket Space Program","id":44922},{"label":"Your Enlightened Side Plus","id":27951}]	;
+	$("#search").autocomplete({
+		source: avaliableTags,
+		select: function(event, ui){
+			window.location.href = 'http://jacketpages.gatech.edu/organizations/view/'+ui.item.id;
+		}
+	});
+	});
+</script>
+</div>			 </div>
+		</div><!-- content -->
+			
+			<div id="footer">
+		    <div class="row clearfix">
+		      <div id="footer-utility-links">
+				<ul class="menu gt-footer-utility-links"><li><a href="/">Campus Calendar</a></li><li><a href="/pages/contact">Contact JacketPages</a></li><li><a href="/pages/privacy_policy">Privacy Policy</a></li></ul><ul class="menu custom-links-included"><li><a href="http://www.gatech.edu">Georgia Tech Main</a></li><li><a href="http://www.studentaffairs.gatech.edu/">Student Affairs</a></li><li><a href="http://www.sga.gatech.edu/">Student Government</a></li><li><a href="http://www.involvement.gatech.edu/">Student Involvement</a></li></ul>		      </div>
+
+		      <div id="footer-logo">
+		        <a href="/" rel="home" title="Georgia Tech" style="margin-right:4px">
+		        	<img src="/img/sgalogogrey.png" alt="Georgia Tech" />		        </a>     
+		    
+		        <p>&copy; 2018 Georgia Tech Student Government Association</p>
+
+		      </div>
+		    </div>
+		  </div><!-- /footer --> 
+			
+			
+			
+			
+			
+        			</body>
+			</html>
