@@ -7,6 +7,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      // Make the home page show the bills
       path: '/',
       name: 'Bills',
       component: Bills
