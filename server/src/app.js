@@ -12,7 +12,7 @@ app.use(cors());
 
 // Connect to the MySQL database
 var connection = mysql.createConnection({
-    host        :   "jacketpagesdev.sga.gatech.edu",
+    host        :   "130.207.188.35",
     port        :   "3306"
     user        :   "user_jp_dev",
     password    :   "dE50en*5"
@@ -31,4 +31,4 @@ app.get("/bills", (req, res) => {
         ]});
     });
 });
-app.listen(process.env.PORT || 3306);
+app.listen(process.env.PORT || 8081);

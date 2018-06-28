@@ -21,6 +21,7 @@ export default {
       billdata: []
     }
   },
+  // Make the data in the table the bills data
   mounted () {
     bill_data.bills().then( (res) => {
       console.log(res.data.data);
