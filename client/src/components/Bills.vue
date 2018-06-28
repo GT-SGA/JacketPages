@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- Table with all the bills -->
         <table>
             <tbody>
                 <tr v-for="(row, rind) in billdata" :key="rind">
