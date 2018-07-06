@@ -24,8 +24,8 @@ app.listen(process.env.PORT || 8081);
 // Send the data of the bills on localhost:8081
 app.get("/bills", (req, res) => {
     connection.query("SELECT * FROM users", function(err, rows) {
-        res.send({data: [
+        res.send({data: 
             rows
-        ]});
+        });
     });
 });

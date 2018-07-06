@@ -4,8 +4,21 @@
         <table>
             <tbody>
                 <tr v-for="(row, rind) in billdata" :key="rind">
-                    <td>{{ row.data1 }}</td>
-                    <td>{{ row.data2 }}</td>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.sga_id }}</td>
+                    <td>{{ row.gt_user_name }}</td>
+                    <td>{{ row.phone }}</td>
+                    <td>{{ row.home_phone }}</td>
+                    <td>{{ row.email }}</td>
+                    <td>{{ row.alt_email }}</td>
+                    <td>{{ row.first_name }}</td>
+                    <td>{{ row.last_name }}</td>
+                    <td>{{ row.level }}</td>
+                    <td>{{ row.local_addr }}</td>
+                    <td>{{ row.home_addr }}</td>
+                    <td>{{ row.last_login }}</td>
+                    <td>{{ row.profile_picture }}</td>
+                    <td>{{ row.profile_text }}</td>
                 </tr>
             </tbody>
         </table>
