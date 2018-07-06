@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Bills from '@/components/Bills'
+import Home from '@/components/Home'
 
 Vue.use(Router)
 
@@ -9,8 +10,8 @@ export default new Router({
     {
       // Make the home page show the bills
       path: '/',
-      name: 'Bills',
-      component: Bills
+      name: 'Home',
+      component: Home
     }
   ]
 })
