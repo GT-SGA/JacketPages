@@ -12,14 +12,11 @@ app.use(cors());
 
 // Connect to the MySQL database
 var connection = mysql.createConnection({
-    host        :   "130.207.188.35",
-    port        :   "3306",
-    user        :   "user_jp_dev",
-    password    :   "dE50en*5"
+    host        :   "localhost",
+    user        :   "localuser",
+    password    :   "password"
 });
-
-var returndata;
-
+console.log(connection);
 // Use the database jacketpages_dev
 connection.query("USE jacketpages_dev");
 
