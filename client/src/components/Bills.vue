@@ -3,6 +3,23 @@
         <!-- Table with all the bills -->
         <table>
             <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>SGA ID</th>
+                    <th>GT Username</th>
+                    <th>Phone</th>
+                    <th>Home Phone</th>
+                    <th>Email</th>
+                    <th>Alternate Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Level</th>
+                    <th>Local address</th>
+                    <th>Home Address</th>
+                    <th>Last Login</th>
+                    <th>Profile Picture</th>
+                    <th>Profile Text</th>
+                </tr>
                 <tr v-for="(row, rind) in billdata" :key="rind">
                     <td>{{ row.id }}</td>
                     <td>{{ row.sga_id }}</td>
