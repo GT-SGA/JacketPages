@@ -19,7 +19,7 @@
    {
       foreach ($line as $value)
        {
-         print "$value\n";
+         echo "$value\n";
       }
    }
  

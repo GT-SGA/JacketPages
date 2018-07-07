@@ -16,7 +16,6 @@ var connection = mysql.createConnection({
     user        :   "localuser",
     password    :   "password"
 });
-console.log(connection);
 // Use the database jacketpages_dev
 connection.query("USE jacketpages_dev");
 
