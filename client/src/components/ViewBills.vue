@@ -6,11 +6,11 @@
 		    <div id="identity-wrapper">
 		      <h1 id="gt-logo">
 		        <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech">
-		        	<img src="jpbills_files/logo-gt.png" alt="Georgia Tech">		        </a>    
+		        	<img src="./jpbills_files/logo-gt.png" alt="Georgia Tech">		        </a>    
 		      </h1>
 		      <h1 id="jp-logo">
 		      	<a href="http://jacketpages.gatech.edu/" rel="home" title="JacketPages">
-		      		<img src="jpbills_files/jacketpages.png" alt="Jacket Pages">		      	</a> 
+		      		<img src="./jpbills_files/jacketpages.png" alt="Jacket Pages">		      	</a> 
 		      </h1>
 		    </div>
 		  </div><!-- /#identity -->
@@ -265,7 +265,16 @@ fails, you will have the opportunity to revise and resubmit.</li>
 	</div>
 </div>
 <table class="listing">
-	<tbody><tr class="links"><th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:title/direction:asc">Title</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:number/direction:asc">Number</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:category/direction:asc">Category</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:Status.name/direction:asc">Status</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:submit_date/direction:asc">Submit Date</a></th></tr></tbody></table>
+	<tbody>
+<tr class="links"><th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:title/direction:asc">Title</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:number/direction:asc">Number</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:category/direction:asc">Category</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:Status.name/direction:asc">Status</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:submit_date/direction:asc">Submit Date</a></th></tr>
+                <tr v-for="(row, rind) in billdata" :key="rind">
+                    <td>{{ row.title }}</td>
+                    <td>{{ row.number }}</td>
+                    <td>{{ row.category }}</td>
+                    <td>{{ row.status }}</td>
+                    <td>{{ row.submit_date }}</td>
+                </tr>
+</tbody></table>
 <div class="paging">
     <span class="disabled">&lt;&lt; previous</span>    |
         |
@@ -282,7 +291,7 @@ fails, you will have the opportunity to revise and resubmit.</li>
 
 		      <div id="footer-logo">
 		        <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech" style="margin-right:4px">
-		        	<img src="jpbills_files/sgalogogrey.png" alt="Georgia Tech">		        </a>     
+		        	<img src="./jpbills_files/sgalogogrey.png" alt="Georgia Tech">		        </a>     
 		    
 		        <p>© 2018 Georgia Tech Student Government Association</p>
 
@@ -294,6 +303,18 @@ fails, you will have the opportunity to revise and resubmit.</li>
 
 <script>
 import bill_data from "../../services/bills";
+import "./jpbills_files/blocks.css";
+import "./jpbills_files/content.css";
+import "./jpbills_files/default.css";
+//import "./jpbills_files/editor.css";
+//import "./jpbills_files/fonts.css";
+//import "./jpbills_files/icing.css";
+//import "./jpbills_files/jquery-ui-1.css";
+//import "./jpbills_files/layout.css";
+import "./jpbills_files/print.css";
+import "./jpbills_files/reset.css";
+import "./jpbills_files/static.css";
+import "./jpbills_files/typography.css";
 export default {
   name: 'ViewBills',
   data () {

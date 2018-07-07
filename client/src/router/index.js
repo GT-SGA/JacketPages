@@ -9,17 +9,15 @@ export default new Router({
   routes: [
     {
       // Make the home page show the bills
-      path: '/',
+      path: '/bills',
       name: 'Bills',
       component: Bills
     },
-    /*
     {
       // Make the home page show the bills
-      path: '/bills',
+      path: '/',
       name: 'ViewBills',
       component: ViewBills
     }
-    */
   ]
 })
