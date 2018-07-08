@@ -1,303 +1,368 @@
 <template>
     <div>
-		<div id="masthead">
-		  
-		  <div id="identity" class="clearfix">
-		    <div id="identity-wrapper">
-		      <h1 id="gt-logo">
-		        <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech">
-		        	<img src="./jpbills_files/logo-gt.png" alt="Georgia Tech">		        </a>    
-		      </h1>
-		      <h1 id="jp-logo">
-		      	<a href="http://jacketpages.gatech.edu/" rel="home" title="JacketPages">
-		      		<img src="./jpbills_files/jacketpages.png" alt="Jacket Pages">		      	</a> 
-		      </h1>
-		    </div>
-		  </div><!-- /#identity -->
-		
-		  <div id="primary-menus">
-		    <div id="primary-menus-wrapper" class="clearfix">
-		      <a id="primary-menus-toggle" class="hide-for-desktop"><span>Menu</span></a>
-		      <div id="primary-menus-off-canvas" class="off-canvas">
-		        <a id="primary-menus-close" class="hide-for-desktop"><span>Close</span></a>
-		        
-		        <div id="nav">
-		          <div id="main-menu-wrapper"><ul class="menu"><li class="expanded first">
-	<a href="http://jacketpages.gatech.edu/users/view/22053"><span>My Account</span></a>	<ul class="menu">
-		<li class="leaf first">
-			<a href="http://jacketpages.gatech.edu/users/view/22053">Account Profile</a>		</li>
-		<li class="leaf">
-			<a href="http://jacketpages.gatech.edu/users/logout">Logout</a>		</li>
-		<li class="leaf last">
-			<a href="http://jacketpages.gatech.edu/">JacketPages Home</a>		</li>
-	</ul>
-	
-</li><li class="expanded">
-	<a href="http://jacketpages.gatech.edu/bills"><span>Bills</span></a>	<ul class="menu">
-		<li class="leaf first">
-			<a href="http://jacketpages.gatech.edu/bills/add">Submit Bill</a>		</li>
-		<li class="leaf">
-			<a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>		</li>
-		<li class="leaf last">
-			<a href="http://jacketpages.gatech.edu/bills">View All Bills</a>		</li>
-	</ul>
-			
-</li><li class="expanded">
-<a href="http://jacketpages.gatech.edu/organizations"><span>Organizations</span></a><!--<ul class="menu">
-	<li class="leaf first ">
-	</li>
-	
-	<li class="leaf">
-			</li>
-	<li class="leaf">
-		</li>
-	<li class="leaf last ">
-	</li>
-
-</ul>--></li><li class="expanded">
-<a href="http://jacketpages.gatech.edu/sga_people"><span>Student Government</span></a><ul class="menu">
-	<li class="leaf first">
-		<a href="http://jacketpages.gatech.edu/sga_people">View SGA Members</a>	</li>
-
-
-
-</ul></li><li class="expanded"></li><li class="leaf last"><a href="#" onclick="openHelp()">Help</a></li></ul></div>	<div id="action-items-wrapper"><div id="action-items"><ul>
-	<li class="first active">
-		<a href="http://jacketpages.gatech.edu/bills/add" class="active">Submit Bill</a>	</li>
-	<li class="active">
-		<a href="http://jacketpages.gatech.edu/users/logout" class="active">Logout</a>	</li>
-</ul>
-</div></div>		        </div>
-		        
-		        <div id="utility">
-		          <div class="row clearfix">
-		          
-		            <div id="utility-links">
-		              <!-- utility-links -->
-		              <ul class="menu">
-		                <li class="mothership ulink"><a href="http://www.gatech.edu/">Georgia Tech Home</a></li>
-		                <li class="campus-map ulink"><a href="http://www.map.gatech.edu/">Map</a></li>
-		                <li class="directories ulink"><a href="http://www.gatech.edu/directory">Directory</a></li>
-		                <li class="offices ulink"><a href="http://www.gatech.edu/departments">Offices</a></li>
-		              </ul>
-		            </div>
-		            
-		            <!--
-		            <div id="social-media-links-wrapper">
-		              <ul id="social-media-links">
-		                <li class="first"><a href="https://www.facebook.com/georgiatech" title="Facebook" class="facebook">Facebook</a></li>
-		                <li><a href="http://www.flickr.com/photos/georgiatech" title="Flickr" class="flickr">Flickr</a></li>
-		                <li><a href="https://plus.google.com/+georgiatech/posts" title="Google Plus" class="googleplus">Google Plus</a></li>
-		                <li><a href="http://www.linkedin.com/company/3558" title="LinkedIn" class="linkedin">LinkedIn</a></li>
-		                <li><a href="http://pinterest.com/georgiatech/" title="Pinterest" class="pinterest">Pinterest</a></li>
-		                <li><a href="http://gatech.edu/rss" title="RSS" class="rss">RSS</a></li>
-		                <li><a href="https://twitter.com/georgiatech" title="Twitter" class="twitter">Twitter</a></li>
-		                <li class="last"><a href="http://www.youtube.com/georgiatech" title="YouTube" class="youtube">YouTube</a></li>
-		              </ul>
-		            </div>
-		            
-		            /#social-media -->
-		            
-		          </div>
-		        </div><!-- /#utility -->
-		      </div>
-		      
-		      <!--<div id="site-search">
-						      </div>-->
-		      
-		    </div><!-- /#primary-menus-wrapper -->
-		    
-		    
-<div id="breadcrumb" class="hide-for-mobile">
-	<div class="row clearfix">
-		<ul style="float: right">
-			<li class="last">
-				<a>Welcome, Akhil Kikkeri</a>
-			</li>
-		</ul>
-	<ul><li class="breadcrumb-item first"><a href="http://jacketpages.gatech.edu/">Home</a></li><li><a href="http://jacketpages.gatech.edu/bills">All Bills</a></li><li class="breadcrumb-item last"><a href="http://jacketpages.gatech.edu/bills/my_bills">My Bills</a></li></ul>	</div>
-</div><!-- /#breadcrumb -->		    
-		  </div><!-- /#primary-menus -->
-		    
-		</div><!-- /#masthead -->
-
-        
-        <div id="content">
-        <div class="clearfix">
-			<div class="ui-overlay" id="help" style="display:none;">
-				<div class="ui-widget-overlay"></div>
-				<div class="ui-corner-all" id="overlay" style="width: 100%; height: 600px; position: absolute;overflow-y:scroll; margin-top:10px;">
-					<button onclick="closeHelp()" style="float:right;" type="submit">X</button><div class="helppage" style="margin-left: 10px; margin-right:10px;">
-<h1>Submitting SGA Bills</h1>
-<h2>Introduction</h2>
-<p>The following will help you to prepare and to learn the process that 
-is required to obtain funding from, or pass a resolution with, the 
-Student Government Association (SGA) at Georgia Tech.<br>
-The Student Government’s legislative structure consists of a body of 
-undergraduate students (Undergraduate House of Representatives or UHR) 
-and of a body of graduate students (Graduate Student Senate or GSS). The
- passing of a “joint” bill requires consideration of a bill in each body
- and is subject to passing by an “enactment ratio.” Mostly all financial
- requests by student organizations will be classified as a joint bill. 
-The enactment ratio is a mathematical calculation to determine whether a
- bill passes both bodies of SGA. It ensures that undergraduate and 
-graduates are represented proportionally since undergraduates represent 
-more of the student body and contribute more money to SGA from the 
-Student Activity Fee.<br>
-The money that SGA allocates to organizations comes from the “Student 
-Activity Fee” line that shows up on the tuition and fee assessment paid 
-by each student every semester. This money is then budgeted to many 
-different organizations with the Student Center and the Campus 
-Recreation Center receiving approximately 70% of that budget. At the end
- of the year, the money that has not been spent is placed into several 
-accounts that can then be allocated to different groups for special 
-one-time items.
-Student Government has a set of policies and priorities that it follows 
-with regards to funding requests.<br>
-Please keep in mind that SGA has a set amount of money that it can spend
- in one year. SGA attempts to wisely spend that set of money on the 
-organizations with most demonstrated need and on those bills that will 
-benefit the majority of campus. Not every request will end in success.</p>
-<h2>The Process</h2>
-<p>The process begins with a student organization that needs additional 
-funding for an event and turns to SGA for financial assistance. SGA 
-should serve as the organization’s last resort after all other funding 
-options have been exhausted. Next, the organization will contact an 
-undergraduate Representative and a graduate Senator of SGA and ask those
- members to author their bill. A complete list of senators and 
-representatives can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>.
- A bill form (further explained in “How to Submit an SGA Bill”) 
-requesting general information about the organization or student will be
- completed and a bill will be drafted to include the organization’s idea
- for an event and an itemized list of requested items.<br>
-If the bill is submitted and reviewed by the authors by 8am on Monday, 
-the bill will appear in New Business on the agenda at the SGA meeting 
-that following Tuesday. The Joint Finance Committee (JFC) will review 
-the bill at its weekly meeting that Thursday; a representative from the 
-organization will be invited to the meeting to speak on behalf of the 
-organization. The Joint Finance Committee will suggest changes based on 
-SGA funding policies (a copy of JFC Policy can be found in the back of 
-this binder). The next Tuesday, the bill will move into Old Business 
-where it will be discussed and voted on. After both legislative bodies 
-discuss the bill and the enactment ratio is reached, the funds will be 
-allocated to the organization. Please see the policy of the Student 
-Organization Finance Office (in the back of this binder) for information
- on reimbursements and purchases.</p>
-<p style="font-style:italic; font-weight:bold;">Be sure to begin working on bills for events and activities at least four (4) weeks before the event!
-</p>
-<h2>Step by Step Process Checklist:</h2>
-<ul style="padding-left:40px;">
-	<li>Before contacting a potential author, draft your bill with itemized
- costs according to the Joint Finance Committee policy, available at <a href="http://sga.gatech.edu/JFC">http://sga.gatech.edu/JFC</a>.</li>
-	<li>Find authors, both an undergraduate and a graduate. A complete list of representatives and senators can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>. Be sure to include your bill and extra information when making contact.</li>
-	<li>Bills must be submitted and reviewed by both authors online by 8am 
-on Monday in order for them to be placed in New Business on Tuesday.</li>
-	<li>After appearing in New Business, the bill submitted or a 
-representative from the organization will need to attend a meeting with 
-the Joint Finance Committee (an invitation will be sent to the bill 
-submitter)</li>
-	<li>After the meeting with the JFC has been attended and the JFC has 
-made their recommendations, the bill will move to Old Business and be 
-voted on the following week. Note: this is one week after that bill was 
-in New Business.</li>
-	<li>You should attend the meeting when your bill appears on the agenda 
-in Old Business. This includes the Graduate Student Senate meeting at 
-11am on Tuesdays and the Undergraduate House of Representatives meetings
- at 7pm on Tuesdays, both in the Student Services Building (Flag 
-Building), room 117. You will be asked to present the bill to the body 
-or answer questions from senators/representatives.</li>
-	<li>If your bill passes, please see the policy of the Student 
-Organization Finance Office about reimbursements and purchases. It if 
-fails, you will have the opportunity to revise and resubmit.</li>
-
-</ul>
-</div>
-</div>
-			</div>
-
-						
-
-<div class="links left-nav" id="sidebar">
-        <ul><li><a href="http://jacketpages.gatech.edu/bills/add">Create New Bill</a></li></ul></div>
-
-<div id="middle">
-    <div id="page_title">My Bills</div>
-    <div id="alphabet">
-    <!--<div id="leftHalf">-->
-        <form action="/bills/my_bills" id="BillMyBillsForm" method="post" accept-charset="utf-8"><div style="display:none;"><input name="_method" value="POST" type="hidden"></div><div class="input text"><label for="search" style="display:inline">Search</label><input name="data[Bill][keyword]" id="search" width="80%" type="text"></div>    <!--</div>-->
-    <!--<div id="rightHalf">
-        <ul>
+      <div id="masthead">
+         <div id="identity" class="clearfix">
+            <div id="identity-wrapper">
+               <h1 id="gt-logo">
+                  <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech">
+                  <img src="./jpbills_files/logo-gt.png" alt="Georgia Tech">		        </a>    
+               </h1>
+               <h1 id="jp-logo">
+                  <a href="http://jacketpages.gatech.edu/" rel="home" title="JacketPages">
+                  <img src="./jpbills_files/jacketpages.png" alt="Jacket Pages">		      	</a> 
+               </h1>
+            </div>
+         </div>
+         <!-- /#identity -->
+         <div id="primary-menus">
+            <div id="primary-menus-wrapper" class="clearfix">
+               <a id="primary-menus-toggle" class="hide-for-desktop"><span>Menu</span></a>
+               <div id="primary-menus-off-canvas" class="off-canvas">
+                  <a id="primary-menus-close" class="hide-for-desktop"><span>Close</span></a>
+                  <div id="nav">
+                     <div id="main-menu-wrapper">
+                        <ul class="menu">
+                           <li class="expanded first">
+                              <a href="http://jacketpages.gatech.edu/users/view/22053"><span>My Account</span></a>	
+                              <ul class="menu">
+                                 <li class="leaf first">
+                                    <a href="http://jacketpages.gatech.edu/users/view/22053">Account Profile</a>		
+                                 </li>
+                                 <li class="leaf">
+                                    <a href="http://jacketpages.gatech.edu/users/logout">Logout</a>		
+                                 </li>
+                                 <li class="leaf last">
+                                    <a href="http://jacketpages.gatech.edu/">JacketPages Home</a>		
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="expanded">
+                              <a href="http://jacketpages.gatech.edu/bills"><span>Bills</span></a>	
+                              <ul class="menu">
+                                 <li class="leaf first">
+                                    <a href="http://jacketpages.gatech.edu/bills/add">Submit Bill</a>		
+                                 </li>
+                                 <li class="leaf">
+                                    <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>		
+                                 </li>
+                                 <li class="leaf last">
+                                    <a href="http://jacketpages.gatech.edu/bills">View All Bills</a>		
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="expanded">
+                              <a href="http://jacketpages.gatech.edu/organizations"><span>Organizations</span></a><!--<ul class="menu">
+                                 <li class="leaf first ">
+                                 </li>
+                                 
+                                 <li class="leaf">
+                                 		</li>
+                                 <li class="leaf">
+                                 	</li>
+                                 <li class="leaf last ">
+                                 </li>
+                                 
+                                 </ul>-->
+                           </li>
+                           <li class="expanded">
+                              <a href="http://jacketpages.gatech.edu/sga_people"><span>Student Government</span></a>
+                              <ul class="menu">
+                                 <li class="leaf first">
+                                    <a href="http://jacketpages.gatech.edu/sga_people">View SGA Members</a>	
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="expanded"></li>
+                           <li class="leaf last"><a href="#" onclick="openHelp()">Help</a></li>
+                        </ul>
+                     </div>
+                     <div id="action-items-wrapper">
+                        <div id="action-items">
+                           <ul>
+                              <li class="first active">
+                                 <a href="http://jacketpages.gatech.edu/bills/add" class="active">Submit Bill</a>	
+                              </li>
+                              <li class="active">
+                                 <a href="http://jacketpages.gatech.edu/users/logout" class="active">Logout</a>	
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div id="utility">
+                     <div class="row clearfix">
+                        <div id="utility-links">
+                           <!-- utility-links -->
+                           <ul class="menu">
+                              <li class="mothership ulink"><a href="http://www.gatech.edu/">Georgia Tech Home</a></li>
+                              <li class="campus-map ulink"><a href="http://www.map.gatech.edu/">Map</a></li>
+                              <li class="directories ulink"><a href="http://www.gatech.edu/directory">Directory</a></li>
+                              <li class="offices ulink"><a href="http://www.gatech.edu/departments">Offices</a></li>
+                           </ul>
+                        </div>
+                        <!--
+                           <div id="social-media-links-wrapper">
+                             <ul id="social-media-links">
+                               <li class="first"><a href="https://www.facebook.com/georgiatech" title="Facebook" class="facebook">Facebook</a></li>
+                               <li><a href="http://www.flickr.com/photos/georgiatech" title="Flickr" class="flickr">Flickr</a></li>
+                               <li><a href="https://plus.google.com/+georgiatech/posts" title="Google Plus" class="googleplus">Google Plus</a></li>
+                               <li><a href="http://www.linkedin.com/company/3558" title="LinkedIn" class="linkedin">LinkedIn</a></li>
+                               <li><a href="http://pinterest.com/georgiatech/" title="Pinterest" class="pinterest">Pinterest</a></li>
+                               <li><a href="http://gatech.edu/rss" title="RSS" class="rss">RSS</a></li>
+                               <li><a href="https://twitter.com/georgiatech" title="Twitter" class="twitter">Twitter</a></li>
+                               <li class="last"><a href="http://www.youtube.com/georgiatech" title="YouTube" class="youtube">YouTube</a></li>
+                             </ul>
+                           </div>
+                           
+                           /#social-media -->
+                     </div>
+                  </div>
+                  <!-- /#utility -->
+               </div>
+               <!--<div id="site-search">
+                  </div>-->
+            </div>
+            <!-- /#primary-menus-wrapper -->
+            <div id="breadcrumb" class="hide-for-mobile">
+               <div class="row clearfix">
+                  <ul style="float: right">
+                     <li class="last">
+                        <a>Welcome, Akhil Kikkeri</a>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="breadcrumb-item first"><a href="http://jacketpages.gatech.edu/">Home</a></li>
+                     <li><a href="http://jacketpages.gatech.edu/bills">All Bills</a></li>
+                     <li class="breadcrumb-item last"><a href="http://jacketpages.gatech.edu/bills/my_bills">My Bills</a></li>
+                  </ul>
+               </div>
+            </div>
+            <!-- /#breadcrumb -->		    
+         </div>
+         <!-- /#primary-menus -->
+      </div>
+      <!-- /#masthead -->
+      <div id="content">
+         <div class="clearfix">
+            <div class="ui-overlay" id="help" style="display:none;">
+               <div class="ui-widget-overlay"></div>
+               <div class="ui-corner-all" id="overlay" style="width: 100%; height: 600px; position: absolute;overflow-y:scroll; margin-top:10px;">
+                  <button onclick="closeHelp()" style="float:right;" type="submit">X</button>
+                  <div class="helppage" style="margin-left: 10px; margin-right:10px;">
+                     <h1>Submitting SGA Bills</h1>
+                     <h2>Introduction</h2>
+                     <p>The following will help you to prepare and to learn the process that 
+                        is required to obtain funding from, or pass a resolution with, the 
+                        Student Government Association (SGA) at Georgia Tech.<br>
+                        The Student Government’s legislative structure consists of a body of 
+                        undergraduate students (Undergraduate House of Representatives or UHR) 
+                        and of a body of graduate students (Graduate Student Senate or GSS). The
+                        passing of a “joint” bill requires consideration of a bill in each body
+                        and is subject to passing by an “enactment ratio.” Mostly all financial
+                        requests by student organizations will be classified as a joint bill. 
+                        The enactment ratio is a mathematical calculation to determine whether a
+                        bill passes both bodies of SGA. It ensures that undergraduate and 
+                        graduates are represented proportionally since undergraduates represent 
+                        more of the student body and contribute more money to SGA from the 
+                        Student Activity Fee.<br>
+                        The money that SGA allocates to organizations comes from the “Student 
+                        Activity Fee” line that shows up on the tuition and fee assessment paid 
+                        by each student every semester. This money is then budgeted to many 
+                        different organizations with the Student Center and the Campus 
+                        Recreation Center receiving approximately 70% of that budget. At the end
+                        of the year, the money that has not been spent is placed into several 
+                        accounts that can then be allocated to different groups for special 
+                        one-time items.
+                        Student Government has a set of policies and priorities that it follows 
+                        with regards to funding requests.<br>
+                        Please keep in mind that SGA has a set amount of money that it can spend
+                        in one year. SGA attempts to wisely spend that set of money on the 
+                        organizations with most demonstrated need and on those bills that will 
+                        benefit the majority of campus. Not every request will end in success.
+                     </p>
+                     <h2>The Process</h2>
+                     <p>The process begins with a student organization that needs additional 
+                        funding for an event and turns to SGA for financial assistance. SGA 
+                        should serve as the organization’s last resort after all other funding 
+                        options have been exhausted. Next, the organization will contact an 
+                        undergraduate Representative and a graduate Senator of SGA and ask those
+                        members to author their bill. A complete list of senators and 
+                        representatives can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>.
+                        A bill form (further explained in “How to Submit an SGA Bill”) 
+                        requesting general information about the organization or student will be
+                        completed and a bill will be drafted to include the organization’s idea
+                        for an event and an itemized list of requested items.<br>
+                        If the bill is submitted and reviewed by the authors by 8am on Monday, 
+                        the bill will appear in New Business on the agenda at the SGA meeting 
+                        that following Tuesday. The Joint Finance Committee (JFC) will review 
+                        the bill at its weekly meeting that Thursday; a representative from the 
+                        organization will be invited to the meeting to speak on behalf of the 
+                        organization. The Joint Finance Committee will suggest changes based on 
+                        SGA funding policies (a copy of JFC Policy can be found in the back of 
+                        this binder). The next Tuesday, the bill will move into Old Business 
+                        where it will be discussed and voted on. After both legislative bodies 
+                        discuss the bill and the enactment ratio is reached, the funds will be 
+                        allocated to the organization. Please see the policy of the Student 
+                        Organization Finance Office (in the back of this binder) for information
+                        on reimbursements and purchases.
+                     </p>
+                     <p style="font-style:italic; font-weight:bold;">Be sure to begin working on bills for events and activities at least four (4) weeks before the event!</p>
+                     <h2>Step by Step Process Checklist:</h2>
+                     <ul style="padding-left:40px;">
+                        <li>Before contacting a potential author, draft your bill with itemized
+                           costs according to the Joint Finance Committee policy, available at <a href="http://sga.gatech.edu/JFC">http://sga.gatech.edu/JFC</a>.
                         </li>
-        </ul>
-    </div>-->
-</form></div><div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
-	<a href="#" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" id="ui-accordion-accordion-header-0" aria-controls="ui-accordion-accordion-panel-0" aria-selected="false" aria-expanded="false" tabindex="0"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Filters</a>
-	<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="display: none;" id="ui-accordion-accordion-panel-0" aria-labelledby="ui-accordion-accordion-header-0" role="tabpanel" aria-hidden="true">
-		<div style="float: left; width: 45%;">
-			<ul>
-				<div class="input select"><label for="BillFrom">From Status</label><select name="data[Bill][from]" id="BillFrom">
-<option value="1" selected="selected">Created</option>
-<option value="2">Awaiting Author</option>
-<option value="3">Authored</option>
-<option value="4">Agenda</option>
-<option value="5">Conference</option>
-<option value="6">Passed</option>
-<option value="7">Failed</option>
-<option value="8">Tabled</option>
-</select></div><div class="input select"><label for="BillTo">To Status</label><select name="data[Bill][to]" id="BillTo">
-<option value="1">Created</option>
-<option value="2">Awaiting Author</option>
-<option value="3">Authored</option>
-<option value="4">Agenda</option>
-<option value="5">Conference</option>
-<option value="6">Passed</option>
-<option value="7" selected="selected">Failed</option>
-<option value="8">Tabled</option>
-</select></div>			</ul>
-		</div>
-		<div style="float: right; width: 45%;">
-			<div class="input select required"><label for="BillCategory">Category</label><select name="data[Bill][category]" id="BillCategory">
-<option value="All" selected="selected">All</option>
-<option value="Joint">Joint</option>
-<option value="Undergraduate">Undergraduate</option>
-<option value="Graduate">Graduate</option>
-</select></div><br><div class="submit" style="display:inline-block"><input value="Submit" type="submit"></div><div class="submit" style="display:inline-block"><input name="submit" value="Clear" type="submit"></div>		</div>
-	</div>
-</div>
-<table class="listing">
-	<tbody>
-<tr class="links"><th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:title/direction:asc">Title</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:number/direction:asc">Number</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:category/direction:asc">Category</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:Status.name/direction:asc">Status</a></th> <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:submit_date/direction:asc">Submit Date</a></th></tr>
-                <tr v-for="(row, rind) in billdata" :key="rind">
-                    <td>{{ row.title }}</td>
-                    <td>{{ row.number }}</td>
-                    <td>{{ row.category }}</td>
-                    <td>{{ row.status }}</td>
-                    <td>{{ row.submit_date }}</td>
-                </tr>
-</tbody></table>
-<div class="paging">
-    <span class="disabled">&lt;&lt; previous</span>    |
-        |
-    <span class="disabled">next &gt;&gt;</span>    <br>
-    <br>
-    Page 1 of 1, showing 0 records out of
-0 total, starting on record 0, ending on 0</div></div>			 </div>
-		</div><!-- content -->
-			
-			<div id="footer">
-		    <div class="row clearfix">
-		      <div id="footer-utility-links">
-				<ul class="menu gt-footer-utility-links"><li><a href="http://jacketpages.gatech.edu/">Campus Calendar</a></li><li><a href="http://jacketpages.gatech.edu/pages/contact">Contact JacketPages</a></li><li><a href="http://jacketpages.gatech.edu/pages/privacy_policy">Privacy Policy</a></li></ul><ul class="menu custom-links-included"><li><a href="http://www.gatech.edu/">Georgia Tech Main</a></li><li><a href="http://www.studentaffairs.gatech.edu/">Student Affairs</a></li><li><a href="http://www.sga.gatech.edu/">Student Government</a></li><li><a href="http://www.involvement.gatech.edu/">Student Involvement</a></li></ul>		      </div>
-
-		      <div id="footer-logo">
-		        <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech" style="margin-right:4px">
-		        	<img src="./jpbills_files/sgalogogrey.png" alt="Georgia Tech">		        </a>     
-		    
-		        <p>© 2018 Georgia Tech Student Government Association</p>
-
-		      </div>
-		    </div>
-		  </div><!-- /footer --> 
+                        <li>Find authors, both an undergraduate and a graduate. A complete list of representatives and senators can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>. Be sure to include your bill and extra information when making contact.</li>
+                        <li>Bills must be submitted and reviewed by both authors online by 8am 
+                           on Monday in order for them to be placed in New Business on Tuesday.
+                        </li>
+                        <li>After appearing in New Business, the bill submitted or a 
+                           representative from the organization will need to attend a meeting with 
+                           the Joint Finance Committee (an invitation will be sent to the bill 
+                           submitter)
+                        </li>
+                        <li>After the meeting with the JFC has been attended and the JFC has 
+                           made their recommendations, the bill will move to Old Business and be 
+                           voted on the following week. Note: this is one week after that bill was 
+                           in New Business.
+                        </li>
+                        <li>You should attend the meeting when your bill appears on the agenda 
+                           in Old Business. This includes the Graduate Student Senate meeting at 
+                           11am on Tuesdays and the Undergraduate House of Representatives meetings
+                           at 7pm on Tuesdays, both in the Student Services Building (Flag 
+                           Building), room 117. You will be asked to present the bill to the body 
+                           or answer questions from senators/representatives.
+                        </li>
+                        <li>If your bill passes, please see the policy of the Student 
+                           Organization Finance Office about reimbursements and purchases. It if 
+                           fails, you will have the opportunity to revise and resubmit.
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="links left-nav" id="sidebar">
+               <ul>
+                  <li><a href="http://jacketpages.gatech.edu/bills/add">Create New Bill</a></li>
+               </ul>
+            </div>
+            <div id="middle">
+               <div id="page_title">My Bills</div>
+               <div id="alphabet">
+                  <!--<div id="leftHalf">-->
+                  <form action="/bills/my_bills" id="BillMyBillsForm" method="post" accept-charset="utf-8">
+                     <div style="display:none;"><input name="_method" value="POST" type="hidden"></div>
+                     <div class="input text"><label for="search" style="display:inline">Search</label><input name="data[Bill][keyword]" id="search" width="80%" type="text"></div>
+                     <!--</div>-->
+                     <!--<div id="rightHalf">
+                        <ul>
+                                        </li>
+                        </ul>
+                        </div>-->
+                  </form>
+               </div>
+               <div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
+                  <a href="#" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" id="ui-accordion-accordion-header-0" aria-controls="ui-accordion-accordion-panel-0" aria-selected="false" aria-expanded="false" tabindex="0"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Filters</a>
+                  <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="display: none;" id="ui-accordion-accordion-panel-0" aria-labelledby="ui-accordion-accordion-header-0" role="tabpanel" aria-hidden="true">
+                     <div style="float: left; width: 45%;">
+                        <ul>
+                           <div class="input select">
+                              <label for="BillFrom">From Status</label>
+                              <select name="data[Bill][from]" id="BillFrom">
+                                 <option value="1" selected="selected">Created</option>
+                                 <option value="2">Awaiting Author</option>
+                                 <option value="3">Authored</option>
+                                 <option value="4">Agenda</option>
+                                 <option value="5">Conference</option>
+                                 <option value="6">Passed</option>
+                                 <option value="7">Failed</option>
+                                 <option value="8">Tabled</option>
+                              </select>
+                           </div>
+                           <div class="input select">
+                              <label for="BillTo">To Status</label>
+                              <select name="data[Bill][to]" id="BillTo">
+                                 <option value="1">Created</option>
+                                 <option value="2">Awaiting Author</option>
+                                 <option value="3">Authored</option>
+                                 <option value="4">Agenda</option>
+                                 <option value="5">Conference</option>
+                                 <option value="6">Passed</option>
+                                 <option value="7" selected="selected">Failed</option>
+                                 <option value="8">Tabled</option>
+                              </select>
+                           </div>
+                        </ul>
+                     </div>
+                     <div style="float: right; width: 45%;">
+                        <div class="input select required">
+                           <label for="BillCategory">Category</label>
+                           <select name="data[Bill][category]" id="BillCategory">
+                              <option value="All" selected="selected">All</option>
+                              <option value="Joint">Joint</option>
+                              <option value="Undergraduate">Undergraduate</option>
+                              <option value="Graduate">Graduate</option>
+                           </select>
+                        </div>
+                        <br>
+                        <div class="submit" style="display:inline-block"><input value="Submit" type="submit"></div>
+                        <div class="submit" style="display:inline-block"><input name="submit" value="Clear" type="submit"></div>
+                     </div>
+                  </div>
+               </div>
+               <table class="listing">
+                  <tbody>
+                     <tr class="links">
+                        <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:title/direction:asc">Title</a></th>
+                        <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:number/direction:asc">Number</a></th>
+                        <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:category/direction:asc">Category</a></th>
+                        <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:Status.name/direction:asc">Status</a></th>
+                        <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:submit_date/direction:asc">Submit Date</a></th>
+                     </tr>
+                     <tr v-for="(row, rind) in billdata" :key="rind">
+                         <td>{{ row.title }}</td>
+                         <td>{{ row.number }}</td>
+                         <td>{{ row.category }}</td>
+                         <td>{{ row.status }}</td>
+                         <td>{{ row.submit_date }}</td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="paging">
+                  <span class="disabled">&lt;&lt; previous</span>    |
+                  |
+                  <span class="disabled">next &gt;&gt;</span>    <br>
+                  <br>
+                  Page 1 of 1, showing 0 records out of
+                  0 total, starting on record 0, ending on 0
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- content -->
+      <div id="footer">
+         <div class="row clearfix">
+            <div id="footer-utility-links">
+               <ul class="menu gt-footer-utility-links">
+                  <li><a href="http://jacketpages.gatech.edu/">Campus Calendar</a></li>
+                  <li><a href="http://jacketpages.gatech.edu/pages/contact">Contact JacketPages</a></li>
+                  <li><a href="http://jacketpages.gatech.edu/pages/privacy_policy">Privacy Policy</a></li>
+               </ul>
+               <ul class="menu custom-links-included">
+                  <li><a href="http://www.gatech.edu/">Georgia Tech Main</a></li>
+                  <li><a href="http://www.studentaffairs.gatech.edu/">Student Affairs</a></li>
+                  <li><a href="http://www.sga.gatech.edu/">Student Government</a></li>
+                  <li><a href="http://www.involvement.gatech.edu/">Student Involvement</a></li>
+               </ul>
+            </div>
+            <div id="footer-logo">
+               <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech" style="margin-right:4px">
+               <img src="./jpbills_files/sgalogogrey.png" alt="Georgia Tech">		        </a>     
+               <p>© 2018 Georgia Tech Student Government Association</p>
+            </div>
+         </div>
+      </div>
+      <!-- /footer --> 
     </div>
 </template>
 
@@ -331,19 +396,8 @@ export default {
     });
   }
 }
-/*
-	$(function() {
-		$("#accordion").accordion({
-			collapsible : true,
-			heightStyle: "content",
-			active : false		});
-	}); 
-*/
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-td {
-    border: 1px solid red;
-}
 </style>
