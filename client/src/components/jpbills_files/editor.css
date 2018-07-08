@@ -66,23 +66,23 @@ body.cke_editable { padding: 5px; }
 
 /* File icon options */
 .editor-icon-pdf {
-  background: transparent url('../images/icons/icon-pdf.png') no-repeat left center;
+  /* background: transparent url('../images/icons/icon-pdf.png') no-repeat left center; */
   padding: 1px 0 1px 20px;
 }
 .editor-icon-xls {
-  background: transparent url('../images/icons/icon-xls.png') no-repeat left center;
+  /* background: transparent url('../images/icons/icon-xls.png') no-repeat left center; */
   padding: 1px 0 1px 20px;
 }
 .editor-icon-ppt {
-  background: transparent url('../images/icons/icon-ppt.png') no-repeat left center;
+  /* background: transparent url('../images/icons/icon-ppt.png') no-repeat left center; */
   padding: 1px 0 1px 20px;
 }
 .editor-icon-doc {
-  background: transparent url('../images/icons/icon-doc.png') no-repeat left center;
+  /* background: transparent url('../images/icons/icon-doc.png') no-repeat left center; */
   padding: 1px 0 1px 20px;
 }
 .editor-icon-file {
-  background: transparent url('../images/icons/icon-file.png') no-repeat left center;
+  /* background: transparent url('../images/icons/icon-file.png') no-repeat left center; */
   padding: 1px 0 1px 20px;
 }
 

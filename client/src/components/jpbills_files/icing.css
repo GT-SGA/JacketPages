@@ -110,7 +110,7 @@ form > .input {
  * header logo.
  */
 #logoWrapper {
-	background: transparent url(../img/jpHeader.jpg) no-repeat scroll center top;
+	/* background: transparent url(../img/jpHeader.jpg) no-repeat scroll center top; */
 	top: -2px;
 	min-height: 125px;
 	margin: 0px auto 0;
@@ -120,7 +120,7 @@ form > .input {
  * the screen.
  */
 #utilityBarWrapper {
-	background: #f8da8a url(../img/jpUtility.gif) repeat-x center bottom;
+	/* background: #f8da8a url(../img/jpUtility.gif) repeat-x center bottom; */
 	min-height: 25px;
 	text-align: center;
 }
@@ -139,7 +139,7 @@ form > .input {
  * across the screen.
  */
 #breadCrumbWrapper {
-	background: transparent url(../img/bgBreadcrumb.gif) repeat-x scroll center bottom;
+	/* background: transparent url(../img/bgBreadcrumb.gif) repeat-x scroll center bottom; */
 	border-bottom: 1px solid #E1E1E1;
 	height: 20px;
 	vertical-align: middle;
@@ -292,7 +292,7 @@ form > .input {
  *  of the menu link.
  */
 .utilityMenu ul li a:after {
-	content: url('../img/down.gif');
+	/* content: url('../img/down.gif'); */
 	position: absolute;
 	top: 5px;
 	right: 3px;
@@ -359,7 +359,7 @@ form > .input {
  * 	Define the image, position, and font formatting of the footer
  */
 #footer_old {
-	background: url(../img/bgFooter2.png) no-repeat center;
+	/* background: url(../img/bgFooter2.png) no-repeat center; */
 	clear: both;
 	color: #666;
 	height: 57px;
@@ -583,7 +583,7 @@ input[type=submit] {
 	width: auto;
 	min-height: 1.9em;
 	cursor: pointer;
-	background: url('../img/button.png') repeat-x #ECA701;
+	/* background: url('../img/button.png') repeat-x #ECA701; */
 	border: 1px solid #cf7b04;
 }
 
@@ -635,7 +635,7 @@ table.list tr:nth-child(2n) td {
 }
 
 #description li {
-	background: url('../img/bullet.png') no-repeat 1px 6px;
+	/* background: url('../img/bullet.png') no-repeat 1px 6px; */
 	font-size: 14px;
 	font-size: 14px;
 	font-weight: normal;

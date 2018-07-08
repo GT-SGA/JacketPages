@@ -61,7 +61,7 @@
 #utility-links .campus-map a { padding-left: 26px; }
 #social-media-links { float: right; }
 #social-media-links a {
-  background: url('../images/icons/icon-sm-outlet-default.png') no-repeat left center;
+  /* background: url('../images/icons/icon-sm-outlet-default.png') no-repeat left center; */
   display: block;
   height: 0px;
   overflow: hidden;
@@ -91,15 +91,15 @@
 #utility-links .campus-map a:before { content: '\f041'; left: 11px; }
 #utility-links .offices a:before { content: '\f0f7'; }
 #utility-links .directories a:before { content: '\f007'; }
-#social-media-links .facebook   { background: url('/img/icons/icon-facebook.png'); }
-#social-media-links .flickr     { background: url('/img/icons/icon-flickr.png'); }
-#social-media-links .googleplus { background: url('/img/icons/icon-googleplus.png'); }
-#social-media-links .instagram  { background: url('/img/icons/icon-instagram.png'); }
-#social-media-links .linkedin   { background: url('/img/icons/icon-linkedin.png'); }
-#social-media-links .pinterest  { background: url('/img/icons/icon-pinterest.png'); }
-#social-media-links .rss        { background: url('/img/icons/icon-rss.png'); }
-#social-media-links .twitter    { background: url('/img/icons/icon-twitter.png'); }
-#social-media-links .youtube    { background: url('/img/icons/icon-youtube.png'); }
+/* #social-media-links .facebook   { background: url('/img/icons/icon-facebook.png'); } */
+/* #social-media-links .flickr     { background: url('/img/icons/icon-flickr.png'); } */
+/* #social-media-links .googleplus { background: url('/img/icons/icon-googleplus.png'); } */
+/* #social-media-links .instagram  { background: url('/img/icons/icon-instagram.png'); } */
+/* #social-media-links .linkedin   { background: url('/img/icons/icon-linkedin.png'); } */
+/* #social-media-links .pinterest  { background: url('/img/icons/icon-pinterest.png'); } */
+/* #social-media-links .rss        { background: url('/img/icons/icon-rss.png'); } */
+/* #social-media-links .twitter    { background: url('/img/icons/icon-twitter.png'); } */
+/* #social-media-links .youtube    { background: url('/img/icons/icon-youtube.png'); } */
 
 /* Masthead */
 #masthead {
@@ -133,7 +133,7 @@
   position: relative;
 }
 #gt-logo-mothership-link {
-  background: url('../images/ie-sucks.png');
+  /* background: url('../images/ie-sucks.png'); */
   display: block;
   height: 0;
   left: 0;
@@ -144,7 +144,7 @@
   width: 25%;
 }
 #gt-logo-secondary-link {
-  background: url('../images/ie-sucks.png');
+  /* background: url('../images/ie-sucks.png'); */
   display: block;
   height: 0;
   left: 25%;
