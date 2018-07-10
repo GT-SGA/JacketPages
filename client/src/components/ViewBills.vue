@@ -325,7 +325,7 @@
                          <td>{{ row.category }}</td>
                          <td>{{ row.status }}</td>
                          <td>{{ row.submit_date }}</td>
-                         <td><button>Delete</button></td>
+                         <td><button v-on:click="delbill(row.id)">Delete</button></td>
                      </tr>
                   </tbody>
                </table>
@@ -334,8 +334,8 @@
                   |
                   <span class="disabled">next &gt;&gt;</span>    <br>
                   <br>
-                  Page 1 of 1, showing 0 records out of
-                  0 total, starting on record 0, ending on 0
+                  Page 1 of 1, showing {{ billdata.length }} records out of
+                  {{ billdata.length }} total, starting on record 0, ending on 0
                </div>
             </div>
          </div>
@@ -386,13 +386,22 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      user: 996,
       billdata: []
+    }
+  },
+  methods : {
+    delbill: function(id) {
+      bill_data.deletebill(id).then((res) => {
+        bill_data.bills(this.user).then( (res) => {
+          this.billdata = res.data.data;
+        });
+      });
     }
   },
   // Make the data in the table the bills data
   mounted () {
-    bill_data.bills(996).then( (res) => {
-      console.log(res.data.data);
+    bill_data.bills(this.user).then( (res) => {
       this.billdata = res.data.data;
     });
   }
