@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JacketPages | Bills</title>
-        <script async="" src="jpbills_files/analytics.js"></script><script type="text/javascript" src="jpbills_files/jquery-1.js"></script><script type="text/javascript" src="jpbills_files/jquery-ui.js"></script>
+        <script async="" src="./jpbills_files/analytics.js"></script><script type="text/javascript" src="jpbills_files/jquery-1.js"></script><script type="text/javascript" src="jpbills_files/jquery-ui.js"></script>
         <link rel="stylesheet" type="text/css" href="jpbills_files/jquery-ui-1.css">
         <link rel="stylesheet" type="text/css" href="jpbills_files/reset.css">
         <link rel="stylesheet" type="text/css" href="jpbills_files/default.css">
@@ -46,7 +46,27 @@
             function closeHelp() {
             	$("#help").attr("style", "display:none;");
             }
+
+            var loggedIn = 996;
             
+            $.ajax({
+                url: `http://localhost:8081/bills?submitter=${loggedIn}`, 
+                type: "GET",
+                success: function(data) {
+                    var billtb = document.getElementById("billtable");
+                    for (let i = 0; i < data.data.length; i++) {
+                        let tr = ""
+                        tr += "<tr>";
+                        tr += `<td>${data.data[i].title}</td>`;
+                        tr += `<td>${data.data[i].number}</td>`;
+                        tr += `<td>${data.data[i].category}</td>`;
+                        tr += `<td>${data.data[i].status}</td>`;
+                        tr += `<td>${data.data[i].submit_date}</td>`;
+                        tr += "</tr>";
+                        billtb.innerHTML += tr;
+                    }
+                }
+            });
                  
         </script>
         <script>
@@ -379,7 +399,7 @@
                         </div>
                     </div>
                     <table class="listing">
-                        <tbody>
+                        <tbody id="billtable">
                             <tr class="links">
                                 <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:title/direction:asc">Title</a></th>
                                 <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:number/direction:asc">Number</a></th>
