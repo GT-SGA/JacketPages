@@ -393,6 +393,7 @@ export default {
   methods : {
     delbill: function(id) {
       bill_data.deletebill(id).then((res) => {
+        if (res.data.err) alert(`Error: \n${res.data.err.sqlMessage}`);
         bill_data.bills(this.user).then( (res) => {
           this.billdata = res.data.data;
         });
