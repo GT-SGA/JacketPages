@@ -319,12 +319,13 @@
                         <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:Status.name/direction:asc">Status</a></th>
                         <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:submit_date/direction:asc">Submit Date</a></th>
                      </tr>
-                     <tr v-for="(row, rind) in billdata" :key="rind">
+                     <tr v-for="(row, rind) in billdata" :key="row.id">
                          <td>{{ row.title }}</td>
                          <td>{{ row.number }}</td>
                          <td>{{ row.category }}</td>
                          <td>{{ row.status }}</td>
                          <td>{{ row.submit_date }}</td>
+                         <td><button>Delete</button></td>
                      </tr>
                   </tbody>
                </table>
@@ -390,7 +391,7 @@ export default {
   },
   // Make the data in the table the bills data
   mounted () {
-    bill_data.bills().then( (res) => {
+    bill_data.bills(996).then( (res) => {
       console.log(res.data.data);
       this.billdata = res.data.data;
     });

@@ -1,7 +1,7 @@
 import api from "./api";
 
 export default {
-    bills() {
-        return api().get("/bills");
+    bills(submitter) {
+        return api().get(`/bills?submitter=${submitter}`);
     }
 }

@@ -22,7 +22,7 @@ connection.query("USE jacketpages_dev");
 app.listen(process.env.PORT || 8081);
 // Send the data of the bills on localhost:8081
 app.get("/bills", (req, res) => {
-    connection.query("SELECT * FROM bills", function(err, rows) {
+    connection.query(`SELECT * FROM bills WHERE submitter=${req.param("submitter")}`, function(err, rows) {
         res.send({data: 
             rows
         });
