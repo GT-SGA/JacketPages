@@ -59,7 +59,13 @@
                     document.getElementById("bill_fundraising").innerHTML = `${data.data[0].fundraising}`;
                     document.getElementById("bill_type").innerHTML = `${data.data[0].type}`;
                     document.getElementById("bill_category").innerHTML = `${data.data[0].category}`;
-                    document.getElementById("bill_status").innerHTML = `${data.data[0].status}`;
+                    $.ajax({
+                        url: `http://localhost:8081/bill_status?id=${data.data[0].status}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_status").innerHTML = `${data.data[0].name}`;
+                        }
+                    });
                     document.getElementById("bill_ugMembers").innerHTML = `${data.data[0].ugMembers}`;
                     document.getElementById("bill_gMembers").innerHTML = `${data.data[0].gMembers}`;
                 }

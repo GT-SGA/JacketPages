@@ -31,7 +31,7 @@ app.get("/bills", (req, res) => {
     });
 });
 
-// Send the data of the bills on localhost:8081
+// Get an individual bill's data
 app.get("/bill", (req, res) => {
     // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
     connection.query(`SELECT * FROM bills WHERE id=${req.param("id")}`, function(err, rows) {
@@ -46,5 +46,14 @@ app.delete("/bill", (req, res) => {
     connection.query(`DELETE FROM bills WHERE id=${req.param("id")}`, function(err, rows) {
         if (err) res.send({err: err});
         else res.send(`id ${req.param("id")} deleted!`);
+    });
+});
+
+// Get status for a certain bill given id
+app.get("/bill_status", (req, res) => {
+    connection.query(`SELECT name FROM bill_statuses WHERE id=${req.param("id")}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
     });
 });
