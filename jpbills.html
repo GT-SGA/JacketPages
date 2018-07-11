@@ -51,7 +51,7 @@
             var billdata;
             var limitrec = 10;
             var pagenum = 0;
-            
+
             var updatebilldata = () => {
                 $.ajax({
                     url: `http://localhost:8081/bills?submitter=${loggedIn}`, 
@@ -60,9 +60,9 @@
                         var billtb = document.getElementById("billtable");
                         billdata = data.data;
                         for (let i = 0; i < data.data.length; i++) {
-                            let tr = ""
+                            let tr = "";
                             tr += "<tr>";
-                            tr += `<td>${data.data[i].title}</td>`;
+                            tr += `<td><a href="jpindbill.html" onclick="document.cookie = '${data.data[i].id}';">${data.data[i].title}</a></td>`;
                             tr += `<td>${data.data[i].number}</td>`;
                             tr += `<td>${data.data[i].category}</td>`;
                             tr += `<td>${data.data[i].status}</td>`;

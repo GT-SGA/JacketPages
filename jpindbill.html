@@ -47,6 +47,23 @@
             	$("#help").attr("style", "display:none;");
             }
             
+            $.ajax({
+                url: `http://localhost:8081/bill?id=${document.cookie}`, 
+                type: "GET",
+                success: function(data) {
+                    document.getElementById("page_title").innerHTML = `Bill ${data.data[0].number}`;
+                    document.getElementById("bill_title").innerHTML = `${data.data[0].title}`;
+                    document.getElementById("bill_description").innerHTML = `${data.data[0].description}`;
+                    document.getElementById("bill_submit_date").innerHTML = `${data.data[0].submit_date}`;
+                    document.getElementById("bill_dues").innerHTML = `${data.data[0].dues}`;
+                    document.getElementById("bill_fundraising").innerHTML = `${data.data[0].fundraising}`;
+                    document.getElementById("bill_type").innerHTML = `${data.data[0].type}`;
+                    document.getElementById("bill_category").innerHTML = `${data.data[0].category}`;
+                    document.getElementById("bill_status").innerHTML = `${data.data[0].status}`;
+                    document.getElementById("bill_ugMembers").innerHTML = `${data.data[0].ugMembers}`;
+                    document.getElementById("bill_gMembers").innerHTML = `${data.data[0].gMembers}`;
+                }
+            });
                  
         </script>
         <script>
@@ -315,11 +332,11 @@
                         <tbody>
                             <tr>
                                 <td>Title</td>
-                                <td>Resolution Expressing Condolences: Durgesh Vasmatkar</td>
+                                <td id="bill_title">Resolution Expressing Condolences: Durgesh Vasmatkar</td>
                             </tr>
                             <tr>
                                 <td>Description</td>
-                                <td style="text-align:justify">BE
+                                <td style="text-align:justify" id="bill_description">BE
                                     IT RESOLVED, the Student Government Association expresses its deepest 
                                     condolences to the family, friends, and colleagues of Durgesh Vasmatkar.<br>
                                     <br>
@@ -331,23 +348,23 @@
                             </tr>
                             <tr>
                                 <td>Fundraising</td>
-                                <td style="text-align:justify"></td>
+                                <td style="text-align:justify" id="bill_fundraising"></td>
                             </tr>
                             <tr>
                                 <td>Dues</td>
-                                <td>0</td>
+                                <td id="bill_dues">0</td>
                             </tr>
                             <tr>
                                 <td>Undergraduate Members</td>
-                                <td>NA</td>
+                                <td id="bill_ugMembers">NA</td>
                             </tr>
                             <tr>
                                 <td>Graduate Members</td>
-                                <td>NA</td>
+                                <td id="bill_gMembers">NA</td>
                             </tr>
                             <tr>
                                 <td>Submit Date</td>
-                                <td>2018-04-17</td>
+                                <td id="bill_submit_date">2018-04-17</td>
                             </tr>
                         </tbody>
                     </table>
@@ -356,15 +373,15 @@
                         <tbody>
                             <tr>
                                 <td>Type</td>
-                                <td>Resolution</td>
+                                <td id="bill_type">Resolution</td>
                             </tr>
                             <tr>
                                 <td>Category</td>
-                                <td>Joint</td>
+                                <td id="bill_category">Joint</td>
                             </tr>
                             <tr>
                                 <td>Status</td>
-                                <td>Passed</td>
+                                <td id="bill_status">Passed</td>
                             </tr>
                         </tbody>
                     </table>

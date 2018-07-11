@@ -1,0 +1,791 @@
+/**
+ * @author Stephen Roca
+ * @author Michael Ellis
+ * @author Michael Mealling
+ *
+ * Adapted from an adaptation of
+ * Georgia Tech's general css layout.
+ */
+
+.ui-autocomplete {
+	width: inherit;
+	max-height: 100px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+}
+
+* html .ui-autocomplete {
+	height: 100px;
+}
+
+.error-message {
+	background: #FFEFEF none repeat scroll 0 0;
+	font-size: 10px;
+}
+
+* {
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+select {
+	width: 100%;
+}
+#category {
+	width: 90%;
+	margin-bottom: 10px;
+}
+label {
+	display: block;
+	font-size: 13px;
+	padding: 0 5px 1px 3px;
+}
+/**
+ * Remove the automatic margin and padding added
+ * to these elements.
+ */
+body, div, ul {
+	margin: 0;
+	padding: 0;
+}
+/**
+ * 	Removes the underline and highlighting of links.
+ */
+.links a {
+	text-decoration: none;
+	color: black;
+}
+/**
+ * 	Highlights links in gold on hover.
+ */
+.links a:hover, .links a:active {
+	color: #C5A757;
+}
+/**
+ * 	Formats the heading of the middle content.
+ */
+h1 {
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 24px;
+	margin: 12px 0;
+	border-bottom: 1px dotted #666;
+	z-index: 0;
+}
+
+h2 {
+	font-size: 14px;
+	font-weight: bold;
+	/*	margin-right: 20px;*/
+	border-bottom: 1px solid #DDD;
+}
+h3 {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 24px;
+	margin: 12px 0 0 0;
+	/*margin-top: 12px;*/
+	/*margin-bottom: 0;*/
+}
+
+form > .input {
+	margin-bottom: 10px;
+}
+
+#page_title {
+	border-bottom: 1px solid #DDD;
+	font-size: 2em;
+	margin-bottom: 10px;
+}
+
+/**
+ * Yep, this is currenty useless. Just a container.
+ */
+#header {
+
+}
+
+/**
+ * Holds and automatically resizes the Jacketpages
+ * header logo.
+ */
+#logoWrapper {
+	background: transparent url(../img/jpHeader.jpg) no-repeat scroll center top;
+	top: -2px;
+	min-height: 125px;
+	margin: 0px auto 0;
+}
+/**
+ * Repeats the picture used for the utility bar across
+ * the screen.
+ */
+#utilityBarWrapper {
+	background: #f8da8a url(../img/jpUtility.gif) repeat-x center bottom;
+	min-height: 25px;
+	text-align: center;
+}
+/**
+ * Houses the generated utility bar links.
+ */
+#utilityBar {
+	background: transparent center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+	min-height: 25px;
+}
+/**
+ * Repeats the picture used for the breadcrumbs section
+ * across the screen.
+ */
+#breadCrumbWrapper {
+	background: transparent url(../img/bgBreadcrumb.gif) repeat-x scroll center bottom;
+	border-bottom: 1px solid #E1E1E1;
+	height: 20px;
+	vertical-align: middle;
+}
+/**
+ * Houses the generated breadcrumbs.
+ */
+#breadCrumbs {
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+	padding: 3px 0 0 0px;
+	height: 20px;
+	font-size: 12px;
+	color: #666;
+}
+#breadCrumbs a {
+	color: #666;
+	text-decoration: none;
+}
+/**
+ * 	Houses the sidebar and main content
+ */
+#content {
+	z-index: 80;
+	width: 1000px;
+	margin: 0px auto 0px auto;
+	position: relative;
+	float: none;
+}
+/**
+ * Houses the sidebar.
+ */
+#sidebar {
+	margin: 18px 0px 0px 0px;
+	padding: 0 0px;
+	float: left;
+	width: 170px;
+}
+/**
+ * Removes the bullet from the top level list
+ * items and edits their font formatting.
+ */
+#sidebar ul li {
+	font-size: 13px;
+	list-style: none;
+	/*	padding-left: 12px;*/
+	padding-bottom: 3px;
+	padding-top: 3px;
+	font-weight: bold;
+}
+
+/**
+ * 	Puts a solid bottom border under the last
+ *  list item in nested lists added on top of
+ *  the general sidebar
+ */
+#sidebar #underline:last-child {
+	/*	margin: 0 0 0 12px;*/
+	padding-left: 0px;
+	border-bottom: 1px solid #DDD;
+}
+/**
+ * Differentiates the nested list elements by
+ * editing their size and weight
+ */
+#sidebar ul li ul li {
+	font-size: 13px;
+	font-weight: normal;
+	padding-left: 7px;
+}
+/**
+ * 	Defines the middle of the page where most
+ *  of the content will be generated
+ */
+#middle {
+	float: right;
+	width: 805px;
+	min-height: 400px;
+	margin-top: 10px;
+}
+/*
+	If the sidebar is empty, use this id instead of #middle
+*/
+#middle_full {
+	min-height: 400px;
+	margin-top: 10px;
+	margin-top: 10px;
+}
+
+/**
+ * 	Defines how paragraphs are displayed in the middle
+ */
+#middle p {
+	font-size: 14px;
+	line-height: 24px;
+	padding-left: 0;
+	/*padding-right: 25px;*/
+	text-align: justify;
+}
+
+#middle_full p {
+	font-size: 14px;
+	line-height: 24px;
+	padding-left: 0;
+	/*padding-right: 25px;*/
+	text-align: justify;
+}
+
+
+#middle ul {
+	/*padding-left: 40px;*/
+}
+
+/*
+ * Notification popup on homepage
+ */
+#notification, .notification {
+	width: 100%;
+	background-color: #EEB211;
+	box-shadow: 5px 5px 5px #888888;
+	color: #454545;
+	padding: 15px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+/**
+ * 	Start CSS for drop down menu.
+ */
+
+/**
+ * 	Style the main menu. Top level list
+ */
+.utilityMenu ul li {
+	display: inline;
+	list-style: none;
+	position: relative;
+	float: right;
+	font-size: 11px;
+	font-weight: bold;
+	text-transform: uppercase;
+	line-height: 19px;
+	padding-right: 10px;
+	/*we will figure this border thing out later*/
+	border-right: 1px solid #DDB856;
+	border-left: 1px solid #DDB856;
+}
+/**
+ * 	Be sure to include the down arrow to the right
+ *  of the menu link.
+ */
+.utilityMenu ul li a:after {
+	content: url('../img/down.gif');
+	position: absolute;
+	top: 5px;
+	right: 3px;
+}
+/**
+ * 	Position the top level list.
+ */
+.utilityMenu ul li a {
+	/*	border-left: 1px solid #f9de95;*/
+	display: block;
+	padding: 3px 10px;
+	color: #957B33;
+	text-decoration: none;
+}
+/**
+ * 	Highlight the link text in black on hover.
+ */
+.utilityMenu ul li a:hover {
+	color: black;
+}
+/**
+ * 	Style the submenu. Make the background color white.
+ */
+.utilityMenu ul li ul {
+	position: absolute;
+	visibility: hidden;
+	background: #ffffff;
+	margin: 0;
+	padding: 0;
+	box-shadow: 5px 5px 5px #888;
+	z-index: 100;
+}
+/**
+ * 	Format the font and include box shadow.
+ */
+.utilityMenu ul li ul li {
+	display: inline;
+	border-left-style: none;
+	text-align: left;
+	text-transform: none;
+	font-weight: normal;
+	font-size: 12px;
+	border-right-style: none;
+}
+/**
+ * 	Remove the border from the submenu links and set a standard width.
+ */
+.utilityMenu ul li ul li a {
+	border-style: none;
+	width: 150px;
+	float: left;
+}
+/**
+ * 	Remove the image added at the top level list.
+ */
+.utilityMenu ul li ul li a:after {
+	content: none;
+}
+/**
+ * 	End CSS for drop down menu.
+ */
+
+/**
+ * 	Define the image, position, and font formatting of the footer
+ */
+#footer_old {
+	background: url(../img/bgFooter2.png) no-repeat center;
+	clear: both;
+	color: #666;
+	height: 57px;
+	font-size: 10px;
+	padding: 12px 0 0 0;
+	text-align: center;
+	margin: 10px auto 10px auto;
+}
+
+/*@TODO Need to go through the following css rules and weed out the unnecessary stuff*/
+#left {
+	float: left;
+}
+#right {
+	float: right;
+}
+#alphabet {
+	position: relative;
+	height: 30px;
+	width: 100%;
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+#leftHalf {
+	left: 0;
+	width: 50%;
+	float: left;
+}
+#leftHalf label {
+	font-size: 16px;
+}
+#rightHalf {
+	width: 50%;
+	height: 24px;
+	float: right;
+	right: 0;
+	bottom: 0;
+}
+#rightHalf ul {
+	bottom: 0;
+	padding-left: 0;
+	font-size: 11.25px;
+	padding-top: 2px;
+}
+#rightHalf ul li {
+	/*	font-size: 110%;*/
+	/*	font-weight: bold;*/
+	/*	line-height: 17px;*/
+	/*	list-style: none;*/
+	width: auto;
+	display: inline;
+}
+#rightHalf ul li a {
+	text-decoration: none;
+	display: block;
+	color: #666;
+	/*	text-decoration: none;*/
+	display: inline;
+}
+
+input, textarea {
+	clear: both;
+	border: 1px solid #dadada;
+	color: #000000;
+	/*padding: 0.3em;*/
+	width: 100%;
+}
+
+input#search {
+
+	width: 83%;
+}
+
+search {
+	clear: both;
+	border: 1px solid #dadada;
+	color: #000000;
+	padding: 0.3em;
+	width: 80%;
+}
+
+/**
+ * 	Defines the table attributes when a list is generated
+ * 	such as users or bills
+ */
+.listing {
+	border-right: 0;
+	margin-bottom: 10px;
+	width: 100%;
+	border-collapse: collapse;
+	color: #2b2726;
+}
+
+/**
+ * 	Color the table data links dark blue
+ */
+.listing td a {
+	color: #001C3A;
+}
+
+/**
+ * 	Style the table headers padding, color, and borders
+ */
+.listing th {
+	border: 0;
+	border-bottom: 2px solid #555;
+	text-align: left;
+	font-size: 12px;
+	padding-left: 6px;
+}
+
+/**
+ * 	Alternate the background color of the table rows to
+ *  help visually differentiate data
+ */
+.listing tr:nth-child(2n) td {
+	background: #f5f5f5;
+}
+
+/**
+ * 	Define padding, border, and size for the table data
+ */
+.listing tr td {
+	border-bottom: 1px solid #DDD;
+	padding: 5px;
+	font-size: 14px;
+}
+
+/**
+ * 	Adds a - character for when the list is
+ *  in ascending sorted order
+ */
+.listing th a.asc:after {
+	content: ' -';
+}
+/**
+ * 	Adds a - character for when the list is
+ *  in descending sorted order
+ */
+.listing th a.desc:after {
+	content: ' +';
+}
+
+.box_listing {
+    border: thin solid #DDDDDD;
+    float: left;
+    margin: 1%;
+    padding: 10px;
+    width: 48%;
+    height: 220px;
+}
+
+.center_helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.box_listing .box_img {
+	float: left;
+    height: 200px;
+    margin-right: 10px;
+    width: 175px;
+    text-align: center;
+}
+
+.box_listing img {
+    max-height: 200px;
+    max-width: 175px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.silver_leaf_cover {
+	width: 70%;
+	margin: 20px auto;
+}
+
+
+/**
+ * 	Defines the attributes for the pagination numbers
+ * 	and links that appear underneath lists of searchable
+ * 	items
+ */
+.paging {
+	text-align: center;
+	background: white;
+	color: #CCC;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	clear: both;
+	padding: 0;
+	font-size: 10pt;
+}
+
+/**
+ * 	Removes and colors the links defined for the pagination
+ *  numbers and links
+ */
+.paging a {
+	text-decoration: none;
+	color: #001C3A;
+}
+
+/**
+ * 	Halfs the width of a table
+ */
+#halftable {
+	width: 50%;
+}
+
+/**
+ * 	Formatting for the submit button
+ */
+input[type=submit] {
+	color: #FFF;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 10px;
+	padding: 4px 15px;
+	width: auto;
+	min-height: 1.9em;
+	cursor: pointer;
+	background: url('../img/button.png') repeat-x #ECA701;
+	border: 1px solid #cf7b04;
+}
+
+.list {
+	background: #fff;
+	border-right: 0;
+	clear: both;
+	color: #333;
+	margin-bottom: 10px;
+	width: 100%;
+	font-size: 14px;
+}
+
+table.list tr {
+	padding: 6px;
+}
+
+table.list tr td {
+	border-bottom: 1px solid #ddd;
+	background: none;
+}
+
+table.list tr:last-child td {
+	border: none;
+}
+
+table.list tr td:first-child {
+	width: 20%;
+	vertical-align: top;
+	font-weight: bold;
+	text-align: left;
+}
+
+table.list tr:nth-child(2n) td {
+	background: none;
+}
+
+#checkboxlist {
+	display: inline;
+	width: 10px;
+	font-size: 13px;
+	color: #666;
+	font-weight: normal;
+}
+
+#filter {
+	padding-left: 10px;
+	list-style: none;
+}
+
+#description li {
+	background: url('../img/bullet.png') no-repeat 1px 6px;
+	font-size: 14px;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 17px;
+	list-style: none;
+	margin-left: 12px;
+	margin-top: 12px;
+	margin-bottom: -6px;
+	padding-left: 16px;
+	color: #666;
+}
+
+#middle a {
+	color: #001C3A;
+}
+
+#logo {
+	text-align: right;
+	display: inline;
+}
+
+#orgInfoLeft {
+	display: inline;
+}
+
+#orgInfo {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#inlineInput {
+	display: inline;
+}
+
+.struck td {
+	text-decoration: line-through;
+}
+
+#overlay {
+	position: absolute;
+	background-color: white;
+	z-index: 100000;
+	padding: 5px;
+}
+
+/**
+ * 	Position the top level list.
+ */
+.utilityMenu ul li p {
+	/*	border-left: 1px solid #f9de95;*/
+	margin: 0;
+	display: block;
+	padding: 3px 10px;
+	color: #957B33;
+	text-decoration: none;
+}
+
+.error {
+	border-color: red;
+}
+
+#outcomes th{
+	text-align:left;
+}
+
+#accordion {
+	margin-bottom: 10px;
+}
+
+.accordion_no_padding .ui-accordion-content {
+	padding: 0px;
+}
+
+#highlight:hover {
+	background-color:#bbcfe4;
+}
+
+.badgeButton {
+	background-color: white;
+	border: thin solid #DDDDDD;
+	display: inline-block;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+
+.badgeButton .badgeIcon img {
+	max-height: 40px;
+}
+
+.badgeIcon {
+	padding: 5px;
+}
+.badgeIcon img {
+	max-height: 33px;
+	vertical-align: text-top;
+}
+#page_title .badgeIcon:first-child {
+	margin-left: 5px;
+}
+
+#awardSearchBox {
+	margin-bottom: 20px;
+}
+#awardSearchBox label {
+	font-size: 16px;
+}
+
+.awardsTable td {
+	padding: 0px;
+	vertical-align: middle;
+}
+
+.awardsTable select {
+	height: 300px;
+}
+
+.awardsCenterButtons {
+	text-align: center;
+}
+.awardsCenterButtons button {
+	font-weight: normal;
+}
+
+.badgeDescription {
+	border-bottom: thin solid #DDDDDD;
+    margin-bottom: 15px;
+    padding: 5px 5px 15px;
+}
+
+#organizationBadgeTable .badgeButton {
+	margin-bottom: 2px;
+    margin-right: 4px;
+    margin-top: 2px;
+    padding: 2px;
+}
+
+.org_logo {
+	float: left;
+    text-align: center;
+    width: 50%;
+    padding: 2px;
+    margin-top: 12px;
+    height: 200px;
+}
+
+.org_logo img {
+	max-height: 200px;
+    vertical-align: middle;
+    width: auto;
+}
