@@ -57,3 +57,12 @@ app.get("/bill_status", (req, res) => {
         });
     });
 });
+
+// Get submitter for a certain bill given id
+app.get("/bill_submitter", (req, res) => {
+    connection.query(`SELECT first_name, last_name FROM users WHERE id=${req.param("id")}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
