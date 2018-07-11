@@ -3,19 +3,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JacketPages | Bills</title>
-        <script async="" src="./jpbills_files/analytics.js"></script><script type="text/javascript" src="jpbills_files/jquery-1.js"></script><script type="text/javascript" src="jpbills_files/jquery-ui.js"></script>
-        <link rel="stylesheet" type="text/css" href="jpbills_files/jquery-ui-1.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/reset.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/default.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/fonts.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/typography.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/layout.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/blocks.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/content.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/editor.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/static.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/icing.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/print.css" media="print">
+        <script async="" src="jpsubmitbill_files/analytics.js"></script><script type="text/javascript" src="jpsubmitbill_files/jquery-1.js"></script><script type="text/javascript" src="jpsubmitbill_files/jquery-ui.js"></script>
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/jquery-ui-1.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/reset.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/default.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/fonts.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/typography.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/layout.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/blocks.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/content.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/editor.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/static.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/icing.css">
+        <link rel="stylesheet" type="text/css" href="jpsubmitbill_files/print.css" media="print">
         <link rel="apple-touch-icon" href="http://jacketpages.gatech.edu/img/apple-touch-icon.png">
         <script type="text/javascript">
             // @TODO Generate this script using the HTML and Js helpers
@@ -46,36 +46,7 @@
             function closeHelp() {
             	$("#help").attr("style", "display:none;");
             }
-
-            var loggedIn = 996;
-            var billdata;
-            var limitrec = 10;
-            var pagenum = 0;
             
-            var updatebilldata = () => {
-                $.ajax({
-                    url: `http://localhost:8081/bills?submitter=${loggedIn}`, 
-                    type: "GET",
-                    success: function(data) {
-                        var billtb = document.getElementById("billtable");
-                        billdata = data.data;
-                        for (let i = 0; i < data.data.length; i++) {
-                            let tr = ""
-                            tr += "<tr>";
-                            tr += `<td>${data.data[i].title}</td>`;
-                            tr += `<td>${data.data[i].number}</td>`;
-                            tr += `<td>${data.data[i].category}</td>`;
-                            tr += `<td>${data.data[i].status}</td>`;
-                            tr += `<td>${data.data[i].submit_date}</td>`;
-                            tr += "</tr>";
-                            billtb.innerHTML += tr;
-                        }
-                        document.getElementById("numrec").innerHTML = `${Math.min(limitrec, billdata.length - limitrec * pagenum)}`;
-                        document.getElementById("numrectotal").innerHTML = `${billdata.length}`;
-                    }
-                });
-            };
-            updatebilldata();
                  
         </script>
         <script>
@@ -102,11 +73,11 @@
                 <div id="identity-wrapper">
                     <h1 id="gt-logo">
                         <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech">
-                        <img src="jpbills_files/logo-gt.png" alt="Georgia Tech">		        </a>    
+                        <img src="jpsubmitbill_files/logo-gt.png" alt="Georgia Tech">		        </a>    
                     </h1>
                     <h1 id="jp-logo">
                         <a href="http://jacketpages.gatech.edu/" rel="home" title="JacketPages">
-                        <img src="jpbills_files/jacketpages.png" alt="Jacket Pages">		      	</a> 
+                        <img src="jpsubmitbill_files/jacketpages.png" alt="Jacket Pages">		      	</a> 
                     </h1>
                 </div>
             </div>
@@ -224,13 +195,15 @@
                     <div class="row clearfix">
                         <ul style="float: right">
                             <li class="last">
-                                <a>Welcome, Akhil Kikkeri</a>
+                                <a>
+                                    <div id="flashMessage" class="message">The line items have been updated.</div>
+                                </a>
                             </li>
                         </ul>
                         <ul>
                             <li class="breadcrumb-item first"><a href="http://jacketpages.gatech.edu/">Home</a></li>
                             <li><a href="http://jacketpages.gatech.edu/bills">All Bills</a></li>
-                            <li class="breadcrumb-item last"><a href="http://jacketpages.gatech.edu/bills/my_bills">My Bills</a></li>
+                            <li class="breadcrumb-item last"><a href="http://jacketpages.gatech.edu/bills/view/2776">View Bill </a></li>
                         </ul>
                     </div>
                 </div>
@@ -340,100 +313,264 @@
                 </div>
                 <div class="links left-nav" id="sidebar">
                     <ul>
-                        <li><a href="http://jacketpages.gatech.edu/bills/add">Create New Bill</a></li>
+                        <li><a href="http://jacketpages.gatech.edu/bills/general_info/2776">Update Details</a></li>
+                        <li><a href="http://jacketpages.gatech.edu/line_items/index/2776/Submitted">Update Line Items</a></li>
+                        <li><a href="http://jacketpages.gatech.edu/bills/submit/2776">Submit Bill</a></li>
+                        <li><a href="http://jacketpages.gatech.edu/bills/delete/2776" style="color:red" onclick="return confirm('Are you sure you want to delete this bill?');">Delete Bill</a></li>
                     </ul>
                 </div>
                 <div id="middle">
-                    <div id="page_title">My Bills</div>
-                    <div id="alphabet">
-                        <!--<div id="leftHalf">-->
-                        <form action="/bills/my_bills" id="BillMyBillsForm" method="post" accept-charset="utf-8">
-                            <div style="display:none;"><input name="_method" value="POST" type="hidden"></div>
-                            <div class="input text"><label for="search" style="display:inline">Search</label><input name="data[Bill][keyword]" id="search" width="80%" type="text"></div>
-                            <!--</div>-->
-                            <!--<div id="rightHalf">
-                                <ul>
-                                                </li>
-                                </ul>
-                                </div>-->
-                        </form>
+                    <div id="page_title">Bill</div>
+                    <div id="notification">Once you have completed editing your bill, 
+                        please use the Submit button or Submit sidebar link to release the bill 
+                        to the authors. No further changes can be made after submitting.
                     </div>
-                    <div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
-                        <a href="#" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" id="ui-accordion-accordion-header-0" aria-controls="ui-accordion-accordion-panel-0" aria-selected="false" aria-expanded="false" tabindex="0"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Filters</a>
-                        <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style="display: none;" id="ui-accordion-accordion-panel-0" aria-labelledby="ui-accordion-accordion-header-0" role="tabpanel" aria-hidden="true">
-                            <div style="float: left; width: 45%;">
-                                <ul>
-                                    <div class="input select">
-                                        <label for="BillFrom">From Status</label>
-                                        <select name="data[Bill][from]" id="BillFrom">
-                                            <option value="1" selected="selected">Created</option>
-                                            <option value="2">Awaiting Author</option>
-                                            <option value="3">Authored</option>
-                                            <option value="4">Agenda</option>
-                                            <option value="5">Conference</option>
-                                            <option value="6">Passed</option>
-                                            <option value="7">Failed</option>
-                                            <option value="8">Tabled</option>
-                                        </select>
-                                    </div>
-                                    <div class="input select">
-                                        <label for="BillTo">To Status</label>
-                                        <select name="data[Bill][to]" id="BillTo">
-                                            <option value="1">Created</option>
-                                            <option value="2">Awaiting Author</option>
-                                            <option value="3">Authored</option>
-                                            <option value="4">Agenda</option>
-                                            <option value="5">Conference</option>
-                                            <option value="6">Passed</option>
-                                            <option value="7" selected="selected">Failed</option>
-                                            <option value="8">Tabled</option>
-                                        </select>
-                                    </div>
-                                </ul>
-                            </div>
-                            <div style="float: right; width: 45%;">
-                                <div class="input select required">
-                                    <label for="BillCategory">Category</label>
-                                    <select name="data[Bill][category]" id="BillCategory">
-                                        <option value="All" selected="selected">All</option>
-                                        <option value="Joint">Joint</option>
-                                        <option value="Undergraduate">Undergraduate</option>
-                                        <option value="Graduate">Graduate</option>
-                                    </select>
-                                </div>
-                                <br>
-                                <div class="submit" style="display:inline-block"><input value="Submit" type="submit"></div>
-                                <div class="submit" style="display:inline-block"><input name="submit" value="Clear" type="submit"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="listing">
-                        <tbody id="billtable">
-                            <tr class="links">
-                                <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:title/direction:asc">Title</a></th>
-                                <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:number/direction:asc">Number</a></th>
-                                <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:category/direction:asc">Category</a></th>
-                                <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:Status.name/direction:asc">Status</a></th>
-                                <th><a href="http://jacketpages.gatech.edu/bills/my_bills/sort:submit_date/direction:asc">Submit Date</a></th>
+                    <br>
+                    <table class="list">
+                        <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td>New1</td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td style="text-align:justify">New</td>
+                            </tr>
+                            <tr>
+                                <td>Fundraising</td>
+                                <td style="text-align:justify">New</td>
+                            </tr>
+                            <tr>
+                                <td>Dues</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate Members</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Graduate Members</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Created Date</td>
+                                <td>2018-07-10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1>Status</h1>
+                    <table class="list">
+                        <tbody>
+                            <tr>
+                                <td>Type</td>
+                                <td>Finance Request</td>
+                            </tr>
+                            <tr>
+                                <td>Category</td>
+                                <td>Joint</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>Created</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1>Authors</h1>
+                    <table class="list">
+                        <tbody>
+                            <tr>
+                                <td>Graduate Author</td>
+                                <td><a href="mailto:abalwani6@gatech.edu">Aishwarya  Balwani </a> - Not Signed</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate Author</td>
+                                <td><a href="mailto:abigailburke@gatech.edu">Abigail Burke</a> - Not Signed</td>
+                            </tr>
+                            <tr>
+                                <td>Submitter</td>
+                                <td><a href="mailto:akikkeri3@gatech.edu">Akhil Kikkeri</a></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Organization</td>
+                                <td><a href="http://jacketpages.gatech.edu/organizations/view/44886">3D Politics</a></td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
                     <script>
-                        $(function() {
-                        	$("#accordion").accordion({
-                        		collapsible : true,
-                        		heightStyle: "content",
-                        		active : false		});
+                        function openComments() {
+                        	$("#comments").attr("style", "");
+                        	$("#comments_text").update(text);
+                        }
+                        
+                        function closeComments() {
+                        	$("#comments").attr("style", "display:none;");
+                        }
+                    </script>			<script>
+                        $(function()
+                        {
+                        	$("#tabs").tabs();
+                        	$("#tabs").tabs("option", "active", 0);
                         }); 
-                    </script> 
-                    <div class="paging">
-                        <span class="disabled">&lt;&lt; previous</span>    |
-                        |
-                        <span class="disabled">next &gt;&gt;</span>    <br>
-                        <br>
-                        Page <span id="currpg"></span> of <span id="totalpgno"></span>, showing <span id="numrec"></span> records out of
-                        <span id="numrectotal"></span> total, starting on record 0, ending on 0
+                    </script>
+                    <br>
+                    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+                        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                            <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true">
+                                <a href="#tabs-1" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">Submitted</a>
+                            </li>
+                            <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false">
+                                <a href="#tabs-2" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">JFC</a>
+                            </li>
+                            <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false">
+                                <a href="#tabs-3" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">Graduate</a>
+                            </li>
+                            <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs-4" aria-labelledby="ui-id-4" aria-selected="false">
+                                <a href="#tabs-4" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4">Undergraduate</a>
+                            </li>
+                            <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs-5" aria-labelledby="ui-id-5" aria-selected="false">
+                                <a href="#tabs-5" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-5">Conference</a>
+                            </li>
+                            <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs-6" aria-labelledby="ui-id-6" aria-selected="false">
+                                <a href="#tabs-6" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-6">All</a>
+                            </li>
+                            <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs-7" aria-labelledby="ui-id-7" aria-selected="false">
+                                <a href="#tabs-7" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-7">Final</a>
+                            </li>
+                        </ul>
+                        <div id="tabs-1" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false">
+                            <table class="listing">
+                                <tbody>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Cost/Unit</th>
+                                        <th>Qty</th>
+                                        <th>TC</th>
+                                        <th>AR</th>
+                                        <th>Account</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/41274">1</a></td>
+                                        <td>1.00</td>
+                                        <td>1</td>
+                                        <td>1.00</td>
+                                        <td>0.67</td>
+                                        <td>CO</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing">
+                                <tbody>
+                                    <tr>
+                                        <td>Prior Year</td>
+                                        <td>$0.00</td>
+                                        <td>Capital Outlay</td>
+                                        <td>67c</td>
+                                        <td>Total</td>
+                                        <td>67c</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="tabs-2" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;" aria-expanded="false" aria-hidden="true">There are no line items for this state.<br></div>
+                        <div id="tabs-3" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;" aria-expanded="false" aria-hidden="true">There are no line items for this state.<br></div>
+                        <div id="tabs-4" aria-labelledby="ui-id-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;" aria-expanded="false" aria-hidden="true">There are no line items for this state.<br></div>
+                        <div id="tabs-5" aria-labelledby="ui-id-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;" aria-expanded="false" aria-hidden="true">There are no line items for this state.<br></div>
+                        <div id="tabs-6" aria-labelledby="ui-id-6" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;" aria-expanded="false" aria-hidden="true">
+                            <table class="listing">
+                                <tbody>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Cost/Unit</th>
+                                        <th>Qty</th>
+                                        <th>TC</th>
+                                        <th>AR</th>
+                                        <th>Account</th>
+                                        <th>State</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/41274">1</a></td>
+                                        <td>1.00</td>
+                                        <td>1</td>
+                                        <td>1.00</td>
+                                        <td>0.67</td>
+                                        <td>CO</td>
+                                        <td>Submitted</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing">
+                                <tbody>
+                                    <tr>
+                                        <td>Submitted:</td>
+                                        <td>Prior Year</td>
+                                        <td>$0.00</td>
+                                        <td>Capital Outlay</td>
+                                        <td>67c</td>
+                                        <td>Total</td>
+                                        <td>67c</td>
+                                    </tr>
+                                    <tr>
+                                        <td>JFC:</td>
+                                        <td>Prior Year</td>
+                                        <td>$0.00</td>
+                                        <td>Capital Outlay</td>
+                                        <td>$0.00</td>
+                                        <td>Total</td>
+                                        <td>$0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Undergraduate:</td>
+                                        <td>Prior Year</td>
+                                        <td>$0.00</td>
+                                        <td>Capital Outlay</td>
+                                        <td>$0.00</td>
+                                        <td>Total</td>
+                                        <td>$0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Conference:</td>
+                                        <td>Prior Year</td>
+                                        <td>$0.00</td>
+                                        <td>Capital Outlay</td>
+                                        <td>$0.00</td>
+                                        <td>Total</td>
+                                        <td>$0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Graduate:</td>
+                                        <td>Prior Year</td>
+                                        <td>$0.00</td>
+                                        <td>Capital Outlay</td>
+                                        <td>$0.00</td>
+                                        <td>Total</td>
+                                        <td>$0.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="tabs-7" aria-labelledby="ui-id-7" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;" aria-expanded="false" aria-hidden="true">There are no line items for this state.<br></div>
                     </div>
+                    <div class="ui-overlay" id="comments" style="display:none;">
+                        <div class="ui-widget-overlay"></div>
+                        <div class="ui-corner-all" id="overlay" style="width: 25%; height: 10%; position: absolute; top: 0;">
+                            <button onclick="closeComments()" style="float:right;" type="submit">X</button>		
+                            <div id="comments_text"></div>
+                        </div>
+                    </div>
+                    <br>
+                    <form action="/bills/submit/2776" id="BillViewForm" method="post" accept-charset="utf-8">
+                        <div style="display:none;"><input name="_method" value="POST" type="hidden"></div>
+                        <div class="submit"><input value="Submit Bill" type="submit"></div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -455,7 +592,7 @@
                 </div>
                 <div id="footer-logo">
                     <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech" style="margin-right:4px">
-                    <img src="jpbills_files/sgalogogrey.png" alt="Georgia Tech">		        </a>     
+                    <img src="jpsubmitbill_files/sgalogogrey.png" alt="Georgia Tech">		        </a>     
                     <p>© 2018 Georgia Tech Student Government Association</p>
                 </div>
             </div>
