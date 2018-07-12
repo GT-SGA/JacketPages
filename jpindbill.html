@@ -38,6 +38,18 @@
             	};
             
             });
+
+            function url_query( query ) {
+                query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                var expr = "[\\?&]"+query+"=([^&#]*)";
+                var regex = new RegExp( expr );
+                var results = regex.exec( window.location.href );
+                if ( results !== null ) {
+                    return results[1];
+                } else {
+                    return false;
+                }
+            }
             
             function openHelp() {
             	$("#help").attr("style", "");
@@ -48,13 +60,13 @@
             }
             
             $.ajax({
-                url: `http://localhost:8081/bill?id=${document.cookie}`, 
+                url: `http://localhost:8081/bill?id=${url_query("id")}`, 
                 type: "GET",
                 success: function(data) {
                     document.getElementById("page_title").innerHTML = `Bill ${data.data[0].number}`;
                     document.getElementById("bill_title").innerHTML = `${data.data[0].title}`;
                     document.getElementById("bill_description").innerHTML = `${data.data[0].description}`;
-                    document.getElementById("bill_submit_date").innerHTML = `${data.data[0].submit_date}`;
+                    document.getElementById("bill_submit_date").innerHTML = `${data.data[0].submit_date.split('T')[0]}`;
                     document.getElementById("bill_dues").innerHTML = `${data.data[0].dues}`;
                     document.getElementById("bill_fundraising").innerHTML = `${data.data[0].fundraising}`;
                     document.getElementById("bill_type").innerHTML = `${data.data[0].type}`;
@@ -69,12 +81,63 @@
                     document.getElementById("bill_ugMembers").innerHTML = `${data.data[0].ugMembers}`;
                     document.getElementById("bill_gMembers").innerHTML = `${data.data[0].gMembers}`;
                     $.ajax({
-                        url: `http://localhost:8081/bill_submitter?id=${data.data[0].submitter}`, 
+                        url: `http://localhost:8081/user?id=${data.data[0].submitter}`, 
                         type: "GET",
                         success: function(data) {
                             document.getElementById("bill_submitter").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                            document.getElementById("bill_submitter").href = `mailto:${data.data[0].email}`;
                         }
                     });
+                    // @TODO: Update authors
+                    $.ajax({
+                        url: `http://localhost:8081/bill_authors?id=${data.data[0].auth_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_auth_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_ug_author").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                        document.getElementById("bill_ug_author").href = `mailto:${data.data[0].email}`;
+                                    } else {
+                                        document.getElementById("bill_ug_author").innerHTML = ``;
+                                        document.getElementById("bill_ug_author").href = ``;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_auth_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_g_author").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                        document.getElementById("bill_g_author").href = `mailto:${data.data[0].email}`;
+                                    } else {
+                                        document.getElementById("bill_g_author").innerHTML = ``;
+                                        document.getElementById("bill_g_author").href = ``;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_auth_appr}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    document.getElementById("bill_g_author").innerHTML += ` - Signed`;
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_auth_appr}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    document.getElementById("bill_ug_author").innerHTML += ` - Signed`;
+                                }
+                            });
+                            document.getElementById("bill_submitter").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                            document.getElementById("bill_submitter").href = `mailto:${data.data[0].email}`;
+                        }
+                    });
+                    // @TODO: Update votes
                 }
             });
                  

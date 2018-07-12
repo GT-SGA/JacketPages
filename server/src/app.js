@@ -58,9 +58,18 @@ app.get("/bill_status", (req, res) => {
     });
 });
 
+// Get user given id
+app.get("/user", (req, res) => {
+    connection.query(`SELECT * FROM users WHERE id=${req.param("id")}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
 // Get submitter for a certain bill given id
-app.get("/bill_submitter", (req, res) => {
-    connection.query(`SELECT first_name, last_name FROM users WHERE id=${req.param("id")}`, function(err, rows) {
+app.get("/bill_authors", (req, res) => {
+    connection.query(`SELECT * FROM bill_authors WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
             rows
         });
