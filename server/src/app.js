@@ -95,3 +95,48 @@ app.get("/bill_authors", (req, res) => {
         });
     });
 });
+
+// Get submitter for a certain bill given id
+app.put("/bill_passed", (req, res) => {
+    connection.query(`UPDATE bills SET status=6 WHERE id=${req.param("id")}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Approve a bill for the graduate president
+app.put("/bill_sign_gp", (req, res) => {
+    connection.query(`UPDATE bill_authors SET grad_pres_id=${req.param("gp_id")} WHERE id=${req.param("id")}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Approve a bill for the graduate secretary
+app.put("/bill_sign_up", (req, res) => {
+    connection.query(`UPDATE bill_authors SET grad_secr_id=${req.param("gs_id")} WHERE id=${req.param("id")}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Approve a bill for the undergraduate president
+app.put("/bill_sign_gp", (req, res) => {
+    connection.query(`UPDATE bill_authors SET undr_pres_id=${req.param("up_id")} WHERE id=${req.param("id")}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Approve a bill for the undergraduate secretary
+app.put("/bill_sign_up", (req, res) => {
+    connection.query(`UPDATE bill_authors SET undr_secr_id=${req.param("us_id")} WHERE id=${req.param("id")}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});

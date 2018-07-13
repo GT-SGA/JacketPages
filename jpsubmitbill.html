@@ -68,6 +68,67 @@
             function closeHelp() {
             	$("#help").attr("style", "display:none;");
             }
+
+            function signBill(author) {
+                $.ajax({
+                    url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
+                    type: "GET",
+                    success: function(data) {
+                        $.ajax({
+                            url: `http://localhost:8081/bill_authors?id=${data.data[0].auth_id}`, 
+                            type: "GET",
+                            success: function(data) {
+                                if (author == 'gp') {
+                                    $.ajax({
+                                        url: `http://localhost:8081/bill_sign_gp?id=${data.data[0].id}&gp_id=${data.data[0].grad_pres_id}`, 
+                                        type: "PUT",
+                                        success: function(data) {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                                else if (author == 'gs') {
+                                    $.ajax({
+                                        url: `http://localhost:8081/bill_sign_gs?id=${data.data[0].id}&gs_id=${data.data[0].grad_secr_id}`, 
+                                        type: "PUT",
+                                        success: function(data) {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                                else if (author == 'up') {
+                                    $.ajax({
+                                        url: `http://localhost:8081/bill_sign_up?id=${data.data[0].id}&up_id=${data.data[0].undr_pres_id}`, 
+                                        type: "PUT",
+                                        success: function(data) {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                                else if (author == 'us') {
+                                    $.ajax({
+                                        url: `http://localhost:8081/bill_sign_us?id=${data.data[0].id}&us_id=${data.data[0].undr_secr_id}`, 
+                                        type: "PUT",
+                                        success: function(data) {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+
+            function markPassed() {
+                $.ajax({
+                    url: `http://localhost:8081/bill_passed?id=${url_query("id")}`, 
+                    type: "PUT",
+                    success: function(data) {
+                        window.location.href = window.location.href;
+                    }
+                });
+            }
             
             $.ajax({
                 url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
@@ -127,7 +188,6 @@
                             document.getElementById("bill_uhr_a").innerHTML = `${data.data[0].abstains}`;
                         }
                     });
-                    // @TODO: Update authors
                     $.ajax({
                         url: `http://localhost:8081/bill_authors?id=${data.data[0].auth_id}`, 
                         type: "GET",
@@ -163,7 +223,7 @@
                                     if (data.data[0]) {
                                         document.getElementById("bill_grad_pres").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
                                     } else {
-                                        document.getElementById("bill_grad_pres").innerHTML = `Unsigned`;
+                                        document.getElementById("bill_grad_pres").innerHTML = `<a href="#" onclick="signBill('gp');"`;
                                     }
                                 }
                             });
@@ -215,7 +275,6 @@
                             document.getElementById("bill_ug_author").innerHTML += data.data[0].undr_auth_appr == 1 ? ` - Signed` : "";
                         }
                     });
-                    // @TODO: Update votes
                 }
             });
                  
@@ -487,6 +546,7 @@
                         <li><a href="http://jacketpages.gatech.edu/bills/general_info/2776">Update Details</a></li>
                         <li><a href="http://jacketpages.gatech.edu/line_items/index/2776/Submitted">Update Line Items</a></li>
                         <li><a href="http://jacketpages.gatech.edu/bills/submit/2776">Submit Bill</a></li>
+                        <li><a href="#" onclick="markPassed();">Mark as Passed</a></li>
                         <li><a href="#" style="color:red" onclick="delBill();">Delete Bill</a></li>
                     </ul>
                 </div>
