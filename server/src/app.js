@@ -62,7 +62,7 @@ app.get("/org", (req, res) => {
 });
 
 // Delete the bill by a certain id
-app.delete("/bill", (req, res) => {
+app.delete("/bill_id", (req, res) => {
     connection.query(`DELETE FROM bills WHERE id=${req.param("id")}`, function(err, rows) {
         if (err) res.send({err: err});
         else res.send(`id ${req.param("id")} deleted!`);

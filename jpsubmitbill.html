@@ -50,6 +50,16 @@
                     return false;
                 }
             }
+
+            function delBill() {
+                $.ajax({
+                    url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
+                    type: "DELETE",
+                    success: function(data) {
+                        window.location.href = `jpbills.html`;
+                    }
+                });
+            }
             
             function openHelp() {
             	$("#help").attr("style", "");
@@ -477,7 +487,7 @@
                         <li><a href="http://jacketpages.gatech.edu/bills/general_info/2776">Update Details</a></li>
                         <li><a href="http://jacketpages.gatech.edu/line_items/index/2776/Submitted">Update Line Items</a></li>
                         <li><a href="http://jacketpages.gatech.edu/bills/submit/2776">Submit Bill</a></li>
-                        <li><a href="http://jacketpages.gatech.edu/bills/delete/2776" style="color:red" onclick="return confirm('Are you sure you want to delete this bill?');">Delete Bill</a></li>
+                        <li><a href="#" style="color:red" onclick="delBill();">Delete Bill</a></li>
                     </ul>
                 </div>
                 <div id="middle">
