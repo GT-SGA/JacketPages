@@ -39,6 +39,18 @@
             
             });
             
+            function url_query( query ) {
+                query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                var expr = "[\\?&]"+query+"=([^&#]*)";
+                var regex = new RegExp( expr );
+                var results = regex.exec( window.location.href );
+                if ( results !== null ) {
+                    return results[1];
+                } else {
+                    return false;
+                }
+            }
+            
             function openHelp() {
             	$("#help").attr("style", "");
             }
@@ -47,6 +59,155 @@
             	$("#help").attr("style", "display:none;");
             }
             
+            $.ajax({
+                url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
+                type: "GET",
+                success: function(data) {
+                    console.log(data);
+                    document.getElementById("page_title").innerHTML = `Bill ${data.data[0].number}`;
+                    document.getElementById("bill_title").innerHTML = `${data.data[0].title}`;
+                    document.getElementById("bill_description").innerHTML = `${data.data[0].description}`;
+                    document.getElementById("bill_submit_date").innerHTML = `${data.data[0].submit_date.split('T')[0]}`;
+                    document.getElementById("bill_dues").innerHTML = `${data.data[0].dues}`;
+                    document.getElementById("bill_fundraising").innerHTML = `${data.data[0].fundraising}`;
+                    document.getElementById("bill_type").innerHTML = `${data.data[0].type}`;
+                    document.getElementById("bill_category").innerHTML = `${data.data[0].category}`;
+                    $.ajax({
+                        url: `http://localhost:8081/bill_status?id=${data.data[0].status}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_status").innerHTML = `${data.data[0].name}`;
+                        }
+                    });
+                    document.getElementById("bill_ugMembers").innerHTML = `${data.data[0].ugMembers}`;
+                    document.getElementById("bill_gMembers").innerHTML = `${data.data[0].gMembers}`;
+                    $.ajax({
+                        url: `http://localhost:8081/user?id=${data.data[0].submitter}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_submitter").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                            document.getElementById("bill_submitter").href = `mailto:${data.data[0].email}`;
+                        }
+                    });
+                    $.ajax({
+                        url: `http://localhost:8081/org?id=${data.data[0].org_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_org").innerHTML = `<a href="jacketpages.gatech.edu/organizations/view/${data.data[0].id}">${data.data[0].name}</a>`;
+                        }
+                    });
+                    $.ajax({
+                        url: `http://localhost:8081/bill_votes?id=${data.data[0].gss_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_gss_date").innerHTML = `${data.data[0].date.split('T')[0]}`;
+                            document.getElementById("bill_gss_y").innerHTML = `${data.data[0].yeas}`;
+                            document.getElementById("bill_gss_n").innerHTML = `${data.data[0].nays}`;
+                            document.getElementById("bill_gss_a").innerHTML = `${data.data[0].abstains}`;
+                        }
+                    });
+                    $.ajax({
+                        url: `http://localhost:8081/bill_votes?id=${data.data[0].uhr_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            console.log(data.data[0]);
+                            document.getElementById("bill_uhr_date").innerHTML = `${data.data[0].date.split('T')[0]}`;
+                            document.getElementById("bill_uhr_y").innerHTML = `${data.data[0].yeas}`;
+                            document.getElementById("bill_uhr_n").innerHTML = `${data.data[0].nays}`;
+                            document.getElementById("bill_uhr_a").innerHTML = `${data.data[0].abstains}`;
+                        }
+                    });
+                    // @TODO: Update authors
+                    $.ajax({
+                        url: `http://localhost:8081/bill_authors?id=${data.data[0].auth_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_auth_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_ug_author").innerHTML = `<a href="mailto:${data.data[0].email}">
+                                                ${data.data[0].first_name} ${data.data[0].last_name}</a>`;
+                                    } else {
+                                        document.getElementById("bill_ug_author").innerHTML = ``;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_auth_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_g_author").innerHTML = `<a href="mailto:${data.data[0].email}">
+                                                ${data.data[0].first_name} ${data.data[0].last_name}</a>`;
+                                    } else {
+                                        document.getElementById("bill_g_author").innerHTML = ``;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_pres_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_grad_pres").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_grad_pres").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_secr_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_grad_sec").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_grad_sec").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_pres_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_undr_pres").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_undr_pres").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_secr_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_undr_sec").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_undr_sec").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].vp_fina_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_vp_fin").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_vp_fin").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            document.getElementById("bill_g_author").innerHTML += data.data[0].grad_auth_appr == 1 ? ` - Signed` : "";
+                            document.getElementById("bill_ug_author").innerHTML += data.data[0].undr_auth_appr == 1 ? ` - Signed` : "";
+                        }
+                    });
+                    // @TODO: Update votes
+                }
+            });
                  
         </script>
         <script>
@@ -320,41 +481,44 @@
                     </ul>
                 </div>
                 <div id="middle">
-                    <div id="page_title">Bill</div>
-                    <div id="notification">Once you have completed editing your bill, 
-                        please use the Submit button or Submit sidebar link to release the bill 
-                        to the authors. No further changes can be made after submitting.
-                    </div>
-                    <br>
+                    <div id="page_title"></div>
                     <table class="list">
                         <tbody>
                             <tr>
                                 <td>Title</td>
-                                <td>New1</td>
+                                <td id="bill_title">Resolution Expressing Condolences: Durgesh Vasmatkar</td>
                             </tr>
                             <tr>
                                 <td>Description</td>
-                                <td style="text-align:justify">New</td>
+                                <td style="text-align:justify" id="bill_description">BE
+                                    IT RESOLVED, the Student Government Association expresses its deepest 
+                                    condolences to the family, friends, and colleagues of Durgesh Vasmatkar.<br>
+                                    <br>
+                                    Durgesh was an Online Masters student majoring in Computer Science. His 
+                                    caring and quest for excellence left a lasting impression on his fellow 
+                                    students. He will truly be missed by the OMSCS Community and the entire 
+                                    Georgia Tech community.
+                                </td>
                             </tr>
                             <tr>
                                 <td>Fundraising</td>
-                                <td style="text-align:justify">New</td>
+                                <td style="text-align:justify" id="bill_fundraising"></td>
                             </tr>
                             <tr>
                                 <td>Dues</td>
-                                <td>1</td>
+                                <td id="bill_dues">0</td>
                             </tr>
                             <tr>
                                 <td>Undergraduate Members</td>
-                                <td>1</td>
+                                <td id="bill_ugMembers">NA</td>
                             </tr>
                             <tr>
                                 <td>Graduate Members</td>
-                                <td>1</td>
+                                <td id="bill_gMembers">NA</td>
                             </tr>
                             <tr>
-                                <td>Created Date</td>
-                                <td>2018-07-10</td>
+                                <td>Submit Date</td>
+                                <td id="bill_submit_date">2018-04-17</td>
                             </tr>
                         </tbody>
                     </table>
@@ -363,15 +527,15 @@
                         <tbody>
                             <tr>
                                 <td>Type</td>
-                                <td>Finance Request</td>
+                                <td id="bill_type">Resolution</td>
                             </tr>
                             <tr>
                                 <td>Category</td>
-                                <td>Joint</td>
+                                <td id="bill_category">Joint</td>
                             </tr>
                             <tr>
                                 <td>Status</td>
-                                <td>Created</td>
+                                <td id="bill_status">Passed</td>
                             </tr>
                         </tbody>
                     </table>
@@ -380,21 +544,81 @@
                         <tbody>
                             <tr>
                                 <td>Graduate Author</td>
-                                <td><a href="mailto:abalwani6@gatech.edu">Aishwarya  Balwani </a> - Not Signed</td>
+                                <td><a id="bill_g_author">Sample Name</a></td>
                             </tr>
                             <tr>
                                 <td>Undergraduate Author</td>
-                                <td><a href="mailto:abigailburke@gatech.edu">Abigail Burke</a> - Not Signed</td>
+                                <td><a id="bill_ug_author">Sample Name</a></td>
                             </tr>
                             <tr>
                                 <td>Submitter</td>
-                                <td><a href="mailto:akikkeri3@gatech.edu">Akhil Kikkeri</a></td>
+                                <td><a id="bill_submitter">Sample Name</a></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Organization</td>
-                                <td><a href="http://jacketpages.gatech.edu/organizations/view/44886">3D Politics</a></td>
+                                <td id="bill_org"><a href="http://jacketpages.gatech.edu/organizations/view/27751">Graduate Student Government Association</a></td>
                                 <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1>Signatures</h1>
+                    <table class="list">
+                        <tbody>
+                            <tr>
+                                <td>Graduate President</td>
+                                <td id="bill_grad_pres">Skanda Prasad P N</td>
+                            </tr>
+                            <tr>
+                                <td>Graduate Secretary</td>
+                                <td id="bill_grad_sec">David Giles</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate President</td>
+                                <td id="bill_undr_pres">Sujay Peramanu</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate Secretary</td>
+                                <td id="bill_undr_sec">Lexie Scott</td>
+                            </tr>
+                            <tr>
+                                <td>Vice President of Finance</td>
+                                <td id="bill_vp_fin">Carson Silbert</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1>Outcomes:</h1>
+                    <table class="list" id="outcomes" width="50%">
+                        <tbody>
+                            <tr>
+                                <th><a href="#" onclick="javascript:openComments()">GSS:</a></th>
+                                <th></th>
+                                <th><a href="#" onclick="javascript:openComments()">UHR:</a></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td id="bill_gss_date"></td>
+                                <td>Date</td>
+                                <td id="bill_uhr_date"></td>
+                            </tr>
+                            <tr>
+                                <td>Yeas</td>
+                                <td id="bill_gss_y"></td>
+                                <td>Yeas</td>
+                                <td id="bill_uhr_y"></td>
+                            </tr>
+                            <tr>
+                                <td>Nays</td>
+                                <td id="bill_gss_n"></td>
+                                <td>Nays</td>
+                                <td id="bill_uhr_n"></td>
+                            </tr>
+                            <tr>
+                                <td>Abstains</td>
+                                <td id="bill_gss_a"></td>
+                                <td>Abstains</td>
+                                <td id="bill_uhr_a"></td>
                             </tr>
                         </tbody>
                     </table>
