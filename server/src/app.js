@@ -21,10 +21,10 @@ connection.query("USE jacketpages_dev");
 
 app.listen(process.env.PORT || 8081);
 
-// Send the data of the bills on localhost:8081
-app.get("/bills", (req, res) => {
+// Send the data of the bills submitted by a certain submitter
+app.get("/bills_sub", (req, res) => {
     // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
-    connection.query(`SELECT * FROM bills WHERE submitter=${req.param("submitter")}`, function(err, rows) {
+    connection.query(`SELECT * FROM bills WHERE submitter=${req.param('submitter')}`, function(err, rows) {
         res.send({data: 
             rows
         });
@@ -32,9 +32,29 @@ app.get("/bills", (req, res) => {
 });
 
 // Get an individual bill's data
-app.get("/bill", (req, res) => {
+app.get("/bill_id", (req, res) => {
     // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
-    connection.query(`SELECT * FROM bills WHERE id=${req.param("id")}`, function(err, rows) {
+    connection.query(`SELECT * FROM bills WHERE id=${req.param('id')}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Get votes for a specific bill given id
+app.get("/bill_votes", (req, res) => {
+    // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
+    connection.query(`SELECT * FROM bill_votes WHERE id=${req.param('id')}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Get an individual organization's data
+app.get("/org", (req, res) => {
+    // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
+    connection.query(`SELECT * FROM organizations WHERE id=${req.param('id')}`, function(err, rows) {
         res.send({data: 
             rows
         });

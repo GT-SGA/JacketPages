@@ -54,7 +54,7 @@
 
             var updatebilldata = () => {
                 $.ajax({
-                    url: `http://localhost:8081/bills?submitter=${loggedIn}`, 
+                    url: `http://localhost:8081/bills_sub?submitter=${loggedIn}`, 
                     type: "GET",
                     success: function(data) {
                         var billtb = document.getElementById("billtable");

@@ -60,9 +60,10 @@
             }
             
             $.ajax({
-                url: `http://localhost:8081/bill?id=${url_query("id")}`, 
+                url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
                 type: "GET",
                 success: function(data) {
+                    console.log(data);
                     document.getElementById("page_title").innerHTML = `Bill ${data.data[0].number}`;
                     document.getElementById("bill_title").innerHTML = `${data.data[0].title}`;
                     document.getElementById("bill_description").innerHTML = `${data.data[0].description}`;
@@ -88,6 +89,34 @@
                             document.getElementById("bill_submitter").href = `mailto:${data.data[0].email}`;
                         }
                     });
+                    $.ajax({
+                        url: `http://localhost:8081/org?id=${data.data[0].org_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_org").innerHTML = `<a href="jacketpages.gatech.edu/organizations/view/${data.data[0].id}">${data.data[0].name}</a>`;
+                        }
+                    });
+                    $.ajax({
+                        url: `http://localhost:8081/bill_votes?id=${data.data[0].gss_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_gss_date").innerHTML = `${data.data[0].date.split('T')[0]}`;
+                            document.getElementById("bill_gss_y").innerHTML = `${data.data[0].yeas}`;
+                            document.getElementById("bill_gss_n").innerHTML = `${data.data[0].nays}`;
+                            document.getElementById("bill_gss_a").innerHTML = `${data.data[0].abstains}`;
+                        }
+                    });
+                    $.ajax({
+                        url: `http://localhost:8081/bill_votes?id=${data.data[0].uhr_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            console.log(data.data[0]);
+                            document.getElementById("bill_uhr_date").innerHTML = `${data.data[0].date.split('T')[0]}`;
+                            document.getElementById("bill_uhr_y").innerHTML = `${data.data[0].yeas}`;
+                            document.getElementById("bill_uhr_n").innerHTML = `${data.data[0].nays}`;
+                            document.getElementById("bill_uhr_a").innerHTML = `${data.data[0].abstains}`;
+                        }
+                    });
                     // @TODO: Update authors
                     $.ajax({
                         url: `http://localhost:8081/bill_authors?id=${data.data[0].auth_id}`, 
@@ -98,11 +127,10 @@
                                 type: "GET",
                                 success: function(data) {
                                     if (data.data[0]) {
-                                        document.getElementById("bill_ug_author").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
-                                        document.getElementById("bill_ug_author").href = `mailto:${data.data[0].email}`;
+                                        document.getElementById("bill_ug_author").innerHTML = `<a href="mailto:${data.data[0].email}">
+                                                ${data.data[0].first_name} ${data.data[0].last_name}</a>`;
                                     } else {
                                         document.getElementById("bill_ug_author").innerHTML = ``;
-                                        document.getElementById("bill_ug_author").href = ``;
                                     }
                                 }
                             });
@@ -111,30 +139,70 @@
                                 type: "GET",
                                 success: function(data) {
                                     if (data.data[0]) {
-                                        document.getElementById("bill_g_author").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
-                                        document.getElementById("bill_g_author").href = `mailto:${data.data[0].email}`;
+                                        document.getElementById("bill_g_author").innerHTML = `<a href="mailto:${data.data[0].email}">
+                                                ${data.data[0].first_name} ${data.data[0].last_name}</a>`;
                                     } else {
                                         document.getElementById("bill_g_author").innerHTML = ``;
-                                        document.getElementById("bill_g_author").href = ``;
                                     }
                                 }
                             });
                             $.ajax({
-                                url: `http://localhost:8081/user?id=${data.data[0].grad_auth_appr}`, 
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_pres_id}`, 
                                 type: "GET",
                                 success: function(data) {
-                                    document.getElementById("bill_g_author").innerHTML += ` - Signed`;
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_grad_pres").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_grad_pres").innerHTML = `Unsigned`;
+                                    }
                                 }
                             });
                             $.ajax({
-                                url: `http://localhost:8081/user?id=${data.data[0].undr_auth_appr}`, 
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_secr_id}`, 
                                 type: "GET",
                                 success: function(data) {
-                                    document.getElementById("bill_ug_author").innerHTML += ` - Signed`;
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_grad_sec").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_grad_sec").innerHTML = `Unsigned`;
+                                    }
                                 }
                             });
-                            document.getElementById("bill_submitter").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
-                            document.getElementById("bill_submitter").href = `mailto:${data.data[0].email}`;
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_pres_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_undr_pres").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_undr_pres").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_secr_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_undr_sec").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_undr_sec").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].vp_fina_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_vp_fin").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_vp_fin").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            document.getElementById("bill_g_author").innerHTML += data.data[0].grad_auth_appr == 1 ? ` - Signed` : "";
+                            document.getElementById("bill_ug_author").innerHTML += data.data[0].undr_auth_appr == 1 ? ` - Signed` : "";
                         }
                     });
                     // @TODO: Update votes
@@ -466,20 +534,20 @@
                         <tbody>
                             <tr>
                                 <td>Graduate Author</td>
-                                <td><a id="bill_g_author">Skanda Prasad P N</a> - Signed</td>
+                                <td><a id="bill_g_author">Sample Name</a></td>
                             </tr>
                             <tr>
                                 <td>Undergraduate Author</td>
-                                <td><a id="bill_ug_author">Sujay Peramanu</a> - Signed</td>
+                                <td><a id="bill_ug_author">Sample Name</a></td>
                             </tr>
                             <tr>
                                 <td>Submitter</td>
-                                <td><a id="bill_submitter">Skanda Prasad P N</a></td>
+                                <td><a id="bill_submitter">Sample Name</a></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Organization</td>
-                                <td><a id="bill_org" href="http://jacketpages.gatech.edu/organizations/view/27751">Graduate Student Government Association</a></td>
+                                <td id="bill_org"><a href="http://jacketpages.gatech.edu/organizations/view/27751">Graduate Student Government Association</a></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -489,23 +557,23 @@
                         <tbody>
                             <tr>
                                 <td>Graduate President</td>
-                                <td>Skanda Prasad P N</td>
+                                <td id="bill_grad_pres">Skanda Prasad P N</td>
                             </tr>
                             <tr>
                                 <td>Graduate Secretary</td>
-                                <td>David Giles</td>
+                                <td id="bill_grad_sec">David Giles</td>
                             </tr>
                             <tr>
                                 <td>Undergraduate President</td>
-                                <td>Sujay Peramanu</td>
+                                <td id="bill_undr_pres">Sujay Peramanu</td>
                             </tr>
                             <tr>
                                 <td>Undergraduate Secretary</td>
-                                <td>Lexie Scott</td>
+                                <td id="bill_undr_sec">Lexie Scott</td>
                             </tr>
                             <tr>
                                 <td>Vice President of Finance</td>
-                                <td>Carson Silbert</td>
+                                <td id="bill_vp_fin">Carson Silbert</td>
                             </tr>
                         </tbody>
                     </table>
@@ -520,27 +588,27 @@
                             </tr>
                             <tr>
                                 <td>Date</td>
-                                <td>2018-04-17</td>
+                                <td id="bill_gss_date"></td>
                                 <td>Date</td>
-                                <td>2018-04-19</td>
+                                <td id="bill_uhr_date"></td>
                             </tr>
                             <tr>
                                 <td>Yeas</td>
-                                <td>13</td>
+                                <td id="bill_gss_y"></td>
                                 <td>Yeas</td>
-                                <td>34</td>
+                                <td id="bill_uhr_y"></td>
                             </tr>
                             <tr>
                                 <td>Nays</td>
-                                <td>0</td>
+                                <td id="bill_gss_n"></td>
                                 <td>Nays</td>
-                                <td>0</td>
+                                <td id="bill_uhr_n"></td>
                             </tr>
                             <tr>
                                 <td>Abstains</td>
-                                <td>0</td>
+                                <td id="bill_gss_a"></td>
                                 <td>Abstains</td>
-                                <td>0</td>
+                                <td id="bill_uhr_a"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -553,7 +621,8 @@
                         function closeComments() {
                         	$("#comments").attr("style", "display:none;");
                         }
-                    </script>			<script>
+                    </script>
+                    <script>
                         $(function()
                         {
                         	$("#tabs").tabs();
@@ -561,6 +630,275 @@
                         }); 
                     </script>
                     <br>
+                    <div id="tabs">
+                        <ul>
+                            <li>
+                                <a href="#tabs-1">Submitted</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-2">JFC</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-3">Graduate</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-4">Undergraduate</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-5">Conference</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-6">All</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-7">Final</a>
+                            </li>
+                        </ul>
+                        <div id="tabs-1">
+                            <table class="listing">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41116">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                </tr>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing">
+                                <tr>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-2">
+                            <table class="listing">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41153">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                </tr>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing">
+                                <tr>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-3">
+                            <table class="listing">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41219">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                </tr>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing">
+                                <tr>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-4">
+                            <table class="listing">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41191">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                </tr>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing">
+                                <tr>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-5">There are no line items for this state.<br/></div>
+                        <div id="tabs-6">
+                            <table class="listing">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th>State</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41116">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                    <td>Submitted</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41153">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                    <td>JFC</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41219">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                    <td>Graduate</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41191">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                    <td>Undergraduate</td>
+                                </tr>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing">
+                                <tr>
+                                    <td>Submitted:</td>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                                <tr>
+                                    <td>JFC:</td>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Undergraduate:</td>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Conference:</td>
+                                    <td>Prior Year</td>
+                                    <td>$0.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Graduate:</td>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-7">There are no line items for this state.<br/></div>
+                    </div>
+
                     <div class="ui-overlay" id="comments" style="display:none;">
                         <div class="ui-widget-overlay"></div>
                         <div class="ui-corner-all" id="overlay" style="width: 25%; height: 10%; position: absolute; top: 0;">
