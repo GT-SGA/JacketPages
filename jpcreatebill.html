@@ -311,7 +311,7 @@
                 </div>
                 <div id="middle_full">
                     <div id="page_title">Create New Bill</div>
-                    <form action="/bills/add" onsubmit="return validateForm()" id="BillAddForm" method="post" accept-charset="utf-8">
+                    <form action="http://localhost:8081/bill_create" onsubmit="return validateForm()" id="BillAddForm" method="post" accept-charset="utf-8">
                         <div style="display:none;"><input name="_method" value="POST" type="hidden"></div>
                         <div class="input text required"><label for="BillTitle">Title</label><input name="data[Bill][title]" maxlength="60" id="BillTitle" required="required" type="text"></div>
                         <div class="input textarea required"><label for="BillDescription">Description</label><textarea name="data[Bill][description]" cols="30" rows="6" id="BillDescription" required="required"></textarea></div>

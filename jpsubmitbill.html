@@ -73,6 +73,8 @@
             	$("#help").attr("style", "display:none;");
             }
 
+            var loggedIn = 400;
+
             function signBill(author) {
                 $.ajax({
                     url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
@@ -82,9 +84,10 @@
                             url: `http://localhost:8081/bill_authors?id=${data.data[0].auth_id}`, 
                             type: "GET",
                             success: function(data) {
+                                console.log(`http://localhost:8081/bill_sign_gp?id=${data.data[0].id}&gp_id=${loggedIn}`);
                                 if (author == 'gp') {
                                     $.ajax({
-                                        url: `http://localhost:8081/bill_sign_gp?id=${data.data[0].id}&gp_id=${data.data[0].grad_pres_id}`, 
+                                        url: `http://localhost:8081/bill_sign_gp?id=${data.data[0].id}&gp_id=${loggedIn}`, 
                                         type: "PUT",
                                         success: function(data) {
                                             window.location.reload();
@@ -93,7 +96,7 @@
                                 }
                                 else if (author == 'gs') {
                                     $.ajax({
-                                        url: `http://localhost:8081/bill_sign_gs?id=${data.data[0].id}&gs_id=${data.data[0].grad_secr_id}`, 
+                                        url: `http://localhost:8081/bill_sign_gs?id=${data.data[0].id}&gs_id=${loggedIn}`, 
                                         type: "PUT",
                                         success: function(data) {
                                             window.location.reload();
@@ -102,7 +105,7 @@
                                 }
                                 else if (author == 'up') {
                                     $.ajax({
-                                        url: `http://localhost:8081/bill_sign_up?id=${data.data[0].id}&up_id=${data.data[0].undr_pres_id}`, 
+                                        url: `http://localhost:8081/bill_sign_up?id=${data.data[0].id}&up_id=${loggedIn}`, 
                                         type: "PUT",
                                         success: function(data) {
                                             window.location.reload();
@@ -111,7 +114,7 @@
                                 }
                                 else if (author == 'us') {
                                     $.ajax({
-                                        url: `http://localhost:8081/bill_sign_us?id=${data.data[0].id}&us_id=${data.data[0].undr_secr_id}`, 
+                                        url: `http://localhost:8081/bill_sign_us?id=${data.data[0].id}&us_id=${loggedIn}`, 
                                         type: "PUT",
                                         success: function(data) {
                                             window.location.reload();
@@ -120,7 +123,7 @@
                                 }
                                 else if (author == 'vf') {
                                     $.ajax({
-                                        url: `http://localhost:8081/bill_sign_vf?id=${data.data[0].id}&vf_id=${data.data[0].vp_fina_id}`, 
+                                        url: `http://localhost:8081/bill_sign_vf?id=${data.data[0].id}&vf_id=${loggedIn}`, 
                                         type: "PUT",
                                         success: function(data) {
                                             window.location.reload();
@@ -280,7 +283,7 @@
                                     if (data.data[0]) {
                                         document.getElementById("bill_vp_fin").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
                                     } else {
-                                        document.getElementById("bill_vp_fin").innerHTML = `Unsigned`;
+                                        document.getElementById("bill_vp_fin").innerHTML = `<a href="#" onclick="signBill('vf');">Sign</a>`;
                                     }
                                 }
                             });

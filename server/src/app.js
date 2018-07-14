@@ -125,7 +125,7 @@ app.put("/bill_sign_gp", (req, res) => {
 
 // Approve a bill for the graduate secretary
 // Still prone to SQL injection attacks.
-app.put("/bill_sign_up", (req, res) => {
+app.put("/bill_sign_gs", (req, res) => {
     connection.query(`UPDATE bill_authors SET grad_secr_id=${req.param("gs_id")} WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
             rows
@@ -135,7 +135,7 @@ app.put("/bill_sign_up", (req, res) => {
 
 // Approve a bill for the undergraduate president
 // Still prone to SQL injection attacks.
-app.put("/bill_sign_gp", (req, res) => {
+app.put("/bill_sign_up", (req, res) => {
     connection.query(`UPDATE bill_authors SET undr_pres_id=${req.param("up_id")} WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
             rows
