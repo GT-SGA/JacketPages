@@ -21,9 +21,9 @@ connection.query("USE jacketpages_dev");
 
 app.listen(process.env.PORT || 8081);
 
-// Send the data of the bills submitted by a certain submitter
+// Return the data of the bills submitted by a certain submitter
+// Still prone to SQL injection attacks.
 app.get("/bills_sub", (req, res) => {
-    // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
     connection.query(`SELECT * FROM bills WHERE submitter=${req.param('submitter')}`, function(err, rows) {
         res.send({data: 
             rows
@@ -32,6 +32,7 @@ app.get("/bills_sub", (req, res) => {
 });
 
 // Get an individual bill's data
+// Still prone to SQL injection attacks.
 app.get("/bill_id", (req, res) => {
     // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
     connection.query(`SELECT * FROM bills WHERE id=${req.param('id')}`, function(err, rows) {
@@ -42,6 +43,7 @@ app.get("/bill_id", (req, res) => {
 });
 
 // Get votes for a specific bill given id
+// Still prone to SQL injection attacks.
 app.get("/bill_votes", (req, res) => {
     // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
     connection.query(`SELECT * FROM bill_votes WHERE id=${req.param('id')}`, function(err, rows) {
@@ -52,6 +54,7 @@ app.get("/bill_votes", (req, res) => {
 });
 
 // Get an individual organization's data
+// Still prone to SQL injection attacks.
 app.get("/org", (req, res) => {
     // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
     connection.query(`SELECT * FROM organizations WHERE id=${req.param('id')}`, function(err, rows) {
@@ -62,6 +65,7 @@ app.get("/org", (req, res) => {
 });
 
 // Delete the bill by a certain id
+// Still prone to SQL injection attacks.
 app.delete("/bill_id", (req, res) => {
     connection.query(`DELETE FROM bills WHERE id=${req.param("id")}`, function(err, rows) {
         if (err) res.send({err: err});
@@ -70,6 +74,7 @@ app.delete("/bill_id", (req, res) => {
 });
 
 // Get status for a certain bill given id
+// Still prone to SQL injection attacks.
 app.get("/bill_status", (req, res) => {
     connection.query(`SELECT name FROM bill_statuses WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
@@ -79,6 +84,7 @@ app.get("/bill_status", (req, res) => {
 });
 
 // Get user given id
+// Still prone to SQL injection attacks.
 app.get("/user", (req, res) => {
     connection.query(`SELECT * FROM users WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
@@ -88,6 +94,7 @@ app.get("/user", (req, res) => {
 });
 
 // Get submitter for a certain bill given id
+// Still prone to SQL injection attacks.
 app.get("/bill_authors", (req, res) => {
     connection.query(`SELECT * FROM bill_authors WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
@@ -97,6 +104,7 @@ app.get("/bill_authors", (req, res) => {
 });
 
 // Get submitter for a certain bill given id
+// Still prone to SQL injection attacks.
 app.put("/bill_passed", (req, res) => {
     connection.query(`UPDATE bills SET status=6 WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
@@ -106,6 +114,7 @@ app.put("/bill_passed", (req, res) => {
 });
 
 // Approve a bill for the graduate president
+// Still prone to SQL injection attacks.
 app.put("/bill_sign_gp", (req, res) => {
     connection.query(`UPDATE bill_authors SET grad_pres_id=${req.param("gp_id")} WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
@@ -115,6 +124,7 @@ app.put("/bill_sign_gp", (req, res) => {
 });
 
 // Approve a bill for the graduate secretary
+// Still prone to SQL injection attacks.
 app.put("/bill_sign_up", (req, res) => {
     connection.query(`UPDATE bill_authors SET grad_secr_id=${req.param("gs_id")} WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
@@ -124,6 +134,7 @@ app.put("/bill_sign_up", (req, res) => {
 });
 
 // Approve a bill for the undergraduate president
+// Still prone to SQL injection attacks.
 app.put("/bill_sign_gp", (req, res) => {
     connection.query(`UPDATE bill_authors SET undr_pres_id=${req.param("up_id")} WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
@@ -133,8 +144,19 @@ app.put("/bill_sign_gp", (req, res) => {
 });
 
 // Approve a bill for the undergraduate secretary
-app.put("/bill_sign_up", (req, res) => {
+// Still prone to SQL injection attacks.
+app.put("/bill_sign_us", (req, res) => {
     connection.query(`UPDATE bill_authors SET undr_secr_id=${req.param("us_id")} WHERE id=${req.param("id")}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Approve a bill for the vice president of finance
+// Still prone to SQL injection attacks.
+app.put("/bill_sign_vf", (req, res) => {
+    connection.query(`UPDATE bill_authors SET vp_fina_id=${req.param("vf_id")} WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
             rows
         });

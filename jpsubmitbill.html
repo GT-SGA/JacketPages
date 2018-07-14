@@ -52,13 +52,17 @@
             }
 
             function delBill() {
-                $.ajax({
-                    url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
-                    type: "DELETE",
-                    success: function(data) {
-                        window.location.href = `jpbills.html`;
-                    }
-                });
+                var yes = confirm("Are you sure you want to delete this bill?");
+                if (yes) {
+                    $.ajax({
+                        url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
+                        type: "DELETE",
+                        success: function(data) {
+                            window.location.href = `jpbills.html`;
+                        }
+                    });
+                }
+                return yes;
             }
             
             function openHelp() {
@@ -108,6 +112,15 @@
                                 else if (author == 'us') {
                                     $.ajax({
                                         url: `http://localhost:8081/bill_sign_us?id=${data.data[0].id}&us_id=${data.data[0].undr_secr_id}`, 
+                                        type: "PUT",
+                                        success: function(data) {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                                else if (author == 'vf') {
+                                    $.ajax({
+                                        url: `http://localhost:8081/bill_sign_vf?id=${data.data[0].id}&vf_id=${data.data[0].vp_fina_id}`, 
                                         type: "PUT",
                                         success: function(data) {
                                             window.location.reload();
@@ -223,7 +236,7 @@
                                     if (data.data[0]) {
                                         document.getElementById("bill_grad_pres").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
                                     } else {
-                                        document.getElementById("bill_grad_pres").innerHTML = `<a href="#" onclick="signBill('gp');"`;
+                                        document.getElementById("bill_grad_pres").innerHTML = `<a href="#" onclick="signBill('gp');">Sign</a>`;
                                     }
                                 }
                             });
@@ -234,7 +247,7 @@
                                     if (data.data[0]) {
                                         document.getElementById("bill_grad_sec").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
                                     } else {
-                                        document.getElementById("bill_grad_sec").innerHTML = `Unsigned`;
+                                        document.getElementById("bill_grad_sec").innerHTML = `<a href="#" onclick="signBill('gs');">Sign</a>`;
                                     }
                                 }
                             });
@@ -245,7 +258,7 @@
                                     if (data.data[0]) {
                                         document.getElementById("bill_undr_pres").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
                                     } else {
-                                        document.getElementById("bill_undr_pres").innerHTML = `Unsigned`;
+                                        document.getElementById("bill_undr_pres").innerHTML = `<a href="#" onclick="signBill('up');">Sign</a>`;
                                     }
                                 }
                             });
@@ -256,7 +269,7 @@
                                     if (data.data[0]) {
                                         document.getElementById("bill_undr_sec").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
                                     } else {
-                                        document.getElementById("bill_undr_sec").innerHTML = `Unsigned`;
+                                        document.getElementById("bill_undr_sec").innerHTML = `<a href="#" onclick="signBill('us');">Sign</a>`;
                                     }
                                 }
                             });
