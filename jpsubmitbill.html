@@ -74,6 +74,14 @@
             }
 
             var loggedIn = 400;
+            var user;
+            $.ajax({
+                url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
+                type: "GET",
+                success: function(data) {
+                    user = data.data[0];
+                }
+            });
 
             function signBill(author) {
                 $.ajax({
@@ -90,7 +98,7 @@
                                         url: `http://localhost:8081/bill_sign_gp?id=${data.data[0].id}&gp_id=${loggedIn}`, 
                                         type: "PUT",
                                         success: function(data) {
-                                            window.location.reload();
+                                            document.getElementById("bill_grad_pres").innerHTML = `${user.first_name} ${user.last_name}`;
                                         }
                                     });
                                 }
@@ -100,6 +108,7 @@
                                         type: "PUT",
                                         success: function(data) {
                                             window.location.reload();
+                                            document.getElementById("bill_grad_sec").innerHTML = `${user.first_name} ${user.last_name}`;
                                         }
                                     });
                                 }
@@ -108,7 +117,7 @@
                                         url: `http://localhost:8081/bill_sign_up?id=${data.data[0].id}&up_id=${loggedIn}`, 
                                         type: "PUT",
                                         success: function(data) {
-                                            window.location.reload();
+                                            document.getElementById("bill_undr_pres").innerHTML = `${user.first_name} ${user.last_name}`;
                                         }
                                     });
                                 }
@@ -117,7 +126,7 @@
                                         url: `http://localhost:8081/bill_sign_us?id=${data.data[0].id}&us_id=${loggedIn}`, 
                                         type: "PUT",
                                         success: function(data) {
-                                            window.location.reload();
+                                            document.getElementById("bill_undr_sec").innerHTML = `${user.first_name} ${user.last_name}`;
                                         }
                                     });
                                 }
@@ -126,7 +135,7 @@
                                         url: `http://localhost:8081/bill_sign_vf?id=${data.data[0].id}&vf_id=${loggedIn}`, 
                                         type: "PUT",
                                         success: function(data) {
-                                            window.location.reload();
+                                            document.getElementById("bill_vp_fin").innerHTML = `${user.first_name} ${user.last_name}`;
                                         }
                                     });
                                 }

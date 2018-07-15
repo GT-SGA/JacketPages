@@ -65,8 +65,17 @@
                             tr += `<td><a href="jpsubmitbill.html" onclick="window.location.href = 'jpsubmitbill.html?id=' + '${data.data[i].id}';">${data.data[i].title}</a></td>`;
                             tr += `<td>${data.data[i].number}</td>`;
                             tr += `<td>${data.data[i].category}</td>`;
-                            tr += `<td>${data.data[i].status}</td>`;
-                            tr += `<td>${data.data[i].submit_date}</td>`;
+                            tr += `<td id="bill_status_${i}"></td>`;
+                            $.ajax({
+                                url: `http://localhost:8081/bill_status?id=${data.data[i].status}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    for (let i = 0; i < billdata.length; i++) {
+                                        document.getElementById(`bill_status_${i}`).innerHTML = data.data[0].name;
+                                    }
+                                }
+                            });
+                            tr += `<td>${data.data[i].submit_date.split('T')[0]}</td>`;
                             tr += "</tr>";
                             billtb.innerHTML += tr;
                         }
