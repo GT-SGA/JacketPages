@@ -169,10 +169,10 @@ app.post("/bill_create", (req, res) => {
     connection.query(`INSERT INTO bill_authors (undr_auth_id, grad_auth_id) VALUES 
             ('${req.param("data_Authors_undr_auth_id")}', '${req.param("data_Authors_grad_auth_id")}')`, function(err, rows) {
         console.log(JSON.stringify(req.param("data_Authors_undr_auth_id")));
-        connection.query(`INSERT INTO bills (create_date, last_mod_date, title, fundraising, type, category, org_id, dues, ugMembers, gMembers, auth_id) VALUES 
-                (NOW(), NOW(),'${req.param("data_Bill_title")}', '${req.param("data_Bill_fundraising")}', '${req.param("data_Bill_type")}', 
+        connection.query(`INSERT INTO bills (create_date, last_mod_date, title, description, fundraising, type, category, org_id, dues, ugMembers, gMembers, auth_id, status) VALUES 
+                (NOW(), NOW(), '${req.param("data_Bill_title")}', '${req.param("data_Bill_description")}', '${req.param("data_Bill_fundraising")}', '${req.param("data_Bill_type")}', 
                 '${req.param("data_Bill_category")}', '${req.param("data_Bill_org_id")}', '${req.param("data_Bill_dues")}', '${req.param("data_Bill_ugMembers")}', 
-                '${req.param("data_Bill_gMembers")}', '${rows.insertId}')`,
+                '${req.param("data_Bill_gMembers")}', '${rows.insertId}', '1')`,
                 function(err, rows) {
             res.send("");
         });

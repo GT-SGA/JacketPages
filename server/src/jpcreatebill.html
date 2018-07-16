@@ -44,6 +44,7 @@
                 if (yes) {
                     $.post(`http://localhost:8081/bill_create?${$('#BillAddForm').serialize()}`, function(data) {
                         window.location.href = "jpbills.html";
+                        //console.log($('#BillAddForm').serialize());
                     });
                 }
                 return false;
@@ -321,8 +322,8 @@
                 </div>
                 <div id="middle_full">
                     <div id="page_title">Create New Bill</div>
-                    <form action="http://localhost:8081/bill_create" onsubmit="return submitForm()" id="BillAddForm" target="__blank" method="POST" accept-charset="utf-8">
-                        <div style="display:none;"><input name="_method" value="POST" type="hidden"></div>
+                    <form action="http://localhost:8081/bill_create" onsubmit="return submitForm()" id="BillAddForm" accept-charset="utf-8">
+                            <!--<div style="display:none;"><input name="_method" value="POST" type="hidden"></div>-->
                         <div class="input text required"><label for="BillTitle">Title</label><input name="data_Bill_title" maxlength="60" id="BillTitle" required="required" type="text"/></div>
                         <div class="input textarea required"><label for="BillDescription">Description</label><textarea name="data_Bill_description" cols="30" rows="6" id="BillDescription" required="required"></textarea></div>
                         <div class="input textarea"><label for="BillFundraising">Fundraising - Please describe related fundraising efforts</label><textarea name="data_Bill_fundraising" cols="30" rows="6" id="BillFundraising"></textarea></div>
@@ -1202,7 +1203,7 @@
                         <div class="input text required"><label for="BillGMembers">Number of Graduate Members</label><input name="data_Bill_gMembers" maxlength="50" id="BillGMembers" required="required" type="text"></div>
                         <div class="input underAuthor_id required">
                             <label for="AuthorsUndrAuthId">Undergraduate Author</label>
-                            <select name="data__Bill_undr_auth_id" id="AuthorsUndrAuthId">
+                            <select name="data_Authors_undr_auth_id" id="AuthorsUndrAuthId">
                                 <option value="" selected="selected">Select a UHR Representative</option>
                                 <optgroup label="SGA">
                                     <option value="725">Abigail Burke -- Freshman Class Representative</option>
@@ -1300,7 +1301,7 @@
                         </div>
                         <div class="multi_enter_line_items">
                             <h1>Add Line Items</h1>
-                            <div style="display:none;"><input name="_method" value="POST" type="hidden"></div>
+                            <div style="display:none;">
                             <table class="listing" id="LineItemsTable">
                                 <tbody>
                                     <tr>
