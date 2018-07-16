@@ -62,12 +62,12 @@
         </script>
         <script>
             (function(i, s, o, g, r, a, m) {
-            	i_'GoogleAnalyticsObject'] = r;
-            	i_r] = i_r] ||
+            	i['GoogleAnalyticsObject'] = r;
+            	i[r] = i[r] ||
             	function() {
-            		(i_r].q = i_r].q || _]).push(arguments)
-            	}, i_r].l = 1 * new Date();
-            	a = s.createElement(o), m = s.getElementsByTagName(o)_0];
+            		(i[r].q = i[r].q || []).push(arguments)
+            	}, i[r].l = 1 * new Date();
+            	a = s.createElement(o), m = s.getElementsByTagName(o)[0];
             	a.async = 1;
             	a.src = g;
             	m.parentNode.insertBefore(a, m)
@@ -1301,7 +1301,6 @@
                         </div>
                         <div class="multi_enter_line_items">
                             <h1>Add Line Items</h1>
-                            <div style="display:none;">
                             <table class="listing" id="LineItemsTable">
                                 <tbody>
                                     <tr>
@@ -1334,10 +1333,10 @@
                                                 </select>
                                             </div>
                                         </td>
-                                        <td><button type="button" onclick="moveUp(0)"><img src="jpcreatebill_files/up.gif" alt=""></button></td>
-                                        <td><button type="button" onclick="moveDown(0)"><img src="jpcreatebill_files/down.gif" alt=""></button></td>
-                                        <td><button type="button" onclick="addRow(0)"><img src="jpcreatebill_files/plus_sign.gif" alt=""></button></td>
-                                        <td><button type="button" onclick="deleteRow(0)"><img src="jpcreatebill_files/minus_sign.png" alt=""></button></td>
+                                        <td><button type="button" onclick="moveUp(0)"><img src="jpcreatebill_files/up.gif" alt="Move Up"></button></td>
+                                        <td><button type="button" onclick="moveDown(0)"><img src="jpcreatebill_files/down.gif" alt="Move Down"></button></td>
+                                        <td><button type="button" onclick="addRow(0)"><img src="jpcreatebill_files/plus_sign.gif" alt="Add"></button></td>
+                                        <td><button type="button" onclick="deleteRow(0)"><img src="jpcreatebill_files/minus_sign.png" alt="Delete"></button></td>
                                     </tr>
                                 </tbody>
                             </table>

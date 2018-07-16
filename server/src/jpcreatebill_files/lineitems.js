@@ -151,28 +151,28 @@ function correctNumbers()
 function updateRow(cells, idNum, row,  lineNumber)
 {
 	cells[0].getElementsByTagName("input")[0].setAttribute("id", "LineItemId" + row);
-		cells[0].getElementsByTagName("input")[0].setAttribute("name", "data[" +row + "][LineItem][id]");
+		cells[0].getElementsByTagName("input")[0].setAttribute("name", "data_" +row + "_LineItem_id");
 		cells[0].getElementsByTagName("input")[1].setAttribute("id", "LineItemLineNumber" +row);
 		get("LineItemLineNumber" + row).value = lineNumber;
-		cells[0].getElementsByTagName("input")[1].setAttribute("name", "data[" +row + "][LineItem][line_number]");
+		cells[0].getElementsByTagName("input")[1].setAttribute("name", "data_" +row + "_LineItem_line_number");
 		cells[0].getElementsByTagName("label")[0].setAttribute("id", "LineNumber" +row);
 		cells[0].getElementsByTagName("label")[0].setAttribute("value", lineNumber);
 		cells[0].getElementsByTagName("label")[0].innerHTML = lineNumber;
 		cells[1].getElementsByTagName("input")[0].setAttribute("id", "LineItemName" +row);
-		cells[1].getElementsByTagName("input")[0].setAttribute("name", "data[" +row + "][LineItem][name]");
+		cells[1].getElementsByTagName("input")[0].setAttribute("name", "data_" +row + "_LineItem_name");
 		cells[2].getElementsByTagName("input")[0].setAttribute("id", "LineItemCostPerUnit" +row);
 		$("#LineItemCostPerUnit" + row).attr('onchange', "updateTCAndRqstd(" + row + ")");
-		cells[2].getElementsByTagName("input")[0].setAttribute("name", "data[" +row + "][LineItem][cost_per_unit]");
+		cells[2].getElementsByTagName("input")[0].setAttribute("name", "data_" +row + "_LineItem_cost_per_unit");
 		cells[3].getElementsByTagName("input")[0].setAttribute("id", "LineItemQuantity" +row);
 		$("#LineItemQuantity" + row).attr('onchange', "updateTCAndRqstd(" +row + ")");
-		cells[3].getElementsByTagName("input")[0].setAttribute("name", "data[" +row + "][LineItem][quantity]");
+		cells[3].getElementsByTagName("input")[0].setAttribute("name", "data_" +row + "_LineItem_quantity");
 		cells[4].getElementsByTagName("input")[0].setAttribute("id", "LineItemTotalCost" +row);
-		cells[4].getElementsByTagName("input")[0].setAttribute("name", "data[" +row + "][LineItem][total_cost]");
+		cells[4].getElementsByTagName("input")[0].setAttribute("name", "data_" +row + "_LineItem_total_cost");
 		cells[5].getElementsByTagName("input")[0].setAttribute("id", "LineItemAmount" +row);
-		cells[5].getElementsByTagName("input")[0].setAttribute("name", "data[" +row + "][LineItem][amount]");
-		cells[6].firstChild.firstChild.setAttribute("id", "LineItemAccount" +row);
+		cells[5].getElementsByTagName("input")[0].setAttribute("name", "data_" +row + "_LineItem_amount");
+		cells[6].childNodes[1].childNodes[1].setAttribute("id", "LineItemAccount" +row);
 		$("#LineItemAccount" + row).attr('onchange', "updateTCAndRqstd(" +row + ")");
-		cells[6].firstChild.firstChild.setAttribute("name", "data[" +row + "][LineItem][account]");
+		cells[6].childNodes[1].childNodes[1].setAttribute("name", "data_" +row + "_LineItem_account");
 		cells[7].getElementsByTagName("button")[0].setAttribute("onclick", "moveUp(" +row + ")");
 		cells[8].getElementsByTagName("button")[0].setAttribute("onclick", "moveDown(" +row + ")");
 		cells[9].getElementsByTagName("button")[0].setAttribute("onclick", "addRow(" +row + ")");
