@@ -461,6 +461,9 @@
 
                 <div id="forupdate">
                     <table class="listing" id="table">
+                        <th>Name</th>
+                        <th>House</th>
+                        <th>Department</th>
                         
                <!--         <tbody>
                             <tr class="links">
@@ -823,7 +826,7 @@
                                  $.ajax({
                                      url: `http://localhost:8081/user?id=${data.data[i].user_id}`, type: "GET", success: function(data) { 
                                          
-                                         document.getElementById(`user_name_${i}`).innerHTML = data.data[0].first_name;
+                                         document.getElementById(`user_name_${i}`).innerHTML = data.data[0].first_name + " " + data.data[0].last_name;
                                      }
                             });
                                 tr += `<td>${data.data[i].house}</td>`;
