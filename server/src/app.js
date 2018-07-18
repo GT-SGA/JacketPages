@@ -168,13 +168,24 @@ app.put("/bill_sign_vf", (req, res) => {
 app.post("/bill_create", (req, res) => {
     connection.query(`INSERT INTO bill_authors (undr_auth_id, grad_auth_id) VALUES 
             ('${req.param("data_Authors_undr_auth_id")}', '${req.param("data_Authors_grad_auth_id")}')`, function(err, rows) {
-        console.log(JSON.stringify(req.param("data_Authors_undr_auth_id")));
         connection.query(`INSERT INTO bills (create_date, last_mod_date, title, description, fundraising, type, category, org_id, dues, ugMembers, gMembers, auth_id, status) VALUES 
                 (NOW(), NOW(), '${req.param("data_Bill_title")}', '${req.param("data_Bill_description")}', '${req.param("data_Bill_fundraising")}', '${req.param("data_Bill_type")}', 
                 '${req.param("data_Bill_category")}', ${req.param("data_Bill_org_id")}, '${req.param("data_Bill_dues")}', '${req.param("data_Bill_ugMembers")}', 
                 ${req.param("data_Bill_gMembers")}, ${rows.insertId}, 1)`,
                 function(err, rows) {
-            res.send("");
+            let billId = rows.insertId;
+            for (let i = 0; req.param(`data_${i}_LineItem_line_number`); i++) {
+                connection.query(`INSERT INTO line_items (line_number, bill_id, name, cost_per_unit, quantity, total_cost, amount, account, type, comments, last_mod_date) VALUES
+                        (${req.param('data_${i}_LineItem_line_number')}, ${billId}, ${req.param('data_${i}_LineItem_name')}, ${req.param('data_${i}_LineItem_cost_per_unit')}, 
+                                ${req.param('data_${i}_LineItem_quantity')}, ${req.param('data_${i}_LineItem_total_cost')}, 
+                                ${req.param('data_${i}_LineItem_amount')}, ${req.param('data_${i}_LineItem_account')}, 
+                                ${req.param('data_${i}_LineItem_type')}, ${req.param('data_${i}_LineItem_comments')}, NOW())`,
+                function(err, rows) {
+                    if (err) console.log(err);
+                    console.log(req.param("data_0_LineItem_line_number"));
+                });
+            }
+            res.send(rows);
         });
     });
 });
