@@ -1,19 +1,23 @@
 const express = require("express");
+/*
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
+*/
 const path = require("path");
 const mysql = require("mysql");
 const app = express();
+/*
 app.use(bodyParser.json());
 app.use(cors());
+*/
 ////////////////////////////////////////////////////////////////////////////////  SERVER & DB SETUP 
 
 // Connect to the MySQL database
 var connection = mysql.createConnection({
     host        :   "localhost",
-    user        :   "jpdev",
-    password    :   "jpdev!"
+    user        :   "localuser",
+    password    :   "password"
 });
 
 connection.connect(function(err) {
