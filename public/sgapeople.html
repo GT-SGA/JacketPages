@@ -5,12 +5,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>JacketPages | SgaPeople</title>
-    
+
     <script async="" src="//www.google-analytics.com/analytics.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-    <script src= "test.js"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
     <link rel="stylesheet" type="text/css" href="./css/default.css">
     <link rel="stylesheet" type="text/css" href="./css/fonts.css">
@@ -42,6 +41,15 @@
             function closeSubMenu() {
                 $(this).find('ul').css('visibility', 'hidden');
             };
+            
+            $(".edit").click(function() { 
+             console.log("clicked!"); 
+             var $row = $(this).closest("tr"), // Finds the closest row <tr>
+             $tds = $row.find("td"); // Finds all children <td> elements 
+             $.each($tds, function() { // Visits every single <td> element 
+                console.log($(this).text()); // Prints out the text within the <td>
+             });
+         });
 
         });
 
@@ -52,6 +60,38 @@
         function closeHelp() {
             $("#help").attr("style", "display:none;");
         }
+        
+        $.ajax({
+            url: `http://localhost:8081/people`,
+            type: "GET",
+            success: function(data) {
+                var ppltb = document.getElementById("table");
+                peopledata = data.data;
+                for (let i = 0; i < peopledata.length; i++) {
+                    let tr = "";
+                    tr += "<tr>";
+
+                    tr += `<td id="user_name_${i}"></td>`
+
+                    $.ajax({
+                        url: `http://localhost:8081/user?id=${data.data[i].user_id}`,
+                        type: "GET",
+                        success: function(data) {
+
+                            document.getElementById(`user_name_${i}`).innerHTML = data.data[0].first_name + " " + data.data[0].last_name;
+                        }
+                    });
+                    tr += `<td>${data.data[i].house}</td>`;
+                    tr += `<td>${data.data[i].department}</td>`
+                    
+//                    tr += `<td><a href="" class="edit">Edit</a></td>`;
+                    tr += `<td><button type=button class="edit" /></td>`
+                    ppltb.innerHTML += tr;
+                }
+
+            }
+        });
+        
     </script>
     <script>
         (function(i, s, o, g, r, a, m) {
@@ -121,19 +161,19 @@
                                     <a href="#"><span>Login</span></a>
                                 </li>
                                 <li class="expanded">
-                                        <a href="jpbills.html"><span>Bills</span></a>	
-                                        <ul class="menu">
-                                            <li class="leaf first">
-                                                <a href="jpsubmitbill.html">Submit Bill</a>		
-                                            </li>
-                                            <li class="leaf">
-                                                <a href="jpbills.html">View My Bills</a>		
-                                            </li>
-                                            <li class="leaf last">
-                                                <a href="jpbills.html">View All Bills</a>		
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    <a href="jpbills.html"><span>Bills</span></a>
+                                    <ul class="menu">
+                                        <li class="leaf first">
+                                            <a href="jpsubmitbill.html">Submit Bill</a>
+                                        </li>
+                                        <li class="leaf">
+                                            <a href="jpbills.html">View My Bills</a>
+                                        </li>
+                                        <li class="leaf last">
+                                            <a href="jpbills.html">View All Bills</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="expanded"></li>
                                 <li class="expanded">
                                     <a href="http://jacketpages.gatech.edu/organizations"><span>Organizations</span></a>
@@ -159,7 +199,7 @@
 
     <div id="content">
         <div class="clearfix">
-           <!-- <div class="ui-overlay" id="help" style="display:none;">
+            <div class="ui-overlay" id="help" style="display:none;">
                 <div class="ui-widget-overlay"></div>
                 <div class="ui-corner-all" id="overlay" style="width: 100%; height: 600px; position: absolute;overflow-y:scroll; margin-top:10px;">
                     <button onclick="closeHelp()" style="float:right;" type="submit">X</button>
@@ -184,9 +224,13 @@
                         </ul>
                     </div>
                 </div>
-            </div> -->
-
-            <div id="middle_full">
+            </div>
+            <div class="links left-nav" id="sidebar">
+                <ul>
+                    <li><a href="./sgapeopleadd.html">Add SGA Member</a></li>
+                </ul>
+            </div>
+            <div id="middle">
                 <div id="page_title">SGA Records</div>
 
                 <div id="alphabet">
@@ -478,114 +522,6 @@
                         <th>Name</th>
                         <th>House</th>
                         <th>Department</th>
-                        
-               <!--         <tbody>
-                            <tr class="links">
-                                <th><a href="/sga_people/index/sort:name/direction:asc" id="link-245177205">Name</a></th>
-                                <th><a href="/sga_people/index/sort:house/direction:asc" id="link-1823610090">House</a></th>
-                                <th><a href="/sga_people/index/sort:department/direction:asc" id="link-2120733716">Department</a></th>
-                            </tr>
-                            <tr>
-                                <td>Andrew Cox</td>
-                                <td>Graduate</td>
-                                <td>Aerospace Engineering</td>
-                            </tr>
-                            <tr>
-                                <td>Daniel Okegbu</td>
-                                <td>Graduate</td>
-                                <td>Aerospace Engineering</td>
-                            </tr>
-                            <tr>
-                                <td>William Sealy</td>
-                                <td>Graduate</td>
-                                <td>Aerospace Engineering</td>
-                            </tr>
-                            <tr>
-                                <td>Ryan Rooney</td>
-                                <td>Graduate</td>
-                                <td>At Large Senator (Business)</td>
-                            </tr>
-                            <tr>
-                                <td>Daniel Moreno</td>
-                                <td>Graduate</td>
-                                <td>At Large Senator (Mechanical Engineering)</td>
-                            </tr>
-                            <tr>
-                                <td>Kelly Michie</td>
-                                <td>Graduate</td>
-                                <td>Biology and Applied Physiology</td>
-                            </tr>
-                            <tr>
-                                <td>Elorm Agra</td>
-                                <td>Graduate</td>
-                                <td>Biomedical Engineering</td>
-                            </tr>
-                            <tr>
-                                <td>VIKAS PATEL</td>
-                                <td>Graduate</td>
-                                <td>Building Construction</td>
-                            </tr>
-                            <tr>
-                                <td>Guanghui Zhu</td>
-                                <td>Graduate</td>
-                                <td>Chemical &amp; Biomolecular Engineering</td>
-                            </tr>
-                            <tr>
-                                <td>Trisha Sen</td>
-                                <td>Graduate</td>
-                                <td>Chemical &amp; Biomolecular Engineering</td>
-                            </tr>
-                            <tr>
-                                <td>Kristin McKenna</td>
-                                <td>Graduate</td>
-                                <td>Chemistry &amp; Biochemistry</td>
-                            </tr>
-                            <tr>
-                                <td>Dara Epstein</td>
-                                <td>Graduate</td>
-                                <td>City and Regional Planning</td>
-                            </tr>
-                            <tr>
-                                <td>Wilson Espinoza</td>
-                                <td>Graduate</td>
-                                <td>Civil &amp; Environmental Engineering</td>
-                            </tr>
-                            <tr>
-                                <td>Rachel Wiseley</td>
-                                <td>Graduate</td>
-                                <td>College of Business</td>
-                            </tr>
-                            <tr>
-                                <td>Jason Alcedo</td>
-                                <td>Graduate</td>
-                                <td>College of Business</td>
-                            </tr>
-                            <tr>
-                                <td>Matthew Reilly</td>
-                                <td>Graduate</td>
-                                <td>College of Business</td>
-                            </tr>
-                            <tr>
-                                <td>Aroua Gharbi</td>
-                                <td>Graduate</td>
-                                <td>Computer Science</td>
-                            </tr>
-                            <tr>
-                                <td>FILIPPOS TAGKLIS</td>
-                                <td>Graduate</td>
-                                <td>EAS</td>
-                            </tr>
-                            <tr>
-                                <td>Aishwarya Balwani </td>
-                                <td>Graduate</td>
-                                <td>ECE</td>
-                            </tr>
-                            <tr>
-                                <td>CHUKWUEMEKA OBIKWELU</td>
-                                <td>Graduate</td>
-                                <td>ECE</td>
-                            </tr>
-                        </tbody> -->
                     </table>
                     <div class="paging">
                         <span class="disabled">&lt;&lt; previous</span> |
@@ -824,34 +760,6 @@
                             active: false
                         });
                     });
-                    
-                    $.ajax({
-                        url: `http://localhost:8081/people`,
-                        type: "GET", 
-                        success: function(data) {
-                            var ppltb = document.getElementById("table"); 
-                            peopledata = data.data; 
-                            for (let i = 0; i < peopledata.length; i++) {
-                                let tr = ""; 
-                                tr += "<tr>"; 
-                                
-                                tr += `<td id="user_name_${i}"></td>`
-                                
-                                 $.ajax({
-                                     url: `http://localhost:8081/user?id=${data.data[i].user_id}`, type: "GET", success: function(data) { 
-                                         
-                                         document.getElementById(`user_name_${i}`).innerHTML = data.data[0].first_name + " " + data.data[0].last_name;
-                                     }
-                            });
-                                tr += `<td>${data.data[i].house}</td>`;
-                                tr += `<td>${data.data[i].department}</td>`
-                                tr += "</tr>"; 
-                                ppltb.innerHTML += tr; 
-                            }
-                            
-
-                        }
-                    })
                 </script>
             </div>
         </div>

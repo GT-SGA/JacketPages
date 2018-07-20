@@ -5,15 +5,21 @@ const morgan = require("morgan");
 const path = require("path");
 const mysql = require("mysql");
 const app = express();
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 app.use(bodyParser.json());
 app.use(cors());
+
 ////////////////////////////////////////////////////////////////////////////////  SERVER & DB SETUP 
 
 // Connect to the MySQL database
 var connection = mysql.createConnection({
     host        :   "localhost",
-    user        :   "jpdev",
-    password    :   "jpdev!"
+    user        :   "root",
+    password    :   "leafxrose1312"
 });
 
 connection.connect(function(err) {
@@ -21,7 +27,7 @@ connection.connect(function(err) {
   console.log("Connected!");
 });
 // Use the database jacketpages_dev
-connection.query("USE jacketpages_dev");
+connection.query("USE jpdev");
 
 app.listen(process.env.PORT || 8081);   //server listening to localhost 8081
 
@@ -45,9 +51,9 @@ app.get('/sgapeople', function(req, res){    // SGAPEOPLE
 });
 
 
-
-
 ////////////////////////////////////////////////////////////////////////////////  SGA PEOPLE 
+
+//finds user in user table based on user_id 
 app.get("/user", (req, res) => {
     connection.query(`SELECT * FROM users WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
@@ -57,19 +63,51 @@ app.get("/user", (req, res) => {
 });
 
 app.get("/person", (req, res) => {
-    connection.query(`SELECT * FROM sga_people WHERE user_id=${req.param("user_id")}`, function(err, rows) {
+    connection.query(`SELECT * FROM users WHERE last_name=${req.param("last_name")}`, function(err, rows) {
         res.send({data:
             rows
         });
     });
 });
 
+//how to check first and last name???
+//app.get("/person", (req, res) => {
+//    connection.query(`SELECT * FROM users WHERE first_name=${req.param("first_name")} and last_name=${req.param("last_name")}`, function(err, rows) {
+//        res.send({data:
+//            rows
+//        });
+//    });
+//});
+
+//Gets list of all the people in the sga_people table 
 app.get("/people", (req, res) => {
     connection.query(`SELECT * FROM sga_people`, function(err, rows) {
         res.send({data: 
             rows
         });
     });
+});
+
+//adds a new member into the sga_people table and users table 
+app.post("/add_member", (req, res) => {
+    
+    //debugging
+    console.log('req.body');
+    console.log(req.data);
+    res.write('You sent the name "' + req.body.firstname+'".\n');
+    res.write('You sent the house "' + req.body.house+'".\n');
+    res.write('You sent the department "' + req.body.department+'".\n');
+    res.write('You sent the status "' + req.body.status+'".\n');
+    res.end()
+    
+    connection.query(`INSERT INTO sga_people (user_id, house, department, status) VALUES ('999999', '${req.body.house}', '${req.body.department}', '${req.body.status}')`, function(err, rows) {
+        if (err) console.log(err); 
+    });
+    
+    connection.query(`INSERT INTO users (sga_id, gt_user_name, first_name, last_name) VALUES ('999999', 'test', '${req.body.firstname}', '${req.body.lastname}')`, function(err, rows) {
+        if (err) console.log(err); 
+    });
+
 });
 
 
