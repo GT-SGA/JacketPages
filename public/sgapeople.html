@@ -42,16 +42,8 @@
                 $(this).find('ul').css('visibility', 'hidden');
             };
             
-            $(".edit").click(function() { 
-             console.log("clicked!"); 
-             var $row = $(this).closest("tr"), // Finds the closest row <tr>
-             $tds = $row.find("td"); // Finds all children <td> elements 
-             $.each($tds, function() { // Visits every single <td> element 
-                console.log($(this).text()); // Prints out the text within the <td>
-             });
          });
-
-        });
+        
 
         function openHelp() {
             $("#help").attr("style", "");
@@ -71,7 +63,7 @@
                     let tr = "";
                     tr += "<tr>";
 
-                    tr += `<td id="user_name_${i}"></td>`
+                    tr += `<td id="user_name_${i}"></td>`;
 
                     $.ajax({
                         url: `http://localhost:8081/user?id=${data.data[i].user_id}`,
@@ -82,10 +74,10 @@
                         }
                     });
                     tr += `<td>${data.data[i].house}</td>`;
-                    tr += `<td>${data.data[i].department}</td>`
+                    tr += `<td>${data.data[i].department}</td>`;
                     
-//                    tr += `<td><a href="" class="edit">Edit</a></td>`;
-                    tr += `<td><button type=button class="edit" /></td>`
+                    tr += `<td><a href ="sgapeopleedit.html?sga_id=${data.data[i].user_id}";>Edit</a></td>`;
+                    
                     ppltb.innerHTML += tr;
                 }
 

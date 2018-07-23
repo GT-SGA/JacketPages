@@ -53,7 +53,7 @@ app.get('/sgapeople', function(req, res){    // SGAPEOPLE
 
 ////////////////////////////////////////////////////////////////////////////////  SGA PEOPLE 
 
-//finds user in user table based on user_id 
+//Gets user in user table based on id 
 app.get("/user", (req, res) => {
     connection.query(`SELECT * FROM users WHERE id=${req.param("id")}`, function(err, rows) {
         res.send({data: 
@@ -62,22 +62,14 @@ app.get("/user", (req, res) => {
     });
 });
 
+//Gets user information based on first and last name
 app.get("/person", (req, res) => {
-    connection.query(`SELECT * FROM users WHERE last_name=${req.param("last_name")}`, function(err, rows) {
+    connection.query(`SELECT * FROM users WHERE first_name="${req.param("first_name")}" and last_name="${req.param("last_name")}"`, function(err, rows) {
         res.send({data:
             rows
         });
     });
 });
-
-//how to check first and last name???
-//app.get("/person", (req, res) => {
-//    connection.query(`SELECT * FROM users WHERE first_name=${req.param("first_name")} and last_name=${req.param("last_name")}`, function(err, rows) {
-//        res.send({data:
-//            rows
-//        });
-//    });
-//});
 
 //Gets list of all the people in the sga_people table 
 app.get("/people", (req, res) => {
@@ -86,6 +78,31 @@ app.get("/people", (req, res) => {
             rows
         });
     });
+});
+
+//Gets user in sga_table based on user_id 
+app.get("/sga_member", (req, res) => {
+    connection.query(`SELECT * FROM sga_people WHERE user_id=${req.param("user_id")}`, function(err, rows) {
+        res.send({data:
+                 rows
+        });
+    });
+}); 
+
+app.post("/edit_member", (req, res) => {
+    //debugging
+    console.log('req.body');
+    console.log(req.data);
+    res.write('You sent the name "' + req.body.firstname+'".\n');
+    res.write('You sent the house "' + req.body.house+'".\n');
+    res.write('You sent the department "' + req.body.department+'".\n');
+    res.write('You sent the status "' + req.body.status+'".\n');
+    res.end()
+    
+    connection.query(`UPDATE sga_people SET house='${req.body.house}', department='${req.body.department}', status='${req.body.status}' WHERE user_id=${req.body.user_id}`, function(err, rows) {
+        if (err) console.log(err); 
+    });
+    
 });
 
 //adds a new member into the sga_people table and users table 
@@ -104,7 +121,7 @@ app.post("/add_member", (req, res) => {
         if (err) console.log(err); 
     });
     
-    connection.query(`INSERT INTO users (sga_id, gt_user_name, first_name, last_name) VALUES ('999999', 'test', '${req.body.firstname}', '${req.body.lastname}')`, function(err, rows) {
+    connection.query(`INSERT INTO users (id, gt_user_name, first_name, last_name) VALUES ('999999', 'test', '${req.body.firstname}', '${req.body.lastname}')`, function(err, rows) {
         if (err) console.log(err); 
     });
 

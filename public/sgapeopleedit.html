@@ -41,7 +41,37 @@
             function closeSubMenu() {
                 $(this).find('ul').css('visibility', 'hidden');
             };
+            
+            function url_query() {
+                let url = new URL(window.location.href); // or construct from window.location
 
+                let params = new URLSearchParams(url.search.slice(1));
+
+                if (params === null) {
+                    return false; 
+                } else {
+                    for (let p of params) {
+                    return(p[1]); 
+                    }   
+                }
+            };
+//            let url = new URL(window.location.href); // or construct from window.location
+//
+//            let params = new URLSearchParams(url.search.slice(1));
+//
+//            for (let p of params) {
+//                console.log(p);
+//                console.log(p[1]);
+//            }   
+            
+            $.ajax({
+                url: `http://localhost:8081/user?id=${url_query()}`, 
+                type: "GET", 
+                success: function(data) {
+                   $("#firstname").val(data.data[0].first_name);
+                   $("#lastname").val(data.data[0].last_name); 
+                }
+            });
         });
 
         function openHelp() {
@@ -173,21 +203,14 @@
             </div>
 
             <div id="middle_full">
-                <div id="page_title">Add SGA Member</div>
-                <form action="http://localhost:8081/add_member" method="post" id="AddMemberForm" accept-charset="utf-8"> 
+                <div id="page_title">Edit SGA Member</div>
+                <form action="http://localhost:8081/edit_member" method="post" id="EditMemberForm" accept-charset="utf-8"> 
                     <div>
                         <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  required="required">
                     </div>
                     <div>
                         <label for="lastname">Last Name</label><input type="text" id="lastname" name="lastname" maxlength="60"  required="required">
                     </div>
-                    <div>
-                        //gtusername
-                    </div>
-                    <div>
-                        //
-                    </div>
-                    
                     <div>
                         <label for="SgaPersonHouse">House</label>
                         <select id="SgaPersonHouse" name="house">
