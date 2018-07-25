@@ -62,7 +62,7 @@
                         for (let i = 0; i < data.data.length; i++) {
                             let tr = "";
                             tr += "<tr>";
-                            tr += `<td><a href="jpsubmitbill.html" onclick="window.location.href = 'jpsubmitbill.html?id=' + '${data.data[i].id}';">${data.data[i].title}</a></td>`;
+                            tr += `<td><a onclick="window.location.href = 'jpsubmitbill.html?id=' + '${data.data[i].id}';">${data.data[i].title}</a></td>`;
                             tr += `<td>${data.data[i].number}</td>`;
                             tr += `<td>${data.data[i].category}</td>`;
                             tr += `<td id="bill_status_${i}"></td>`;
