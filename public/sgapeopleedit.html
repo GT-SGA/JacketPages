@@ -69,7 +69,19 @@
                 type: "GET", 
                 success: function(data) {
                    $("#firstname").val(data.data[0].first_name);
-                   $("#lastname").val(data.data[0].last_name); 
+                   $("#lastname").val(data.data[0].last_name);
+                    
+                   $("#EditMemberForm").attr('action', `http://localhost:8081/edit_member?id=${url_query()}`);
+                    
+                   $.ajax({
+                       url: `http://localhost:8081/sga_member?user_id=${data.data[0].id}`,
+                       type: "GET", 
+                       success: function(data) {
+                           $("#SgaPersonHouse").val(data.data[0].house);
+                           $("#SgaPersonDepartment").val(data.data[0].department);
+                           $("#SgaPersonStatus").val(data.data[0].status);
+                       }
+                   });
                 }
             });
         });
@@ -204,7 +216,7 @@
 
             <div id="middle_full">
                 <div id="page_title">Edit SGA Member</div>
-                <form action="http://localhost:8081/edit_member" method="post" id="EditMemberForm" accept-charset="utf-8"> 
+                <form method="post" id="EditMemberForm" accept-charset="utf-8"> 
                     <div>
                         <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  required="required">
                     </div>
@@ -214,8 +226,8 @@
                     <div>
                         <label for="SgaPersonHouse">House</label>
                         <select id="SgaPersonHouse" name="house">
-                            <option value="undergraduate">Undergraduate</option>
-                            <option value="graduate">Graduate</option>
+                            <option value="Undergraduate">Undergraduate</option>
+                            <option value="Graduate">Graduate</option>
                         </select>
                     </div>
                     <div>
@@ -415,12 +427,12 @@
                     <div>
                         <label for="SgaPersonStatus">Status</label>
                         <select id="SgaPersonStatus" name="status">
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
                         </select>
                     </div>
                     <div class="submit">
-                        <input type="submit" value="Add New Member">
+                        <input type="submit" value="Submit Changes">
                     </div>
                 </form>
             </div>
