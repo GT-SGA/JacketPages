@@ -70,6 +70,12 @@
 
     </script>
 </head>
+    
+<style> 
+    .inputs {
+        margin: 5px; 
+    }
+</style>
 
 <body data-gr-c-s-loaded="true">
 
@@ -122,15 +128,18 @@
                                 </li>
                                 <li class="expanded"></li>
                                 <li class="expanded">
-                                    <a href="http://jacketpages.gatech.edu/organizations"><span>Organizations</span></a>
+                                    <a href="organizations.html"><span>Organizations</span></a>
                                 </li>
                                 <li class="expanded"></li>
                                 <li class="expanded">
-                                    <a href="http://jacketpages.gatech.edu/sga_people"><span>Student Government</span></a>
+                                    <a href="sgapeople.html"><span>Student Government</span></a>
                                 </li>
                                 <li class="expanded"></li>
                                 <li class="expanded">
-                                    <a href="http://jacketpages.gatech.edu/help"><span>Help</span></a></li>
+                                    <a href="jpbills.html"><span>Bills</span></a></li>
+                                <li class="expanded"></li>
+                                <li class="expanded">
+                                    <a href="http://localhost:3000/help"><span>Help</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -175,27 +184,24 @@
             <div id="middle_full">
                 <div id="page_title">Add SGA Member</div>
                 <form action="http://localhost:8081/add_member" method="post" id="AddMemberForm" accept-charset="utf-8"> 
-                    <div>
+                    <div class=inputs>
                         <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  required="required">
                     </div>
-                    <div>
+                    <div class=inputs>
                         <label for="lastname">Last Name</label><input type="text" id="lastname" name="lastname" maxlength="60"  required="required">
                     </div>
-                    <div>
-                        //gtusername
-                    </div>
-                    <div>
-                        //
-                    </div>
-                    
-                    <div>
+                    <div class=inputs>
+                        <label for="gtusername">GT Username</label>
+                        <input type="text" id="gtusername" name="gtusername" maxlength="60" required="required">
+                    </div>                    
+                    <div class=inputs>
                         <label for="SgaPersonHouse">House</label>
                         <select id="SgaPersonHouse" name="house">
                             <option value="Undergraduate">Undergraduate</option>
                             <option value="Graduate">Graduate</option>
                         </select>
                     </div>
-                    <div>
+                    <div class=inputs>
                         <label for="SgaPersonDepartment">Department</label>
                         <select id="SgaPersonDepartment" name="department">
                             <option value="AE">AE</option>
@@ -389,7 +395,7 @@
                             <option value="Vice President of Information Technology">Vice President of Information Technology</option>
                         </select>
                     </div>
-                    <div>
+                    <div class=inputs>
                         <label for="SgaPersonStatus">Status</label>
                         <select id="SgaPersonStatus" name="status">
                             <option value="Active">Active</option>

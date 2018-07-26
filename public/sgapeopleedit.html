@@ -42,6 +42,7 @@
                 $(this).find('ul').css('visibility', 'hidden');
             };
             
+            //queries the url to find the passed in id 
             function url_query() {
                 let url = new URL(window.location.href); // or construct from window.location
 
@@ -55,14 +56,6 @@
                     }   
                 }
             };
-//            let url = new URL(window.location.href); // or construct from window.location
-//
-//            let params = new URLSearchParams(url.search.slice(1));
-//
-//            for (let p of params) {
-//                console.log(p);
-//                console.log(p[1]);
-//            }   
             
             $.ajax({
                 url: `http://localhost:8081/user?id=${url_query()}`, 
@@ -112,6 +105,12 @@
 
     </script>
 </head>
+    
+<style> 
+    .inputs {
+        margin: 5px; 
+    }
+</style>
 
 <body data-gr-c-s-loaded="true">
 
@@ -154,27 +153,30 @@
                     <!-- /#utility -->
 
                     <div id="nav">
-                        <div id="main-menu-wrapper">
-                            <ul class="menu">
-                                <li class="expanded first">
-                                </li>
-                                <li class="expanded"></li>
-                                <li class="expanded">
-                                    <a href="#"><span>Login</span></a>
-                                </li>
-                                <li class="expanded"></li>
-                                <li class="expanded">
-                                    <a href="http://jacketpages.gatech.edu/organizations"><span>Organizations</span></a>
-                                </li>
-                                <li class="expanded"></li>
-                                <li class="expanded">
-                                    <a href="http://jacketpages.gatech.edu/sga_people"><span>Student Government</span></a>
-                                </li>
-                                <li class="expanded"></li>
-                                <li class="expanded">
-                                    <a href="http://jacketpages.gatech.edu/help"><span>Help</span></a></li>
-                            </ul>
-                        </div>
+                    <div id="main-menu-wrapper">
+                        <ul class="menu">
+                            <li class="expanded first">
+                            </li>
+                            <li class="expanded"></li>
+                            <li class="expanded">
+                                <a href="#"><span>Login</span></a>
+                            </li>
+                            <li class="expanded"></li>
+                            <li class="expanded">
+                                <a href="organizations.html"><span>Organizations</span></a>
+                            </li>
+                            <li class="expanded"></li>
+                            <li class="expanded">
+                                <a href="sgapeople.html"><span>Student Government</span></a>
+                            </li>
+                            <li class="expanded"></li>
+                            <li class="expanded">
+                                <a href="jpbills.html"><span>Bills</span></a></li>
+                            <li class="expanded"></li>
+                            <li class="expanded">
+                                <a href="http://localhost:3000/help"><span>Help</span></a></li>
+                        </ul>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -216,21 +218,21 @@
 
             <div id="middle_full">
                 <div id="page_title">Edit SGA Member</div>
-                <form method="post" id="EditMemberForm" accept-charset="utf-8"> 
-                    <div>
+                <form method="post" id="EditMemberForm" target= "_blank" charset="utf-8"> 
+                    <div class=inputs>
                         <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  required="required">
                     </div>
-                    <div>
+                    <div class=inputs>
                         <label for="lastname">Last Name</label><input type="text" id="lastname" name="lastname" maxlength="60"  required="required">
                     </div>
-                    <div>
+                    <div class=inputs>
                         <label for="SgaPersonHouse">House</label>
                         <select id="SgaPersonHouse" name="house">
                             <option value="Undergraduate">Undergraduate</option>
                             <option value="Graduate">Graduate</option>
                         </select>
                     </div>
-                    <div>
+                    <div class=inputs>
                         <label for="SgaPersonDepartment">Department</label>
                         <select id="SgaPersonDepartment" name="department">
                             <option value="AE">AE</option>
@@ -422,13 +424,6 @@
                             <option value="Vice President of External Affairs">Vice President of External Affairs</option>
                             <option value="Vice President of Finance">Vice President of Finance</option>
                             <option value="Vice President of Information Technology">Vice President of Information Technology</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="SgaPersonStatus">Status</label>
-                        <select id="SgaPersonStatus" name="status">
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
                         </select>
                     </div>
                     <div class="submit">
