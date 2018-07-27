@@ -98,6 +98,16 @@ app.get("/bills_filteredwithcategory", (req, res) => {
 
 // Return the data of all bills with filter
 // Still prone to SQL injection attacks.
+app.get("/bills_filtereddate", (req, res) => {
+    connection.query(`SELECT * FROM bills WHERE submit_date BETWEEN DATE("${req.query['from']}") AND DATE("${req.query['to']}")`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Return the data of all bills with filter
+// Still prone to SQL injection attacks.
 app.get("/bills_filtered", (req, res) => {
     connection.query(`SELECT * FROM bills WHERE status BETWEEN ${req.query['from']} AND ${req.query['to']}`, function(err, rows) {
         res.send({data: 

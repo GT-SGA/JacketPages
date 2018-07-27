@@ -94,7 +94,6 @@
                  
             var statusSearch = () => {
                 let billCat = document.getElementById('BillCategory').value;
-            console.log(billCat);
                 if (billCat === "All") {
                     updatebilldata(`http://localhost:8081/bills_filtered?from=${document.getElementById('BillFrom').value}&to=${document.getElementById('BillTo').value}`);
                     return false;
@@ -102,6 +101,11 @@
                     updatebilldata(`http://localhost:8081/bills_filteredwithcategory?from=${document.getElementById('BillFrom').value}&to=${document.getElementById('BillTo').value}&category=${billCat}`);
                     return false;
                 }
+            };
+
+            var dateSearch = () => {
+                updatebilldata(`http://localhost:8081/bills_filtereddate?from=${document.getElementById('BillFromDate').value}&to=${document.getElementById('BillToDate').value}`);
+                return false;
             };
                  
         </script>
@@ -425,7 +429,15 @@
                                 <br>
                                 <div class="submit" style="display:inline-block"><input value="Submit" type="submit" onclick="return statusSearch()"></div>
                                 <div class="submit" style="display:inline-block"><input name="submit" value="Clear" type="submit"></div>
+                                <div style="float: left;">
+                                    <label for="BillFromDate">From</label>
+                                    <input type="date" id="BillFromDate" />
+                                    <label for="BillToDate">To</label>
+                                    <input type="date" id="BillToDate" />
+                                    <input type="submit" value="Search By Date" onclick="return dateSearch()" />
+                                </div>
                             </div>
+                            <br />
                         </div>
                     </div>
                     <table class="listing">
