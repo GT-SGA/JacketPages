@@ -54,29 +54,23 @@
         }
         
         $.ajax({
-            url: `http://localhost:8081/people`,
+            url: `http://localhost:8081/users`,
             type: "GET",
             success: function(data) {
-                var ppltb = document.getElementById("table");
-                peopledata = data.data;
+                var ppltb = document.getElementById("usertable");
+                userdata = data.data;
                 for (let i = 0; i < peopledata.length; i++) {
                     let tr = "";
                     tr += "<tr>";
-
-                    tr += `<td id="user_name_${i}"></td>`;
-
-                    $.ajax({
-                        url: `http://localhost:8081/user?id=${data.data[i].user_id}`,
-                        type: "GET",
-                        success: function(data) {
-
-                            document.getElementById(`user_name_${i}`).innerHTML = data.data[0].first_name + " " + data.data[0].last_name;
-                        }
-                    });
-                    tr += `<td>${data.data[i].house}</td>`;
-                    tr += `<td>${data.data[i].department}</td>`;
                     
+                    tr += `<td>${data.data[i].first_name + " " + data.data[i].last_name}</td>`;
+                    tr += `<td>${data.data[i].email}</td>`;
+                    tr += `<td>${data.data[i].gt_user_name}</td>`;
+                    tr += `<td>${data.data[i].level}</td>`;
+                    tr += `<td>${data.data[i].major}</td>`;
+                    tr += `<td>${data.data[i].year}</td>`;      
                     tr += `<td><a href ="sgapeopleedit.html?sga_id=${data.data[i].user_id}";>Edit</a></td>`;
+                    tr += `<td><a href ="sgapeopledelete.html?sga_id=${data.data[i].user_id}";>Delete</a></td>`;
                     
                     ppltb.innerHTML += tr;
                 }
@@ -220,6 +214,7 @@
             <div class="links left-nav" id="sidebar">
                 <ul>
                     <li><a href="./sgapeopleadd.html">Add SGA Member</a></li>
+                    <li><a href="./sgapeopleadd.html">Add Users</a></li>
                 </ul>
             </div>
             <div id="middle">
@@ -510,10 +505,13 @@
                 </div>
 
                 <div id="forupdate">
-                    <table class="listing" id="table">
+                    <table class="listing" id="usertable">
                         <th>Name</th>
-                        <th>House</th>
-                        <th>Department</th>
+                        <th>Email</th>
+                        <th>GT Username</th>
+                        <th>Level</th>
+                        <th>Major</th>
+                        <th>Year</th>
                     </table>
 <!--
                     <div class="paging"> 

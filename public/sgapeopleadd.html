@@ -51,6 +51,7 @@
         function closeHelp() {
             $("#help").attr("style", "display:none;");
         }
+            
     </script>
     <script>
         (function(i, s, o, g, r, a, m) {
@@ -183,7 +184,7 @@
 
             <div id="middle_full">
                 <div id="page_title">Add SGA Member</div>
-                <form action="http://localhost:8081/add_member" method="post" id="AddMemberForm" accept-charset="utf-8"> 
+                <form method="post" id="AddMemberForm" accept-charset="utf-8"> 
                     <div class=inputs>
                         <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  required="required">
                     </div>
@@ -393,13 +394,6 @@
                             <option value="Vice President of External Affairs">Vice President of External Affairs</option>
                             <option value="Vice President of Finance">Vice President of Finance</option>
                             <option value="Vice President of Information Technology">Vice President of Information Technology</option>
-                        </select>
-                    </div>
-                    <div class=inputs>
-                        <label for="SgaPersonStatus">Status</label>
-                        <select id="SgaPersonStatus" name="status">
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
                         </select>
                     </div>
                     <div class="submit">
