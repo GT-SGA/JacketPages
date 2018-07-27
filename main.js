@@ -86,6 +86,26 @@ app.get("/bills_sub", (req, res) => {
     });
 });
 
+// Return the data of all bills with filter
+// Still prone to SQL injection attacks.
+app.get("/bills_filtered", (req, res) => {
+    connection.query(`SELECT * FROM bills WHERE status BETWEEN ${req.query['from']} AND ${req.query['to']} AND category='${req.query["category"]}'`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Return the data of all bills with keyword
+// Still prone to SQL injection attacks.
+app.get("/bills_keyword", (req, res) => {
+    connection.query(`SELECT * FROM bills WHERE title REGEXP '.*${req.query["keyword"]}.*'`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
 // Return the data of all bills
 // Still prone to SQL injection attacks.
 app.get("/bills_all", (req, res) => {
