@@ -92,6 +92,18 @@
                 return false;
             };
                  
+            var statusSearch = () => {
+                let billCat = document.getElementById('BillCategory').value;
+            console.log(billCat);
+                if (billCat === "All") {
+                    updatebilldata(`http://localhost:8081/bills_filtered?from=${document.getElementById('BillFrom').value}&to=${document.getElementById('BillTo').value}`);
+                    return false;
+                } else {
+                    updatebilldata(`http://localhost:8081/bills_filteredwithcategory?from=${document.getElementById('BillFrom').value}&to=${document.getElementById('BillTo').value}&category=${billCat}`);
+                    return false;
+                }
+            };
+                 
         </script>
         <script>
             (function(i, s, o, g, r, a, m) {
@@ -411,7 +423,7 @@
                                     </select>
                                 </div>
                                 <br>
-                                <div class="submit" style="display:inline-block"><input value="Submit" type="submit"></div>
+                                <div class="submit" style="display:inline-block"><input value="Submit" type="submit" onclick="return statusSearch()"></div>
                                 <div class="submit" style="display:inline-block"><input name="submit" value="Clear" type="submit"></div>
                             </div>
                         </div>

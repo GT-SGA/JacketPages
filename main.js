@@ -88,8 +88,18 @@ app.get("/bills_sub", (req, res) => {
 
 // Return the data of all bills with filter
 // Still prone to SQL injection attacks.
-app.get("/bills_filtered", (req, res) => {
+app.get("/bills_filteredwithcategory", (req, res) => {
     connection.query(`SELECT * FROM bills WHERE status BETWEEN ${req.query['from']} AND ${req.query['to']} AND category='${req.query["category"]}'`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
+// Return the data of all bills with filter
+// Still prone to SQL injection attacks.
+app.get("/bills_filtered", (req, res) => {
+    connection.query(`SELECT * FROM bills WHERE status BETWEEN ${req.query['from']} AND ${req.query['to']}`, function(err, rows) {
         res.send({data: 
             rows
         });
