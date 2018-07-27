@@ -1,112 +1,27 @@
 <!DOCTYPE html>
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
-    <head>
+<html>
+<head>
+	<title></title>
+	<head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JacketPages | Bills</title>
-        <script async="" src="./jpbills_files/analytics.js"></script><script type="text/javascript" src="jpbills_files/jquery-1.js"></script><script type="text/javascript" src="jpbills_files/jquery-ui.js"></script>
-        <link rel="stylesheet" type="text/css" href="jpbills_files/jquery-ui-1.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/reset.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/default.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/fonts.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/typography.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/layout.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/blocks.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/content.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/editor.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/static.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/icing.css">
-        <link rel="stylesheet" type="text/css" href="jpbills_files/print.css" media="print">
+        <title>JacketPages | Vote Bills</title>
+        <script async="" src="jpindbill_files/analytics.js"></script><script type="text/javascript" src="jpindbill_files/jquery-1.js"></script><script type="text/javascript" src="jpindbill_files/jquery-ui.js"></script>
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/jquery-ui-1.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/reset.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/default.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/fonts.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/typography.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/layout.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/blocks.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/content.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/editor.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/static.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/icing.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/print.css" media="print">
         <link rel="apple-touch-icon" href="http://jacketpages.gatech.edu/img/apple-touch-icon.png">
-        <script type="text/javascript">
-            // @TODO Generate this script using the HTML and Js helpers
-            $(document).ready(function() {
-            	/**
-            	 * Bind the top unorder lists to the open and close functions
-            	 */
-            	$('.utilityMenu li').bind('mouseover', openSubMenu);
-            	$('.utilityMenu ul').bind('mouseout', closeSubMenu);
-            	/**
-            	 * Find the nested unordered lists and make them visible or hidden depending
-            	 * on the event.
-            	 */
-            	function openSubMenu() {
-            		$(this).find('ul').css('visibility', 'visible');
-            	};
-            
-            	function closeSubMenu() {
-            		$(this).find('ul').css('visibility', 'hidden');
-            	};
-            
-            });
-            
-            function openHelp() {
-            	$("#help").attr("style", "");
-            }
-            
-            function closeHelp() {
-            	$("#help").attr("style", "display:none;");
-            }
-
-            var loggedIn = 996;
-            var billdata;
-            var limitrec = 10;
-            var pagenum = 0;
-
-            var updatebilldata = () => {
-                $.ajax({
-                    url: `http://localhost:8081/bills_sub?submitter=${loggedIn}`, 
-                    type: "GET",
-                    success: function(data) {
-                        var billtb = document.getElementById("billtable");
-                        billdata = data.data;
-                        for (let i = 0; i < data.data.length; i++) {
-                            let tr = "";
-                            tr += "<tr>";
-                            tr += `<td><a href="jpsubmitbill.html" onclick="window.location.href = 'jpsubmitbill.html?id=' + '${data.data[i].id}';">${data.data[i].title}</a></td>`;
-                            tr += `<td>${data.data[i].number}</td>`;
-                            tr += `<td>${data.data[i].category}</td>`;
-                            tr += `<td id="bill_status_${i}"></td>`;
-                            $.ajax({
-                                url: `http://localhost:8081/bill_status?id=${data.data[i].status}`, 
-                                type: "GET",
-                                success: function(data) {
-                                    for (let i = 0; i < billdata.length; i++) {
-                                        document.getElementById(`bill_status_${i}`).innerHTML = data.data[0].name;
-                                    }
-                                }
-                            });
-                            tr += `<td>${data.data[i].submit_date.split('T')[0]}</td>`;
-                            tr += "</tr>";
-                            billtb.innerHTML += tr;
-                        }
-                        document.getElementById("numrec").innerHTML = `${Math.min(limitrec, billdata.length - limitrec * pagenum)}`;
-                        document.getElementById("numrectotal").innerHTML = `${billdata.length}`;
-                    }
-                });
-            };
-            updatebilldata();
-                 
-        </script>
-        <script>
-            (function(i, s, o, g, r, a, m) {
-            	i['GoogleAnalyticsObject'] = r;
-            	i[r] = i[r] ||
-            	function() {
-            		(i[r].q = i[r].q || []).push(arguments)
-            	}, i[r].l = 1 * new Date();
-            	a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-            	a.async = 1;
-            	a.src = g;
-            	m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            
-            ga('create', 'UA-43065423-1', 'gatech.edu');
-            ga('send', 'pageview');
-            
-        </script>
-    </head>
-    <body>
-        <div id="masthead">
+</head>
+<body>
+	<div id="masthead">
             <div id="identity" class="clearfix">
                 <div id="identity-wrapper">
                     <h1 id="gt-logo">
@@ -155,7 +70,7 @@
                                                 <a href="jpbills.html">View My Bills</a>        
                                             </li>
                                             <li class="leaf last">
-                                                <a href="jpbills.html">Voting</a>		
+                                                <a href="jpbills.html">View All Bills</a>		
                                             </li>
                                         </ul>
                                     </li>
@@ -246,7 +161,7 @@
             <!-- /#primary-menus -->
         </div>
         <!-- /#masthead -->
-        <div id="content">
+        <!-- <div id="content">
             <div class="clearfix">
                 <div class="ui-overlay" id="help" style="display:none;">
                     <div class="ui-widget-overlay"></div>
@@ -353,16 +268,9 @@
                 <div id="middle">
                     <div id="page_title">My Bills</div>
                     <div id="alphabet">
-                        <!--<div id="leftHalf">-->
                         <form action="/bills/my_bills" id="BillMyBillsForm" method="post" accept-charset="utf-8">
                             <div style="display:none;"><input name="_method" value="POST" type="hidden"></div>
                             <div class="input text"><label for="search" style="display:inline">Search</label><input name="data[Bill][keyword]" id="search" width="80%" type="text"></div>
-                            <!--</div>-->
-                            <!--<div id="rightHalf">
-                                <ul>
-                                                </li>
-                                </ul>
-                                </div>-->
                         </form>
                     </div>
                     <div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
@@ -443,8 +351,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- content -->
+        </div> -->
+        
+        <!-- Footer -->
         <div id="footer">
             <div class="row clearfix">
                 <div id="footer-utility-links">
@@ -467,7 +376,7 @@
                 </div>
             </div>
         </div>
-        <!-- /footer --> 
-    </body>
-</html>
 
+
+</body>
+</html>
