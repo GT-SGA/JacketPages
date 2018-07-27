@@ -52,9 +52,9 @@
             var limitrec = 10;
             var pagenum = 0;
 
-            var updatebilldata = () => {
+            var updatebilldatasubmitter = (submitter) => {
                 $.ajax({
-                    url: `http://localhost:8081/bills_sub?submitter=${loggedIn}`, 
+                    url: `http://localhost:8081/bills_sub?submitter=${submitter}`, 
                     type: "GET",
                     success: function(data) {
                         var billtb = document.getElementById("billtable");
@@ -84,7 +84,7 @@
                     }
                 });
             };
-            updatebilldata();
+            updatebilldatasubmitter(loggedIn);
                  
         </script>
         <script>

@@ -86,6 +86,16 @@ app.get("/bills_sub", (req, res) => {
     });
 });
 
+// Return the data of all bills
+// Still prone to SQL injection attacks.
+app.get("/bills_all", (req, res) => {
+    connection.query(`SELECT * FROM bills`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
+
 // Get an individual bill's data
 // Still prone to SQL injection attacks.
 app.get("/bill_id", (req, res) => {
@@ -223,29 +233,61 @@ app.put("/bill_sign_vf", (req, res) => {
 app.post("/bill_create", (req, res) => {
     connection.query(`INSERT INTO bill_authors (undr_auth_id, grad_auth_id) VALUES 
             ('${req.query["data_Authors_undr_auth_id"]}', '${req.query["data_Authors_grad_auth_id"]}')`, function(err, rows) {
-        connection.query(`INSERT INTO bills (create_date, last_mod_date, title, description, fundraising, type, category, org_id, dues, ugMembers, gMembers, auth_id, status) VALUES 
-                (NOW(), NOW(), '${req.query["data_Bill_title"]}', '${req.query["data_Bill_description"]}', '${req.query["data_Bill_fundraising"]}', '${req.query["data_Bill_type"]}', 
-                '${req.query["data_Bill_category"]}', ${req.query["data_Bill_org_id"]}, '${req.query["data_Bill_dues"]}', '${req.query["data_Bill_ugMembers"]}', 
-                ${req.query["data_Bill_gMembers"]}, ${rows.insertId}, 1)`,
+        if (err) console.log(err);
+        let cat = req.query['data_Bill_category'];
+        let catChar = cat === 'Joint' ? 'J' : cat === 'Undergraduate' ? 'U' : cat === 'Graduate' ? 'G' : 'B';
+        function pad(n, width, z) {
+            z = z || '0';
+            n = n + '';
+            return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+        }
+        let insertId = rows.insertId;
+        connection.query(`SELECT substr(number,4) as num, NOW() as now FROM bills WHERE substr(number,3,1) = '${catChar}' ORDER BY num DESC LIMIT 1`, function(err, rows) {
+            if (err) console.log(err);
+            let number = `${Number(rows[0].now.toLocaleDateString().split('-')[0].substring(1)) + 1}${catChar}${rows[0].num ? pad((Number(rows[0].num) + 1).toString(), 3) : '001'}`;
+            connection.query(`INSERT INTO bills (create_date, last_mod_date, title, description, fundraising, type, category, org_id, dues, ugMembers, gMembers, auth_id, status, number) VALUES 
+                    (NOW(), NOW(), '${req.query["data_Bill_title"]}', '${req.query["data_Bill_description"]}', '${req.query["data_Bill_fundraising"]}', '${req.query["data_Bill_type"]}', 
+                    '${req.query["data_Bill_category"]}', ${req.query["data_Bill_org_id"]}, '${req.query["data_Bill_dues"]}', '${req.query["data_Bill_ugMembers"]}', 
+                    ${req.query["data_Bill_gMembers"]}, ${insertId}, 1, '${number}')`,
+                    function(err, rows) {
+                        if (err) console.log(err);
+                let billId = insertId;
+                if (req.query['data_Bill_type'] !== 'Resolution') {
+                    for (let i = 0; req.query[`data_${i}_LineItem_line_number`]; i++) {
+                        let line_number = req.query[`data_${i}_LineItem_line_number`];
+                        let name = req.query[`data_${i}_LineItem_name`];
+                        let cost_per_unit = req.query[`data_${i}_LineItem_cost_per_unit`];
+                        let quantity = req.query[`data_${i}_LineItem_quantity`];
+                        let total_cost = req.query[`data_${i}_LineItem_total_cost`];
+                        let amount = req.query[`data_${i}_LineItem_amount`];
+                        let account = req.query[`data_${i}_LineItem_account`];
+                        let type = req.query[`data_${i}_LineItem_type`];
+                        let comments = req.query[`data_${i}_LineItem_comments`];
+                        connection.query(`INSERT INTO line_items (line_number, bill_id, name, cost_per_unit, quantity, total_cost, amount, account, type, comments, last_mod_date) VALUES
+                                (${line_number}, ${billId}, '${name}', ${cost_per_unit}, ${quantity}, ${total_cost}, ${amount}, '${account}', '${type ? type : ""}', ${comments ? comments : null}, NOW())`,
+                        function(err, rows) {
+                            if (err) console.log(err);
+                        });
+                    }
+                }
+                res.send('done');
+            });
+        });
+    });
+});
+
+// Update a bill
+// Still prone to SQL injection attacks.
+app.post("/bill_update", (req, res) => {
+    connection.query(`UPDATE bill_authors SET undr_auth_id='${req.query["data_Authors_undr_auth_id"]}', grad_auth_id='${req.query["data_Authors_grad_auth_id"]}' 
+            WHERE id=${req.query["data_Authors_id"]}`, function(err, rows) {
+        if (err) console.log(err);
+        connection.query(`UPDATE bills SET last_mod_date=NOW(), title='${req.query["data_Bill_title"]}', description='${req.query["data_Bill_description"]}', 
+                fundraising='${req.query["data_Bill_fundraising"]}', type='${req.query["data_Bill_type"]}', category='${req.query["data_Bill_category"]}', 
+                org_id=${req.query["data_Bill_org_id"]}, dues='${req.query["data_Bill_dues"]}', ugMembers=${req.query["data_Bill_ugMembers"]}, 
+                gMembers=${req.query["data_Bill_gMembers"]}, auth_id=${req.query["data_Authors_id"]} WHERE id=${req.query["data_Bill_id"]}`,
                 function(err, rows) {
-            let billId = rows.insertId;
-            for (let i = 0; req.query[`data_${i}_LineItem_line_number`]; i++) {
-                let line_number = req.query[`data_${i}_LineItem_line_number`];
-                let name = req.query[`data_${i}_LineItem_name`];
-                let cost_per_unit = req.query[`data_${i}_LineItem_cost_per_unit`];
-                let quantity = req.query[`data_${i}_LineItem_quantity`];
-                let total_cost = req.query[`data_${i}_LineItem_total_cost`];
-                let amount = req.query[`data_${i}_LineItem_amount`];
-                let account = req.query[`data_${i}_LineItem_account`];
-                let type = req.query[`data_${i}_LineItem_type`];
-                let comments = req.query[`data_${i}_LineItem_comments`];
-                connection.query(`INSERT INTO line_items (line_number, bill_id, name, cost_per_unit, quantity, total_cost, amount, account, type, comments, last_mod_date) VALUES
-                        (${line_number}, ${billId}, '${name}', ${cost_per_unit}, ${quantity}, ${total_cost}, ${amount}, '${account}', '${type ? type : ""}', ${comments ? comments : null}, NOW())`,
-                function(err, rows) {
-                    if (err) console.log(err);
-                    //console.log(name);
-                });
-            }
+            if (err) console.log(err);
             res.send(rows);
         });
     });

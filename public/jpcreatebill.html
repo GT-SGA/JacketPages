@@ -42,9 +42,13 @@
             function submitForm() {
                 var yes = validateForm();
                 if (yes) {
-                    $.post(`http://localhost:8081/bill_create?${$('#BillAddForm').serialize()}`, function(data) {
-                        //window.location.href = "jpbills.html";
-                        console.log($('#BillAddForm').serialize());
+                    console.log(`http://localhost:8081/bill_create?${$('#BillAddForm').serialize()}`);
+                    $.ajax({
+                        type: "POST",
+                        url: `http://localhost:8081/bill_create?${$('#BillAddForm').serialize()}`,
+                        success: function(data) {
+                            window.location.href = "jpbills.html";
+                        }
                     });
                 }
                 return false;
