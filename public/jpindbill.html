@@ -63,7 +63,6 @@
                 url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
                 type: "GET",
                 success: function(data) {
-                    console.log(data);
                     document.getElementById("page_title").innerHTML = `Bill ${data.data[0].number}`;
                     document.getElementById("bill_title").innerHTML = `${data.data[0].title}`;
                     document.getElementById("bill_description").innerHTML = `${data.data[0].description}`;
@@ -117,7 +116,6 @@
                             document.getElementById("bill_uhr_a").innerHTML = `${data.data[0].abstains}`;
                         }
                     });
-                    // @TODO: Update authors
                     $.ajax({
                         url: `http://localhost:8081/bill_authors?id=${data.data[0].auth_id}`, 
                         type: "GET",
@@ -206,6 +204,125 @@
                         }
                     });
                     // @TODO: Update votes
+                    $.ajax({
+                        url: `http://localhost:8081/bill_line_items?bill_id=${data.data[0].id}`,
+                        type: 'GET',
+                        success: function(data) {
+                            console.log(JSON.stringify(data.data));
+                            document.getElementById("LineItemsSubmitted").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsJFC").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsGraduate").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsUndergraduate").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsConference").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsAll").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsFinal").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            for (let j = 0; j < data.data.length; j++) {
+                                document.getElementById("LineItemsAll").innerHTML += 
+                                `<tr>
+                                    <td>${data.data[j].line_number}</td>
+                                    <td>${data.data[j].name}</td>
+                                    <td>${data.data[j].cost_per_unit}</td>
+                                    <td>${data.data[j].quantity}</td>
+                                    <td>${data.data[j].total_cost}</td>
+                                    <td>${data.data[j].amount}</td>
+                                    <td>${data.data[j].account}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>`;
+                                if (data.data[j].state === "Submitted") {
+                                    document.getElementById("LineItemsSubmitted").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td>${data.data[j].name}</td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                }
+                                if (data.data[j].state === "JFC") {
+                                    document.getElementById("LineItemsJFC").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td>${data.data[j].name}</td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                }
+                                if (data.data[j].state === "Graduate") {
+                                    document.getElementById("LineItemsGraduate").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td>${data.data[j].name}</td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                }
+                                if (data.data[j].state === "Undergraduate") {
+                                    document.getElementById("LineItemsUndergraduate").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td>${data.data[j].name}</td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                }
+                                if (data.data[j].state === "Conference") {
+                                    document.getElementById("LineItemsConference").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td>${data.data[j].name}</td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                }
+                                if (data.data[j].state === "Final") {
+                                    document.getElementById("LineItemsFinal").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td>${data.data[j].name}</td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                }
+                            }
+                        }
+                    });
                 }
             });
                  
@@ -356,7 +473,7 @@
                     <div class="row clearfix">
                         <ul style="float: right">
                             <li class="last">
-                                <a>Welcome, Akhil Kikkeri</a>
+                                <a>Welcome, </a>
                             </li>
                         </ul>
                         <ul>
@@ -655,7 +772,7 @@
                             </li>
                         </ul>
                         <div id="tabs-1">
-                            <table class="listing">
+                            <table class="listing" id="LineItemsSubmitted">
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
@@ -689,7 +806,7 @@
                             </table>
                         </div>
                         <div id="tabs-2">
-                            <table class="listing">
+                            <table class="listing" id="LineItemsJFC">
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
@@ -724,7 +841,7 @@
                             </table>
                         </div>
                         <div id="tabs-3">
-                            <table class="listing">
+                            <table class="listing" id="LineItemsUndergraduate">
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
@@ -759,7 +876,7 @@
                             </table>
                         </div>
                         <div id="tabs-4">
-                            <table class="listing">
+                            <table class="listing" id="LineItemsGraduate">
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
@@ -793,9 +910,12 @@
                                 </tr>
                             </table>
                         </div>
-                        <div id="tabs-5">There are no line items for this state.<br/></div>
+                        <div id="tabs-5">
+                            <table class="listing" id="LineItemsConference">
+                            </table>
+                        </div>
                         <div id="tabs-6">
-                            <table class="listing">
+                            <table class="listing" id="LineItemsAll">
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
@@ -896,7 +1016,11 @@
                                 </tr>
                             </table>
                         </div>
-                        <div id="tabs-7">There are no line items for this state.<br/></div>
+                        <div id="tabs-7">
+                            <table class="listing" id="LineItemsFinal">
+                                
+                            </table>
+                        </div>
                     </div>
 
                     <div class="ui-overlay" id="comments" style="display:none;">

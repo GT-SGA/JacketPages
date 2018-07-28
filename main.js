@@ -332,3 +332,13 @@ app.post("/bill_update", (req, res) => {
         });
     });
 });
+
+// Get submitter for a certain bill given id
+// Still prone to SQL injection attacks.
+app.get("/bill_line_items", (req, res) => {
+    connection.query(`SELECT * FROM line_items WHERE bill_id=${req.query["bill_id"]}`, function(err, rows) {
+        res.send({data: 
+            rows
+        });
+    });
+});
