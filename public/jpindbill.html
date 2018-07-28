@@ -220,27 +220,27 @@
                             document.getElementById("LineItemsConference").innerHTML = 
                             "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
                             document.getElementById("LineItemsAll").innerHTML = 
-                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th>State</th> <th></th> </tr>";
                             document.getElementById("LineItemsFinal").innerHTML = 
                             "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
                             for (let j = 0; j < data.data.length; j++) {
                                 document.getElementById("LineItemsAll").innerHTML += 
                                 `<tr>
                                     <td>${data.data[j].line_number}</td>
-                                    <td>${data.data[j].name}</td>
+                                    <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
                                     <td>${data.data[j].cost_per_unit}</td>
                                     <td>${data.data[j].quantity}</td>
                                     <td>${data.data[j].total_cost}</td>
                                     <td>${data.data[j].amount}</td>
                                     <td>${data.data[j].account}</td>
-                                    <td></td>
+                                    <td>${data.data[j].state}</td>
                                     <td></td>
                                 </tr>`;
                                 if (data.data[j].state === "Submitted") {
                                     document.getElementById("LineItemsSubmitted").innerHTML += 
                                     `<tr>
                                         <td>${data.data[j].line_number}</td>
-                                        <td>${data.data[j].name}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
                                         <td>${data.data[j].cost_per_unit}</td>
                                         <td>${data.data[j].quantity}</td>
                                         <td>${data.data[j].total_cost}</td>
@@ -254,7 +254,7 @@
                                     document.getElementById("LineItemsJFC").innerHTML += 
                                     `<tr>
                                         <td>${data.data[j].line_number}</td>
-                                        <td>${data.data[j].name}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
                                         <td>${data.data[j].cost_per_unit}</td>
                                         <td>${data.data[j].quantity}</td>
                                         <td>${data.data[j].total_cost}</td>
@@ -268,7 +268,7 @@
                                     document.getElementById("LineItemsGraduate").innerHTML += 
                                     `<tr>
                                         <td>${data.data[j].line_number}</td>
-                                        <td>${data.data[j].name}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
                                         <td>${data.data[j].cost_per_unit}</td>
                                         <td>${data.data[j].quantity}</td>
                                         <td>${data.data[j].total_cost}</td>
@@ -282,7 +282,7 @@
                                     document.getElementById("LineItemsUndergraduate").innerHTML += 
                                     `<tr>
                                         <td>${data.data[j].line_number}</td>
-                                        <td>${data.data[j].name}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
                                         <td>${data.data[j].cost_per_unit}</td>
                                         <td>${data.data[j].quantity}</td>
                                         <td>${data.data[j].total_cost}</td>
@@ -296,7 +296,7 @@
                                     document.getElementById("LineItemsConference").innerHTML += 
                                     `<tr>
                                         <td>${data.data[j].line_number}</td>
-                                        <td>${data.data[j].name}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
                                         <td>${data.data[j].cost_per_unit}</td>
                                         <td>${data.data[j].quantity}</td>
                                         <td>${data.data[j].total_cost}</td>
@@ -310,7 +310,7 @@
                                     document.getElementById("LineItemsFinal").innerHTML += 
                                     `<tr>
                                         <td>${data.data[j].line_number}</td>
-                                        <td>${data.data[j].name}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
                                         <td>${data.data[j].cost_per_unit}</td>
                                         <td>${data.data[j].quantity}</td>
                                         <td>${data.data[j].total_cost}</td>
