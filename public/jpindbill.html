@@ -223,6 +223,18 @@
                             "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th>State</th> <th></th> </tr>";
                             document.getElementById("LineItemsFinal").innerHTML = 
                             "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            let subAmPYTotal = 0.0,
+                            subAmCOTotal = 0.0,
+                            jfcAmPYTotal = 0.0,
+                            jfcAmCOTotal = 0.0,
+                            gradAmPYTotal = 0.0,
+                            gradAmCOTotal = 0.0,
+                            undrAmPYTotal = 0.0,
+                            undrAmCOTotal = 0.0,
+                            confAmPYTotal = 0.0,
+                            confAmCOTotal = 0.0,
+                            finAmPYTotal = 0.0,
+                            finAmCOTotal = 0.0;
                             for (let j = 0; j < data.data.length; j++) {
                                 document.getElementById("LineItemsAll").innerHTML += 
                                 `<tr>
@@ -249,6 +261,12 @@
                                         <td></td>
                                         <td></td>
                                     </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        subAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        subAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
                                 }
                                 if (data.data[j].state === "JFC") {
                                     document.getElementById("LineItemsJFC").innerHTML += 
@@ -263,6 +281,12 @@
                                         <td></td>
                                         <td></td>
                                     </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        jfcAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        jfcAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
                                 }
                                 if (data.data[j].state === "Graduate") {
                                     document.getElementById("LineItemsGraduate").innerHTML += 
@@ -277,6 +301,12 @@
                                         <td></td>
                                         <td></td>
                                     </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        gradAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        gradAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
                                 }
                                 if (data.data[j].state === "Undergraduate") {
                                     document.getElementById("LineItemsUndergraduate").innerHTML += 
@@ -291,6 +321,12 @@
                                         <td></td>
                                         <td></td>
                                     </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        undrAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        undrAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
                                 }
                                 if (data.data[j].state === "Conference") {
                                     document.getElementById("LineItemsConference").innerHTML += 
@@ -305,6 +341,12 @@
                                         <td></td>
                                         <td></td>
                                     </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        confAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        confAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
                                 }
                                 if (data.data[j].state === "Final") {
                                     document.getElementById("LineItemsFinal").innerHTML += 
@@ -319,8 +361,114 @@
                                         <td></td>
                                         <td></td>
                                     </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        finAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        finAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
                                 }
                             }
+                            document.getElementById("LineItemsSubmittedAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${subAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${subAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(subAmPYTotal + subAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsJFCAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${jfcAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${jfcAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(jfcAmPYTotal + jfcAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsUndergraduateAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${undrAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${undrAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(undrAmPYTotal + undrAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsGraduateAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${gradAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${gradAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(gradAmPYTotal + gradAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsConferenceAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${confAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${confAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(confAmPYTotal + confAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsFinalAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${finAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${finAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(finAmPYTotal + finAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsAllAmount").innerHTML = 
+                            `<tr>
+                                <td>Submitted:</td>
+                                <td>Prior Year</td>
+                                <td>$${subAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${subAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(subAmPYTotal + subAmCOTotal).toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>JFC:</td>
+                                <td>Prior Year</td>
+                                <td>$${jfcAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${jfcAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(jfcAmPYTotal + jfcAmCOTotal).toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate:</td>
+                                <td>Prior Year</td>
+                                <td>$${undrAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${undrAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(undrAmPYTotal + undrAmCOTotal).toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Conference:</td>
+                                <td>Prior Year</td>
+                                <td>$${confAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${confAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(confAmPYTotal + confAmCOTotal).toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Graduate:</td>
+                                <td>Prior Year</td>
+                                <td>$${gradAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${gradAmCOTotal}</td>
+                                <td>Total</td>
+                                <td>$${(gradAmPYTotal + gradAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
                         }
                     });
                 }
@@ -773,6 +921,7 @@
                         </ul>
                         <div id="tabs-1">
                             <table class="listing" id="LineItemsSubmitted">
+                              <!--
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
@@ -792,9 +941,10 @@
                                     <td>250.00</td>
                                     <td>PY</td>
                                 </tr>
+                              --->
                             </table>
                             <h1>Amounts</h1>
-                            <table class="listing">
+                            <table class="listing" id="LineItemsSubmittedAmount">
                                 <tr>
                                     <td>Prior Year</td>
                                     <td>$250.00</td>
@@ -829,7 +979,7 @@
                                 </tr>
                             </table>
                             <h1>Amounts</h1>
-                            <table class="listing">
+                            <table class="listing" id="LineItemsJFCAmount">
                                 <tr>
                                     <td>Prior Year</td>
                                     <td>$250.00</td>
@@ -864,7 +1014,7 @@
                                 </tr>
                             </table>
                             <h1>Amounts</h1>
-                            <table class="listing">
+                            <table class="listing" id="LineItemsUndergraduateAmount">
                                 <tr>
                                     <td>Prior Year</td>
                                     <td>$250.00</td>
@@ -899,7 +1049,7 @@
                                 </tr>
                             </table>
                             <h1>Amounts</h1>
-                            <table class="listing">
+                            <table class="listing" id="LineItemsGraduateAmount">
                                 <tr>
                                     <td>Prior Year</td>
                                     <td>$250.00</td>
@@ -912,6 +1062,9 @@
                         </div>
                         <div id="tabs-5">
                             <table class="listing" id="LineItemsConference">
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing" id="LineItemsConferenceAmount">
                             </table>
                         </div>
                         <div id="tabs-6">
@@ -968,57 +1121,59 @@
                                 </tr>
                             </table>
                             <h1>Amounts</h1>
-                            <table class="listing">
-                                <tr>
-                                    <td>Submitted:</td>
-                                    <td>Prior Year</td>
-                                    <td>$250.00</td>
-                                    <td>Capital Outlay</td>
-                                    <td>$0.00</td>
-                                    <td>Total</td>
-                                    <td>$250.00</td>
-                                </tr>
-                                <tr>
-                                    <td>JFC:</td>
-                                    <td>Prior Year</td>
-                                    <td>$250.00</td>
-                                    <td>Capital Outlay</td>
-                                    <td>$0.00</td>
-                                    <td>Total</td>
-                                    <td>$250.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Undergraduate:</td>
-                                    <td>Prior Year</td>
-                                    <td>$250.00</td>
-                                    <td>Capital Outlay</td>
-                                    <td>$0.00</td>
-                                    <td>Total</td>
-                                    <td>$250.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Conference:</td>
-                                    <td>Prior Year</td>
-                                    <td>$0.00</td>
-                                    <td>Capital Outlay</td>
-                                    <td>$0.00</td>
-                                    <td>Total</td>
-                                    <td>$0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Graduate:</td>
-                                    <td>Prior Year</td>
-                                    <td>$250.00</td>
-                                    <td>Capital Outlay</td>
-                                    <td>$0.00</td>
-                                    <td>Total</td>
-                                    <td>$250.00</td>
-                                </tr>
+                            <table class="listing" id="LineItemsAllAmount">
+                            <tr>
+                                <td>Submitted:</td>
+                                <td>Prior Year</td>
+                                <td>$250.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$250.00</td>
+                            </tr>
+                            <tr>
+                                <td>JFC:</td>
+                                <td>Prior Year</td>
+                                <td>$250.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$250.00</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate:</td>
+                                <td>Prior Year</td>
+                                <td>$250.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$250.00</td>
+                            </tr>
+                            <tr>
+                                <td>Conference:</td>
+                                <td>Prior Year</td>
+                                <td>$0.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Graduate:</td>
+                                <td>Prior Year</td>
+                                <td>$250.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$250.00</td>
+                            </tr>
                             </table>
                         </div>
                         <div id="tabs-7">
                             <table class="listing" id="LineItemsFinal">
-                                
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing" id="LineItemsFinalAmount">
                             </table>
                         </div>
                     </div>
