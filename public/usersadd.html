@@ -60,7 +60,7 @@
             success: function(data) {
                 id = id + data.data[0].id;
                 
-                $("#AddMemberForm").attr('action', `http://localhost:8081/add_user?id=${id}`);
+                $("#AddUserForm").attr('action', `http://localhost:8081/add_user?id=${id}`);
             }
         });
         

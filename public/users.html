@@ -59,7 +59,7 @@
             success: function(data) {
                 var ppltb = document.getElementById("usertable");
                 userdata = data.data;
-                for (let i = 0; i < peopledata.length; i++) {
+                for (let i = 0; i < userdata.length; i++) {
                     let tr = "";
                     tr += "<tr>";
                     
@@ -69,8 +69,8 @@
                     tr += `<td>${data.data[i].level}</td>`;
                     tr += `<td>${data.data[i].major}</td>`;
                     tr += `<td>${data.data[i].year}</td>`;      
-                    tr += `<td><a href ="sgapeopleedit.html?sga_id=${data.data[i].user_id}";>Edit</a></td>`;
-                    tr += `<td><a href ="sgapeopledelete.html?sga_id=${data.data[i].user_id}";>Delete</a></td>`;
+                    tr += `<td><a href ="usersedit.html?id=${data.data[i].id}";>Edit</a></td>`;
+                    tr += `<td><a href =http://localhost:8081/delete_user?id=${data.data[i].id};>Delete</a></td>`;
                     
                     ppltb.innerHTML += tr;
                 }
@@ -214,11 +214,11 @@
             <div class="links left-nav" id="sidebar">
                 <ul>
                     <li><a href="./sgapeopleadd.html">Add SGA Member</a></li>
-                    <li><a href="./sgapeopleadd.html">Add Users</a></li>
+                    <li><a href="./usersadd.html">Add Users</a></li>
                 </ul>
             </div>
             <div id="middle">
-                <div id="page_title">SGA Records</div>
+                <div id="page_title">Users</div>
 
                 <div id="alphabet">
                     <div id="leftHalf">
@@ -512,6 +512,8 @@
                         <th>Level</th>
                         <th>Major</th>
                         <th>Year</th>
+                        <th></th>
+                        <th></th>
                     </table>
 <!--
                     <div class="paging"> 

@@ -42,41 +42,6 @@
                 $(this).find('ul').css('visibility', 'hidden');
             };
             
-            //queries the url to find the passed in id 
-            function url_query() {
-                let url = new URL(window.location.href); // or construct from window.location
-
-                let params = new URLSearchParams(url.search.slice(1));
-
-                if (params === null) {
-                    return false; 
-                } else {
-                    for (let p of params) {
-                    return(p[1]); 
-                    }   
-                }
-            };
-            
-            $.ajax({
-                url: `http://localhost:8081/user?id=${url_query()}`, 
-                type: "GET", 
-                success: function(data) {
-                   $("#firstname").val(data.data[0].first_name);
-                   $("#lastname").val(data.data[0].last_name);
-                    
-                   $("#EditMemberForm").attr('action', `http://localhost:8081/edit_member?id=${url_query()}`);
-                    
-                   $.ajax({
-                       url: `http://localhost:8081/sga_member?user_id=${data.data[0].id}`,
-                       type: "GET", 
-                       success: function(data) {
-                           $("#SgaPersonHouse").val(data.data[0].house);
-                           $("#SgaPersonDepartment").val(data.data[0].department);
-                           $("#SgaPersonStatus").val(data.data[0].status);
-                       }
-                   });
-                }
-            });
         });
 
         function openHelp() {
@@ -86,6 +51,43 @@
         function closeHelp() {
             $("#help").attr("style", "display:none;");
         }
+        
+        //queries the url to find the passed in id 
+        function url_query() {
+            let url = new URL(window.location.href); // or construct from window.location
+
+            let params = new URLSearchParams(url.search.slice(1));
+
+            if (params === null) {
+                return false; 
+            } else {
+                for (let p of params) {
+                return(p[1]); 
+                }   
+            }
+        };
+        
+        $.ajax({
+            url: `http://localhost:8081/sga_member?user_id=${url_query()}`, 
+            type: "GET", 
+            success: function(data) {
+                
+               $.ajax({
+                   url: `http://localhost:8081/user?id=${url_query()}`, 
+                   type: "GET",
+                   success: function(data) {
+                       $("#firstname").val(data.data[0].first_name);
+                       $("#lastname").val(data.data[0].last_name); 
+                   }
+               })
+               
+               $("#house").val(data.data[0].house); 
+               $("#department").val(data.data[0].department);
+               $("#status").val(data.data[0].status);
+                
+                $("#EditMemberForm").attr('action', `http://localhost:8081/edit_member?id=${url_query()}`);
+            }
+        });
     </script>
     <script>
         (function(i, s, o, g, r, a, m) {
@@ -108,7 +110,7 @@
     
 <style> 
     .inputs {
-        margin: 5px; 
+        margin: 8px; 
     }
 </style>
 
@@ -220,21 +222,21 @@
                 <div id="page_title">Edit SGA Member</div>
                 <form method="post" id="EditMemberForm" target= "_blank" charset="utf-8"> 
                     <div class=inputs>
-                        <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  required="required">
+                        <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  readonly>
                     </div>
                     <div class=inputs>
-                        <label for="lastname">Last Name</label><input type="text" id="lastname" name="lastname" maxlength="60"  required="required">
-                    </div>
+                        <label for="lastname">Last Name</label><input type="text" id="lastname" name="lastname" maxlength="60" readonly>
+                    </div>     
                     <div class=inputs>
-                        <label for="SgaPersonHouse">House</label>
-                        <select id="SgaPersonHouse" name="house">
+                        <label for="house">House</label>
+                        <select id="house" name="house">
                             <option value="Undergraduate">Undergraduate</option>
                             <option value="Graduate">Graduate</option>
                         </select>
                     </div>
                     <div class=inputs>
-                        <label for="SgaPersonDepartment">Department</label>
-                        <select id="SgaPersonDepartment" name="department">
+                        <label for="department">Department</label>
+                        <select id="department" name="department">
                             <option value="AE">AE</option>
                             <option value="Aerospace">Aerospace</option>
                             <option value="Aerospace ">Aerospace </option>
@@ -424,6 +426,13 @@
                             <option value="Vice President of External Affairs">Vice President of External Affairs</option>
                             <option value="Vice President of Finance">Vice President of Finance</option>
                             <option value="Vice President of Information Technology">Vice President of Information Technology</option>
+                        </select>
+                    </div>
+                    <div class=inputs>
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
                         </select>
                     </div>
                     <div class="submit">

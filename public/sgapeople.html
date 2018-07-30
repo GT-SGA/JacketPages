@@ -75,8 +75,9 @@
                     });
                     tr += `<td>${data.data[i].house}</td>`;
                     tr += `<td>${data.data[i].department}</td>`;
+                    tr += `<td>${data.data[i].status}</td>`
                     
-                    tr += `<td><a href ="sgapeopleedit.html?sga_id=${data.data[i].user_id}";>Edit</a></td>`;
+                    tr += `<td><a href ="sgapeopleedit.html?user_id=${data.data[i].user_id}";>Edit</a></td>`;
                     
                     ppltb.innerHTML += tr;
                 }
@@ -514,6 +515,7 @@
                         <th>Name</th>
                         <th>House</th>
                         <th>Department</th>
+                        <th>Status</th>
                     </table>
 <!--
                     <div class="paging"> 

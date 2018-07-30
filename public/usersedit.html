@@ -52,15 +52,33 @@
             $("#help").attr("style", "display:none;");
         }
         
-        var id = 1; 
+        //queries the url to find the passed in id 
+        function url_query() {
+            let url = new URL(window.location.href); // or construct from window.location
+
+            let params = new URLSearchParams(url.search.slice(1));
+
+            if (params === null) {
+                return false; 
+            } else {
+                for (let p of params) {
+                return(p[1]); 
+                }   
+            }
+        };
         
         $.ajax({
-            url: `http://localhost:8081/last_member`,
+            url: `http://localhost:8081/user?id=${url_query()}`, 
             type: "GET", 
             success: function(data) {
-                id = id + data.data[0].id;
+               $("#firstname").val(data.data[0].first_name);
+               $("#lastname").val(data.data[0].last_name); 
+               $("#level").val(data.data[0].level); 
+               $("#email").val(data.data[0].email);
+               $("#major").val(data.data[0].major);
+               $("#year").val(data.data[0].year);
                 
-                $("#AddMemberForm").attr('action', `http://localhost:8081/add_member?id=${id}`);
+                $("#EditUserForm").attr('action', `http://localhost:8081/edit_user?id=${url_query()}`);
             }
         });
         
@@ -86,7 +104,7 @@
     
 <style> 
     .inputs {
-        margin: 5px; 
+        margin: 8px; 
     }
 </style>
 
@@ -204,21 +222,19 @@
                         <label for="lastname">Last Name</label><input type="text" id="lastname" name="lastname" maxlength="60"  required="required">
                     </div>     
                     
-                    //////////////////////EDIT THIS/////////////
                     <div class=inputs>
                         <label for="level">Level</label>
                         <select id="level" name="level">
                             <option value="admin">Administrator</option>
-                            <option value="Leadership">Leadership and Civic Engagement</option>
+                            <option value="sofo">Leadership and Civic Engagement</option>
                             <option value="sga_exec">SGA Executive</option>
                             <option value="sga_user">Sga User</option>
                             <option value="gt_member">General GT User</option>
                         </select>
                     </div>
-                    ///////////////////////////////////////////
                     
                     <div class=inputs>
-                        <label for="gtusername">Email</label>
+                        <label for="email">Email</label>
                         <input type="text" id="email" name="email" maxlength="60" required="required">
                     </div>  
                     <div class=inputs>
@@ -300,7 +316,7 @@
                     </div>
                     
                     <div class="submit">
-                        <input type="submit" value="Add New Member">
+                        <input type="submit" value="Submit Changes">
                     </div>
                 </form>
             </div>
