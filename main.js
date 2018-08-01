@@ -53,6 +53,20 @@ app.get('/sgapeople', function(req, res){    // SGAPEOPLE
 
 ////////////////////////////////////////////////////////////////////////////////  SGA PEOPLE 
 
+app.get('/search',function(req,res){
+    connection.query('SELECT first_name from TABLE_NAME where first_name like "%'+req.query.key+'%"',
+    function(err, rows, fields) {
+    if (err) throw err;
+    var data=[];
+    for(i=0;i<rows.length;i++)
+    {
+    data.push(rows[i].first_name);
+    }
+    res.end(JSON.stringify(data));
+    });
+}); 
+
+
 //Gets list of all users in the user table 
 app.get("/users", (req, res) => {
     connection.query(`SELECT * FROM users ORDER BY id DESC LIMIT 50`, function(err, rows) {
