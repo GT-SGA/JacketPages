@@ -246,9 +246,7 @@ app.post("/bill_create", (req, res) => {
 });
 
 app.post("/create_votes", (req, res) => {
-  // con.query("INSERT INTO bill_votes (date) VALUES (" + (new Date()).toString() + ");", function(err, rows) {
   let currDate = (new Date()).toISOString().substring(0, 10);
-  console.log(currDate);
   connection.query("INSERT INTO bill_votes (date, yeas, nays, abstains, comments) VALUES (\"" + currDate + "\", 0, 0, 0, \"\");", function(err, rows) {
     if (err) throw err; 
     console.log("votes entry created");
@@ -265,8 +263,6 @@ app.post("/bill_votes", (req, res) => {
 })
 
 app.post("/votes/:opt", (req, res) => {
-  // In the future, need to pass in an ID so we know which bill to update votes for. 
-  // connection.query("UPDATE bill_votes SET opt"+req.params.optId+"_votes=opt"+req.params.optId+"_votes + 1 WHERE id=1", function(err, rows, fields) {
   connection.query("UPDATE bill_votes SET "+req.params.opt+"="+req.params.opt+"+1 ORDER BY id DESC LIMIT 1;", function(err, rows, fields) {
     if (err) throw err;
     res.sendStatus(200);
