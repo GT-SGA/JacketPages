@@ -245,6 +245,7 @@ app.post("/bill_create", (req, res) => {
     });
 });
 
+// Creates a database entry in bill_votes for the current bill
 app.post("/create_votes", (req, res) => {
   let currDate = (new Date()).toISOString().substring(0, 10);
   connection.query("INSERT INTO bill_votes (date, yeas, nays, abstains, comments) VALUES (\"" + currDate + "\", 0, 0, 0, \"\");", function(err, rows) {
@@ -254,6 +255,8 @@ app.post("/create_votes", (req, res) => {
   });
 });
 
+// Gets the most recently added entry in bill_votes.
+// Used for updating yeas, nays, abstains
 app.get("/bill_vote", (req, res) => { 
   connection.query("Select * from bill_votes ORDER BY id DESC LIMIT 1", function(err, rows) {
     if (err) throw err; 
@@ -261,11 +264,12 @@ app.get("/bill_vote", (req, res) => {
   });  
 })
 
+// Updates the bill_votes entry based on a button press
 app.post("/votes/:opt", (req, res) => {
   connection.query("UPDATE bill_votes SET "+req.params.opt+"="+req.params.opt+"+1 ORDER BY id DESC LIMIT 1;", function(err, rows, fields) {
     if (err) throw err;
-    res.sendStatus(200);
     console.log("update successful");
+    // Tells server to run getVotes
     io.emit("voted");
   });
 })
