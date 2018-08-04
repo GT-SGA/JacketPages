@@ -250,15 +250,14 @@ app.post("/create_votes", (req, res) => {
   connection.query("INSERT INTO bill_votes (date, yeas, nays, abstains, comments) VALUES (\"" + currDate + "\", 0, 0, 0, \"\");", function(err, rows) {
     if (err) throw err; 
     console.log("votes entry created");
+    io.emit("voted");
   });
 });
 
-app.post("/bill_votes", (req, res) => { 
-    // In the future, need to pass in an ID so we know which bill to update votes for. 
-  connection.query("Select * from bill_votes WHERE id=1", function(err, rows) {
+app.get("/bill_vote", (req, res) => { 
+  connection.query("Select * from bill_votes ORDER BY id DESC LIMIT 1", function(err, rows) {
     if (err) throw err; 
-    votes = rows;
-    res.send(votes[0])
+    res.send(rows[0]);
   });  
 })
 

@@ -20,15 +20,16 @@ $(function() {
 	getVotes();
 })
 
-// socket.on("voted", getVotes)
+socket.on("voted", getVotes);
 
 function getVotes() {
-	// $.get("http://localhost:3000/votes", (data) => {
-	// 	$("#votes1").text(data["opt1_votes"]);
-	// 	$("#votes2").text(data["opt2_votes"]);
-	// 	$("#votes3").text(data["opt3_votes"]);
-	// });
-	console.log("get Votes");
+	$.get("http://localhost:8081/bill_vote", (data) => {
+		$("#yeas").text(data["yeas"]);
+		$("#nays").text(data["nays"]);
+		$("#abstains").text(data["abstains"]);
+
+	});
+	console.log("getting votes");
 }
 
 function addVote(option) {
