@@ -269,6 +269,7 @@ app.post("/votes/:opt", (req, res) => {
   connection.query("UPDATE bill_votes SET "+req.params.opt+"="+req.params.opt+"+1 ORDER BY id DESC LIMIT 1;", function(err, rows, fields) {
     if (err) throw err;
     console.log("update successful");
+    res.sendStatus(200);
     // Tells server to run getVotes
     io.emit("voted");
   });
