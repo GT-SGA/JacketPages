@@ -52,9 +52,9 @@
             $("#help").attr("style", "display:none;");
         }
         
-        //queries the url to find the passed in id 
+        ////////////////////queries the url to find the passed in id this particular situation/////////////////////////
         function url_query() {
-            let url = new URL(window.location.href); // or construct from window.location
+            let url = new URL(window.location.href);
 
             let params = new URLSearchParams(url.search.slice(1));
 
@@ -67,6 +67,7 @@
             }
         };
         
+        ////////finds user in database based on id and populates the fields with their information//////////////////////
         $.ajax({
             url: `http://localhost:8081/user?id=${url_query()}`, 
             type: "GET", 
@@ -78,9 +79,30 @@
                $("#major").val(data.data[0].major);
                $("#year").val(data.data[0].year);
                 
+                ////sets action value to id of user/////
                 $("#EditUserForm").attr('action', `http://localhost:8081/edit_user?id=${url_query()}`);
             }
         });
+        
+        /////////ajax submitting form, pulls inputted values from form, redirects page after submission///////////
+        function editUserForm() {              
+            $.ajax({
+                type: "POST",
+                    url: $("#EditUserForm").attr('action'),
+                    data: {
+                        'email' : $("#email").val(),
+                        'firstname' : $("#firstname").val(), 
+                        'lastname'  : $("#lastname").val(),
+                        'level' : $("#level").val(),
+                        'major' : $("#major").val(),
+                        'year' : $("#year").val()      
+                    },
+                    success: function(data) {
+                        window.location.href = "users.html"
+                    }
+            });
+            return false;
+        }
         
     </script>
     <script>
@@ -214,7 +236,7 @@
 
             <div id="middle_full">
                 <div id="page_title">Edit User</div>
-                <form method="post" id="EditUserForm" accept-charset="utf-8"> 
+                <form method="post" id="EditUserForm" onsubmit = "return editUserForm()" accept-charset="utf-8"> 
                     <div class=inputs>
                         <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  required="required">
                     </div>

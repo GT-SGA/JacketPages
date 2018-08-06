@@ -52,6 +52,7 @@
             $("#help").attr("style", "display:none;");
         }
         
+        //////////gets id of last added user, adds 1, then appends value to the form action value//////////////
         var id = 1; 
         
         $.ajax({
@@ -64,15 +65,27 @@
             }
         });
         
-        $('form.ajax').on('submit', function() {
-//            var that = $(this),
-//                url = that.attr('action'),
-//                method = that.attr('method'),
-//                data = {};
-            return false; 
-        });
         
-        
+        /////////ajax submitting form, pulls inputted values from form, redirects page after submission///////////
+        function submitForm() {              
+            $.ajax({
+                type: "POST",
+                    url: $("#AddUserForm").attr('action'),
+                    data: {
+                        'gtusername': $("#gtusername").val(),
+                        'email' : $("#email").val(),
+                        'firstname' : $("#firstname").val(), 
+                        'lastname'  : $("#lastname").val(), 
+                        'major' : $("#major").val(),
+                        'year' : $("#year").val()      
+                    },
+                    success: function(data) {
+                        window.location.href = "users.html"
+                    }
+            });
+            return false;
+        }
+            
     </script>
     <script>
         (function(i, s, o, g, r, a, m) {
@@ -205,7 +218,7 @@
 
             <div id="middle_full">
                 <div id="page_title">Add User</div>
-                <form method="post" id="AddUserForm" class="ajax" accept-charset="utf-8"> 
+                <form method="post" id="AddUserForm" onsubmit="return submitForm()" accept-charset="utf-8"> 
                     <div class=inputs>
                         <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  required="required">
                     </div>

@@ -52,7 +52,7 @@
             $("#help").attr("style", "display:none;");
         }
         
-        //queries the url to find the passed in id 
+        ////////////////////queries the url to find the passed in id this particular situation/////////////////////////
         function url_query() {
             let url = new URL(window.location.href); // or construct from window.location
 
@@ -67,6 +67,7 @@
             }
         };
         
+        ////////finds sga member in database based on user_id and populates the fields with their info///////////////
         $.ajax({
             url: `http://localhost:8081/sga_member?user_id=${url_query()}`, 
             type: "GET", 
@@ -79,15 +80,35 @@
                        $("#firstname").val(data.data[0].first_name);
                        $("#lastname").val(data.data[0].last_name); 
                    }
-               })
+               });
                
                $("#house").val(data.data[0].house); 
                $("#department").val(data.data[0].department);
                $("#status").val(data.data[0].status);
                 
+                ///sets action value to user_id of sga member///
                 $("#EditMemberForm").attr('action', `http://localhost:8081/edit_member?id=${url_query()}`);
             }
         });
+        
+        /////////ajax submitting form, pulls inputted values from form, redirects page after submission///////////
+        function editMemberForm() {        
+            console.log($("house").val());
+            $.ajax({
+                type: "POST",
+                    url: $("#EditMemberForm").attr('action'),
+                    data: {
+                        'house' : $("#house").val(),
+                        'department' : $("#department").val(),
+                        'status' : $("#status").val()
+                    },
+                    success: function(data) {
+                        window.location.href = "sgapeople.html"
+                    }
+            });
+            return false;
+        }
+        
     </script>
     <script>
         (function(i, s, o, g, r, a, m) {
@@ -220,7 +241,7 @@
 
             <div id="middle_full">
                 <div id="page_title">Edit SGA Member</div>
-                <form method="post" id="EditMemberForm" target= "_blank" charset="utf-8"> 
+                <form method="post" id="EditMemberForm" onsubmit="return editMemberForm()" charset="utf-8"> 
                     <div class=inputs>
                         <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  readonly>
                     </div>
