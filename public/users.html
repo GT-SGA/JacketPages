@@ -63,7 +63,7 @@
                     let tr = "";
                     tr += "<tr>";
                     
-                    tr += `<td>${data.data[i].first_name + " " + data.data[i].last_name}</td>`;
+                    tr += `<td><a href = "usersview.html?id=${data.data[i].id}";>${data.data[i].first_name + " " + data.data[i].last_name}</a></td>`;
                     tr += `<td>${data.data[i].email}</td>`;
                     tr += `<td>${data.data[i].gt_user_name}</td>`;
                     tr += `<td>${data.data[i].level}</td>`;

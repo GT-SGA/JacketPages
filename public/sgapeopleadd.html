@@ -43,13 +43,6 @@
             function closeSubMenu() {
                 $(this).find('ul').css('visibility', 'hidden');
             };
-            
-            $('input.typeahead').typeahead({
-                name: 'typeahead',
-                remote: 'http://localhost:8081/search?key=%QUERY',
-                limit: 10
-            });
-
         });
 
         function openHelp() {
@@ -194,7 +187,6 @@
 
             <div id="middle_full">
                 <div id="page_title">Add SGA Member</div>
-                <input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" />
                 
                 <form method="post" id="AddMemberForm" accept-charset="utf-8"> 
                     <div class=inputs>
