@@ -61,6 +61,7 @@
                 userdata = data.data;
                 for (let i = 0; i < userdata.length; i++) {
                     let tr = "";
+                    tr += "<tbody>";
                     tr += "<tr>";
                     
                     tr += `<td><a href = "usersview.html?id=${data.data[i].id}";>${data.data[i].first_name + " " + data.data[i].last_name}</a></td>`;
@@ -72,6 +73,8 @@
                     tr += `<td><a href ="usersedit.html?id=${data.data[i].id}";>Edit</a></td>`;
                     tr += `<td><a href =http://localhost:8081/delete_user?id=${data.data[i].id};>Delete</a></td>`;
                     
+                    tr += "</tr>";
+                    tr += "</tbody>";
                     ppltb.innerHTML += tr;
                 }
 

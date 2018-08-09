@@ -51,31 +51,69 @@
         function closeHelp() {
             $("#help").attr("style", "display:none;");
         }
+        
+        ////////////////////queries the url to find the passed in id this particular situation/////////////////////////
+        function url_query() {
+            let url = new URL(window.location.href);
+
+            let params = new URLSearchParams(url.search.slice(1));
+
+            if (params === null) {
+                return false; 
+            } else {
+                for (let p of params) {
+                return(p[1]); 
+                }   
+            }
+        };        
 
         $.ajax({
-            url: `http://localhost:8081/users`,
+            url: `http://localhost:8081/users?id=${url_query()}`,
             type: "GET",
             success: function(data) {
-                var ppltb = document.getElementById("usertable");
-                userdata = data.data;
-                for (let i = 0; i < userdata.length; i++) {
-                    let tr = "";
-                    tr += "<tr>";
-
-                    tr += `<td>${data.data[i].first_name + " " + data.data[i].last_name}</td>`;
-                    tr += `<td>${data.data[i].email}</td>`;
-                    tr += `<td>${data.data[i].gt_user_name}</td>`;
-                    tr += `<td>${data.data[i].level}</td>`;
-                    tr += `<td>${data.data[i].major}</td>`;
-                    tr += `<td>${data.data[i].year}</td>`;
-                    tr += `<td><a href ="usersedit.html?id=${data.data[i].id}";>Edit</a></td>`;
-                    tr += `<td><a href =http://localhost:8081/delete_user?id=${data.data[i].id};>Delete</a></td>`;
-
-                    ppltb.innerHTML += tr;
-                }
+                
+                $("#page_title").text(data.data[0].first_name + "" + data.data[0].last_name);
+                
+                //////sets information in table/////
+                var tb = document.getElementById("halftable");
+                
+                let tr = ""; 
+                tr += "<tbody>"; 
+                tr += "<tr>";
+                tr += "<td>GT Username</td>";
+                tr += `<td>${data.data[0].gt_user_name}</td>`;
+                tr += "</tr>";
+                tr += "<tr>";
+                tr += "<td>Email</td>";
+                tr += `<td>${data.data[0].email}</td>`
+                tr += "</tr>";
+                tr += "</tbody>";
+                tb.innerHTML += tr; 
+                
+                ///sets links on side///////
+                $("#edituserside").attr('href', `usersedit.html?id=${data.data[0].id}`);
+                $("#deleteuserside").attr('href', `http://localhost:8081/delete_user?id=${data.data[0].id}`);
 
             }
         });
+                
+        
+        function deleteUser() {
+            var x = confirm("Are you sure you want to delete?");
+            if (x) {
+                $.ajax({
+                    type: "DELETE",
+                    url: $("#deleteuserside").attr('href'),
+                    success: function(data) {
+                        console.log("Success!");
+                        window.location.href = "users.html"
+                    }
+                });
+                return true; 
+            }
+            return false; 
+        }
+        
     </script>
     <script>
         (function(i, s, o, g, r, a, m) {
@@ -211,24 +249,14 @@
             </div>
             <div class="links left-nav" id="sidebar">
                 <ul>
-                    <li><a href="">Edit User</a></li>
-                    <li><a href="" onclick="return confirm('Are you sure you want to delete this user');">Delete User</a></li>
+                    <li><a href="" id="edituserside">Edit User</a></li>
+                    <li><a href="" id="deleteuserside" onclick="return deleteUser()">Delete User</a></li>
                 </ul>
             </div>
             <div id="middle">
                 <div id="page_title"></div>
 
                 <table class="listing" id="halftable">
-                    <tbody>
-                        <tr>
-                            <td>GT Username</td>
-                            <td>athoni3</td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>a@a.net</td>
-                        </tr>
-                    </tbody>
                 </table>
                 <script>
                     $(function() {
