@@ -53,19 +53,6 @@ app.get('/sgapeople', function(req, res){    // SGAPEOPLE
 
 ////////////////////////////////////////////////////////////////////////////////  SGA PEOPLE 
 
-app.get('/search',function(req,res){
-    connection.query('SELECT first_name from TABLE_NAME where first_name like "%'+req.query.key+'%"',
-    function(err, rows, fields) {
-    if (err) throw err;
-    var data=[];
-    for(i=0;i<rows.length;i++)
-    {
-    data.push(rows[i].first_name);
-    }
-    res.end(JSON.stringify(data));
-    });
-}); 
-
 
 //Gets list of all users in the user table 
 app.get("/users", (req, res) => {
@@ -81,6 +68,12 @@ app.get("/user", (req, res) => {
         res.send({data:
                  rows
         });
+    });
+});
+
+app.get("/find_user", (req,res) => {
+    connection.query(`SELECT * FROM users WHERE first_name='${req.query.first_name}' && last_name='${req.query.last_name}'`, function(err, rows) {
+        res.send({data: rows});
     });
 });
 

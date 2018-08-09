@@ -53,7 +53,48 @@
             $("#help").attr("style", "display:none;");
         }
         
+        ////////////////////queries the url to find the passed in id this particular situation/////////////////////////
+        function url_query() {
+            let url = new URL(window.location.href);
+
+            let params = new URLSearchParams(url.search.slice(1));
+
+            if (params === null) {
+                return false; 
+            } else {
+                for (let p of params) {
+                return(p[1]); 
+                }   
+            }
+        };
         
+        ////////finds user in database based on id and populates the fields with their information//////////////////////
+        $.ajax({
+            url: `http://localhost:8081/user?id=${url_query()}`, 
+            type: "GET", 
+            success: function(data) {
+               $("#firstname").val(data.data[0].first_name);
+               $("#lastname").val(data.data[0].last_name); 
+                
+                ////sets action value to id of user/////
+                $("#AddMemberForm").attr('action', `http://localhost:8081/add_sga_member?id=${url_query()}`);
+            }
+        });
+        
+        function addMember() {
+            $.ajax({
+                type: "POST", 
+                url: $("#AddMemberForm").attr('action'),
+                data: {
+                    'house': $("#SgaPersonHouse").val(),
+                    'department': $("#SgaPersonDepartment").val()
+                },
+                success: function(data) {
+                    window.location.href = "sgapeople.html"
+                }
+            });
+            return false; 
+        }
             
     </script>
     <script>
@@ -188,7 +229,8 @@
             <div id="middle_full">
                 <div id="page_title">Add SGA Member</div>
                 
-                <form method="post" id="AddMemberForm" accept-charset="utf-8"> 
+                <form method="post" id="AddMemberForm" onsubmit = "return addMember()" accept-charset="utf-8"> 
+                    <div class-inputs>Fill in the corresponding information</div>
                     <div class=inputs>
                         <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" maxlength="60"  required="required">
                     </div>

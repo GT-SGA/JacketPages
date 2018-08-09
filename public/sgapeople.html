@@ -63,16 +63,19 @@
                     let tr = "";
                     tr += "<tr>";
 
-                    tr += `<td id="user_name_${i}"></td>`;
+                    tr += `<td id="user_name_${i}"><a id="username_${i}" href=""></a></td>`;
 
                     $.ajax({
                         url: `http://localhost:8081/user?id=${data.data[i].user_id}`,
                         type: "GET",
                         success: function(data) {
-
-                            document.getElementById(`user_name_${i}`).innerHTML = data.data[0].first_name + " " + data.data[0].last_name;
+                             document.getElementById(`username_${i}`).innerHTML =  data.data[0].first_name + " " + data.data[0].last_name;
+                            document.getElementById(`username_${i}`).href = `http://localhost:8081/usersedit.html?id=${data.data[0].id}`
+                            
                         }
                     });
+                    
+                    
                     tr += `<td>${data.data[i].house}</td>`;
                     tr += `<td>${data.data[i].department}</td>`;
                     tr += `<td>${data.data[i].status}</td>`
@@ -80,6 +83,7 @@
                     tr += `<td><a href ="sgapeopleedit.html?user_id=${data.data[i].user_id}";>Edit</a></td>`;
                     
                     ppltb.innerHTML += tr;
+                    
                 }
 
             }
@@ -220,7 +224,7 @@
             </div>
             <div class="links left-nav" id="sidebar">
                 <ul>
-                    <li><a href="./sgapeopleadd.html">Add SGA Member</a></li>
+                    <li><a href="./sgapeoplsearch.html">Add SGA Member</a></li>
                 </ul>
             </div>
             <div id="middle">
