@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const morgan = require("morgan");
 const path = require("path");
 const mysql = require("mysql");
 const app = express();
@@ -29,7 +28,9 @@ connection.connect(function(err) {
 // Use the database jacketpages_dev
 connection.query("USE jpdev");
 
-app.listen(process.env.PORT || 8081);   //server listening to localhost 8081
+var server = app.listen(process.env.PORT || 8081);   //server listening to localhost 8081
+
+const io = require('socket.io').listen(server);
 
 app.use(express.static("public"));  //automatically serves static files home.html and its css files
 
@@ -359,3 +360,38 @@ app.post("/bill_create", (req, res) => {
         });
     });
 });
+
+/**
+Voting for Bills
+**/
+
+// Creates a database entry in bill_votes for the current bill
+app.post("/create_votes", (req, res) => {
+  let currDate = (new Date()).toISOString().substring(0, 10);
+  connection.query("INSERT INTO bill_votes (date, yeas, nays, abstains, comments) VALUES (\"" + currDate + "\", 0, 0, 0, \"\");", function(err, rows) {
+    if (err) throw err; 
+    console.log("votes entry created");
+    io.emit("voted");
+  });
+});
+
+// Gets the most recently added entry in bill_votes.
+// Used for updating yeas, nays, abstains
+app.get("/bill_vote", (req, res) => { 
+  connection.query("Select * from bill_votes ORDER BY id DESC LIMIT 1", function(err, rows) {
+    if (err) throw err; 
+    res.send(rows[0]);
+  });  
+})
+
+// Updates the bill_votes entry based on a button press
+app.post("/votes/:opt", (req, res) => {
+  connection.query("UPDATE bill_votes SET "+req.params.opt+"="+req.params.opt+"+1 ORDER BY id DESC LIMIT 1;", function(err, rows, fields) {
+    if (err) throw err;
+    console.log("update successful");
+    res.sendStatus(200);
+    // Tells server to run getVotes
+    io.emit("voted");
+  });
+})
+
