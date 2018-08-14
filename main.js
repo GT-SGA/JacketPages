@@ -245,6 +245,10 @@ app.post("/bill_create", (req, res) => {
     });
 });
 
+/**
+Voting for Bills
+**/
+
 // Creates a database entry in bill_votes for the current bill
 app.post("/create_votes", (req, res) => {
   let currDate = (new Date()).toISOString().substring(0, 10);
