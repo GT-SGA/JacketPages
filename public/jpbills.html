@@ -52,27 +52,28 @@
             var limitrec = 10;
             var pagenum = 0;
 
-            var updatebilldata = () => {
+            var updatebilldata = (urltosearch) => {
                 $.ajax({
-                    url: `http://localhost:8081/bills_sub?submitter=${loggedIn}`, 
+                    url: urltosearch,
                     type: "GET",
                     success: function(data) {
                         var billtb = document.getElementById("billtable");
+                        billtb.innerHTML = "";
                         billdata = data.data;
+                        console.log(billdata);
                         for (let i = 0; i < data.data.length; i++) {
                             let tr = "";
                             tr += "<tr>";
-                            tr += `<td><a href="jpsubmitbill.html" onclick="window.location.href = 'jpsubmitbill.html?id=' + '${data.data[i].id}';">${data.data[i].title}</a></td>`;
+                            tr += `<td><a href="#" onclick="window.location.href = 'jpsubmitbill.html?id=' + '${data.data[i].id}';">${data.data[i].title}</a></td>`;
                             tr += `<td>${data.data[i].number}</td>`;
                             tr += `<td>${data.data[i].category}</td>`;
                             tr += `<td id="bill_status_${i}"></td>`;
+                            let numbills = data.data.length;
                             $.ajax({
                                 url: `http://localhost:8081/bill_status?id=${data.data[i].status}`, 
                                 type: "GET",
                                 success: function(data) {
-                                    for (let i = 0; i < billdata.length; i++) {
-                                        document.getElementById(`bill_status_${i}`).innerHTML = data.data[0].name;
-                                    }
+                                    document.getElementById(`bill_status_${i}`).innerHTML = data.data[0].name;
                                 }
                             });
                             tr += `<td>${data.data[i].submit_date.split('T')[0]}</td>`;
@@ -80,11 +81,32 @@
                             billtb.innerHTML += tr;
                         }
                         document.getElementById("numrec").innerHTML = `${Math.min(limitrec, billdata.length - limitrec * pagenum)}`;
-                        document.getElementById("numrectotal").innerHTML = `${billdata.length}`;
+                        document.getElementById("numrectotal").innerHTML = `${data.data.length}`;
                     }
                 });
             };
-            updatebilldata();
+            updatebilldata(`http://localhost:8081/bills_all`);
+
+            var keywordSearch = () => {
+                updatebilldata(`http://localhost:8081/bills_keyword?keyword=${document.getElementById('search').value}`);
+                return false;
+            };
+                 
+            var statusSearch = () => {
+                let billCat = document.getElementById('BillCategory').value;
+                if (billCat === "All") {
+                    updatebilldata(`http://localhost:8081/bills_filtered?from=${document.getElementById('BillFrom').value}&to=${document.getElementById('BillTo').value}`);
+                    return false;
+                } else {
+                    updatebilldata(`http://localhost:8081/bills_filteredwithcategory?from=${document.getElementById('BillFrom').value}&to=${document.getElementById('BillTo').value}&category=${billCat}`);
+                    return false;
+                }
+            };
+
+            var dateSearch = () => {
+                updatebilldata(`http://localhost:8081/bills_filtereddate?from=${document.getElementById('BillFromDate').value}&to=${document.getElementById('BillToDate').value}`);
+                return false;
+            };
                  
         </script>
         <script>
@@ -237,7 +259,6 @@
                         <ul>
                             <li class="breadcrumb-item first"><a href="http://jacketpages.gatech.edu/">Home</a></li>
                             <li><a href="http://jacketpages.gatech.edu/bills">All Bills</a></li>
-                            <li class="breadcrumb-item last"><a href="http://jacketpages.gatech.edu/bills/my_bills">My Bills</a></li>
                         </ul>
                     </div>
                 </div>
@@ -351,12 +372,11 @@
                     </ul>
                 </div>
                 <div id="middle">
-                    <div id="page_title">My Bills</div>
+                    <div id="page_title">All Bills</div>
                     <div id="alphabet">
                         <!--<div id="leftHalf">-->
-                        <form action="/bills/my_bills" id="BillMyBillsForm" method="post" accept-charset="utf-8">
-                            <div style="display:none;"><input name="_method" value="POST" type="hidden"></div>
-                            <div class="input text"><label for="search" style="display:inline">Search</label><input name="data[Bill][keyword]" id="search" width="80%" type="text"></div>
+                        <form id="BillMyBillsForm" action="/bills" method="post" onsubmit="return keywordSearch()" accept-charset="utf-8">
+                            <div class="input text"><label for="search" style="display:inline">Search</label><input name="data_Bill_keyword" id="search" width="80%" type="text"></div>
                             <!--</div>-->
                             <!--<div id="rightHalf">
                                 <ul>
@@ -372,7 +392,7 @@
                                 <ul>
                                     <div class="input select">
                                         <label for="BillFrom">From Status</label>
-                                        <select name="data[Bill][from]" id="BillFrom">
+                                        <select name="data_Bill_from" id="BillFrom">
                                             <option value="1" selected="selected">Created</option>
                                             <option value="2">Awaiting Author</option>
                                             <option value="3">Authored</option>
@@ -385,7 +405,7 @@
                                     </div>
                                     <div class="input select">
                                         <label for="BillTo">To Status</label>
-                                        <select name="data[Bill][to]" id="BillTo">
+                                        <select name="data_Bill_to" id="BillTo">
                                             <option value="1">Created</option>
                                             <option value="2">Awaiting Author</option>
                                             <option value="3">Authored</option>
@@ -401,7 +421,7 @@
                             <div style="float: right; width: 45%;">
                                 <div class="input select required">
                                     <label for="BillCategory">Category</label>
-                                    <select name="data[Bill][category]" id="BillCategory">
+                                    <select name="data_Bill_category" id="BillCategory">
                                         <option value="All" selected="selected">All</option>
                                         <option value="Joint">Joint</option>
                                         <option value="Undergraduate">Undergraduate</option>
@@ -409,9 +429,17 @@
                                     </select>
                                 </div>
                                 <br>
-                                <div class="submit" style="display:inline-block"><input value="Submit" type="submit"></div>
+                                <div class="submit" style="display:inline-block"><input value="Submit" type="submit" onclick="return statusSearch()"></div>
                                 <div class="submit" style="display:inline-block"><input name="submit" value="Clear" type="submit"></div>
+                                <div style="float: left;">
+                                    <label for="BillFromDate">From</label>
+                                    <input type="date" id="BillFromDate" />
+                                    <label for="BillToDate">To</label>
+                                    <input type="date" id="BillToDate" />
+                                    <input type="submit" value="Search By Date" onclick="return dateSearch()" />
+                                </div>
                             </div>
+                            <br />
                         </div>
                     </div>
                     <table class="listing">
