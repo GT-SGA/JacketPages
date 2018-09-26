@@ -41,15 +41,15 @@ console.log("Running on port 8081");
 ////////////////////////////////////////////////////////////////////////////////  ROUTES TO HTML & CSS DOCS
 
 app.get('/', function(req, res){    // HOME - routes to home.html on startup - only directs to html file - css needs previous line to be displayed
-  res.sendFile('public/home.html');
+  res.sendFile('home.html', { root: 'public' });
 });
 
 app.get('/jpbills', function(req, res){    // JPBILLS
-  res.sendFile('public/jpbills.html');
+  res.sendFile('jpbills.html', { root: 'public' });
 });
 
 app.get('/sgapeople', function(req, res){    // SGAPEOPLE
-  res.sendFile('public/sgapeople.html');
+  res.sendFile('sgapeople.html', { root: 'public' });
 });
 
 
