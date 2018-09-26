@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
-////////////////////////////////////////////////////////////////////////////////  SERVER & DB SETUP 
+////////////////////////////////////////////////////////////////////////////////  SERVER & DB SETUP
 
 // Connect to the MySQL database
 var connection = mysql.createConnection({
@@ -35,36 +35,36 @@ const io = require('socket.io').listen(server);
 
 app.use(express.static("public"));  //automatically serves static files home.html and its css files
 
-console.log("Running on port 8081"); 
+console.log("Running on port 8081");
 
 
-////////////////////////////////////////////////////////////////////////////////  ROUTES TO HTML & CSS DOCS 
+////////////////////////////////////////////////////////////////////////////////  ROUTES TO HTML & CSS DOCS
 
 app.get('/', function(req, res){    // HOME - routes to home.html on startup - only directs to html file - css needs previous line to be displayed
-  res.sendfile('public/home.html');
+  res.sendFile('public/home.html');
 });
 
 app.get('/jpbills', function(req, res){    // JPBILLS
-  res.sendfile('public/jpbills.html');
+  res.sendFile('public/jpbills.html');
 });
 
 app.get('/sgapeople', function(req, res){    // SGAPEOPLE
-  res.sendfile('public/sgapeople.html');
+  res.sendFile('public/sgapeople.html');
 });
 
 
-////////////////////////////////////////////////////////////////////////////////  SGA PEOPLE 
+////////////////////////////////////////////////////////////////////////////////  SGA PEOPLE
 
 
-//Gets list of all users in the user table 
+//Gets list of all users in the user table
 app.get("/users", (req, res) => {
     connection.query(`SELECT * FROM users ORDER BY id DESC LIMIT 50`, function(err, rows) {
         res.send({data: rows});
     });
 });
 
-//Gets user in user table based on id 
-//used in sgapeople.html to get first and last names 
+//Gets user in user table based on id
+//used in sgapeople.html to get first and last names
 app.get("/user", (req, res) => {
     connection.query(`SELECT * FROM users WHERE id=${req.query.id}`, function(err, rows) {
         res.send({data:
@@ -80,39 +80,39 @@ app.get("/find_user", (req,res) => {
 });
 
 //Gets most recently added user from user table
-//used to get id to add to datbase in sgapeopleadd 
+//used to get id to add to datbase in sgapeopleadd
 app.get("/last_member", (req, res) => {
     connection.query(`SELECT * FROM users ORDER BY id DESC LIMIT 1`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
                   rows});
     });
 });
 
-//Gets list of all the people in the sga_people table 
+//Gets list of all the people in the sga_people table
 app.get("/people", (req, res) => {
     connection.query(`SELECT * FROM sga_people`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
 });
 
-//Gets user in sga_table based on user_id 
+//Gets user in sga_table based on user_id
 app.get("/sga_member", (req, res) => {
     connection.query(`SELECT * FROM sga_people WHERE user_id=${req.query.user_id}`, function(err, rows) {
         res.send({data:
                  rows
         });
     });
-}); 
+});
 
 //deletes a user from user table using their id passed in through the url
 app.get("/delete_user", (req, res) => {
     //debugging
     res.write('You deleted the user with the id "' + req.query.id+'".\n');
-    
+
     connection.query(`DELETE FROM users WHERE id=${req.query.id}`, function(err, rows) {
-        if (err) console.log(err); 
+        if (err) console.log(err);
     });
 });
 
@@ -120,13 +120,13 @@ app.get("/delete_user", (req, res) => {
 app.get("/delete_member", (req, res) => {
     //debugging
     res.write('You deleted the sga member with the user_id "' + req.query.user_id+'".\n');
-    
+
     connection.query(`DELETE FROM sga_people WHERE id=${req.query.user_id}`, function(err, rows) {
-        if (err) console.log(err); 
+        if (err) console.log(err);
     });
 });
 
-//edits a user from user table using their id passed in through the url 
+//edits a user from user table using their id passed in through the url
 app.post("/edit_user", (req, res) => {
     //debugging
     res.write('You sent the name "' + req.body.firstname+'".\n');
@@ -135,13 +135,13 @@ app.post("/edit_user", (req, res) => {
     res.write('You sent the major"' + req.body.major+'".\n');
     res.write('You sent the year"' + req.body.year+'".\n');
     res.end()
-    
+
     connection.query(`UPDATE users SET email='${req.body.email}', first_name='${req.body.firstname}', last_name='${req.body.lastname}', level='${req.body.level}', major='${req.body.major}', year='${req.body.year}' WHERE id=${req.query.id}`, function(err, rows) {
-        if (err) console.log(err); 
+        if (err) console.log(err);
     });
 });
 
-//edits a sga member using their id in the user table and user id in the sga_people table 
+//edits a sga member using their id in the user table and user id in the sga_people table
 app.post("/edit_member", (req, res) => {
     //debugging
     console.log(req.data);
@@ -149,17 +149,17 @@ app.post("/edit_member", (req, res) => {
     res.write('You sent the house "' + req.body.house+'".\n');
     res.write('You sent the department "' + req.body.department+'".\n');
     res.end()
-    
+
     connection.query(`UPDATE sga_people SET house='${req.body.house}', department='${req.body.department}', status='${req.body.status}' WHERE user_id=${req.query.id}`, function(err, rows) {
-        if (err) console.log(err); 
+        if (err) console.log(err);
     });
-    
+
 });
- 
-//adds a new user into the users table 
-//make sure major and year columns are added to database 
+
+//adds a new user into the users table
+//make sure major and year columns are added to database
 app.post("/add_user", (req, res) => {
-    
+
     //debugging
     res.write('You sent the name "' + req.body.firstname+'".\n');
     res.write('You sent the gtusername "' + req.body.gtusername+'".\n');
@@ -167,37 +167,37 @@ app.post("/add_user", (req, res) => {
     res.write('You sent the major "' + req.body.major+'".\n');
     res.write('You sent the year "' + req.body.year+'".\n');
     res.end()
-    
+
     //id is passed in through the url
-    //in usersadd, ajax gets id of most recently added user than adds 1 to it. Passes this number through the url 
+    //in usersadd, ajax gets id of most recently added user than adds 1 to it. Passes this number through the url
     connection.query(`INSERT INTO users (id, gt_user_name, email, first_name, last_name, major, year) VALUES ('${req.query.id}', '${req.body.gtusername}', '${req.body.email}', '${req.body.firstname}', '${req.body.lastname}', '${req.body.major}', '${req.body.year}')`, function(err, rows) {
-        if (err) console.log(err); 
+        if (err) console.log(err);
     });
 });
 
-//adds a new member into the sga_people table 
+//adds a new member into the sga_people table
 app.post("/add_sga_member", (req, res) => {
-    
+
     //debugging
     res.write('You sent the id "' + req.query.id+'".\n');
     res.write('You sent the house "' + req.body.house+'".\n');
     res.write('You sent the department "' + req.body.department+'".\n');
     res.end()
-    
-    //user id is passed in through the url 
+
+    //user id is passed in through the url
     connection.query(`INSERT INTO sga_people (user_id, house, department) VALUES ('${req.query.id}', '${req.body.house}', '${req.body.department}')`, function(err, rows) {
-        if (err) console.log(err); 
+        if (err) console.log(err);
     });
 });
 
 
-////////////////////////////////////////////////////////////////////////////////  BILLS 
+////////////////////////////////////////////////////////////////////////////////  BILLS
 
 // Return the data of the bills submitted by a certain submitter
 // Still prone to SQL injection attacks.
 app.get("/bills_sub", (req, res) => {
     connection.query(`SELECT * FROM bills WHERE submitter=${req.query['submitter']}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -207,7 +207,7 @@ app.get("/bills_sub", (req, res) => {
 // Still prone to SQL injection attacks.
 app.get("/bills_filteredwithcategory", (req, res) => {
     connection.query(`SELECT * FROM bills WHERE status BETWEEN ${req.query['from']} AND ${req.query['to']} AND category='${req.query["category"]}'`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -217,7 +217,7 @@ app.get("/bills_filteredwithcategory", (req, res) => {
 // Still prone to SQL injection attacks.
 app.get("/bills_filtereddate", (req, res) => {
     connection.query(`SELECT * FROM bills WHERE submit_date BETWEEN DATE("${req.query['from']}") AND DATE("${req.query['to']}")`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -227,7 +227,7 @@ app.get("/bills_filtereddate", (req, res) => {
 // Still prone to SQL injection attacks.
 app.get("/bills_filtered", (req, res) => {
     connection.query(`SELECT * FROM bills WHERE status BETWEEN ${req.query['from']} AND ${req.query['to']}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -237,7 +237,7 @@ app.get("/bills_filtered", (req, res) => {
 // Still prone to SQL injection attacks.
 app.get("/bills_keyword", (req, res) => {
     connection.query(`SELECT * FROM bills WHERE title REGEXP '.*${req.query["keyword"]}.*'`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -247,7 +247,7 @@ app.get("/bills_keyword", (req, res) => {
 // Still prone to SQL injection attacks.
 app.get("/bills_all", (req, res) => {
     connection.query(`SELECT * FROM bills`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -258,7 +258,7 @@ app.get("/bills_all", (req, res) => {
 app.get("/bill_id", (req, res) => {
     // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
     connection.query(`SELECT * FROM bills WHERE id=${req.query['id']}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -269,7 +269,7 @@ app.get("/bill_id", (req, res) => {
 app.get("/bill_votes", (req, res) => {
     // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
     connection.query(`SELECT * FROM bill_votes WHERE id=${req.query['id']}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -280,7 +280,7 @@ app.get("/bill_votes", (req, res) => {
 app.get("/org", (req, res) => {
     // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
     connection.query(`SELECT * FROM organizations WHERE id=${req.query['id']}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -299,7 +299,7 @@ app.delete("/bill_id", (req, res) => {
 // Still prone to SQL injection attacks.
 app.get("/bill_status", (req, res) => {
     connection.query(`SELECT name FROM bill_statuses WHERE id=${req.query["id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -309,7 +309,7 @@ app.get("/bill_status", (req, res) => {
 // Still prone to SQL injection attacks.
 app.get("/user", (req, res) => {
     connection.query(`SELECT * FROM users WHERE id=${req.query["id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -319,7 +319,7 @@ app.get("/user", (req, res) => {
 // Still prone to SQL injection attacks.
 app.get("/bill_authors", (req, res) => {
     connection.query(`SELECT * FROM bill_authors WHERE id=${req.query["id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -329,7 +329,7 @@ app.get("/bill_authors", (req, res) => {
 // Still prone to SQL injection attacks.
 app.put("/bill_passed", (req, res) => {
     connection.query(`UPDATE bills SET status=6 WHERE id=${req.query["id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -339,7 +339,7 @@ app.put("/bill_passed", (req, res) => {
 // Still prone to SQL injection attacks.
 app.put("/bill_sign_gp", (req, res) => {
     connection.query(`UPDATE bill_authors SET grad_pres_id=${req.query["gp_id"]} WHERE id=${req.query["id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -349,7 +349,7 @@ app.put("/bill_sign_gp", (req, res) => {
 // Still prone to SQL injection attacks.
 app.put("/bill_sign_gs", (req, res) => {
     connection.query(`UPDATE bill_authors SET grad_secr_id=${req.query["gs_id"]} WHERE id=${req.query["id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -359,7 +359,7 @@ app.put("/bill_sign_gs", (req, res) => {
 // Still prone to SQL injection attacks.
 app.put("/bill_sign_up", (req, res) => {
     connection.query(`UPDATE bill_authors SET undr_pres_id=${req.query["up_id"]} WHERE id=${req.query["id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -369,7 +369,7 @@ app.put("/bill_sign_up", (req, res) => {
 // Still prone to SQL injection attacks.
 app.put("/bill_sign_us", (req, res) => {
     connection.query(`UPDATE bill_authors SET undr_secr_id=${req.query["us_id"]} WHERE id=${req.query["id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -379,7 +379,7 @@ app.put("/bill_sign_us", (req, res) => {
 // Still prone to SQL injection attacks.
 app.put("/bill_sign_vf", (req, res) => {
     connection.query(`UPDATE bill_authors SET vp_fina_id=${req.query["vf_id"]} WHERE id=${req.query["id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
@@ -388,7 +388,7 @@ app.put("/bill_sign_vf", (req, res) => {
 // Create a new bill
 // Still prone to SQL injection attacks.
 app.post("/bill_create", (req, res) => {
-    connection.query(`INSERT INTO bill_authors (undr_auth_id, grad_auth_id) VALUES 
+    connection.query(`INSERT INTO bill_authors (undr_auth_id, grad_auth_id) VALUES
             ('${req.query["data_Authors_undr_auth_id"]}', '${req.query["data_Authors_grad_auth_id"]}')`, function(err, rows) {
         if (err) console.log(err);
         let cat = req.query['data_Bill_category'];
@@ -402,9 +402,9 @@ app.post("/bill_create", (req, res) => {
         connection.query(`SELECT substr(number,4) as num, NOW() as now FROM bills WHERE substr(number,3,1) = '${catChar}' ORDER BY num DESC LIMIT 1`, function(err, rows) {
             if (err) console.log(err);
             let number = `${Number(rows[0].now.toLocaleDateString().split('-')[0].substring(1)) + 1}${catChar}${rows[0].num ? pad((Number(rows[0].num) + 1).toString(), 3) : '001'}`;
-            connection.query(`INSERT INTO bills (create_date, last_mod_date, title, description, fundraising, type, category, org_id, dues, ugMembers, gMembers, auth_id, status, number) VALUES 
-                    (NOW(), NOW(), '${req.query["data_Bill_title"]}', '${req.query["data_Bill_description"]}', '${req.query["data_Bill_fundraising"]}', '${req.query["data_Bill_type"]}', 
-                    '${req.query["data_Bill_category"]}', ${req.query["data_Bill_org_id"]}, '${req.query["data_Bill_dues"]}', '${req.query["data_Bill_ugMembers"]}', 
+            connection.query(`INSERT INTO bills (create_date, last_mod_date, title, description, fundraising, type, category, org_id, dues, ugMembers, gMembers, auth_id, status, number) VALUES
+                    (NOW(), NOW(), '${req.query["data_Bill_title"]}', '${req.query["data_Bill_description"]}', '${req.query["data_Bill_fundraising"]}', '${req.query["data_Bill_type"]}',
+                    '${req.query["data_Bill_category"]}', ${req.query["data_Bill_org_id"]}, '${req.query["data_Bill_dues"]}', '${req.query["data_Bill_ugMembers"]}',
                     ${req.query["data_Bill_gMembers"]}, ${insertId}, 1, '${number}')`,
                     function(err, rows) {
                         if (err) console.log(err);
@@ -436,12 +436,12 @@ app.post("/bill_create", (req, res) => {
 // Update a bill
 // Still prone to SQL injection attacks.
 app.post("/bill_update", (req, res) => {
-    connection.query(`UPDATE bill_authors SET undr_auth_id='${req.query["data_Authors_undr_auth_id"]}', grad_auth_id='${req.query["data_Authors_grad_auth_id"]}' 
+    connection.query(`UPDATE bill_authors SET undr_auth_id='${req.query["data_Authors_undr_auth_id"]}', grad_auth_id='${req.query["data_Authors_grad_auth_id"]}'
             WHERE id=${req.query["data_Authors_id"]}`, function(err, rows) {
         if (err) console.log(err);
-        connection.query(`UPDATE bills SET last_mod_date=NOW(), title='${req.query["data_Bill_title"]}', description='${req.query["data_Bill_description"]}', 
-                fundraising='${req.query["data_Bill_fundraising"]}', type='${req.query["data_Bill_type"]}', category='${req.query["data_Bill_category"]}', 
-                org_id=${req.query["data_Bill_org_id"]}, dues='${req.query["data_Bill_dues"]}', ugMembers=${req.query["data_Bill_ugMembers"]}, 
+        connection.query(`UPDATE bills SET last_mod_date=NOW(), title='${req.query["data_Bill_title"]}', description='${req.query["data_Bill_description"]}',
+                fundraising='${req.query["data_Bill_fundraising"]}', type='${req.query["data_Bill_type"]}', category='${req.query["data_Bill_category"]}',
+                org_id=${req.query["data_Bill_org_id"]}, dues='${req.query["data_Bill_dues"]}', ugMembers=${req.query["data_Bill_ugMembers"]},
                 gMembers=${req.query["data_Bill_gMembers"]}, auth_id=${req.query["data_Authors_id"]} WHERE id=${req.query["data_Bill_id"]}`,
                 function(err, rows) {
             if (err) console.log(err);
@@ -458,7 +458,7 @@ Voting for Bills
 app.post("/create_votes", (req, res) => {
   let currDate = (new Date()).toISOString().substring(0, 10);
   connection.query("INSERT INTO bill_votes (date, yeas, nays, abstains, comments) VALUES (\"" + currDate + "\", 0, 0, 0, \"\");", function(err, rows) {
-    if (err) throw err; 
+    if (err) throw err;
     console.log("votes entry created");
     io.emit("voted");
   });
@@ -466,11 +466,11 @@ app.post("/create_votes", (req, res) => {
 
 // Gets the most recently added entry in bill_votes.
 // Used for updating yeas, nays, abstains
-app.get("/bill_vote", (req, res) => { 
+app.get("/bill_vote", (req, res) => {
   connection.query("Select * from bill_votes ORDER BY id DESC LIMIT 1", function(err, rows) {
-    if (err) throw err; 
+    if (err) throw err;
     res.send(rows[0]);
-  });  
+  });
 })
 
 // Updates the bill_votes entry based on a button press
@@ -488,7 +488,7 @@ app.post("/votes/:opt", (req, res) => {
 // Still prone to SQL injection attacks.
 app.get("/bill_line_items", (req, res) => {
     connection.query(`SELECT * FROM line_items WHERE bill_id=${req.query["bill_id"]}`, function(err, rows) {
-        res.send({data: 
+        res.send({data:
             rows
         });
     });
