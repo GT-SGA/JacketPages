@@ -4,17 +4,17 @@ class SGAPeople extends Component {
   render() {
     return (
       <div id="content">
-        <div class="clearfix">
-          <div class="ui-overlay" id="help" style="display:none;">
-            <div class="ui-widget-overlay"></div>
-            <div class="ui-corner-all" id="overlay" style="width: 100%; height: 600px; position: absolute;overflow-y:scroll; margin-top:10px;">
+        <div className="clearfix">
+          <div className="ui-overlay" id="help" style="display:none;">
+            <div className="ui-widget-overlay"></div>
+            <div className="ui-corner-all" id="overlay" style="width: 100%; height: 600px; position: absolute;overflow-y:scroll; margin-top:10px;">
               <button onclick="closeHelp()" style="float:right;" type="submit">X</button>
-              <div class="helppage" style="margin-left: 10px; margin-right:10px;">
+              <div className="helppage" style="margin-left: 10px; margin-right:10px;">
                 <h1>Submitting SGA Bills</h1>
                 <h2>Introduction</h2>
-                <p>The following will help you to prepare and to learn the process that is required to obtain funding from, or pass a resolution with, the Student Government Association (SGA) at Georgia Tech.<br> The Student Government’s legislative structure consists of a body of undergraduate students (Undergraduate House of Representatives or UHR) and of a body of graduate students (Graduate Student Senate or GSS). The passing of a “joint” bill requires consideration of a bill in each body and is subject to passing by an “enactment ratio.” Mostly all financial requests by student organizations will be classified as a joint bill. The enactment ratio is a mathematical calculation to determine whether a bill passes both bodies of SGA. It ensures that undergraduate and graduates are represented proportionally since undergraduates represent more of the student body and contribute more money to SGA from the Student Activity Fee.<br> The money that SGA allocates to organizations comes from the “Student Activity Fee” line that shows up on the tuition and fee assessment paid by each student every semester. This money is then budgeted to many different organizations with the Student Center and the Campus Recreation Center receiving approximately 70% of that budget. At the end of the year, the money that has not been spent is placed into several accounts that can then be allocated to different groups for special one-time items. Student Government has a set of policies and priorities that it follows with regards to funding requests.<br> Please keep in mind that SGA has a set amount of money that it can spend in one year. SGA attempts to wisely spend that set of money on the organizations with most demonstrated need and on those bills that will benefit the majority of campus. Not every request will end in success.</p>
+                <p>The following will help you to prepare and to learn the process that is required to obtain funding from, or pass a resolution with, the Student Government Association (SGA) at Georgia Tech.<br /> The Student Government’s legislative structure consists of a body of undergraduate students (Undergraduate House of Representatives or UHR) and of a body of graduate students (Graduate Student Senate or GSS). The passing of a “joint” bill requires consideration of a bill in each body and is subject to passing by an “enactment ratio.” Mostly all financial requests by student organizations will be classified as a joint bill. The enactment ratio is a mathematical calculation to determine whether a bill passes both bodies of SGA. It ensures that undergraduate and graduates are represented proportionally since undergraduates represent more of the student body and contribute more money to SGA from the Student Activity Fee.<br /> The money that SGA allocates to organizations comes from the “Student Activity Fee” line that shows up on the tuition and fee assessment paid by each student every semester. This money is then budgeted to many different organizations with the Student Center and the Campus Recreation Center receiving approximately 70% of that budget. At the end of the year, the money that has not been spent is placed into several accounts that can then be allocated to different groups for special one-time items. Student Government has a set of policies and priorities that it follows with regards to funding requests.<br /> Please keep in mind that SGA has a set amount of money that it can spend in one year. SGA attempts to wisely spend that set of money on the organizations with most demonstrated need and on those bills that will benefit the majority of campus. Not every request will end in success.</p>
                 <h2>The Process</h2>
-                <p>The process begins with a student organization that needs additional funding for an event and turns to SGA for financial assistance. SGA should serve as the organization’s last resort after all other funding options have been exhausted. Next, the organization will contact an undergraduate Representative and a graduate Senator of SGA and ask those members to author their bill. A complete list of senators and representatives can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>. A bill form (further explained in “How to Submit an SGA Bill”) requesting general information about the organization or student will be completed and a bill will be drafted to include the organization’s idea for an event and an itemized list of requested items.<br> If the bill is submitted and reviewed by the authors by 8am on Monday, the bill will appear in New Business on the agenda at the SGA meeting that following Tuesday. The Joint Finance Committee (JFC) will review the bill at its weekly meeting that Thursday; a representative from the organization will be invited to the meeting to speak on behalf of the organization. The Joint Finance Committee will suggest changes based on SGA funding policies (a copy of JFC Policy can be found in the back of this binder). The next Tuesday, the bill will move into Old Business where it will be discussed and voted on. After both legislative bodies discuss the bill and the enactment ratio is reached, the funds will be allocated to the organization. Please see the policy of the Student Organization Finance Office (in the back of this binder) for information on reimbursements and purchases.</p>
+                <p>The process begins with a student organization that needs additional funding for an event and turns to SGA for financial assistance. SGA should serve as the organization’s last resort after all other funding options have been exhausted. Next, the organization will contact an undergraduate Representative and a graduate Senator of SGA and ask those members to author their bill. A complete list of senators and representatives can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>. A bill form (further explained in “How to Submit an SGA Bill”) requesting general information about the organization or student will be completed and a bill will be drafted to include the organization’s idea for an event and an itemized list of requested items.<br /> If the bill is submitted and reviewed by the authors by 8am on Monday, the bill will appear in New Business on the agenda at the SGA meeting that following Tuesday. The Joint Finance Committee (JFC) will review the bill at its weekly meeting that Thursday; a representative from the organization will be invited to the meeting to speak on behalf of the organization. The Joint Finance Committee will suggest changes based on SGA funding policies (a copy of JFC Policy can be found in the back of this binder). The next Tuesday, the bill will move into Old Business where it will be discussed and voted on. After both legislative bodies discuss the bill and the enactment ratio is reached, the funds will be allocated to the organization. Please see the policy of the Student Organization Finance Office (in the back of this binder) for information on reimbursements and purchases.</p>
                 <p style="font-style:italic; font-weight:bold;">Be sure to begin working on bills for events and activities at least four (4) weeks before the event!
                 </p>
                 <h2>Step by Step Process Checklist:</h2>
@@ -31,7 +31,7 @@ class SGAPeople extends Component {
               </div>
             </div>
           </div>
-          <div class="links left-nav" id="sidebar">
+          <div className="links left-nav" id="sidebar">
             <ul>
               <li><a href="./sgapeoplesearch.html">Add SGA Member</a></li>
             </ul>
@@ -42,8 +42,8 @@ class SGAPeople extends Component {
             <div id="alphabet">
               <div id="leftHalf">
                 <form action="/sga_people" id="SgaPersonIndexForm" method="post" accept-charset="utf-8">
-                  <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
-                  <div class="input text"><label for="search" style="display:inline">Search</label><input name="data[SgaPerson][keyword]" id="search" width="80%" type="text"></div>
+                  <div style="display:none;"><input type="hidden" name="_method" value="POST" /></div>
+                  <div className="input text"><label for="search" style="display:inline">Search</label><input name="data[SgaPerson][keyword]" id="search" width="80%" type="text" /></div>
                 </form>
               </div>
               <div id="rightHalf">
@@ -106,17 +106,17 @@ class SGAPeople extends Component {
               </div>
             </div>
 
-            <div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
-              <a href="#" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" id="ui-accordion-accordion-header-0" aria-controls="ui-accordion-accordion-panel-0" aria-selected="false" aria-expanded="false" tabindex="0"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Filters</a>
-              <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" id="ui-accordion-accordion-panel-0" aria-labelledby="ui-accordion-accordion-header-0" role="tabpanel" aria-hidden="true" style="display: none;">
+            <div id="accordion" className="ui-accordion ui-widget ui-helper-reset" role="tablist">
+              <a href="#" className="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" id="ui-accordion-accordion-header-0" aria-controls="ui-accordion-accordion-panel-0" aria-selected="false" aria-expanded="false" tabindex="0"><span className="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Filters</a>
+              <div className="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" id="ui-accordion-accordion-panel-0" aria-labelledby="ui-accordion-accordion-header-0" role="tabpanel" aria-hidden="true" style="display: none;">
                 <div style="float: left; width: 45%;">
                   <ul>
-                    <div class="input select"><label for="SgaPersonHouse">House</label><select name="data[SgaPerson][house]" id="SgaPersonHouse">
+                    <div className="input select"><label for="SgaPersonHouse">House</label><select name="data[SgaPerson][house]" id="SgaPersonHouse">
   <option value="all" selected="selected">All</option>
   <option value="undergraduate">Undergraduate</option>
   <option value="graduate">Graduate</option>
   </select></div>
-                    <div class="input select"><label for="SgaPersonDepartment">Department</label><select name="data[SgaPerson][department]" id="SgaPersonDepartment">
+                    <div className="input select"><label for="SgaPersonDepartment">Department</label><select name="data[SgaPerson][department]" id="SgaPersonDepartment">
   <option value="all" selected="selected">All</option>
   <option value="AE">AE</option>
   <option value="Aerospace">Aerospace</option>
@@ -311,20 +311,20 @@ class SGAPeople extends Component {
                   </ul>
                 </div>
                           <div style="float: right; width: 45%;">
-                              <div class="input select"><label for="SgaPersonStatus">Status</label><select name="data[SgaPerson][status]" id="SgaPersonStatus">
+                              <div className="input select"><label for="SgaPersonStatus">Status</label><select name="data[SgaPerson][status]" id="SgaPersonStatus">
   <option value="all" selected="selected">All</option>
   <option value="active">Active</option>
   <option value="inactive">Inactive</option>
-  </select></div><br>
-                              <div class="submit" style="display:inline-block"><input type="submit" value="Submit"></div>
-                              <div class="submit" style="display:inline-block"><input name="submit" type="submit" value="Clear"></div>
+  </select></div><br />
+                              <div className="submit" style="display:inline-block"><input type="submit" value="Submit" /></div>
+                              <div className="submit" style="display:inline-block"><input name="submit" type="submit" value="Clear" /></div>
                           </div>
                           <div style="clear:both"></div>
                       </div>
                   </div>
 
                   <div id="forupdate">
-                      <table class="listing" id="table">
+                      <table className="listing" id="table">
                           <th>Name</th>
                           <th>House</th>
                           <th>Department</th>
@@ -332,11 +332,11 @@ class SGAPeople extends Component {
                           <th></th>
                       </table>
   {/* <!--
-                      <div class="paging">
-                          <span class="disabled">&lt;&lt; previous</span> |
-                          <span class="current">1</span> | <span><a href="/sga_people/index/page:2/sort:SgaPerson.status/direction:ASC" id="link-1014622121">2</a></span> | <span><a href="/sga_people/index/page:3/sort:SgaPerson.status/direction:ASC" id="link-1357168111">3</a></span> | <span><a href="/sga_people/index/page:4/sort:SgaPerson.status/direction:ASC" id="link-888091751">4</a></span> | <span><a href="/sga_people/index/page:5/sort:SgaPerson.status/direction:ASC" id="link-379935715">5</a></span> | <span><a href="/sga_people/index/page:6/sort:SgaPerson.status/direction:ASC" id="link-1025615170">6</a></span> | <span><a href="/sga_people/index/page:7/sort:SgaPerson.status/direction:ASC" id="link-914385852">7</a></span> | <span><a href="/sga_people/index/page:8/sort:SgaPerson.status/direction:ASC" id="link-698445193">8</a></span> | <span><a href="/sga_people/index/page:9/sort:SgaPerson.status/direction:ASC" id="link-77138752">9</a></span> |
-                          <span class="next"><a href="/sga_people/index/page:2/sort:SgaPerson.status/direction:ASC" id="link-1794877457" rel="next">next &gt;&gt;</a></span> <br>
-                          <br> Page 1 of 37, showing 20 records out of 733 total, starting on record 1, ending on 20
+                      <div className="paging">
+                          <span className="disabled">&lt;&lt; previous</span> |
+                          <span className="current">1</span> | <span><a href="/sga_people/index/page:2/sort:SgaPerson.status/direction:ASC" id="link-1014622121">2</a></span> | <span><a href="/sga_people/index/page:3/sort:SgaPerson.status/direction:ASC" id="link-1357168111">3</a></span> | <span><a href="/sga_people/index/page:4/sort:SgaPerson.status/direction:ASC" id="link-888091751">4</a></span> | <span><a href="/sga_people/index/page:5/sort:SgaPerson.status/direction:ASC" id="link-379935715">5</a></span> | <span><a href="/sga_people/index/page:6/sort:SgaPerson.status/direction:ASC" id="link-1025615170">6</a></span> | <span><a href="/sga_people/index/page:7/sort:SgaPerson.status/direction:ASC" id="link-914385852">7</a></span> | <span><a href="/sga_people/index/page:8/sort:SgaPerson.status/direction:ASC" id="link-698445193">8</a></span> | <span><a href="/sga_people/index/page:9/sort:SgaPerson.status/direction:ASC" id="link-77138752">9</a></span> |
+                          <span className="next"><a href="/sga_people/index/page:2/sort:SgaPerson.status/direction:ASC" id="link-1794877457" rel="next">next &gt;&gt;</a></span> <br />
+                          <br /> Page 1 of 37, showing 20 records out of 733 total, starting on record 1, ending on 20
                           <script type="text/javascript">
                               //<![CDATA[
                               $(document).ready(function() {
