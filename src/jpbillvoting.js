@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class BillVoting extends React.Component {
+class JPBillVoting extends React.Component {
   constructor(props) {
     super(props);
     this.state = { present: false };
@@ -16,3 +16,5 @@ export class BillVoting extends React.Component {
     }
   }
 }
+
+export default JPBillVoting;
