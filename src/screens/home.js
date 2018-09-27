@@ -4,7 +4,7 @@ class Home extends Component {
   render() {
     return (
       <div id="content">
-        <div class="clearfix">
+        <div className="clearfix">
           <div id="middle_full">
             <div id="page_title">Welcome to JacketPages</div>
             <p>JacketPages serves as the Student Government Association bills system for financial allocations to student organizations and resolutions to represent the student opinion. If you are looking for organization information, please visit the Georgia Tech Orgsync! JacketPages will continue to be updated more over the next few weeks!</p>
