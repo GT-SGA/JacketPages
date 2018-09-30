@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import logo from './logo.svg';
 import Masthead from './common/masthead';
-import Toolbar from './common/toolbar';
 import Footer from './common/footer';
 import Home from './screens/home';
+import JPBills from './screens/bills/jpbills';
 import './App.css';
 
-class AppContainer extends Component {
+class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div id="masthead">
-          <Masthead />
+      <Router>
+        <div className="App">
+          <div id="masthead">
+            <Masthead />
+          </div>
+          <div id="content">
+            <div id="clearfix">
+              <Route exact path="/" component={Home} />
+              <Route path="/bills" component={JPBills} />
+            </div>
+          </div>
+          <Footer />
         </div>
-        <Route path="/" component={Home} />
-        <Footer />
-      </div>
+      </Router>
     );
   }
 }
-
-const App = () => (
-  <BrowserRouter>
-    <AppContainer />
-  </BrowserRouter>
-);
 
 export default App;

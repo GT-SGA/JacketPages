@@ -65,7 +65,7 @@ class Masthead extends Component {
                     </li>
                     <li class="expanded"></li>
                     <li class="expanded">
-                      <a href="jpbills.html"><span>Bills</span></a>
+                      <a href="/bills"><span>Bills</span></a>
                       <ul class="menu">
                         <li class="leaf first">
                             <a href="http://jacketpages.gatech.edu/bills/add">Submit Bill</a>
@@ -74,7 +74,7 @@ class Masthead extends Component {
                             <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
                         </li>
                         <li class="leaf last">
-                            <a href="http://jacketpages.gatech.edu/bills">View All Bills</a>
+                            <a href="/bills">View All Bills</a>
                         </li>
                         </ul>
                       </li>

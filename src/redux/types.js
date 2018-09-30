@@ -1,0 +1,6 @@
+const types = {
+  FETCH_BILLS_FAILURE: 'FETCH_BILLS_FAILURE',
+  FETCH_BILLS_SUCCESS: 'FETCH_BILLS_SUCCESS',
+};
+
+export default types;
