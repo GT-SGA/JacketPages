@@ -33,13 +33,13 @@ connection.connect(function(err) {
 // Use the database jacketpages_dev
 connection.query("USE jpdev");
 
-var server = app.listen(process.env.PORT || 8081);   //server listening to localhost 8081
+var server = app.listen(process.env.PORT || 5000);   //server listening to localhost 8081
 
 const io = require('socket.io').listen(server);
 
 app.use(express.static("public"));  //automatically serves static files home.html and its css files
 
-console.log("Running on port 8081");
+console.log("Running on port 5000");
 
 //Load Routes
 const users = require("./routes/users");
@@ -48,8 +48,6 @@ const index = require("./routes/index");
 
 
 //Use Routes
-app.use('/users', users);
-app.use('/bill', bills);
-app.use('/', index)
-
-
+app.use('/users/api', users);
+app.use('/bills/api', bills);
+app.use('/api', index)
