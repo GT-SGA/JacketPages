@@ -60,9 +60,11 @@ console.log('Running on port 8081');
 const users = require('./routes/users');
 const bills = require('./routes/bills');
 const index = require('./routes/index');
+const auth = require('./routes/auth');
 
 
 // Use Routes
 app.use('/users', users);
 app.use('/bill', bills);
 app.use('/', index);
+app.use('/auth', auth);
