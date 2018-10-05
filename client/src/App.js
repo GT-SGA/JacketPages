@@ -6,6 +6,7 @@ import Masthead from './common/masthead';
 import Toolbar from './common/toolbar';
 import Footer from './common/footer';
 import Home from './screens/home';
+import SGAPeople from './screens/sgapeople'
 import './App.css';
 
 class AppContainer extends Component {
@@ -15,7 +16,8 @@ class AppContainer extends Component {
         <div id="masthead">
           <Masthead />
         </div>
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/sgapeople" component={SGAPeople} />
         <Footer />
       </div>
     );

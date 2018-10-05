@@ -55,11 +55,11 @@ class Masthead extends Component {
                     </li>
                     <li class="expanded"></li>
                     <li class="expanded">
-                      <a href="sgapeople.html"><span>Student Government</span></a>
+                      <a href="/sgapeople"><span>Student Government</span></a>
                       <ul class="menu">
                         <li class="leaf first">
                           {/* TODO: Change this to a relative link to /sgapeople */}
-                            <a href="http://jacketpages.gatech.edu/sga_people">View SGA Members</a>
+                            <a href="/sgapeople">View SGA Members</a>
                         </li>
                       </ul>
                     </li>
