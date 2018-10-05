@@ -11,8 +11,8 @@ class Masthead extends Component {
 
   render() {
     return (
-      <div id="masthead">
-        <div id="identity" class="clearfix">
+      <div id="masthead" styles={{ flex: 1 }}>
+        <div id="identity" className="clearfix">
           <div id="identity-wrapper">
             <h1 id="gt-logo">
               <a href="http://gatech.edu/" rel="" title="Georgia Tech">
@@ -27,59 +27,62 @@ class Masthead extends Component {
           </div>
         </div>
         <div id="primary-menus">
-          <div id="primary-menus-wrapper" class="clearfix">
-            <a id="primary-menus-toggle" class="hide-for-desktop"><span>Menu</span></a>
-            <div id="primary-menus-off-canvas" class="off-canvas">
-              <a id="primary-menus-close" class="hide-for-desktop"><span>Close</span></a>
+          <div id="primary-menus-wrapper" className="clearfix">
+            <a id="primary-menus-toggle" className="hide-for-desktop"><span>Menu</span></a>
+            <div id="primary-menus-off-canvas" className="off-canvas">
+              <a id="primary-menus-close" className="hide-for-desktop"><span>Close</span></a>
               <div id="utility">
-                <div class="row clearfix">
+                <div className="row clearfix">
                   <div id="utility-links">
-                    <ul class="menu">
-                      <li class="mothership ulink"><a href="http://www.gatech.edu/">Georgia Tech Home</a></li>
-                      <li class="campus-map ulink"><a href="http://www.map.gatech.edu/">Map</a></li>
-                      <li class="directories ulink"><a href="http://www.gatech.edu/directory">Directory</a></li>
-                      <li class="offices ulink"><a href="http://www.gatech.edu/departments">Offices</a></li>
+                    <ul className="menu">
+                      <li className="mothership ulink"><a href="http://www.gatech.edu/">Georgia Tech Home</a></li>
+                      <li className="campus-map ulink"><a href="http://www.map.gatech.edu/">Map</a></li>
+                      <li className="directories ulink"><a href="http://www.gatech.edu/directory">Directory</a></li>
+                      <li className="offices ulink"><a href="http://www.gatech.edu/departments">Offices</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div id="nav">
                 <div id="main-menu-wrapper">
-                  <ul class="menu">
-                    <li class="expanded first"></li>
-                    <li class="expanded"></li>
+                  <ul className="menu">
+                    <li className="expanded first"></li>
+                    <li className="expanded"></li>
                     <AccountTab user={this.state.user}/>
-                    <li class="expanded"></li>
-                    <li class="expanded">
+                    <li className="expanded"></li>
+                    <li className="expanded">
                       <a href="organizations.html"><span>Organizations</span></a>
                     </li>
-                    <li class="expanded"></li>
-                    <li class="expanded">
+                    <li className="expanded"></li>
+                    <li className="expanded">
                       <a href="/sgapeople"><span>Student Government</span></a>
-                      <ul class="menu">
-                        <li class="leaf first">
+                      <ul className="menu">
+                        <li className="leaf first">
                           {/* TODO: Change this to a relative link to /sgapeople */}
                             <a href="/sgapeople">View SGA Members</a>
                         </li>
+                        <li className="leaf">
+                          <a href="/bill_voting">Vote on Bills</a>
+                        </li>
                       </ul>
                     </li>
-                    <li class="expanded"></li>
-                    <li class="expanded">
+                    <li className="expanded"></li>
+                    <li className="expanded">
                       <a href="jpbills.html"><span>Bills</span></a>
-                      <ul class="menu">
-                        <li class="leaf first">
+                      <ul className="menu">
+                        <li className="leaf first">
                             <a href="http://jacketpages.gatech.edu/bills/add">Submit Bill</a>
                         </li>
-                        <li class="leaf">
+                        <li className="leaf">
                             <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
                         </li>
-                        <li class="leaf last">
+                        <li className="leaf last">
                             <a href="http://jacketpages.gatech.edu/bills">View All Bills</a>
                         </li>
                         </ul>
                       </li>
-                    <li class="expanded"></li>
-                    <li class="expanded">
+                    <li className="expanded"></li>
+                    <li className="expanded">
                       <a href="http://localhost:3000/help"><span>Help</span></a>
                     </li>
                   </ul>
@@ -96,16 +99,16 @@ class Masthead extends Component {
 const AccountTab = (props) => {
   if (props.user) {
     return (
-      <li class="expanded">
+      <li className="expanded">
           <a href="http://jacketpages.gatech.edu/users/view/22053"><span>My Account</span></a>
-          <ul class="menu">
-              <li class="leaf first">
+          <ul className="menu">
+              <li className="leaf first">
                   <a href="http://jacketpages.gatech.edu/users/view/22053">Account Profile</a>
               </li>
-              <li class="leaf">
+              <li className="leaf">
                   <a href="http://jacketpages.gatech.edu/users/logout">Logout</a>
               </li>
-              <li class="leaf last">
+              <li className="leaf last">
                   <a href="http://jacketpages.gatech.edu/">JacketPages Home</a>
               </li>
           </ul>
@@ -113,7 +116,7 @@ const AccountTab = (props) => {
     );
   } else {
     return (
-      <li class="expanded">
+      <li className="expanded">
         <a href="#"><span>Login</span></a>
       </li>
     );
