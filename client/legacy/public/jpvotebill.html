@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JacketPages | Vote Bills</title>
+
+        <script async="" src="jpindbill_files/analytics.js"></script><script type="text/javascript" src="jpindbill_files/jquery-1.js"></script><script type="text/javascript" src="jpindbill_files/jquery-ui.js"></script>
+    </script>
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/jquery-ui-1.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/reset.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/default.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/fonts.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/typography.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/layout.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/blocks.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/content.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/editor.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/static.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/icing.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/print.css" media="print">
+        <link rel="apple-touch-icon" href="http://jacketpages.gatech.edu/img/apple-touch-icon.png">
+		</head>
+<body>
+	<div id="masthead">
+            <div id="identity" class="clearfix">
+                <div id="identity-wrapper">
+                    <h1 id="gt-logo">
+                        <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech">
+                        <img src="jpbills_files/logo-gt.png" alt="Georgia Tech">		        </a>    
+                    </h1>
+                    <h1 id="jp-logo">
+                        <a href="http://jacketpages.gatech.edu/" rel="home" title="JacketPages">
+                        <img src="jpbills_files/jacketpages.png" alt="Jacket Pages">		      	</a> 
+                    </h1>
+                </div>
+            </div>
+            <!-- /#identity -->
+            <div id="primary-menus">
+                <div id="primary-menus-wrapper" class="clearfix">
+                    <a id="primary-menus-toggle" class="hide-for-desktop"><span>Menu</span></a>
+                    <div id="primary-menus-off-canvas" class="off-canvas">
+                        <a id="primary-menus-close" class="hide-for-desktop"><span>Close</span></a>
+                        <div id="nav">
+                            <div id="main-menu-wrapper">
+                                <ul class="menu">
+                                    <li class="expanded first">
+                                        <a href="http://jacketpages.gatech.edu/users/view/22053"><span>My Account</span></a>	
+                                        <ul class="menu">
+                                            <li class="leaf first">
+                                                <a href="http://jacketpages.gatech.edu/users/view/22053">Account Profile</a>		
+                                            </li>
+                                            <li class="leaf">
+                                                <a href="http://jacketpages.gatech.edu/users/logout">Logout</a>		
+                                            </li>
+                                            <li class="leaf last">
+                                                <a href="home.html">JacketPages Home</a>		
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="expanded">
+                                        <a href="jpbills.html"><span>Bills</span></a>	
+                                        <ul class="menu">
+                                            <li class="leaf first">
+                                                <a href="jpsubmitbill.html">Submit Bill</a>		
+                                            </li>
+                                            <li class="leaf">
+                                                <a href="jpbills.html">View My Bills</a>		
+                                            </li>
+                                            <li class="leaf">
+                                                <a href="jpbills.html">View My Bills</a>        
+                                            </li>
+                                            <li class="leaf last">
+                                                <a href="jpbills.html">View All Bills</a>		
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="expanded">
+                                        <a href="http://jacketpages.gatech.edu/organizations"><span>Organizations</span></a><!--<ul class="menu">
+                                            <li class="leaf first ">
+                                            </li>
+                                            
+                                            <li class="leaf">
+                                            		</li>
+                                            <li class="leaf">
+                                            	</li>
+                                            <li class="leaf last ">
+                                            </li>
+                                            
+                                            </ul>-->
+                                    </li>
+                                    <li class="expanded">
+                                        <a href="sga_people.html"><span>Student Government</span></a>
+                                    </li>
+                                    <li class="expanded"></li>
+                                    <li class="leaf last"><a href="#" onclick="openHelp()">Help</a></li>
+                                </ul>
+                            </div>
+                            <div id="action-items-wrapper">
+                                <div id="action-items">
+                                    <ul>
+                                        <li class="first active">
+                                            <a href="http://jacketpages.gatech.edu/bills/add" class="active">Submit Bill</a>	
+                                        </li>
+                                        <li class="active">
+                                            <a href="http://jacketpages.gatech.edu/users/logout" class="active">Logout</a>	
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="utility">
+                            <div class="row clearfix">
+                                <div id="utility-links">
+                                    <!-- utility-links -->
+                                    <ul class="menu">
+                                        <li class="mothership ulink"><a href="http://www.gatech.edu/">Georgia Tech Home</a></li>
+                                        <li class="campus-map ulink"><a href="http://www.map.gatech.edu/">Map</a></li>
+                                        <li class="directories ulink"><a href="http://www.gatech.edu/directory">Directory</a></li>
+                                        <li class="offices ulink"><a href="http://www.gatech.edu/departments">Offices</a></li>
+                                    </ul>
+                                </div>
+                                <!--
+                                    <div id="social-media-links-wrapper">
+                                      <ul id="social-media-links">
+                                        <li class="first"><a href="https://www.facebook.com/georgiatech" title="Facebook" class="facebook">Facebook</a></li>
+                                        <li><a href="http://www.flickr.com/photos/georgiatech" title="Flickr" class="flickr">Flickr</a></li>
+                                        <li><a href="https://plus.google.com/+georgiatech/posts" title="Google Plus" class="googleplus">Google Plus</a></li>
+                                        <li><a href="http://www.linkedin.com/company/3558" title="LinkedIn" class="linkedin">LinkedIn</a></li>
+                                        <li><a href="http://pinterest.com/georgiatech/" title="Pinterest" class="pinterest">Pinterest</a></li>
+                                        <li><a href="http://gatech.edu/rss" title="RSS" class="rss">RSS</a></li>
+                                        <li><a href="https://twitter.com/georgiatech" title="Twitter" class="twitter">Twitter</a></li>
+                                        <li class="last"><a href="http://www.youtube.com/georgiatech" title="YouTube" class="youtube">YouTube</a></li>
+                                      </ul>
+                                    </div>
+                                    
+                                    /#social-media -->
+                            </div>
+                        </div>
+                        <!-- /#utility -->
+                    </div>
+                    <!--<div id="site-search">
+                        </div>-->
+                </div>
+                <!-- /#primary-menus-wrapper -->
+                <div id="breadcrumb" class="hide-for-mobile">
+                    <div class="row clearfix">
+                        <ul style="float: right">
+                            <li class="last">
+                                <a>Welcome, Akhil Kikkeri</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="breadcrumb-item first"><a href="http://jacketpages.gatech.edu/">Home</a></li>
+                            <li><a href="http://jacketpages.gatech.edu/bills">All Bills</a></li>
+                            <li class="breadcrumb-item last"><a href="http://jacketpages.gatech.edu/bills/my_bills">My Bills</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /#breadcrumb -->		    
+            </div>
+            <!-- /#primary-menus -->
+        </div>
+        <!-- /#masthead -->
+        <div id="content">
+            <div class="clearfix">
+                <div>
+                    <div id="page_title">Voting for Bills</div>
+                    <h1>Select current bill</h1>
+                    <div id="content">
+                    	<select>
+						  <option value="Bill1">Bill 1</option>
+						  <option value="Bill2">Bill 2</option>
+						  <option value="Bill3">Bill 3</option>
+						</select>
+                    </div>
+                </div>
+                <div>
+                    <button id="start-btn">Start Voting</button>
+                    <button id="yes-btn">Yes</button>
+                    <button id="no-btn">No</button>
+                    <button id="abstain-btn">Abstain</button>
+                </div>
+                <div>
+                    <h1>Yeas: <span id="yeas">0</span></h1>
+                    <h1>Nays: <span id="nays">0</span></h1>
+                    <h1>Abstains: <span id="abstains">0</span></h1>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div id="footer">
+            <div class="row clearfix">
+                <div id="footer-utility-links">
+                    <ul class="menu gt-footer-utility-links">
+                        <li><a href="http://jacketpages.gatech.edu/">Campus Calendar</a></li>
+                        <li><a href="http://jacketpages.gatech.edu/pages/contact">Contact JacketPages</a></li>
+                        <li><a href="http://jacketpages.gatech.edu/pages/privacy_policy">Privacy Policy</a></li>
+                    </ul>
+                    <ul class="menu custom-links-included">
+                        <li><a href="http://www.gatech.edu/">Georgia Tech Main</a></li>
+                        <li><a href="http://www.studentaffairs.gatech.edu/">Student Affairs</a></li>
+                        <li><a href="http://www.sga.gatech.edu/">Student Government</a></li>
+                        <li><a href="http://www.involvement.gatech.edu/">Student Involvement</a></li>
+                    </ul>
+                </div>
+                <div id="footer-logo">
+                    <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech" style="margin-right:4px">
+                    <img src="jpbills_files/sgalogogrey.png" alt="Georgia Tech">		        </a>     
+                    <p>© 2018 Georgia Tech Student Government Association</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+</body>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script type="text/javascript" src="./jpvotebill_files/voting.js"></script>
+</html>

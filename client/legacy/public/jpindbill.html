@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JacketPages | Bills</title>
+        <script async="" src="jpindbill_files/analytics.js"></script><script type="text/javascript" src="jpindbill_files/jquery-1.js"></script><script type="text/javascript" src="jpindbill_files/jquery-ui.js"></script>
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/jquery-ui-1.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/reset.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/default.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/fonts.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/typography.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/layout.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/blocks.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/content.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/editor.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/static.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/icing.css">
+        <link rel="stylesheet" type="text/css" href="jpindbill_files/print.css" media="print">
+        <link rel="apple-touch-icon" href="http://jacketpages.gatech.edu/img/apple-touch-icon.png">
+        <script type="text/javascript">
+            // @TODO Generate this script using the HTML and Js helpers
+            $(document).ready(function() {
+            	/**
+            	 * Bind the top unorder lists to the open and close functions
+            	 */
+            	$('.utilityMenu li').bind('mouseover', openSubMenu);
+            	$('.utilityMenu ul').bind('mouseout', closeSubMenu);
+            	/**
+            	 * Find the nested unordered lists and make them visible or hidden depending
+            	 * on the event.
+            	 */
+            	function openSubMenu() {
+            		$(this).find('ul').css('visibility', 'visible');
+            	};
+            
+            	function closeSubMenu() {
+            		$(this).find('ul').css('visibility', 'hidden');
+            	};
+            
+            });
+
+            function url_query( query ) {
+                query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                var expr = "[\\?&]"+query+"=([^&#]*)";
+                var regex = new RegExp( expr );
+                var results = regex.exec( window.location.href );
+                if ( results !== null ) {
+                    return results[1];
+                } else {
+                    return false;
+                }
+            }
+            
+            function openHelp() {
+            	$("#help").attr("style", "");
+            }
+            
+            function closeHelp() {
+            	$("#help").attr("style", "display:none;");
+            }
+            
+            $.ajax({
+                url: `http://localhost:8081/bill_id?id=${url_query("id")}`, 
+                type: "GET",
+                success: function(data) {
+                    document.getElementById("page_title").innerHTML = `Bill ${data.data[0].number}`;
+                    document.getElementById("bill_title").innerHTML = `${data.data[0].title}`;
+                    document.getElementById("bill_description").innerHTML = `${data.data[0].description}`;
+                    document.getElementById("bill_submit_date").innerHTML = `${data.data[0].submit_date.split('T')[0]}`;
+                    document.getElementById("bill_dues").innerHTML = `${data.data[0].dues}`;
+                    document.getElementById("bill_fundraising").innerHTML = `${data.data[0].fundraising}`;
+                    document.getElementById("bill_type").innerHTML = `${data.data[0].type}`;
+                    document.getElementById("bill_category").innerHTML = `${data.data[0].category}`;
+                    $.ajax({
+                        url: `http://localhost:8081/bill_status?id=${data.data[0].status}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_status").innerHTML = `${data.data[0].name}`;
+                        }
+                    });
+                    document.getElementById("bill_ugMembers").innerHTML = `${data.data[0].ugMembers}`;
+                    document.getElementById("bill_gMembers").innerHTML = `${data.data[0].gMembers}`;
+                    $.ajax({
+                        url: `http://localhost:8081/user?id=${data.data[0].submitter}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_submitter").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                            document.getElementById("bill_submitter").href = `mailto:${data.data[0].email}`;
+                        }
+                    });
+                    $.ajax({
+                        url: `http://localhost:8081/org?id=${data.data[0].org_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_org").innerHTML = `<a href="jacketpages.gatech.edu/organizations/view/${data.data[0].id}">${data.data[0].name}</a>`;
+                        }
+                    });
+                    $.ajax({
+                        url: `http://localhost:8081/bill_votes?id=${data.data[0].gss_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            document.getElementById("bill_gss_date").innerHTML = `${data.data[0].date.split('T')[0]}`;
+                            document.getElementById("bill_gss_y").innerHTML = `${data.data[0].yeas}`;
+                            document.getElementById("bill_gss_n").innerHTML = `${data.data[0].nays}`;
+                            document.getElementById("bill_gss_a").innerHTML = `${data.data[0].abstains}`;
+                        }
+                    });
+                    $.ajax({
+                        url: `http://localhost:8081/bill_votes?id=${data.data[0].uhr_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            console.log(data.data[0]);
+                            document.getElementById("bill_uhr_date").innerHTML = `${data.data[0].date.split('T')[0]}`;
+                            document.getElementById("bill_uhr_y").innerHTML = `${data.data[0].yeas}`;
+                            document.getElementById("bill_uhr_n").innerHTML = `${data.data[0].nays}`;
+                            document.getElementById("bill_uhr_a").innerHTML = `${data.data[0].abstains}`;
+                        }
+                    });
+                    $.ajax({
+                        url: `http://localhost:8081/bill_authors?id=${data.data[0].auth_id}`, 
+                        type: "GET",
+                        success: function(data) {
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_auth_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_ug_author").innerHTML = `<a href="mailto:${data.data[0].email}">
+                                                ${data.data[0].first_name} ${data.data[0].last_name}</a>`;
+                                    } else {
+                                        document.getElementById("bill_ug_author").innerHTML = ``;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_auth_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_g_author").innerHTML = `<a href="mailto:${data.data[0].email}">
+                                                ${data.data[0].first_name} ${data.data[0].last_name}</a>`;
+                                    } else {
+                                        document.getElementById("bill_g_author").innerHTML = ``;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_pres_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_grad_pres").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_grad_pres").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].grad_secr_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_grad_sec").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_grad_sec").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_pres_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_undr_pres").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_undr_pres").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].undr_secr_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_undr_sec").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_undr_sec").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            $.ajax({
+                                url: `http://localhost:8081/user?id=${data.data[0].vp_fina_id}`, 
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.data[0]) {
+                                        document.getElementById("bill_vp_fin").innerHTML = `${data.data[0].first_name} ${data.data[0].last_name}`;
+                                    } else {
+                                        document.getElementById("bill_vp_fin").innerHTML = `Unsigned`;
+                                    }
+                                }
+                            });
+                            document.getElementById("bill_g_author").innerHTML += data.data[0].grad_auth_appr == 1 ? ` - Signed` : "";
+                            document.getElementById("bill_ug_author").innerHTML += data.data[0].undr_auth_appr == 1 ? ` - Signed` : "";
+                        }
+                    });
+                    // @TODO: Update votes
+                    $.ajax({
+                        url: `http://localhost:8081/bill_line_items?bill_id=${data.data[0].id}`,
+                        type: 'GET',
+                        success: function(data) {
+                            console.log(JSON.stringify(data.data));
+                            document.getElementById("LineItemsSubmitted").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsJFC").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsGraduate").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsUndergraduate").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsConference").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            document.getElementById("LineItemsAll").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th>State</th> <th></th> </tr>";
+                            document.getElementById("LineItemsFinal").innerHTML = 
+                            "<tr> <th>#</th> <th>Name</th> <th>Cost/Unit</th> <th>Qty</th> <th>TC</th> <th>AR</th> <th>Account</th> <th></th> <th></th> </tr>";
+                            let subAmPYTotal = 0.0,
+                            subAmCOTotal = 0.0,
+                            jfcAmPYTotal = 0.0,
+                            jfcAmCOTotal = 0.0,
+                            gradAmPYTotal = 0.0,
+                            gradAmCOTotal = 0.0,
+                            undrAmPYTotal = 0.0,
+                            undrAmCOTotal = 0.0,
+                            confAmPYTotal = 0.0,
+                            confAmCOTotal = 0.0,
+                            finAmPYTotal = 0.0,
+                            finAmCOTotal = 0.0;
+                            for (let j = 0; j < data.data.length; j++) {
+                                document.getElementById("LineItemsAll").innerHTML += 
+                                `<tr>
+                                    <td>${data.data[j].line_number}</td>
+                                    <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
+                                    <td>${data.data[j].cost_per_unit}</td>
+                                    <td>${data.data[j].quantity}</td>
+                                    <td>${data.data[j].total_cost}</td>
+                                    <td>${data.data[j].amount}</td>
+                                    <td>${data.data[j].account}</td>
+                                    <td>${data.data[j].state}</td>
+                                    <td></td>
+                                </tr>`;
+                                if (data.data[j].state === "Submitted") {
+                                    document.getElementById("LineItemsSubmitted").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        subAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        subAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                }
+                                if (data.data[j].state === "JFC") {
+                                    document.getElementById("LineItemsJFC").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        jfcAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        jfcAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                }
+                                if (data.data[j].state === "Graduate") {
+                                    document.getElementById("LineItemsGraduate").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        gradAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        gradAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                }
+                                if (data.data[j].state === "Undergraduate") {
+                                    document.getElementById("LineItemsUndergraduate").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        undrAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        undrAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                }
+                                if (data.data[j].state === "Conference") {
+                                    document.getElementById("LineItemsConference").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        confAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        confAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                }
+                                if (data.data[j].state === "Final") {
+                                    document.getElementById("LineItemsFinal").innerHTML += 
+                                    `<tr>
+                                        <td>${data.data[j].line_number}</td>
+                                        <td><a href="http://jacketpages.gatech.edu/LineItems/view/${data.data[j].id}">${data.data[j].name}</a></td>
+                                        <td>${data.data[j].cost_per_unit}</td>
+                                        <td>${data.data[j].quantity}</td>
+                                        <td>${data.data[j].total_cost}</td>
+                                        <td>${data.data[j].amount}</td>
+                                        <td>${data.data[j].account}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>`;
+                                    if (data.data[j].account === "PY") {
+                                        finAmPYTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                    if (data.data[j].account === "CO") {
+                                        finAmCOTotal += parseFloat(Math.round(Number(data.data[j].total_cost) * 100) / 100);
+                                    }
+                                }
+                            }
+                            document.getElementById("LineItemsSubmittedAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${subAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${subAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(subAmPYTotal + subAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsJFCAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${jfcAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${jfcAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(jfcAmPYTotal + jfcAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsUndergraduateAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${undrAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${undrAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(undrAmPYTotal + undrAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsGraduateAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${gradAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${gradAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(gradAmPYTotal + gradAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsConferenceAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${confAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${confAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(confAmPYTotal + confAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsFinalAmount").innerHTML = 
+                            `<tr>
+                                <td>Prior Year</td>
+                                <td>$${finAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${finAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(finAmPYTotal + finAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                            document.getElementById("LineItemsAllAmount").innerHTML = 
+                            `<tr>
+                                <td>Submitted:</td>
+                                <td>Prior Year</td>
+                                <td>$${subAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${subAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(subAmPYTotal + subAmCOTotal).toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>JFC:</td>
+                                <td>Prior Year</td>
+                                <td>$${jfcAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${jfcAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(jfcAmPYTotal + jfcAmCOTotal).toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate:</td>
+                                <td>Prior Year</td>
+                                <td>$${undrAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${undrAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(undrAmPYTotal + undrAmCOTotal).toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Conference:</td>
+                                <td>Prior Year</td>
+                                <td>$${confAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${confAmCOTotal.toFixed(2)}</td>
+                                <td>Total</td>
+                                <td>$${(confAmPYTotal + confAmCOTotal).toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Graduate:</td>
+                                <td>Prior Year</td>
+                                <td>$${gradAmPYTotal.toFixed(2)}</td>
+                                <td>Capital Outlay</td>
+                                <td>$${gradAmCOTotal}</td>
+                                <td>Total</td>
+                                <td>$${(gradAmPYTotal + gradAmCOTotal).toFixed(2)}</td>
+                            </tr>`;
+                        }
+                    });
+                }
+            });
+                 
+        </script>
+        <script>
+            (function(i, s, o, g, r, a, m) {
+            	i['GoogleAnalyticsObject'] = r;
+            	i[r] = i[r] ||
+            	function() {
+            		(i[r].q = i[r].q || []).push(arguments)
+            	}, i[r].l = 1 * new Date();
+            	a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            	a.async = 1;
+            	a.src = g;
+            	m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            
+            ga('create', 'UA-43065423-1', 'gatech.edu');
+            ga('send', 'pageview');
+            
+        </script>
+    </head>
+    <body>
+        <div id="masthead">
+            <div id="identity" class="clearfix">
+                <div id="identity-wrapper">
+                    <h1 id="gt-logo">
+                        <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech">
+                        <img src="jpindbill_files/logo-gt.png" alt="Georgia Tech">		        </a>    
+                    </h1>
+                    <h1 id="jp-logo">
+                        <a href="http://jacketpages.gatech.edu/" rel="home" title="JacketPages">
+                        <img src="jpindbill_files/jacketpages.png" alt="Jacket Pages">		      	</a> 
+                    </h1>
+                </div>
+            </div>
+            <!-- /#identity -->
+            <div id="primary-menus">
+                <div id="primary-menus-wrapper" class="clearfix">
+                    <a id="primary-menus-toggle" class="hide-for-desktop"><span>Menu</span></a>
+                    <div id="primary-menus-off-canvas" class="off-canvas">
+                        <a id="primary-menus-close" class="hide-for-desktop"><span>Close</span></a>
+                        <div id="nav">
+                            <div id="main-menu-wrapper">
+                                <ul class="menu">
+                                    <li class="expanded first">
+                                        <a href="http://jacketpages.gatech.edu/users/view/22053"><span>My Account</span></a>	
+                                        <ul class="menu">
+                                            <li class="leaf first">
+                                                <a href="http://jacketpages.gatech.edu/users/view/22053">Account Profile</a>		
+                                            </li>
+                                            <li class="leaf">
+                                                <a href="http://jacketpages.gatech.edu/users/logout">Logout</a>		
+                                            </li>
+                                            <li class="leaf last">
+                                                <a href="http://jacketpages.gatech.edu/">JacketPages Home</a>		
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="expanded">
+                                        <a href="http://jacketpages.gatech.edu/bills"><span>Bills</span></a>	
+                                        <ul class="menu">
+                                            <li class="leaf first">
+                                                <a href="http://jacketpages.gatech.edu/bills/add">Submit Bill</a>		
+                                            </li>
+                                            <li class="leaf">
+                                                <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>		
+                                            </li>
+                                            <li class="leaf last">
+                                                <a href="http://jacketpages.gatech.edu/bills">View All Bills</a>		
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="expanded">
+                                        <a href="http://jacketpages.gatech.edu/organizations"><span>Organizations</span></a><!--<ul class="menu">
+                                            <li class="leaf first ">
+                                            </li>
+                                            
+                                            <li class="leaf">
+                                            		</li>
+                                            <li class="leaf">
+                                            	</li>
+                                            <li class="leaf last ">
+                                            </li>
+                                            
+                                            </ul>-->
+                                    </li>
+                                    <li class="expanded">
+                                        <a href="http://jacketpages.gatech.edu/sga_people"><span>Student Government</span></a>
+                                        <ul class="menu">
+                                            <li class="leaf first">
+                                                <a href="http://jacketpages.gatech.edu/sga_people">View SGA Members</a>	
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="expanded"></li>
+                                    <li class="leaf last"><a href="#" onclick="openHelp()">Help</a></li>
+                                </ul>
+                            </div>
+                            <div id="action-items-wrapper">
+                                <div id="action-items">
+                                    <ul>
+                                        <li class="first active">
+                                            <a href="http://jacketpages.gatech.edu/bills/add" class="active">Submit Bill</a>	
+                                        </li>
+                                        <li class="active">
+                                            <a href="http://jacketpages.gatech.edu/users/logout" class="active">Logout</a>	
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="utility">
+                            <div class="row clearfix">
+                                <div id="utility-links">
+                                    <!-- utility-links -->
+                                    <ul class="menu">
+                                        <li class="mothership ulink"><a href="http://www.gatech.edu/">Georgia Tech Home</a></li>
+                                        <li class="campus-map ulink"><a href="http://www.map.gatech.edu/">Map</a></li>
+                                        <li class="directories ulink"><a href="http://www.gatech.edu/directory">Directory</a></li>
+                                        <li class="offices ulink"><a href="http://www.gatech.edu/departments">Offices</a></li>
+                                    </ul>
+                                </div>
+                                <!--
+                                    <div id="social-media-links-wrapper">
+                                      <ul id="social-media-links">
+                                        <li class="first"><a href="https://www.facebook.com/georgiatech" title="Facebook" class="facebook">Facebook</a></li>
+                                        <li><a href="http://www.flickr.com/photos/georgiatech" title="Flickr" class="flickr">Flickr</a></li>
+                                        <li><a href="https://plus.google.com/+georgiatech/posts" title="Google Plus" class="googleplus">Google Plus</a></li>
+                                        <li><a href="http://www.linkedin.com/company/3558" title="LinkedIn" class="linkedin">LinkedIn</a></li>
+                                        <li><a href="http://pinterest.com/georgiatech/" title="Pinterest" class="pinterest">Pinterest</a></li>
+                                        <li><a href="http://gatech.edu/rss" title="RSS" class="rss">RSS</a></li>
+                                        <li><a href="https://twitter.com/georgiatech" title="Twitter" class="twitter">Twitter</a></li>
+                                        <li class="last"><a href="http://www.youtube.com/georgiatech" title="YouTube" class="youtube">YouTube</a></li>
+                                      </ul>
+                                    </div>
+                                    
+                                    /#social-media -->
+                            </div>
+                        </div>
+                        <!-- /#utility -->
+                    </div>
+                    <!--<div id="site-search">
+                        </div>-->
+                </div>
+                <!-- /#primary-menus-wrapper -->
+                <div id="breadcrumb" class="hide-for-mobile">
+                    <div class="row clearfix">
+                        <ul style="float: right">
+                            <li class="last">
+                                <a>Welcome, </a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="breadcrumb-item first"><a href="http://jacketpages.gatech.edu/">Home</a></li>
+                            <li><a href="http://jacketpages.gatech.edu/bills">All Bills</a></li>
+                            <li class="breadcrumb-item last"><a href="http://jacketpages.gatech.edu/bills/view/2752">View Bill </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /#breadcrumb -->		    
+            </div>
+            <!-- /#primary-menus -->
+        </div>
+        <!-- /#masthead -->
+        <div id="content">
+            <div class="clearfix">
+                <div class="ui-overlay" id="help" style="display:none;">
+                    <div class="ui-widget-overlay"></div>
+                    <div class="ui-corner-all" id="overlay" style="width: 100%; height: 600px; position: absolute;overflow-y:scroll; margin-top:10px;">
+                        <button onclick="closeHelp()" style="float:right;" type="submit">X</button>
+                        <div class="helppage" style="margin-left: 10px; margin-right:10px;">
+                            <h1>Submitting SGA Bills</h1>
+                            <h2>Introduction</h2>
+                            <p>The following will help you to prepare and to learn the process that 
+                                is required to obtain funding from, or pass a resolution with, the 
+                                Student Government Association (SGA) at Georgia Tech.<br>
+                                The Student Government’s legislative structure consists of a body of 
+                                undergraduate students (Undergraduate House of Representatives or UHR) 
+                                and of a body of graduate students (Graduate Student Senate or GSS). The
+                                passing of a “joint” bill requires consideration of a bill in each body
+                                and is subject to passing by an “enactment ratio.” Mostly all financial
+                                requests by student organizations will be classified as a joint bill. 
+                                The enactment ratio is a mathematical calculation to determine whether a
+                                bill passes both bodies of SGA. It ensures that undergraduate and 
+                                graduates are represented proportionally since undergraduates represent 
+                                more of the student body and contribute more money to SGA from the 
+                                Student Activity Fee.<br>
+                                The money that SGA allocates to organizations comes from the “Student 
+                                Activity Fee” line that shows up on the tuition and fee assessment paid 
+                                by each student every semester. This money is then budgeted to many 
+                                different organizations with the Student Center and the Campus 
+                                Recreation Center receiving approximately 70% of that budget. At the end
+                                of the year, the money that has not been spent is placed into several 
+                                accounts that can then be allocated to different groups for special 
+                                one-time items.
+                                Student Government has a set of policies and priorities that it follows 
+                                with regards to funding requests.<br>
+                                Please keep in mind that SGA has a set amount of money that it can spend
+                                in one year. SGA attempts to wisely spend that set of money on the 
+                                organizations with most demonstrated need and on those bills that will 
+                                benefit the majority of campus. Not every request will end in success.
+                            </p>
+                            <h2>The Process</h2>
+                            <p>The process begins with a student organization that needs additional 
+                                funding for an event and turns to SGA for financial assistance. SGA 
+                                should serve as the organization’s last resort after all other funding 
+                                options have been exhausted. Next, the organization will contact an 
+                                undergraduate Representative and a graduate Senator of SGA and ask those
+                                members to author their bill. A complete list of senators and 
+                                representatives can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>.
+                                A bill form (further explained in “How to Submit an SGA Bill”) 
+                                requesting general information about the organization or student will be
+                                completed and a bill will be drafted to include the organization’s idea
+                                for an event and an itemized list of requested items.<br>
+                                If the bill is submitted and reviewed by the authors by 8am on Monday, 
+                                the bill will appear in New Business on the agenda at the SGA meeting 
+                                that following Tuesday. The Joint Finance Committee (JFC) will review 
+                                the bill at its weekly meeting that Thursday; a representative from the 
+                                organization will be invited to the meeting to speak on behalf of the 
+                                organization. The Joint Finance Committee will suggest changes based on 
+                                SGA funding policies (a copy of JFC Policy can be found in the back of 
+                                this binder). The next Tuesday, the bill will move into Old Business 
+                                where it will be discussed and voted on. After both legislative bodies 
+                                discuss the bill and the enactment ratio is reached, the funds will be 
+                                allocated to the organization. Please see the policy of the Student 
+                                Organization Finance Office (in the back of this binder) for information
+                                on reimbursements and purchases.
+                            </p>
+                            <p style="font-style:italic; font-weight:bold;">Be sure to begin working on bills for events and activities at least four (4) weeks before the event!</p>
+                            <h2>Step by Step Process Checklist:</h2>
+                            <ul style="padding-left:40px;">
+                                <li>Before contacting a potential author, draft your bill with itemized
+                                    costs according to the Joint Finance Committee policy, available at <a href="http://sga.gatech.edu/JFC">http://sga.gatech.edu/JFC</a>.
+                                </li>
+                                <li>Find authors, both an undergraduate and a graduate. A complete list of representatives and senators can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>. Be sure to include your bill and extra information when making contact.</li>
+                                <li>Bills must be submitted and reviewed by both authors online by 8am 
+                                    on Monday in order for them to be placed in New Business on Tuesday.
+                                </li>
+                                <li>After appearing in New Business, the bill submitted or a 
+                                    representative from the organization will need to attend a meeting with 
+                                    the Joint Finance Committee (an invitation will be sent to the bill 
+                                    submitter)
+                                </li>
+                                <li>After the meeting with the JFC has been attended and the JFC has 
+                                    made their recommendations, the bill will move to Old Business and be 
+                                    voted on the following week. Note: this is one week after that bill was 
+                                    in New Business.
+                                </li>
+                                <li>You should attend the meeting when your bill appears on the agenda 
+                                    in Old Business. This includes the Graduate Student Senate meeting at 
+                                    11am on Tuesdays and the Undergraduate House of Representatives meetings
+                                    at 7pm on Tuesdays, both in the Student Services Building (Flag 
+                                    Building), room 117. You will be asked to present the bill to the body 
+                                    or answer questions from senators/representatives.
+                                </li>
+                                <li>If your bill passes, please see the policy of the Student 
+                                    Organization Finance Office about reimbursements and purchases. It if 
+                                    fails, you will have the opportunity to revise and resubmit.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="middle_full">
+                    <div id="page_title">Bill 18J276</div>
+                    <table class="list">
+                        <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td id="bill_title">Resolution Expressing Condolences: Durgesh Vasmatkar</td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td style="text-align:justify" id="bill_description">BE
+                                    IT RESOLVED, the Student Government Association expresses its deepest 
+                                    condolences to the family, friends, and colleagues of Durgesh Vasmatkar.<br>
+                                    <br>
+                                    Durgesh was an Online Masters student majoring in Computer Science. His 
+                                    caring and quest for excellence left a lasting impression on his fellow 
+                                    students. He will truly be missed by the OMSCS Community and the entire 
+                                    Georgia Tech community.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Fundraising</td>
+                                <td style="text-align:justify" id="bill_fundraising"></td>
+                            </tr>
+                            <tr>
+                                <td>Dues</td>
+                                <td id="bill_dues">0</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate Members</td>
+                                <td id="bill_ugMembers">NA</td>
+                            </tr>
+                            <tr>
+                                <td>Graduate Members</td>
+                                <td id="bill_gMembers">NA</td>
+                            </tr>
+                            <tr>
+                                <td>Submit Date</td>
+                                <td id="bill_submit_date">2018-04-17</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1>Status</h1>
+                    <table class="list">
+                        <tbody>
+                            <tr>
+                                <td>Type</td>
+                                <td id="bill_type">Resolution</td>
+                            </tr>
+                            <tr>
+                                <td>Category</td>
+                                <td id="bill_category">Joint</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td id="bill_status">Passed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1>Authors</h1>
+                    <table class="list">
+                        <tbody>
+                            <tr>
+                                <td>Graduate Author</td>
+                                <td><a id="bill_g_author">Sample Name</a></td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate Author</td>
+                                <td><a id="bill_ug_author">Sample Name</a></td>
+                            </tr>
+                            <tr>
+                                <td>Submitter</td>
+                                <td><a id="bill_submitter">Sample Name</a></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Organization</td>
+                                <td id="bill_org"><a href="http://jacketpages.gatech.edu/organizations/view/27751">Graduate Student Government Association</a></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1>Signatures</h1>
+                    <table class="list">
+                        <tbody>
+                            <tr>
+                                <td>Graduate President</td>
+                                <td id="bill_grad_pres">Skanda Prasad P N</td>
+                            </tr>
+                            <tr>
+                                <td>Graduate Secretary</td>
+                                <td id="bill_grad_sec">David Giles</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate President</td>
+                                <td id="bill_undr_pres">Sujay Peramanu</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate Secretary</td>
+                                <td id="bill_undr_sec">Lexie Scott</td>
+                            </tr>
+                            <tr>
+                                <td>Vice President of Finance</td>
+                                <td id="bill_vp_fin">Carson Silbert</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1>Outcomes:</h1>
+                    <table class="list" id="outcomes" width="50%">
+                        <tbody>
+                            <tr>
+                                <th><a href="#" onclick="javascript:openComments()">GSS:</a></th>
+                                <th></th>
+                                <th><a href="#" onclick="javascript:openComments()">UHR:</a></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td id="bill_gss_date"></td>
+                                <td>Date</td>
+                                <td id="bill_uhr_date"></td>
+                            </tr>
+                            <tr>
+                                <td>Yeas</td>
+                                <td id="bill_gss_y"></td>
+                                <td>Yeas</td>
+                                <td id="bill_uhr_y"></td>
+                            </tr>
+                            <tr>
+                                <td>Nays</td>
+                                <td id="bill_gss_n"></td>
+                                <td>Nays</td>
+                                <td id="bill_uhr_n"></td>
+                            </tr>
+                            <tr>
+                                <td>Abstains</td>
+                                <td id="bill_gss_a"></td>
+                                <td>Abstains</td>
+                                <td id="bill_uhr_a"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <script>
+                        function openComments() {
+                        	$("#comments").attr("style", "");
+                        	$("#comments_text").update(text);
+                        }
+                        
+                        function closeComments() {
+                        	$("#comments").attr("style", "display:none;");
+                        }
+                    </script>
+                    <script>
+                        $(function()
+                        {
+                        	$("#tabs").tabs();
+                        	$("#tabs").tabs("option", "active", 0);
+                        }); 
+                    </script>
+                    <br>
+                    <div id="tabs">
+                        <ul>
+                            <li>
+                                <a href="#tabs-1">Submitted</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-2">JFC</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-3">Graduate</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-4">Undergraduate</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-5">Conference</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-6">All</a>
+                            </li>
+                            <li>
+                                <a href="#tabs-7">Final</a>
+                            </li>
+                        </ul>
+                        <div id="tabs-1">
+                            <table class="listing" id="LineItemsSubmitted">
+                              <!--
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41116">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                </tr>
+                              --->
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing" id="LineItemsSubmittedAmount">
+                                <tr>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-2">
+                            <table class="listing" id="LineItemsJFC">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41153">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                </tr>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing" id="LineItemsJFCAmount">
+                                <tr>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-3">
+                            <table class="listing" id="LineItemsUndergraduate">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41219">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                </tr>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing" id="LineItemsUndergraduateAmount">
+                                <tr>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-4">
+                            <table class="listing" id="LineItemsGraduate">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41191">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                </tr>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing" id="LineItemsGraduateAmount">
+                                <tr>
+                                    <td>Prior Year</td>
+                                    <td>$250.00</td>
+                                    <td>Capital Outlay</td>
+                                    <td>$0.00</td>
+                                    <td>Total</td>
+                                    <td>$250.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-5">
+                            <table class="listing" id="LineItemsConference">
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing" id="LineItemsConferenceAmount">
+                            </table>
+                        </div>
+                        <div id="tabs-6">
+                            <table class="listing" id="LineItemsAll">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Qty</th>
+                                    <th>TC</th>
+                                    <th>AR</th>
+                                    <th>Account</th>
+                                    <th>State</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41116">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                    <td>Submitted</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41153">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                    <td>JFC</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41219">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                    <td>Graduate</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a href="/LineItems/view/41191">Coaching stipend </a></td>
+                                    <td>250.00</td>
+                                    <td>1</td>
+                                    <td>250.00</td>
+                                    <td>250.00</td>
+                                    <td>PY</td>
+                                    <td>Undergraduate</td>
+                                </tr>
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing" id="LineItemsAllAmount">
+                            <tr>
+                                <td>Submitted:</td>
+                                <td>Prior Year</td>
+                                <td>$250.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$250.00</td>
+                            </tr>
+                            <tr>
+                                <td>JFC:</td>
+                                <td>Prior Year</td>
+                                <td>$250.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$250.00</td>
+                            </tr>
+                            <tr>
+                                <td>Undergraduate:</td>
+                                <td>Prior Year</td>
+                                <td>$250.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$250.00</td>
+                            </tr>
+                            <tr>
+                                <td>Conference:</td>
+                                <td>Prior Year</td>
+                                <td>$0.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Graduate:</td>
+                                <td>Prior Year</td>
+                                <td>$250.00</td>
+                                <td>Capital Outlay</td>
+                                <td>$0.00</td>
+                                <td>Total</td>
+                                <td>$250.00</td>
+                            </tr>
+                            </table>
+                        </div>
+                        <div id="tabs-7">
+                            <table class="listing" id="LineItemsFinal">
+                            </table>
+                            <h1>Amounts</h1>
+                            <table class="listing" id="LineItemsFinalAmount">
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="ui-overlay" id="comments" style="display:none;">
+                        <div class="ui-widget-overlay"></div>
+                        <div class="ui-corner-all" id="overlay" style="width: 25%; height: 10%; position: absolute; top: 0;">
+                            <button onclick="closeComments()" style="float:right;" type="submit">X</button>		
+                            <div id="comments_text"></div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- content -->
+        <div id="footer">
+            <div class="row clearfix">
+                <div id="footer-utility-links">
+                    <ul class="menu gt-footer-utility-links">
+                        <li><a href="http://jacketpages.gatech.edu/">Campus Calendar</a></li>
+                        <li><a href="http://jacketpages.gatech.edu/pages/contact">Contact JacketPages</a></li>
+                        <li><a href="http://jacketpages.gatech.edu/pages/privacy_policy">Privacy Policy</a></li>
+                    </ul>
+                    <ul class="menu custom-links-included">
+                        <li><a href="http://www.gatech.edu/">Georgia Tech Main</a></li>
+                        <li><a href="http://www.studentaffairs.gatech.edu/">Student Affairs</a></li>
+                        <li><a href="http://www.sga.gatech.edu/">Student Government</a></li>
+                        <li><a href="http://www.involvement.gatech.edu/">Student Involvement</a></li>
+                    </ul>
+                </div>
+                <div id="footer-logo">
+                    <a href="http://jacketpages.gatech.edu/" rel="home" title="Georgia Tech" style="margin-right:4px">
+                    <img src="jpindbill_files/sgalogogrey.png" alt="Georgia Tech">		        </a>     
+                    <p>© 2018 Georgia Tech Student Government Association</p>
+                </div>
+            </div>
+        </div>
+        <!-- /footer --> 
+    </body>
+</html>
+
