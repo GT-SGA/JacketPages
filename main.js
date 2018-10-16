@@ -33,7 +33,7 @@ connection.connect(function(err) {
 // Use the database jacketpages_dev
 connection.query("USE jpdev");
 
-var server = app.listen(process.env.PORT || 5000);   //server listening to localhost 8081
+var server = app.listen(process.env.PORT || 5000);   //server listening to localhost 5000
 
 const io = require('socket.io').listen(server);
 
@@ -49,5 +49,5 @@ const index = require("./routes/index");
 
 //Use Routes
 app.use('/users/api', users);
-app.use('/bills/api', bills);
+app.use('/bills', bills);
 app.use('/api', index)
