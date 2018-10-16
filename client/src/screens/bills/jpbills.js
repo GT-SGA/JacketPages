@@ -2,25 +2,32 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import actions from '../../redux/bills/actions';
+
 import Alphabet from '../../common/alphabet';
 import BillsTable from './components/billstable';
 
 class JPBills extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      bills: props.bills,
-    };
 
+    this.state = {
+      bills: this.props.bills.bills,
+    };
     // this.filterBills = this.filterBills.bind(this);
   }
+
+  getDerivedStateFromProps(nextProps) {
+    this.setState({ bills: nextProps.bills.bills });
+  }
+
   /* TODO: search bills in frontend */
   keywordSearch() {
   //   updatebilldata(`http://localhost:8081/bills_keyword?keyword=${document.getElementById('search').value}`);
   //   return false;
   };
 
-  /* TODO: filter newsletters in frontend */
+  /* TODO: filter bills in frontend */
   statusSearch() {
   //   let billCat = document.getElementById('BillCategory').value;
   //   if (billCat === "All") {
@@ -126,13 +133,9 @@ class JPBills extends Component {
               <br />
             </div>
           </div>
+          {/* TODO: change this to use state so that filtering in the frontend can be done */}
           <BillsTable
-            bills={this.state.bills}
-            sortTitle={this.sortTitle}
-            sortDate={this.sortDate}
-            sortCategory={this.sortCategory}
-            sortStatus={this.sortStatus}
-            sortNum={this.sortNum}
+            bills={this.props.bills.bills}
           />
           <script>
             {/* $(function() {
@@ -169,5 +172,12 @@ JPBills.propTypes = {
   bills: PropTypes.shape.isRequired,
 };
 
-/* TODO: Connect JPBills component to redux */
-export default JPBills;
+const mapStateToProps = state => ({
+  bills: state.bills,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchBills: dispatch(actions.fetchBills()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(JPBills);
