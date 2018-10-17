@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const mysql = require('mysql');
 const session = require('express-session');
-const CASAuthentication = require('cas-authentication');
+const CASAuthentication = require('cas-authentication-gt');
 
 const app = express();
 
@@ -48,13 +48,14 @@ connection.connect(function(err) {
 // Use the database jacketpages_dev
 connection.query('USE jpdev');
 
-const server = app.listen(process.env.PORT || 8081); // server listening to localhost 8081
+const port = (process.env.port || 80);
+const server = app.listen(port);
 
 const io = require('socket.io').listen(server);
 
 app.use(express.static('public')); // automatically serves static files home.html and its css files
 
-console.log('Running on port 8081');
+console.log('Running on port ' + port);
 
 // Load Routes
 const users = require('./routes/users');

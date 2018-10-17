@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
 const router = express.Router();
-const CASAuthentication = require('cas-authentication');
+const CASAuthentication = require('cas-authentication-gt');
 const session = require('express-session');
 
 var connection = mysql.createConnection({
@@ -18,6 +18,7 @@ connection.connect(function(err) {
 // Use the database jacketpages_dev
 connection.query("USE jpdev");
 
+const basePath = 'http://sga.gatech.edu'
 
 // Express Session
 router.use(session({
@@ -29,8 +30,9 @@ router.use(session({
 
 //Cas authentication
 const cas = new CASAuthentication({
-  cas_url: 'https://login.gatech.edu/cas/login',
-  service_url: 'https://jacketpages.gatech.edu',
+  cas_url: 'https://login.gatech.edu/cas',
+  service_url: 'http://sga.gatech.edu',
+  cas_version: 'saml1.1',
 });
 
 // Unauthenticated clients will be redirected to the CAS login and then back to
@@ -39,8 +41,25 @@ const cas = new CASAuthentication({
 //     res.send( '<html><body>Hello!</body></html>' );
 // });
 
-router.get( '/', cas.bounce_redirect, function(req, res) {
-    res.redirectTo('../');
+router.get( '/login', cas.bounce, function(req, res) {
+  redirectPath = req.query['redirectTo'];
+  if (redirectPath) {
+    res.redirect(encodeURI(basePath + redirectPath));
+  } else {
+    res.redirect(encodeURI(basePath));
+  }
+  
+});
+
+router.get( '/logout', cas.logout, function(req, res) {
+  
+})
+
+router.get( '/info', cas.block, function(req, res) {
+  return (res.json ({
+    'uid': req.session[cas.session_name],
+    'otherInfo': req.session[cas.session_info]
+  }));
 });
 
 module.exports = router;
