@@ -58,7 +58,6 @@ class Masthead extends Component {
                       <a href="/sgapeople"><span>Student Government</span></a>
                       <ul className="menu">
                         <li className="leaf first">
-                          {/* TODO: Change this to a relative link to /sgapeople */}
                             <a href="/sgapeople">View SGA Members</a>
                         </li>
                         <li className="leaf">
@@ -68,7 +67,7 @@ class Masthead extends Component {
                     </li>
                     <li className="expanded"></li>
                     <li className="expanded">
-                      <a href="jpbills.html"><span>Bills</span></a>
+                      <a href="/bills"><span>Bills</span></a>
                       <ul className="menu">
                         <li className="leaf first">
                             <a href="http://jacketpages.gatech.edu/bills/add">Submit Bill</a>
@@ -77,7 +76,7 @@ class Masthead extends Component {
                             <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
                         </li>
                         <li className="leaf last">
-                            <a href="http://jacketpages.gatech.edu/bills">View All Bills</a>
+                            <a href="/bills">View All Bills</a>
                         </li>
                         </ul>
                       </li>
