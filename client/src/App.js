@@ -9,8 +9,9 @@ import Footer from './common/footer';
 
 import Home from './screens/home';
 import JPBills from './screens/bills/jpbills';
-import SGAPeople from './screens/sgapeople'
+import SGAPeople from './screens/sgapeople';
 import JPBillVoting from './screens/jpbillvoting';
+import JPCreateBill from './screens/bills/jpcreatebill';
 
 import './App.css';
 
@@ -31,6 +32,7 @@ class App extends Component {
                 <Route path="/bills" component={JPBills} />
                 <Route exact path="/bill_voting" component={JPBillVoting} />
                 <Route exact path="/sgapeople" component={SGAPeople} />
+                <Route exact path="/create_bill" component={JPCreateBill} />
               </div>
             </div>
             <Footer />
