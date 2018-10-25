@@ -169,6 +169,8 @@ form > .input {
 	margin: 0px auto 0px auto;
 	position: relative;
 	float: none;
+  display: table;
+  min-height: 75vh;
 }
 /**
  * Houses the sidebar.
