@@ -70,7 +70,7 @@ class Masthead extends Component {
                       <a href="/bills"><span>Bills</span></a>
                       <ul class="menu">
                         <li class="leaf first">
-                            <a href="http://jacketpages.gatech.edu/bills/add">Submit Bill</a>
+                            <a href="/create_bill">Submit Bill</a>
                         </li>
                         <li className="leaf">
                             <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>

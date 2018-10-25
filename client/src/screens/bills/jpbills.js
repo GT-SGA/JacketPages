@@ -145,7 +145,7 @@ class JPBills extends Component {
                 active : false		});
             }); */}
           </script>
-          <div className="paging">
+          {/* <div className="paging">
             <span className="disabled">&lt;&lt; previous</span>    |
             |
             <span className="disabled">next &gt;&gt;</span>
@@ -160,7 +160,7 @@ class JPBills extends Component {
             records out of
             <span id="numrectotal" />
             total, starting on record 0, ending on 0
-          </div>
+          </div> */}
         </div>
       </div>
     );
