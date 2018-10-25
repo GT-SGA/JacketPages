@@ -5,20 +5,20 @@ class SGAPeople extends Component {
     return (
       <div id="content">
         <div className="clearfix">
-          <div className="ui-overlay" id="help" style="display:none;">
+          <div className="ui-overlay" id="help" style={{ display: "none" }}>
             <div className="ui-widget-overlay"></div>
-            <div className="ui-corner-all" id="overlay" style="width: 100%; height: 600px; position: absolute;overflow-y:scroll; margin-top:10px;">
-              <button onclick="closeHelp()" style="float:right;" type="submit">X</button>
-              <div className="helppage" style="margin-left: 10px; margin-right:10px;">
+            <div className="ui-corner-all" id="overlay" style={{ width: "100%", height: 600, position: "absolute", overflowY: "scroll", marginTop: 10 }}>
+              <button onclick="closeHelp()" style={{ float: "right" }} type="submit">X</button>
+              <div className="helppage" style={{ marginLeft: 10, marginRight: 10 }}>
                 <h1>Submitting SGA Bills</h1>
                 <h2>Introduction</h2>
                 <p>The following will help you to prepare and to learn the process that is required to obtain funding from, or pass a resolution with, the Student Government Association (SGA) at Georgia Tech.<br /> The Student Government’s legislative structure consists of a body of undergraduate students (Undergraduate House of Representatives or UHR) and of a body of graduate students (Graduate Student Senate or GSS). The passing of a “joint” bill requires consideration of a bill in each body and is subject to passing by an “enactment ratio.” Mostly all financial requests by student organizations will be classified as a joint bill. The enactment ratio is a mathematical calculation to determine whether a bill passes both bodies of SGA. It ensures that undergraduate and graduates are represented proportionally since undergraduates represent more of the student body and contribute more money to SGA from the Student Activity Fee.<br /> The money that SGA allocates to organizations comes from the “Student Activity Fee” line that shows up on the tuition and fee assessment paid by each student every semester. This money is then budgeted to many different organizations with the Student Center and the Campus Recreation Center receiving approximately 70% of that budget. At the end of the year, the money that has not been spent is placed into several accounts that can then be allocated to different groups for special one-time items. Student Government has a set of policies and priorities that it follows with regards to funding requests.<br /> Please keep in mind that SGA has a set amount of money that it can spend in one year. SGA attempts to wisely spend that set of money on the organizations with most demonstrated need and on those bills that will benefit the majority of campus. Not every request will end in success.</p>
                 <h2>The Process</h2>
                 <p>The process begins with a student organization that needs additional funding for an event and turns to SGA for financial assistance. SGA should serve as the organization’s last resort after all other funding options have been exhausted. Next, the organization will contact an undergraduate Representative and a graduate Senator of SGA and ask those members to author their bill. A complete list of senators and representatives can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>. A bill form (further explained in “How to Submit an SGA Bill”) requesting general information about the organization or student will be completed and a bill will be drafted to include the organization’s idea for an event and an itemized list of requested items.<br /> If the bill is submitted and reviewed by the authors by 8am on Monday, the bill will appear in New Business on the agenda at the SGA meeting that following Tuesday. The Joint Finance Committee (JFC) will review the bill at its weekly meeting that Thursday; a representative from the organization will be invited to the meeting to speak on behalf of the organization. The Joint Finance Committee will suggest changes based on SGA funding policies (a copy of JFC Policy can be found in the back of this binder). The next Tuesday, the bill will move into Old Business where it will be discussed and voted on. After both legislative bodies discuss the bill and the enactment ratio is reached, the funds will be allocated to the organization. Please see the policy of the Student Organization Finance Office (in the back of this binder) for information on reimbursements and purchases.</p>
-                <p style="font-style:italic; font-weight:bold;">Be sure to begin working on bills for events and activities at least four (4) weeks before the event!
+                <p style={{ fontStyle: "italic", fontWeight: "bold" }}>Be sure to begin working on bills for events and activities at least four (4) weeks before the event!
                 </p>
                 <h2>Step by Step Process Checklist:</h2>
-                <ul style="padding-left:40px;">
+                <ul style={{ paddingLeft: 40 }}>
                   <li>Before contacting a potential author, draft your bill with itemized costs according to the Joint Finance Committee policy, available at <a href="http://sga.gatech.edu/JFC">http://sga.gatech.edu/JFC</a>.</li>
                   <li>Find authors, both an undergraduate and a graduate. A complete list of representatives and senators can be found at <a href="http://jacketpages.gatech.edu/sga_people">http://jacketpages.gatech.edu/sga_people</a>. Be sure to include your bill and extra information when making contact.</li>
                   <li>Bills must be submitted and reviewed by both authors online by 8am on Monday in order for them to be placed in New Business on Tuesday.</li>
@@ -42,8 +42,8 @@ class SGAPeople extends Component {
             <div id="alphabet">
               <div id="leftHalf">
                 <form action="/sga_people" id="SgaPersonIndexForm" method="post" accept-charset="utf-8">
-                  <div style="display:none;"><input type="hidden" name="_method" value="POST" /></div>
-                  <div className="input text"><label for="search" style="display:inline">Search</label><input name="data[SgaPerson][keyword]" id="search" width="80%" type="text" /></div>
+                  <div style={{ display: "none" }}><input type="hidden" name="_method" value="POST" /></div>
+                  <div className="input text"><label for="search" style={{ display: "inline" }}>Search</label><input name="data[SgaPerson][keyword]" id="search" width="80%" type="text" /></div>
                 </form>
               </div>
               <div id="rightHalf">
@@ -108,8 +108,8 @@ class SGAPeople extends Component {
 
             <div id="accordion" className="ui-accordion ui-widget ui-helper-reset" role="tablist">
               <a href="#" className="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" id="ui-accordion-accordion-header-0" aria-controls="ui-accordion-accordion-panel-0" aria-selected="false" aria-expanded="false" tabindex="0"><span className="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Filters</a>
-              <div className="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" id="ui-accordion-accordion-panel-0" aria-labelledby="ui-accordion-accordion-header-0" role="tabpanel" aria-hidden="true" style="display: none;">
-                <div style="float: left; width: 45%;">
+              <div className="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" id="ui-accordion-accordion-panel-0" aria-labelledby="ui-accordion-accordion-header-0" role="tabpanel" aria-hidden="true" style={{ display: "none" }}>
+                <div style={{ float: "left", width: "45%" }}>
                   <ul>
                     <div className="input select"><label for="SgaPersonHouse">House</label><select name="data[SgaPerson][house]" id="SgaPersonHouse">
   <option value="all" selected="selected">All</option>
@@ -310,16 +310,16 @@ class SGAPeople extends Component {
   </select></div>
                   </ul>
                 </div>
-                          <div style="float: right; width: 45%;">
+                          <div style={{ float: "right", width: "45%" }}>
                               <div className="input select"><label for="SgaPersonStatus">Status</label><select name="data[SgaPerson][status]" id="SgaPersonStatus">
   <option value="all" selected="selected">All</option>
   <option value="active">Active</option>
   <option value="inactive">Inactive</option>
   </select></div><br />
-                              <div className="submit" style="display:inline-block"><input type="submit" value="Submit" /></div>
-                              <div className="submit" style="display:inline-block"><input name="submit" type="submit" value="Clear" /></div>
+                              <div className="submit" style={{ display: "inline-block" }}><input type="submit" value="Submit" /></div>
+                              <div className="submit" style={{ display: "inline-block" }}><input name="submit" type="submit" value="Clear" /></div>
                           </div>
-                          <div style="clear:both"></div>
+                          <div style={{ clear: "both" }}></div>
                       </div>
                   </div>
 
@@ -562,7 +562,7 @@ class SGAPeople extends Component {
                       </div>
   --> */}
                   </div>
-                  <script>
+                  {/* <script>
                       $(function() {
                           $("#accordion").accordion({
                               collapsible: true,
@@ -570,7 +570,7 @@ class SGAPeople extends Component {
                               active: false
                           });
                       });
-                  </script>
+                  </script> */}
               </div>
           </div>
       </div>

@@ -942,7 +942,7 @@ div:hover > .gt-tools-contextual-link.populated { visibility: visible; }
   }
   #gt-logo-mothership-link { width: 30%; }
   #gt-logo-secondary-link { left: 30%; width: 70%; }
-  
+
   /**
   * Main Menu, Action Items + Utility/SM
   */
@@ -1430,4 +1430,3 @@ div:hover > .gt-tools-contextual-link.populated { visibility: visible; }
 @media only screen and (min-width: 64em) {
 
 }
-

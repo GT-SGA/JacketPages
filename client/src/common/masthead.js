@@ -55,29 +55,28 @@ class Masthead extends Component {
                     </li>
                     <li className="expanded"></li>
                     <li className="expanded">
-                      <a href="sgapeople.html"><span>Student Government</span></a>
+                      <a href="/sgapeople"><span>Student Government</span></a>
                       <ul className="menu">
                         <li className="leaf first">
-                          {/* TODO: Change this to a relative link to /sgapeople */}
-                            <a href="http://jacketpages.gatech.edu/sga_people">View SGA Members</a>
+                            <a href="/sgapeople">View SGA Members</a>
                         </li>
                         <li className="leaf">
                           <a href="/bill_voting">Vote on Bills</a>
                         </li>
                       </ul>
                     </li>
-                    <li className="expanded"></li>
-                    <li className="expanded">
-                      <a href="jpbills.html"><span>Bills</span></a>
-                      <ul className="menu">
-                        <li className="leaf first">
+                    <li class="expanded"></li>
+                    <li class="expanded">
+                      <a href="/bills"><span>Bills</span></a>
+                      <ul class="menu">
+                        <li class="leaf first">
                             <a href="http://jacketpages.gatech.edu/bills/add">Submit Bill</a>
                         </li>
                         <li className="leaf">
                             <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
                         </li>
-                        <li className="leaf last">
-                            <a href="http://jacketpages.gatech.edu/bills">View All Bills</a>
+                        <li class="leaf last">
+                            <a href="/bills">View All Bills</a>
                         </li>
                         </ul>
                       </li>
