@@ -1,4 +1,5 @@
 import React from 'react';
+import VotingUHRRepView from './studentgovernment/votinguhrrepview';
 
 class JPBillVoting extends React.Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class JPBillVoting extends React.Component {
         </div>
       );
     }
+
+    return <VotingUHRRepView />;
   }
 }
 
