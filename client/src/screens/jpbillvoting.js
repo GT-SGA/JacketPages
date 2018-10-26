@@ -1,10 +1,12 @@
 import React from 'react';
 import VotingUHRRepView from './studentgovernment/votinguhrrepview';
 
+import JPBillVotingAdminView from './jpbillvotingadminview';
+
 class JPBillVoting extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { present: false };
+    this.state = { present: true };
   }
 
   render() {
@@ -15,8 +17,7 @@ class JPBillVoting extends React.Component {
         </div>
       );
     }
-
-    return <VotingUHRRepView />;
+    return <JPBillVotingAdminView />;
   }
 }
 
