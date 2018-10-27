@@ -1,5 +1,5 @@
 import api from '../../common/api';
-import types from '../types';
+import types from './types';
 
 const fetchBillsRequest = () => ({
   type: types.FETCH_BILLS_REQUEST,

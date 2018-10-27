@@ -1,4 +1,4 @@
-import types from '../types';
+import types from './types';
 
 export const fetchBills = () => {
   /* TODO: Add fetch request here to get bills */
