@@ -45,7 +45,7 @@ const createBills = () => (
 
 const actions = {
   fetchBills,
-  createBills
+  createBills,
 };
 
 export default actions;
