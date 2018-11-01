@@ -34,12 +34,12 @@ const createBillsSuccess = bills => ({
 const createBills = () => (
   (dispatch) => {
     dispatch(createBillsRequest());
-    //return api.get('bills/bills_all')
-      .then(res => dispatch(createBillsSuccess(res.data)))
-      .catch(error => ({
-        type: types.CREATE_BILLS_FAILURE,
-        error,
-      }));
+    // return api.get('bills/bills_all')
+    //   .then(res => dispatch(createBillsSuccess(res.data)))
+    //   .catch(error => ({
+    //     type: types.CREATE_BILLS_FAILURE,
+    //     error,
+    //   }));
   }
 );
 
