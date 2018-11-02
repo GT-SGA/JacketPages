@@ -16,17 +16,6 @@ connection.connect(function(err) {
 // Use the database jacketpages_dev
 connection.query("USE jpdev");
 
-
-//index route
-router.get('/', function(req, res){    // HOME - routes to home.html on startup - only directs to html file - css needs previous line to be displayed
-  res.sendfile('public/home.html');
-});
-
-//jpbill page
-router.get('/jpbills', function(req, res){    // JPBILLS
-  res.sendfile('public/jpbills.html');
-});
-
 //sga people page
 router.get('/sgapeople', function(req, res){    // SGAPEOPLE
   res.sendfile('public/sgapeople.html');

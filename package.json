@@ -4,16 +4,24 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
-    "start": "sudo node ./node_modules/nodemon/bin/nodemon.js main.js",
+    "server": "sudo node ./node_modules/nodemon/bin/nodemon.js main.js",
+    "client": "cd client && npm start",
+    "start": "npm run server",
     "test": "echo \"Hi\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.3",
     "cas-authentication-gt": "0.0.9",
     "cors": "^2.8.4",
+    "css-loader": "^1.0.0",
     "ejs": "^2.5.5",
     "eslint": "^4.19.1",
     "express": "^4.16.3",
@@ -21,8 +29,19 @@
     "jquery-typeahead": "^2.10.6",
     "morgan": "^1.9.0",
     "mysql": "^2.16.0",
+    "node-fetch": "^2.2.0",
     "nodemon": "^1.18.3",
-    "socket.io": "^2.1.1"
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "react-hot-loader": "^4.3.6",
+    "react-paginate": "^5.2.4",
+    "react-router": "^4.3.1",
+    "socket.io": "^2.1.1",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8",
+    "yarn": "^1.10.1"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
@@ -32,6 +51,7 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.11.1",
-    "eslint-plugin-standard": "^3.1.0"
+    "eslint-plugin-standard": "^3.1.0",
+    "file-loader": "^2.0.0"
   }
 }

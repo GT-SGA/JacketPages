@@ -64,8 +64,8 @@ const index = require('./routes/index');
 const auth = require('./routes/auth');
 
 
-// Use Routes
-app.use('/users', users);
-app.use('/bill', bills);
-app.use('/', index);
+//Use Routes
+app.use('/users/api', users);
+app.use('/bills', bills);
+app.use('/api', index);
 app.use('/auth', auth);

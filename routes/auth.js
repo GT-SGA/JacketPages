@@ -48,11 +48,11 @@ router.get( '/login', cas.bounce, function(req, res) {
   } else {
     res.redirect(encodeURI(basePath));
   }
-  
+
 });
 
 router.get( '/logout', cas.logout, function(req, res) {
-  
+
 })
 
 router.get( '/info', cas.block, function(req, res) {
@@ -63,4 +63,3 @@ router.get( '/info', cas.block, function(req, res) {
 });
 
 module.exports = router;
-
