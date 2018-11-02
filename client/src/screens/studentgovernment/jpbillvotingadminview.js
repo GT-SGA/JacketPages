@@ -30,21 +30,24 @@ class JPBillVotingAdminView extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-9 col-xl-9 offset-lg-0">
-            <h1>Bill View</h1>
+          <div className="col-md-12 col-lg-12">
+            <h2>Bill View</h2>
             {this.renderBillView()}
 
             <div className="row">
               <div className="col d-flex justify-content-center">
-                <button className="btn btn-primary bill-voting-button" type="button" style={{ margin: 0 }}>Begin Voting</button>
+                <button className="btn btn-primary btn-block bill-voting-button" type="button" style={{ margin: 0 }}>Begin Voting</button>
               </div>
               <div className="col d-flex justify-content-center">
-                <button className="btn btn-primary bill-voting-button" type="button">Stop Voting</button>
+                <button className="btn btn-primary btn-block bill-voting-button" type="button">Stop Voting</button>
               </div>
               <div className="col d-flex justify-content-center">
-                <button className="btn btn-primary bill-voting-button" type="button">Show Res</button>
+                <button className="btn btn-primary btn-block bill-voting-button" type="button">Show Res</button>
               </div>
-              <div className="col-lg-9 offset-lg-2 d-flex justify-content-end">
+            </div>
+
+            <div className="row">
+              <div className="col d-flex justify-content-end" style={{marginTop: 10}}>
                 <button className="btn btn-primary bill-voting-button" type="button">Next</button>
               </div>
             </div>
