@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import '../assets/css/jpbillvoting.css';
+import '../../assets/css/jpbillvoting.css';
 
 class JPBillVotingAdminView extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      bills: this.props.bills,
       bill: {},
     };
 
@@ -25,24 +27,8 @@ class JPBillVotingAdminView extends Component {
   }
 
   render() {
-    const bills = [{
-      name: 'Bill 1',
-    }, {
-      name: 'Bill 2',
-    }];
-
     return (
       <div>
-        <div className="nav-side-menu">
-          <div style={{ backgroundColor: '#eeb211' }}>
-            <div className="brand">Agenda</div>
-            <div className="menu-list">
-              <ul className="menu-content">
-                {bills.map(bill => this.renderBillRow(bill))}
-              </ul>
-            </div>
-          </div>
-        </div>
         <div className="page-content-wrapper">
           <div className="container">
             <div className="row">
@@ -82,5 +68,9 @@ class JPBillVotingAdminView extends Component {
     );
   }
 }
+
+JPBillVotingAdminView.propTypes = {
+  bills: PropTypes.array.isRequired,
+};
 
 export default JPBillVotingAdminView;
