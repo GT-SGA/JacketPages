@@ -8,6 +8,7 @@
   height: 75vh;
   color: #e1ffff;
   margin-bottom: 10px;
+  float: left;
 }
 .nav-side-menu .brand {
   background-color: #23282e;
@@ -24,6 +25,7 @@
   margin: 0px;
   line-height: 35px;
   cursor: pointer;
+  color: #212529;
 }
 
 .nav-side-menu ul .active,

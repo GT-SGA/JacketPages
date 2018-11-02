@@ -28,7 +28,7 @@ class JPBillVoting extends Component {
       bills: this.props.studentgovernment.bills,
       currentBill: 0,
       present: true,
-      admin: true,
+      admin: false,
     };
 
     this.renderContent = this.renderContent.bind(this);
