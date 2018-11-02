@@ -13,7 +13,7 @@ const fetchUsersSuccess = bills => ({
 const fetchUsers = () => (
   (dispatch) => {
     dispatch(fetchUsersRequest());
-    //return api.get('bills/bills_all')
+    return api.get('users/users')
       .then(res => dispatch(fetchUsersSuccess(res.data)))
       .catch(error => ({
         type: types.FETCH_USERS_FAILURE,
