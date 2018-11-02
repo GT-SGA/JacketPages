@@ -7,7 +7,7 @@ class JPBillVotingUHRRepView extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-8 col-lg-9">
+          <div className="col-md-12 col-lg-12">
               <h2>Bill 2</h2>
               <h3>Organization:</h3>
               <p>Information about bill<br />Info<br />Info<br />Info</p>
