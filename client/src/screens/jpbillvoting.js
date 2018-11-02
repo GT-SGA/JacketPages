@@ -1,6 +1,5 @@
 import React from 'react';
 import VotingUHRRepView from './studentgovernment/votinguhrrepview';
-
 import JPBillVotingAdminView from './jpbillvotingadminview';
 
 class JPBillVoting extends React.Component {
@@ -17,7 +16,8 @@ class JPBillVoting extends React.Component {
         </div>
       );
     }
-    return <JPBillVotingAdminView />;
+    // return <JPBillVotingAdminView />;
+    return <VotingUHRRepView />;
   }
 }
 
