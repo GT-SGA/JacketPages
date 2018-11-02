@@ -4,9 +4,8 @@
   font-size: 12px;
   font-weight: 200;
   background-color: #2e353d;
-  position: fixed;
   width: 300px;
-  height: inherit;
+  height: 75vh;
   color: #e1ffff;
   margin-bottom: 10px;
 }
