@@ -4,7 +4,7 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
-    "server": "sudo node ./node_modules/nodemon/bin/nodemon.js main.js",
+    "server": "node ./node_modules/nodemon/bin/nodemon.js main.js",
     "client": "cd client && npm start",
     "start": "npm run server",
     "test": "echo \"Hi\""
