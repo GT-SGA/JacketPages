@@ -7,7 +7,35 @@ const billRow = bill => (
     <td>{bill.title}</td>
     <td>{bill.num}</td>
     <td>{bill.category}</td>
-    <td>{bill.status}</td>
+    <td>{(() => {
+      switch(bill.status) {
+        case 1:
+          return "Created";
+          break;
+        case 2:
+          return "Awaiting Author";
+          break;
+        case 3:
+          return "Authored";
+          break;
+        case 4:
+          return "Agenda";
+          break;
+        case 5:
+          return "Conference";
+          break;
+        case 6:
+          return "Passed";
+          break;
+        case 7:
+          return "Failed";
+          break;
+        case 8:
+          return "Tabled";
+          break;
+      }
+    })()}
+    </td>
     <td>{bill.date}</td>
   </tr>
 );
