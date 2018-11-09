@@ -99,11 +99,6 @@
   justify-content: center!important;
 }
 
-.justify-content-end {
-  -ms-flex-pack: end!important;
-  justify-content: flex-end!important;
-}
-
 .d-flex {
   display: -ms-flexbox!important;
   display: flex!important;
