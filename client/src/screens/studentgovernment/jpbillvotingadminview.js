@@ -28,42 +28,34 @@ class JPBillVotingAdminView extends Component {
 
   render() {
     return (
-      <div>
-        <div className="page-content-wrapper">
-          <div className="container">
-            <div className="row">
-              <div className="col">
-                <h1 style={{fontStyle: 'normal', fontWeight: 'bold'}}>JacketPages</h1>
-              </div>
-              <div className="col-lg-4">
-                <p>Logged in as: Admin</p>
-              </div>
-            </div>
-          </div>
-          <div className="container-fluid">
-            <a className="btn btn-link" role="button" href="#menu-toggle" id="menu-toggle">
-              <i className="fa fa-bars"></i>
-            </a>
-          </div>
-          <div className="col-lg-9 col-xl-9 offset-lg-0">
-            <h1>Bill View</h1>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-12 col-lg-12">
+            <h2>Bill View</h2>
             {this.renderBillView()}
-          </div>
-          <div className="row">
-            <div className="col d-flex justify-content-center">
-              <button className="btn btn-primary bill-voting-button" type="button" style={{ margin: 0 }}>Begin Voting</button>
+
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <button className="btn btn-primary btn-block bill-voting-button" type="button" style={{ margin: 0 }}>Begin Voting</button>
+              </div>
+              <div className="col d-flex justify-content-center">
+                <button className="btn btn-primary btn-block bill-voting-button" type="button">Stop Voting</button>
+              </div>
+              <div className="col d-flex justify-content-center">
+                <button className="btn btn-primary btn-block bill-voting-button" type="button">Show Res</button>
+              </div>
             </div>
-            <div className="col d-flex justify-content-center">
-              <button className="btn btn-primary bill-voting-button" type="button">Stop Voting</button>
+
+            <div className="row">
+              <div className="col d-flex justify-content-end" style={{marginTop: 10}}>
+                <button className="btn btn-primary bill-voting-button" type="button">Next</button>
+              </div>
             </div>
-            <div className="col d-flex justify-content-center">
-              <button className="btn btn-primary bill-voting-button" type="button">Show Res</button>
-            </div>
-          </div>
-          <div className="col-lg-9 offset-lg-2 d-flex justify-content-end">
-            <button className="btn btn-primary bill-voting-button" type="button">Next</button>
+
           </div>
         </div>
+
+
       </div>
     );
   }
