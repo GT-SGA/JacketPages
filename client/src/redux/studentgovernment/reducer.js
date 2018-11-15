@@ -1,26 +1,36 @@
 import types from './types';
 
 const initialState = {
+  bills: [],
   error: null,
+  isFetching: false,
   sga_people: [],
-  users: [],
 };
 
-const studentGovernment = (state = initialState, action) => {
+const studentgovernment = (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_SGA_PEOPLE_REQUEST: return Object.assign({}, state, {
+    case types.FETCH_SGA_PEOPLE_REQUEST:
+    case types.FETCH_AGENDA_BILLS_REQUEST: return Object.assign({}, state, {
       isFetching: true,
     });
-    case types.FETCH_SGA_PEOPLE_SUCCESS: return Object.assign({}, state, {
-      sga_people: action.payload,
+    case types.FETCH_AGENDA_BILLS_SUCCESS: return Object.assign({}, state, {
       isFetching: false,
+      bills: action.payload,
     });
-    case types.FETCH_SGA_PEOPLE_FAILURE: return Object.assign({}, state, {
+    case types.FETCH_AGENDA_BILLS_FAILURE: return Object.assign({}, state, {
+      isFetching: false,
       error: action.error,
-      isFetching: false,
     });
+    case types.FETCH_SGA_PEOPLE_SUCCESS: return Object.assign({}, state, {
+      isFetching: false,
+      sga_people: action.payload,
+    });
+    case types.FETCH_SGA_PEOPLE_FAILURE: return (Object.assign({}, state, {
+      isFetching: false,
+      error: action.error,
+    }));
     default: return state;
   }
 };
 
-export default studentGovernment;
+export default studentgovernment;

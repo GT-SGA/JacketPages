@@ -10,7 +10,7 @@ class SGAPeople extends Component {
     super(props);
 
     this.state = {
-      people: this.props.sgaPeople,
+      people: this.props.SGA.sga_people,
     };
   }
 
@@ -324,7 +324,7 @@ class SGAPeople extends Component {
               </div>
             </div>
             <div id="forupdate">
-              <PeopleTable people={this.props.sgaPeople} />
+              <PeopleTable people={this.props.SGA.sga_people} />
             </div>
           </div>
         </div>
@@ -334,7 +334,7 @@ class SGAPeople extends Component {
 }
 
 const mapStateToProps = state => ({
-  sgaPeople: state.studentGovernment.sga_people,
+  SGA: state.studentgovernment,
 });
 
 const mapDispatchToProps = dispatch => ({

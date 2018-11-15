@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 import bills from './bills/reducer';
-import studentGovernment from './studentgovernment/reducer';
+import studentgovernment from './studentgovernment/reducer';
 
 const rootReducer = combineReducers({
   bills,
-  studentGovernment,
+  studentgovernment,
 });
 
 export default rootReducer;

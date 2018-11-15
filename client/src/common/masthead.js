@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Masthead extends Component {
   constructor(props) {
     super(props);
     this.state = {
       admin: false,
-      user: true,
+      user: null,
     };
+
+    this.onLogin = this.onLogin.bind(this);
+  }
+
+  onLogin() {
+    this.props.login();
   }
 
   render() {
@@ -48,7 +55,7 @@ class Masthead extends Component {
                   <ul className="menu">
                     <li className="expanded first"></li>
                     <li className="expanded"></li>
-                    <AccountTab user={this.state.user}/>
+                    <AccountTab user={this.state.user} login={this.onLogin} />
                     <li className="expanded"></li>
                     <li className="expanded">
                       <a href="organizations.html"><span>Organizations</span></a>
@@ -65,17 +72,17 @@ class Masthead extends Component {
                         </li>
                       </ul>
                     </li>
-                    <li className="expanded"></li>
-                    <li className="expanded">
+                    <li class="expanded"></li>
+                    <li class="expanded">
                       <a href="/bills"><span>Bills</span></a>
-                      <ul className="menu">
-                        <li className="leaf first">
-                            <a href="http://jacketpages.gatech.edu/bills/add">Submit Bill</a>
+                      <ul class="menu">
+                        <li class="leaf first">
+                            <a href="/create_bill">Submit Bill</a>
                         </li>
                         <li className="leaf">
                             <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
                         </li>
-                        <li className="leaf last">
+                        <li class="leaf last">
                             <a href="/bills">View All Bills</a>
                         </li>
                         </ul>
@@ -113,13 +120,16 @@ const AccountTab = (props) => {
           </ul>
       </li>
     );
-  } else {
-    return (
-      <li className="expanded">
-        <a href="#"><span>Login</span></a>
-      </li>
-    );
   }
-}
+  return (
+    <li className="expanded">
+      <a href="/auth"><span>Login</span></a>
+    </li>
+  );
+};
 
-export default Masthead;
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, null)(Masthead);

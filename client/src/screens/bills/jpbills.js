@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import actions from '../../redux/bills/actions';
 
+import Alphabet from '../../common/alphabet';
 import BillsTable from './components/billstable';
 
 class JPBills extends Component {
@@ -14,6 +15,10 @@ class JPBills extends Component {
       bills: this.props.bills.bills,
     };
     // this.filterBills = this.filterBills.bind(this);
+  }
+
+  getDerivedStateFromProps(nextProps) {
+    this.setState({ bills: nextProps.bills.bills });
   }
 
   /* TODO: search bills in frontend */
@@ -61,7 +66,7 @@ class JPBills extends Component {
               </form>
             </div>
             <div id="rightHalf">
-              {/* <Alphabet /> */}
+              <Alphabet />
             </div>
           </div>
           <div id="accordion" className="ui-accordion ui-widget ui-helper-reset" role="tablist">

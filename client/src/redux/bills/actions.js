@@ -22,6 +22,27 @@ const fetchBills = () => (
   }
 );
 
+const createBillsRequest = () => ({
+  type: types.CREATE_BILLS_REQUEST,
+});
+
+const createBillsSuccess = bills => ({
+  type: types.CREATE_BILLS_SUCCESS,
+  payload: bills,
+});
+
+const createBills = () => (
+  (dispatch) => {
+    dispatch(createBillsRequest());
+    // return api.get('bills/bills_all')
+    //   .then(res => dispatch(createBillsSuccess(res.data)))
+    //   .catch(error => ({
+    //     type: types.CREATE_BILLS_FAILURE,
+    //     error,
+    //   }));
+  }
+);
+
 const actions = {
   fetchBills,
 };
