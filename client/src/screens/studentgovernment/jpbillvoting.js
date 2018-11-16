@@ -6,6 +6,7 @@ import actions from '../../redux/studentgovernment/actions';
 
 import JPBillVotingAdminView from './jpbillvotingadminview';
 import JPBillVotingUHRRepView from './jpbillvotinguhrrepview';
+import JPBillVotingAttendance from './jpbillvotingattendance';
 
 const BillAgenda = (props) => {
   const { bills } = props;
@@ -46,7 +47,8 @@ class JPBillVoting extends Component {
 
   renderContent() {
     if (this.state.admin) {
-      return <JPBillVotingAdminView />;
+      return [<JPBillVotingAdminView />,
+      <JPBillVotingAttendance people={this.props.studentgovernment.sga_people}/>];
     }
     if (!this.state.present) {
       return (
@@ -86,6 +88,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchAgendaBills: dispatch(actions.fetchAgendaBills()),
+  fetchSGAPeople: dispatch(actions.fetchSGAPeople()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JPBillVoting);
