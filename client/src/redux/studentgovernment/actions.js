@@ -2,6 +2,38 @@ import types from './types';
 
 import api from '../../common/api';
 
+const fetchUsersRequest = () => ({
+  type: types.FETCH_USERS_REQUEST,
+  isFetching: true,
+});
+
+const fetchUsersSuccess = users => ({
+  type: types.FETCH_USERS_SUCCESS,
+  isFetching: false,
+  payload: users,
+});
+
+const fetchUsersFailure = error => ({
+  type: types.FETCH_USERS_FAILURE,
+  isFetching: false,
+  error,
+});
+
+const fetchUsers = () => (
+  (dispatch) => {
+    dispatch(fetchUsersRequest());
+    return api.get('/users/api/users')
+      .then((res) => {
+        const users = {};
+        res.data.forEach((user) => {
+          users[user.id] = user;
+        });
+        dispatch(fetchUsersSuccess(users));
+      })
+      .catch(error => dispatch(fetchUsersFailure(error)));
+  }
+);
+
 const fetchSGAPeopleRequest = () => ({
   type: types.FETCH_SGA_PEOPLE_REQUEST,
   isFetching: true,
@@ -21,36 +53,10 @@ const fetchSGAPeopleFailure = error => ({
 const fetchSGAPeople = () => (
   (dispatch) => {
     dispatch(fetchSGAPeopleRequest());
+    dispatch(fetchUsers());
     return api.get('/users/api/people')
       .then(res => dispatch(fetchSGAPeopleSuccess(res)))
       .catch(error => dispatch(fetchSGAPeopleFailure(error)));
-  }
-);
-
-const fetchUsersRequest = () => ({
-  type: types.FETCH_USERS_REQUEST,
-  isFetching: true,
-});
-
-const fetchUsersSuccess = res => ({
-  type: types.FETCH_USERS_SUCCESS,
-  isFetching: false,
-  payload: res.data,
-});
-
-const fetchUsersFailure = error => ({
-  type: types.FETCH_USERS_FAILURE,
-  isFetching: false,
-  error,
-});
-
-const fetchUsers = () => (
-  (dispatch) => {
-    dispatch(fetchUsersRequest());
-
-    return api.get('/users/api/')
-      .then(res => dispatch(fetchUsersSuccess(res)))
-      .catch(error => dispatch(fetchUsersFailure(error)));
   }
 );
 

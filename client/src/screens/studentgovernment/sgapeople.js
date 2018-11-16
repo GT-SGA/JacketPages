@@ -324,7 +324,7 @@ class SGAPeople extends Component {
               </div>
             </div>
             <div id="forupdate">
-              <PeopleTable people={this.props.SGA.sga_people} />
+              <PeopleTable people={this.props.SGA.sga_people} users={this.props.SGA.users}/>
             </div>
           </div>
         </div>
