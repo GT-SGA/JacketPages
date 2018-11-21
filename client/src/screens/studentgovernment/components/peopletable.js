@@ -11,7 +11,7 @@ const peopleRow = (person, users) => {
       <td>{person.department}</td>
       <td>{person.status}</td>
     </tr>
-  )
+  );
 };
 
 class PeopleTable extends Component {

@@ -53,7 +53,6 @@ const fetchSGAPeopleFailure = error => ({
 const fetchSGAPeople = () => (
   (dispatch) => {
     dispatch(fetchSGAPeopleRequest());
-    dispatch(fetchUsers());
     return api.get('/users/api/people')
       .then(res => dispatch(fetchSGAPeopleSuccess(res)))
       .catch(error => dispatch(fetchSGAPeopleFailure(error)));
