@@ -19,15 +19,15 @@ connection.query("USE jpdev");
 
 //Gets list of all users in the user table
 router.get("/users", (req, res) => {
-    connection.query(`SELECT * FROM users ORDER BY id DESC LIMIT 50`, function(err, rows) {
+    connection.query(`SELECT * FROM users ORDER BY id DESC`, function(err, rows) {
         res.send({data: rows});
     });
 });
 
 //Gets user in user table based on id
 //used in sgapeople.html to get first and last names
-router.get("/user", (req, res) => {
-    connection.query(`SELECT * FROM users WHERE id=${req.query.id}`, function(err, rows) {
+router.get("/users/:id", (req, res) => {
+    connection.query(`SELECT * FROM users WHERE id=${req.params.id}`, function(err, rows) {
         res.send({data:
                  rows
         });
