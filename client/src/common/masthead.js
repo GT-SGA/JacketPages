@@ -63,9 +63,13 @@ class Masthead extends Component {
                         <li className="leaf first">
                             <a href="/sgapeople">View SGA Members</a>
                         </li>
-                        <li className="leaf">
-                          <a href="/bill_voting">Vote on Bills</a>
-                        </li>
+                        {this.props.auth.user &&
+                          (this.props.auth.user.level === 'sga_user' || this.props.auth.user.level === 'admin') &&
+                          (
+                            <li className="leaf">
+                              <a href="/bill_voting">Vote on Bills</a>
+                            </li>
+                          )}
                       </ul>
                     </li>
                     <li className="expanded"></li>

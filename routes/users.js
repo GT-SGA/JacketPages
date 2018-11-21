@@ -35,7 +35,7 @@ router.get("/user", (req, res) => {
 });
 
 router.get('/user/:uid', (req, res) => {
-  connection.query(`SELECT * FROM users WHERE gt_user_name=${req.query.uid}`, (err, rows) => {
+  connection.query(`SELECT * FROM users WHERE gt_user_name='${req.params.uid}'`, (err, rows) => {
     res.send({ data: rows });
   });
 });
