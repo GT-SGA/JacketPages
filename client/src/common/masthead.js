@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Masthead extends Component {
   constructor(props) {
     super(props);
     this.state = {
       admin: false,
-      user: true,
+      user: null,
     };
+
+    this.onLogin = this.onLogin.bind(this);
+  }
+
+  onLogin() {
+    this.props.login();
   }
 
   render() {
@@ -48,7 +55,7 @@ class Masthead extends Component {
                   <ul className="menu">
                     <li className="expanded first"></li>
                     <li className="expanded"></li>
-                    <AccountTab user={this.state.user}/>
+                    <AccountTab user={this.state.user} login={this.onLogin} />
                     <li className="expanded"></li>
                     <li className="expanded">
                       <a href="organizations.html"><span>Organizations</span></a>
@@ -113,13 +120,16 @@ const AccountTab = (props) => {
           </ul>
       </li>
     );
-  } else {
-    return (
-      <li className="expanded">
-        <a href="#"><span>Login</span></a>
-      </li>
-    );
   }
-}
+  return (
+    <li className="expanded">
+      <a href="/auth"><span>Login</span></a>
+    </li>
+  );
+};
 
-export default Masthead;
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, null)(Masthead);

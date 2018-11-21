@@ -4,10 +4,12 @@ const initialState = {
   bills: [],
   error: null,
   isFetching: false,
+  sga_people: [],
 };
 
 const studentgovernment = (state = initialState, action) => {
   switch (action.type) {
+    case types.FETCH_SGA_PEOPLE_REQUEST:
     case types.FETCH_AGENDA_BILLS_REQUEST: return Object.assign({}, state, {
       isFetching: true,
     });
@@ -19,6 +21,14 @@ const studentgovernment = (state = initialState, action) => {
       isFetching: false,
       error: action.error,
     });
+    case types.FETCH_SGA_PEOPLE_SUCCESS: return Object.assign({}, state, {
+      isFetching: false,
+      sga_people: action.payload,
+    });
+    case types.FETCH_SGA_PEOPLE_FAILURE: return (Object.assign({}, state, {
+      isFetching: false,
+      error: action.error,
+    }));
     default: return state;
   }
 };
