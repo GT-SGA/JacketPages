@@ -5,6 +5,9 @@ const path = require('path');
 const mysql = require('mysql');
 const session = require('express-session');
 const CASAuthentication = require('cas-authentication-gt');
+const Redis = require('./redis');
+
+const redis = new Redis();
 
 const app = express();
 

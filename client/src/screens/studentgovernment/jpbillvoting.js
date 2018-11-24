@@ -26,17 +26,17 @@ class JPBillVoting extends Component {
     super(props);
 
     this.state = {
-      bills: this.props.studentgovernment.bills,
+      bills: this.props.SGA.bills,
       currentBill: 0,
       present: true,
-      admin: false,
+      admin: true,
     };
 
     this.renderContent = this.renderContent.bind(this);
   }
 
   getDerivedStateFromProps(nextProps) {
-    this.setState({ bills: nextProps.studentgovernment.bills });
+    this.setState({ bills: nextProps.SGA.bills });
   }
 
   renderBillRow(bill) {
@@ -47,8 +47,14 @@ class JPBillVoting extends Component {
 
   renderContent() {
     if (this.state.admin) {
-      return [<JPBillVotingAdminView />,
-      <JPBillVotingAttendance people={this.props.studentgovernment.sga_people}/>];
+      return [
+        <JPBillVotingAdminView />,
+        <JPBillVotingAttendance
+          people={this.props.SGA.sga_people}
+          users={this.props.SGA.users}
+          markPresent={this.props.markPresent}
+        />,
+      ];
     }
     if (!this.state.present) {
       return (
@@ -61,8 +67,7 @@ class JPBillVoting extends Component {
   }
 
   render() {
-    const { bills } = this.props.studentgovernment;
-    console.log(bills);
+    const { bills } = this.props.SGA;
 
     return (
       <div className="container">
@@ -83,12 +88,13 @@ class JPBillVoting extends Component {
 }
 
 const mapStateToProps = state => ({
-  studentgovernment: state.studentgovernment,
+  SGA: state.studentgovernment,
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchAgendaBills: dispatch(actions.fetchAgendaBills()),
   fetchSGAPeople: dispatch(actions.fetchSGAPeople()),
+  markPresent: ids => dispatch(actions.markPresent(ids)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JPBillVoting);
