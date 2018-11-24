@@ -30,7 +30,7 @@ app.use(session({
 
 const cas = new CASAuthentication({
   cas_url: 'https://login.gatech.edu/cas/login',
-  service_url: 'https://jacketpages.gatech.edu',
+  service_url: 'https://jacketpages.sga.gatech.edu',
 });
 
 /* SERVER & DB SETUP */

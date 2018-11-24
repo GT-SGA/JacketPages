@@ -34,6 +34,12 @@ router.get("/users/:id", (req, res) => {
     });
 });
 
+router.get('/user/:uid', (req, res) => {
+  connection.query(`SELECT * FROM users WHERE gt_user_name='${req.params.uid}'`, (err, rows) => {
+    res.send({ data: rows });
+  });
+});
+
 router.get("/find_user", (req,res) => {
     connection.query(`SELECT * FROM users WHERE first_name='${req.query.first_name}' && last_name='${req.query.last_name}'`, function(err, rows) {
         res.send({data: rows});

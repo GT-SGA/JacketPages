@@ -18,7 +18,7 @@ connection.connect(function(err) {
 // Use the database jacketpages_dev
 connection.query("USE jpdev");
 
-const basePath = 'http://sga.gatech.edu'
+const basePath = 'http://jacketpages.sga.gatech.edu'
 
 // Express Session
 router.use(session({
@@ -31,7 +31,7 @@ router.use(session({
 //Cas authentication
 const cas = new CASAuthentication({
   cas_url: 'https://login.gatech.edu/cas',
-  service_url: 'http://sga.gatech.edu',
+  service_url: 'http://jacketpages.sga.gatech.edu',
   cas_version: 'saml1.1',
 });
 

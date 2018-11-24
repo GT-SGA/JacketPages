@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import actions from '../redux/auth/actions';
+
 class Masthead extends Component {
   constructor(props) {
     super(props);
@@ -55,7 +57,7 @@ class Masthead extends Component {
                   <ul className="menu">
                     <li className="expanded first"></li>
                     <li className="expanded"></li>
-                    <AccountTab user={this.state.user} login={this.onLogin} />
+                    <AccountTab user={this.props.auth.user} />
                     <li className="expanded"></li>
                     <li className="expanded">
                       <a href="organizations.html"><span>Organizations</span></a>
@@ -67,22 +69,26 @@ class Masthead extends Component {
                         <li className="leaf first">
                             <a href="/sgapeople">View SGA Members</a>
                         </li>
-                        <li className="leaf">
-                          <a href="/bill_voting">Vote on Bills</a>
-                        </li>
+                        {this.props.auth.user &&
+                          (this.props.auth.user.level === 'sga_user' || this.props.auth.user.level === 'admin') &&
+                          (
+                            <li className="leaf">
+                              <a href="/bill_voting">Vote on Bills</a>
+                            </li>
+                          )}
                       </ul>
                     </li>
-                    <li class="expanded"></li>
-                    <li class="expanded">
+                    <li className="expanded"></li>
+                    <li className="expanded">
                       <a href="/bills"><span>Bills</span></a>
-                      <ul class="menu">
-                        <li class="leaf first">
+                      <ul className="menu">
+                        <li className="leaf first">
                             <a href="/create_bill">Submit Bill</a>
                         </li>
                         <li className="leaf">
                             <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
                         </li>
-                        <li class="leaf last">
+                        <li className="leaf last">
                             <a href="/bills">View All Bills</a>
                         </li>
                         </ul>
@@ -123,7 +129,7 @@ const AccountTab = (props) => {
   }
   return (
     <li className="expanded">
-      <a href="/auth"><span>Login</span></a>
+      <a href="https://localhost:80/auth/login"><span>Login</span></a>
     </li>
   );
 };
@@ -132,4 +138,8 @@ const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, null)(Masthead);
+const mapDispatchToProps = dispatch => ({
+  info: dispatch(actions.info()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Masthead);
