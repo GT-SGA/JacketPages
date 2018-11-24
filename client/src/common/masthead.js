@@ -8,8 +8,14 @@ class Masthead extends Component {
     super(props);
     this.state = {
       admin: false,
-      user: true,
+      user: null,
     };
+
+    this.onLogin = this.onLogin.bind(this);
+  }
+
+  onLogin() {
+    this.props.login();
   }
 
   render() {
@@ -120,14 +126,13 @@ const AccountTab = (props) => {
           </ul>
       </li>
     );
-  } else {
-    return (
-      <li className="expanded">
-        <a href="https://localhost:80/auth/login"><span>Login</span></a>
-      </li>
-    );
   }
-}
+  return (
+    <li className="expanded">
+      <a href="https://localhost:80/auth/login"><span>Login</span></a>
+    </li>
+  );
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,

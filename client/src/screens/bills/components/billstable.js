@@ -67,6 +67,7 @@ class BillsTable extends Component {
 
   render() {
     const { bills } = this.props;
+
     const billsToDisplay = bills.slice(
       this.state.offset,
       this.state.offset + itemLimit

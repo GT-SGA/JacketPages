@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import bills from './bills/billsreducer';
+import bills from './bills/reducer';
 import studentgovernment from './studentgovernment/reducer';
 import auth from './auth/reducer';
 

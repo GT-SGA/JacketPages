@@ -9,7 +9,7 @@ import Footer from './common/footer';
 
 import Home from './screens/home';
 import JPBills from './screens/bills/jpbills';
-import SGAPeople from './screens/sgapeople';
+import SGAPeople from './screens/studentgovernment/sgapeople';
 import JPBillVoting from './screens/studentgovernment/jpbillvoting';
 import JPCreateBill from './screens/bills/jpcreatebill';
 

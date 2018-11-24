@@ -134,33 +134,11 @@ class JPBills extends Component {
             </div>
           </div>
           {/* TODO: change this to use state so that filtering in the frontend can be done */}
-          <BillsTable
-            bills={this.props.bills.bills}
-          />
-          <script>
-            {/* $(function() {
-              $("#accordion").accordion({
-                collapsible : true,
-                heightStyle: "content",
-                active : false		});
-            }); */}
-          </script>
-          {/* <div className="paging">
-            <span className="disabled">&lt;&lt; previous</span>    |
-            |
-            <span className="disabled">next &gt;&gt;</span>
-            <br />
-            <br />
-            Page
-            <span id="currpg" />
-            of
-            <span id="totalpgno" />
-            , showing
-            <span id="numrec" />
-            records out of
-            <span id="numrectotal" />
-            total, starting on record 0, ending on 0
-          </div> */}
+          <div id="forupdate">
+            <BillsTable
+              bills={this.props.bills.bills}
+            />
+          </div>
         </div>
       </div>
     );
