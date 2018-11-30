@@ -7,10 +7,10 @@ const fetchUsersRequest = () => ({
   isFetching: true,
 });
 
-const fetchUsersSuccess = users => ({
+const fetchUsersSuccess = res => ({
   type: types.FETCH_USERS_SUCCESS,
   isFetching: false,
-  payload: users,
+  payload: res.data,
 });
 
 const fetchUsersFailure = error => ({
@@ -23,13 +23,7 @@ const fetchUsers = () => (
   (dispatch) => {
     dispatch(fetchUsersRequest());
     return api.get('/users/api/users')
-      .then((res) => {
-        const users = {};
-        res.data.forEach((user) => {
-          users[user.id] = user;
-        });
-        dispatch(fetchUsersSuccess(users));
-      })
+      .then(res => dispatch(fetchUsersSuccess(res)))
       .catch(error => dispatch(fetchUsersFailure(error)));
   }
 );
@@ -53,6 +47,7 @@ const fetchSGAPeopleFailure = error => ({
 const fetchSGAPeople = () => (
   (dispatch) => {
     dispatch(fetchSGAPeopleRequest());
+    dispatch(fetchUsers());
     return api.get('/users/api/people')
       .then(res => dispatch(fetchSGAPeopleSuccess(res)))
       .catch(error => dispatch(fetchSGAPeopleFailure(error)));
@@ -83,10 +78,31 @@ const fetchAgendaBills = () => (
   }
 );
 
+const markPresentRequest = () => ({
+  type: types.MARK_PRESENT_REQUEST,
+});
+
+const markPresentSuccess = () => ({
+  type: types.MARK_PRESENT_SUCCESS,
+});
+
+const markPresent = ids => (
+  (dispatch) => {
+    dispatch(markPresentRequest());
+    api.post('/users/api/mark_present', { ids })
+      .then(() => dispatch(markPresentSuccess()))
+      .catch(error => ({
+        type: types.MARK_PRESENT_FAILURE,
+        error,
+      }));
+  }
+);
+
 const actions = {
   fetchSGAPeople,
   fetchUsers,
   fetchAgendaBills,
+  markPresent,
 };
 
 export default actions;

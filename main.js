@@ -5,8 +5,9 @@ const path = require('path');
 const mysql = require('mysql');
 const session = require('express-session');
 const CASAuthentication = require('cas-authentication-gt');
-
 const Redis = require('./redis');
+
+const redis = new Redis();
 
 const app = express();
 
@@ -54,8 +55,6 @@ const port = (process.env.port || 80);
 const server = app.listen(port);
 
 const io = require('socket.io').listen(server);
-
-let redis = new Redis();
 
 app.use(express.static('public')); // automatically serves static files home.html and its css files
 

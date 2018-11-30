@@ -3,6 +3,10 @@ const cors = require("cors");
 const mysql = require("mysql");
 const router = express.Router();
 
+const redis = require('../redis');
+
+const Redis = new redis();
+
 var connection = mysql.createConnection({
     host        :   "localhost",
     user        :   "root",
@@ -32,6 +36,13 @@ router.get("/users/:id", (req, res) => {
                  rows
         });
     });
+});
+
+router.post('/mark_present', (req) => {
+  console.log("body", req.body);
+  req.body.ids.forEach((id) => {
+    Redis.write(id, 'present');
+  });
 });
 
 router.get('/user/:uid', (req, res) => {
