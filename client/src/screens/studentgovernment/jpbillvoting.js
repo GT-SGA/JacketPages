@@ -56,18 +56,20 @@ class JPBillVoting extends Component {
         />,
       ];
     }
-    if (!this.state.present) {
+
+    return <JPBillVotingUHRRepView />;
+  }
+
+  render() {
+    const { bills } = this.props.SGA;
+
+    if (!this.state.present && !this.state.admin) {
       return (
         <div>
           You must be marked present at the meeting in order to vote.
         </div>
       );
     }
-    return <JPBillVotingUHRRepView />;
-  }
-
-  render() {
-    const { bills } = this.props.SGA;
 
     return (
       <div className="container">
