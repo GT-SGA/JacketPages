@@ -76,8 +76,103 @@ const fetchAgendaBills = () => (
         const agendaBills = res.data.filter(bill => bill.status === 4);
         dispatch(fetchAgendaBillsSuccess(agendaBills));
       })
-      .catch(error => ({
+      .catch(error => dispatch({
         type: types.FETCH_AGENDA_BILLS_FAILURE,
+        error,
+      }));
+  }
+);
+
+const startBillVotingRequest = () => ({
+  type: types.START_BILL_VOTING_REQUEST,
+});
+
+const startBillVoting = id => (
+  (dispatch) => {
+    dispatch(startBillVotingRequest());
+    api.post('/voting/startVoting', { id })
+      .then(() => dispatch({
+        type: types.START_BILL_VOTING_SUCCESS,
+      }))
+      .catch(error => dispatch({
+        type: types.START_BILL_VOTING_FAILURE,
+        error,
+      }));
+  }
+);
+
+const stopBillVotingRequest = () => ({
+  type: types.STOP_BILL_VOTING_REQUEST,
+});
+
+const stopBillVoting = () => (
+  (dispatch) => {
+    dispatch(stopBillVotingRequest());
+    api.post('/voting/stopVoting')
+      .then(() => dispatch({
+        type: types.STOP_BILL_VOTING_SUCCESS,
+      }))
+      .catch(error => dispatch({
+        type: types.STOP_BILL_VOTING_FAILURE,
+        error,
+      }));
+  }
+);
+
+const voteRequest = () => ({
+  type: types.VOTE_REQUEST,
+});
+
+const vote = (billId, repVote) => (
+  (dispatch) => {
+    dispatch(voteRequest());
+    api.post('/voting/vote', {
+      bill: "875",
+      vote: repVote,
+    }).then(() => dispatch({
+      type: types.VOTE_SUCCESS,
+    })).catch(error => dispatch({
+      type: types.VOTE_FAILURE,
+      error,
+    }));
+  }
+);
+
+const getResultsRequest = () => ({
+  type: types.GET_RESULTS_REQUEST,
+});
+
+const getResultsSuccess = res => ({
+  type: types.GET_RESULTS_SUCCESS,
+  payload: res.data,
+});
+
+const getResults = billId => (
+  (dispatch) => {
+    dispatch(getResultsRequest());
+    api.get(`/voting/getResults/${billId}`)
+      .then(res => dispatch(getResultsSuccess(res)))
+      .catch(error => dispatch({
+        type: types.GET_RESULTS_FAILURE,
+        error,
+      }));
+  }
+);
+
+const getCurrentBillRequest = () => ({
+  type: types.GET_CURRENT_BILL_REQUEST,
+});
+
+const getCurrentBill = () => (
+  (dispatch) => {
+    dispatch(getCurrentBillRequest());
+    api.get('/voting/currentBill')
+      .then(res => dispatch({
+        type: types.GET_CURRENT_BILL_SUCCESS,
+        payload: res.data,
+      }))
+      .catch(error => dispatch({
+        type: types.GET_CURRENT_BILL_FAILURE,
         error,
       }));
   }
@@ -87,6 +182,11 @@ const actions = {
   fetchSGAPeople,
   fetchUsers,
   fetchAgendaBills,
+  startBillVoting,
+  stopBillVoting,
+  vote,
+  getResults,
+  getCurrentBill,
 };
 
 export default actions;
