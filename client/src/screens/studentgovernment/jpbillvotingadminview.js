@@ -36,6 +36,16 @@ class JPBillVotingAdminView extends Component {
     <p>Organization: {this.state.bill.organization}</p>
   }
 
+  showResults() {
+    var content = document.getElementById("voting-results");
+
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  }
+
   render() {
     return (
       <div className="container-fluid">
@@ -65,7 +75,17 @@ class JPBillVotingAdminView extends Component {
                 </button>
               </div>
               <div className="col d-flex justify-content-center">
-                <button className="btn btn-primary btn-block bill-voting-button" type="button">Show Res</button>
+                <button className="btn btn-primary btn-block bill-voting-button collapsible" type="button" onClick={this.showResults}>Show Results</button>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col">
+                <div id="voting-results">
+                  <p style={{ marginTop: ".5rem" }}>Yeas: </p>
+                  <p>Nays: </p>
+                  <p>Abstains: </p>
+                </div>
               </div>
             </div>
 
