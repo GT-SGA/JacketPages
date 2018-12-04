@@ -73,12 +73,14 @@ class JPBillVoting extends Component {
   }
 
   renderContent() {
+    console.log("student gov", this.props.studentgovernment.results);
     if (this.props.auth.user && this.props.auth.user.level === 'admin') {
       return (
         <div>
           <JPBillVotingAdminView
             startBillVoting={this.startVoting}
             stopBillVoting={this.stopVoting}
+            results={this.props.studentgovernment.results}
           />
           <JPBillVotingAttendance people={this.props.studentgovernment.sga_people} />
         </div>

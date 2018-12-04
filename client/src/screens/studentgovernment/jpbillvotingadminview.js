@@ -47,6 +47,7 @@ class JPBillVotingAdminView extends Component {
   }
 
   render() {
+    console.log("results", this.props.results);
     return (
       <div className="container-fluid">
         <div className="row">
@@ -82,9 +83,9 @@ class JPBillVotingAdminView extends Component {
             <div className="row">
               <div className="col">
                 <div id="voting-results">
-                  <p style={{ marginTop: ".5rem" }}>Yeas: </p>
-                  <p>Nays: </p>
-                  <p>Abstains: </p>
+                  <p style={{ marginTop: ".5rem" }}>Yeas: {this.props.results.yes}</p>
+                  <p>Nays: {this.props.results.no}</p>
+                  <p>Abstains: {this.props.results.abstain}</p>
                 </div>
               </div>
             </div>

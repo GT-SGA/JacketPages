@@ -105,12 +105,35 @@ const stopBillVotingRequest = () => ({
   type: types.STOP_BILL_VOTING_REQUEST,
 });
 
+const getResultsRequest = () => ({
+  type: types.GET_RESULTS_REQUEST,
+});
+
+const getResultsSuccess = res => ({
+  type: types.GET_RESULTS_SUCCESS,
+  payload: res.data,
+});
+
+const getResults = () => (
+  (dispatch) => {
+    dispatch(getResultsRequest());
+    api.get('/voting/getResults')
+      .then(res => dispatch(getResultsSuccess(res)))
+      .catch(error => dispatch({
+        type: types.GET_RESULTS_FAILURE,
+        error,
+      }));
+  }
+);
+
 const stopBillVoting = () => (
   (dispatch) => {
+    // dispatch(getResults());
     dispatch(stopBillVotingRequest());
     api.post('/voting/stopVoting')
-      .then(() => dispatch({
+      .then(res => dispatch({
         type: types.STOP_BILL_VOTING_SUCCESS,
+        payload: res.data,
       }))
       .catch(error => dispatch({
         type: types.STOP_BILL_VOTING_FAILURE,
@@ -135,27 +158,6 @@ const vote = (billId, repVote) => (
       type: types.VOTE_FAILURE,
       error,
     }));
-  }
-);
-
-const getResultsRequest = () => ({
-  type: types.GET_RESULTS_REQUEST,
-});
-
-const getResultsSuccess = res => ({
-  type: types.GET_RESULTS_SUCCESS,
-  payload: res.data,
-});
-
-const getResults = billId => (
-  (dispatch) => {
-    dispatch(getResultsRequest());
-    api.get(`/voting/getResults/${billId}`)
-      .then(res => dispatch(getResultsSuccess(res)))
-      .catch(error => dispatch({
-        type: types.GET_RESULTS_FAILURE,
-        error,
-      }));
   }
 );
 
@@ -185,7 +187,6 @@ const actions = {
   startBillVoting,
   stopBillVoting,
   vote,
-  getResults,
   getCurrentBill,
 };
 

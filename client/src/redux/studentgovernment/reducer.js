@@ -6,6 +6,7 @@ const initialState = {
   isFetching: false,
   sga_people: [],
   users: {},
+  results: {},
 };
 
 const studentgovernment = (state = initialState, action) => {
@@ -52,9 +53,12 @@ const studentgovernment = (state = initialState, action) => {
       currentBill: action.payload,
     });
     case types.VOTE_SUCCESS:
-    case types.START_BILL_VOTING_SUCCESS:
+    case types.START_BILL_VOTING_SUCCESS: return Object.assign({}, state, {
+      isFetching: false,
+    });
     case types.STOP_BILL_VOTING_SUCCESS: return Object.assign({}, state, {
       isFetching: false,
+      results: action.payload,
     });
     default: return state;
   }

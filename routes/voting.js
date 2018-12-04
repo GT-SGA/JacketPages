@@ -30,13 +30,15 @@ router.get('/currentBill', (req, res) => {
 });
 
 router.get('/getResults', (req, res) => {
-  res.send({
-    data: {
-      billId: req.params.billId,
-      yes: Redis.get(`voting_${req.params.billId}_yes`),
-      no: Redis.get(`voting_${req.params.billId}_no`),
-      abstain: Redis.get(`voting_${req.params.billId}_abstain`),
-    },
+  Redis.get('bill_voting', (err, reply) => {
+    res.send({
+      data: {
+        billId: reply,
+        yes: Redis.get(`voting_${reply}_yes`),
+        no: Redis.get(`voting_${reply}_no`),
+        abstain: Redis.get(`voting_${reply}_abstain`),
+      },
+    });
   });
 });
 
@@ -49,8 +51,19 @@ router.post('/startVoting', (req, res) => {
 });
 
 router.post('/stopVoting', (req, res) => {
+  Redis.get('bill_voting', (err, reply) => {
+    Redis.mget([`voting_${reply}_yes`, `voting_${reply}_no`, `voting_${reply}_abstain`], (err1, replies) => {
+      res.send({
+        data: {
+          billId: reply,
+          yes: replies[0],
+          no: replies[1],
+          abstain: replies[2],
+        },
+      });
+    });
+  });
   Redis.remove('bill_voting');
-  res.send({ data: 'Success' });
 });
 
 router.post('/vote', (req, res) => {

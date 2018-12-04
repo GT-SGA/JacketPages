@@ -16,6 +16,10 @@ class Redis {
     this.client.get(key, cb);
   }
 
+  mget(keys, cb) {
+    this.client.mget(keys, cb);
+  }
+
   remove(key) {
     this.client.del(key);
   }
