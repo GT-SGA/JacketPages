@@ -7,7 +7,8 @@
     "server": "sudo node ./node_modules/nodemon/bin/nodemon.js main.js",
     "client": "cd client && npm start",
     "start": "npm run server",
-    "test": "echo \"Hi\""
+    "test": "echo \"Hi\"",
+    "heroku-postbuild": "npm run client"
   },
   "author": "",
   "license": "ISC",
