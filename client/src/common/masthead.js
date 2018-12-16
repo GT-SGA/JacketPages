@@ -57,7 +57,12 @@ class Masthead extends Component {
                   <ul className="menu">
                     <li className="expanded first"></li>
                     <li className="expanded"></li>
-                    <AccountTab user={this.props.auth.user} />
+                    <AccountTab
+                      user={this.props.auth.user}
+                      adminInfo={this.props.adminInfo}
+                      repInfo={this.props.repInfo}
+                      userInfo={this.props.userInfo}
+                    />
                     <li className="expanded"></li>
                     <li className="expanded">
                       <a href="organizations.html"><span>Organizations</span></a>
@@ -67,7 +72,7 @@ class Masthead extends Component {
                       <a href="/sgapeople"><span>Student Government</span></a>
                       <ul className="menu">
                         <li className="leaf first">
-                            <a href="/sgapeople">View SGA Members</a>
+                          <a href="/sgapeople">View SGA Members</a>
                         </li>
                         {this.props.auth.user &&
                           (this.props.auth.user.level === 'sga_user' || this.props.auth.user.level === 'admin') &&
@@ -83,16 +88,16 @@ class Masthead extends Component {
                       <a href="/bills"><span>Bills</span></a>
                       <ul className="menu">
                         <li className="leaf first">
-                            <a href="/create_bill">Submit Bill</a>
+                          <a href="/create_bill">Submit Bill</a>
                         </li>
                         <li className="leaf">
-                            <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
+                          <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
                         </li>
                         <li className="leaf last">
-                            <a href="/bills">View All Bills</a>
+                          <a href="/bills">View All Bills</a>
                         </li>
-                        </ul>
-                      </li>
+                      </ul>
+                    </li>
                     <li className="expanded"></li>
                     <li className="expanded">
                       <a href="http://localhost:3000/help"><span>Help</span></a>
@@ -112,24 +117,35 @@ const AccountTab = (props) => {
   if (props.user) {
     return (
       <li className="expanded">
-          <a href="http://jacketpages.gatech.edu/users/view/22053"><span>My Account</span></a>
-          <ul className="menu">
-              <li className="leaf first">
-                  <a href="http://jacketpages.gatech.edu/users/view/22053">Account Profile</a>
-              </li>
-              <li className="leaf">
-                  <a href="http://jacketpages.gatech.edu/users/logout">Logout</a>
-              </li>
-              <li className="leaf last">
-                  <a href="http://jacketpages.gatech.edu/">JacketPages Home</a>
-              </li>
-          </ul>
+        <a href="http://jacketpages.gatech.edu/users/view/22053"><span>My Account</span></a>
+        <ul className="menu">
+          <li className="leaf first">
+            <a href="http://jacketpages.gatech.edu/users/view/22053">Account Profile</a>
+          </li>
+          <li className="leaf">
+            <a href="http://jacketpages.gatech.edu/users/logout">Logout</a>
+          </li>
+          <li className="leaf last">
+            <a href="http://jacketpages.gatech.edu/">JacketPages Home</a>
+          </li>
+        </ul>
       </li>
     );
   }
   return (
     <li className="expanded">
       <a href="https://localhost:80/auth/login"><span>Login</span></a>
+      <ul className="menu">
+        <li className="leaf first">
+          <button onClick={props.adminInfo}>Admin</button>
+        </li>
+        <li className="leaf">
+          <button onClick={props.repInfo}>Rep</button>
+        </li>
+        <li className="leaf">
+          <button onClick={props.userInfo}>User</button>
+        </li>
+      </ul>
     </li>
   );
 };
@@ -139,7 +155,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  info: dispatch(actions.info()),
+  info: () => dispatch(actions.info()),
+  adminInfo: () => dispatch(actions.adminInfo()),
+  repInfo: () => dispatch(actions.repInfo()),
+  userInfo: () => dispatch(actions.userInfo()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Masthead);

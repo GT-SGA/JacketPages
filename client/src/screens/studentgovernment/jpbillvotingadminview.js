@@ -14,6 +14,16 @@ class JPBillVotingAdminView extends Component {
 
     this.renderBillRow = this.renderBillRow.bind(this);
     this.renderBillView = this.renderBillView.bind(this);
+    this.startVoting = this.startVoting.bind(this);
+    this.stopVoting = this.stopVoting.bind(this);
+  }
+
+  startVoting() {
+    this.props.startBillVoting();
+  }
+
+  stopVoting() {
+    this.props.stopBillVoting();
   }
 
   renderBillRow(bill) {
@@ -37,6 +47,7 @@ class JPBillVotingAdminView extends Component {
   }
 
   render() {
+    console.log("results", this.props.results);
     return (
       <div className="container-fluid">
         <div className="row">
@@ -46,10 +57,23 @@ class JPBillVotingAdminView extends Component {
 
             <div className="row">
               <div className="col d-flex justify-content-center">
-                <button className="btn btn-primary btn-block bill-voting-button" type="button" style={{ margin: 0 }}>Begin Voting</button>
+                <button
+                  className="btn btn-primary btn-block bill-voting-button"
+                  type="button"
+                  style={{ margin: 0 }}
+                  onClick={this.startVoting}
+                >
+                  Begin Voting
+                </button>
               </div>
               <div className="col d-flex justify-content-center">
-                <button className="btn btn-primary btn-block bill-voting-button" type="button">Stop Voting</button>
+                <button
+                  className="btn btn-primary btn-block bill-voting-button"
+                  type="button"
+                  onClick={this.stopVoting}
+                >
+                  Stop Voting
+                </button>
               </div>
               <div className="col d-flex justify-content-center">
                 <button className="btn btn-primary btn-block bill-voting-button collapsible" type="button" onClick={this.showResults}>Show Results</button>
@@ -59,9 +83,9 @@ class JPBillVotingAdminView extends Component {
             <div className="row">
               <div className="col">
                 <div id="voting-results">
-                  <p style={{ marginTop: ".5rem" }}>Yeas: </p>
-                  <p>Nays: </p>
-                  <p>Abstains: </p>
+                  <p style={{ marginTop: ".5rem" }}>Yeas: {this.props.results.yes}</p>
+                  <p>Nays: {this.props.results.no}</p>
+                  <p>Abstains: {this.props.results.abstain}</p>
                 </div>
               </div>
             </div>
@@ -74,8 +98,6 @@ class JPBillVotingAdminView extends Component {
 
           </div>
         </div>
-
-
       </div>
     );
   }
@@ -83,6 +105,8 @@ class JPBillVotingAdminView extends Component {
 
 JPBillVotingAdminView.propTypes = {
   bills: PropTypes.array.isRequired,
+  startBillVoting: PropTypes.func.isRequired,
+  stopBillVoting: PropTypes.func.isRequired,
 };
 
 export default JPBillVotingAdminView;

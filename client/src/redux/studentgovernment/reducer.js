@@ -6,10 +6,16 @@ const initialState = {
   isFetching: false,
   sga_people: [],
   users: {},
+  results: {},
 };
 
 const studentgovernment = (state = initialState, action) => {
   switch (action.type) {
+    case types.GET_CURRENT_BILL_REQUEST:
+    case types.GET_RESULTS_REQUEST:
+    case types.VOTE_REQUEST:
+    case types.START_BILL_VOTING_REQUEST:
+    case types.STOP_BILL_VOTING_REQUEST:
     case types.FETCH_SGA_PEOPLE_REQUEST:
     case types.FETCH_USERS_REQUEST:
     case types.FETCH_AGENDA_BILLS_REQUEST: return Object.assign({}, state, {
@@ -19,6 +25,11 @@ const studentgovernment = (state = initialState, action) => {
       isFetching: false,
       bills: action.payload,
     });
+    case types.GET_CURRENT_BILL_FAILURE:
+    case types.GET_RESULTS_FAILURE:
+    case types.VOTE_FAILURE:
+    case types.START_BILL_VOTING_FAILURE:
+    case types.STOP_BILL_VOTING_FAILURE:
     case types.FETCH_SGA_PEOPLE_FAILURE:
     case types.FETCH_USERS_FAILURE:
     case types.FETCH_AGENDA_BILLS_FAILURE: return Object.assign({}, state, {
@@ -32,6 +43,22 @@ const studentgovernment = (state = initialState, action) => {
     case types.FETCH_USERS_SUCCESS: return Object.assign({}, state, {
       isFetching: false,
       users: action.payload,
+    });
+    case types.GET_RESULTS_SUCCESS: return Object.assign({}, state, {
+      isFetching: false,
+      results: action.payload,
+    });
+    case types.GET_CURRENT_BILL_SUCCESS: return Object.assign({}, state, {
+      isFetching: false,
+      currentBill: action.payload,
+    });
+    case types.VOTE_SUCCESS:
+    case types.START_BILL_VOTING_SUCCESS: return Object.assign({}, state, {
+      isFetching: false,
+    });
+    case types.STOP_BILL_VOTING_SUCCESS: return Object.assign({}, state, {
+      isFetching: false,
+      results: action.payload,
     });
     default: return state;
   }

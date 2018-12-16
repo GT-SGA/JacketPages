@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const peopleRow = (person, users) => {
   const user = users[person.user_id];
-  console.log(person.user_id);
   return user && (
     <tr>
       <td>{`${user.first_name} ${user.last_name}`}</td>
@@ -39,7 +38,7 @@ class PeopleTable extends Component {
 
 PeopleTable.propTypes = {
   people: PropTypes.array.isRequired,
-  users: PropTypes.array.isRequired,
+  users: PropTypes.shape.isRequired,
 };
 
 export default PeopleTable;

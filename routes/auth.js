@@ -1,24 +1,26 @@
-const express = require("express");
-const cors = require("cors");
-const mysql = require("mysql");
+const express = require('express');
+require('cors');
+const mysql = require('mysql');
+
 const router = express.Router();
+
 const CASAuthentication = require('cas-authentication-gt');
 const session = require('express-session');
 
-var connection = mysql.createConnection({
-    host        :   "localhost",
-    user        :   "root",
-    password    :   "password"
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
 });
 
-connection.connect(function(err) {
+connection.connect((err) => {
   if (err) throw err;
-  console.log("Connected!");
+  console.log('Connected!');
 });
 // Use the database jacketpages_dev
-connection.query("USE jpdev");
+connection.query('USE jpdev');
 
-const basePath = 'http://jacketpages.sga.gatech.edu'
+const basePath = 'http://jacketpages.sga.gatech.edu';
 
 // Express Session
 router.use(session({
@@ -28,7 +30,7 @@ router.use(session({
 }));
 
 
-//Cas authentication
+// Cas authentication
 const cas = new CASAuthentication({
   cas_url: 'https://login.gatech.edu/cas',
   service_url: 'http://jacketpages.sga.gatech.edu',
@@ -41,25 +43,42 @@ const cas = new CASAuthentication({
 //     res.send( '<html><body>Hello!</body></html>' );
 // });
 
-router.get( '/login', cas.bounce, function(req, res) {
-  redirectPath = req.query['redirectTo'];
+router.get('/adminLogin', (req, res) => {
+  connection.query("SELECT * FROM users WHERE gt_user_name='ewilson79'", (err, rows) => {
+    res.send({ data: rows });
+  });
+});
+
+router.get('/repLogin', (req, res) => {
+  connection.query("SELECT * FROM users WHERE level='sga_user'", (err, rows) => {
+    res.send({ data: rows });
+  });
+});
+
+router.get('/userLogin', (req, res) => {
+  connection.query("SELECT * FROM users WHERE level='gt_member'", (err, rows) => {
+    res.send({ data: rows });
+  });
+});
+
+router.get('/login', cas.bounce, (req, res) => {
+  const redirectPath = req.query.redirectTo;
   if (redirectPath) {
     res.redirect(encodeURI(basePath + redirectPath));
   } else {
     res.redirect(encodeURI(basePath));
   }
+});
+
+router.get('/logout', cas.logout, () => {
 
 });
 
-router.get( '/logout', cas.logout, function(req, res) {
-
-})
-
-router.get( '/info', cas.block, function(req, res) {
-  return (res.json ({
-    'uid': req.session[cas.session_name],
-    'otherInfo': req.session[cas.session_info]
-  }));
-});
+router.get('/info', cas.block, (req, res) => (
+  res.json({
+    uid: req.session[cas.session_name],
+    otherInfo: req.session[cas.session_info],
+  })
+));
 
 module.exports = router;

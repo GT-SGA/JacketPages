@@ -12,13 +12,13 @@ const BillAgenda = (props) => {
   const { bills } = props;
   return (
     <ul className="menu-content">
-      {bills.map(bill => <li>{bill.title}</li>)}
+      {bills.map(bill => <li onClick={() => props.setCurrentBill(bill.id)}>{bill.title}</li>)}
     </ul>
   );
 };
 
 BillAgenda.propTypes = {
-  bills: PropTypes.array.isRequired,
+  bills: PropTypes.array.isRequired
 };
 
 class JPBillVoting extends Component {
@@ -26,29 +26,65 @@ class JPBillVoting extends Component {
     super(props);
 
     this.state = {
-      bills: this.props.studentgovernment.bills,
-      currentBill: 0,
+      currentBill: null,
       present: true,
-      admin: true,
     };
 
     this.renderContent = this.renderContent.bind(this);
+    this.startVoting = this.startVoting.bind(this);
+    this.stopVoting = this.stopVoting.bind(this);
+    this.setCurrentBill = this.setCurrentBill.bind(this);
+    this.getCurrentBill = this.getCurrentBill.bind(this);
+    this.vote = this.vote.bind(this);
   }
 
-  getDerivedStateFromProps(nextProps) {
-    this.setState({ bills: nextProps.studentgovernment.bills });
+  componentDidMount() {
+    this.props.getCurrentBill();
   }
 
-  renderBillRow(bill) {
-    return (
-      <li><a>{bill.name}</a></li>
-    );
+  getCurrentBill() {
+    const { bills, currentBill } = this.props.studentgovernment;
+    console.log('currentBill', currentBill);
+    let returnBill = {};
+    bills.forEach((bill) => {
+      if (String(bill.id) === currentBill) {
+        console.log('found bill');
+        returnBill = bill;
+      }
+    });
+    return returnBill;
+  }
+
+  setCurrentBill(billId) {
+    this.setState({ currentBill: billId });
+  }
+
+  startVoting() {
+    this.props.startBillVoting(this.state.currentBill);
+  }
+
+  stopVoting() {
+    this.setState({ currentBill: null });
+    this.props.stopBillVoting();
+  }
+
+  vote(vote) {
+    this.props.vote(this.state.currentBill, vote);
   }
 
   renderContent() {
-    if (this.state.admin) {
-      return [<JPBillVotingAdminView />,
-      <JPBillVotingAttendance people={this.props.studentgovernment.sga_people}/>];
+    console.log("student gov", this.props.studentgovernment.results);
+    if (this.props.auth.user && this.props.auth.user.level === 'admin') {
+      return (
+        <div>
+          <JPBillVotingAdminView
+            startBillVoting={this.startVoting}
+            stopBillVoting={this.stopVoting}
+            results={this.props.studentgovernment.results}
+          />
+          <JPBillVotingAttendance people={this.props.studentgovernment.sga_people} />
+        </div>
+      );
     }
     if (!this.state.present) {
       return (
@@ -57,12 +93,11 @@ class JPBillVoting extends Component {
         </div>
       );
     }
-    return <JPBillVotingUHRRepView />;
+    return <JPBillVotingUHRRepView currentBill={this.getCurrentBill()} vote={(vote) => this.vote(vote)} />;
   }
 
   render() {
     const { bills } = this.props.studentgovernment;
-    console.log(bills);
 
     return (
       <div className="container">
@@ -71,7 +106,10 @@ class JPBillVoting extends Component {
             <div className="brand">Agenda</div>
             <div className="menu-list">
               <ul className="menu-content">
-                <BillAgenda bills={bills} />
+                <BillAgenda
+                  bills={bills}
+                  setCurrentBill={this.setCurrentBill}
+                />
               </ul>
             </div>
           </div>
@@ -82,13 +120,27 @@ class JPBillVoting extends Component {
   }
 }
 
+JPBillVoting.propTypes = {
+  startBillVoting: PropTypes.func.isRequired,
+  stopBillVoting: PropTypes.func.isRequired,
+  getCurrentBill: PropTypes.func.isRequired,
+  vote: PropTypes.func.isRequired,
+  studentgovernment: PropTypes.shape.isRequired,
+  auth: PropTypes.shape.isRequired,
+};
+
 const mapStateToProps = state => ({
   studentgovernment: state.studentgovernment,
+  auth: state.auth,
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchAgendaBills: dispatch(actions.fetchAgendaBills()),
   fetchSGAPeople: dispatch(actions.fetchSGAPeople()),
+  startBillVoting: bill => dispatch(actions.startBillVoting(bill)),
+  stopBillVoting: () => dispatch(actions.stopBillVoting()),
+  getCurrentBill: () => dispatch(actions.getCurrentBill()),
+  vote: (bill, vote) => dispatch(actions.vote(bill, vote)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JPBillVoting);

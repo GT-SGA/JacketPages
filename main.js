@@ -4,9 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const mysql = require('mysql');
 const session = require('express-session');
-const CASAuthentication = require('cas-authentication-gt');
-
-const Redis = require('./redis');
+// const CASAuthentication = require('cas-authentication-gt');
 
 const app = express();
 
@@ -28,10 +26,10 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-const cas = new CASAuthentication({
-  cas_url: 'https://login.gatech.edu/cas/login',
-  service_url: 'https://jacketpages.sga.gatech.edu',
-});
+// const cas = new CASAuthentication({
+//   cas_url: 'https://login.gatech.edu/cas/login',
+//   service_url: 'jacketpages.sga.gatech.edu',
+// });
 
 /* SERVER & DB SETUP */
 
@@ -42,9 +40,9 @@ const connection = mysql.createConnection({
   password: 'password',
 });
 
-connection.connect(function(err) {
+connection.connect((err) => {
   if (err) throw err;
-  console.log("Connected!");
+  console.log('Connected!');
 });
 
 // Use the database jacketpages_dev
@@ -55,8 +53,6 @@ const server = app.listen(port);
 
 const io = require('socket.io').listen(server);
 
-let redis = new Redis();
-
 app.use(express.static('public')); // automatically serves static files home.html and its css files
 
 console.log('Running on port ' + port);
@@ -66,10 +62,12 @@ const users = require('./routes/users');
 const bills = require('./routes/bills');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const voting = require('./routes/voting');
 
 
-//Use Routes
+// Use Routes
 app.use('/users/api', users);
 app.use('/bills', bills);
 app.use('/api', index);
 app.use('/auth', auth);
+app.use('/voting', voting);

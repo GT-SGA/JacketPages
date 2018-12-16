@@ -27,8 +27,53 @@ const info = () => (
   }
 );
 
+const adminInfo = () => (
+  (dispatch) => {
+    dispatch(infoRequest());
+    api.get('/auth/adminLogin')
+      .then(res => (
+        dispatch(infoSuccess(res.data[0]))
+      ))
+      .catch(error => ({
+        type: types.INFO_FAILURE_TYPE,
+        error,
+      }));
+  }
+);
+
+const userInfo = () => (
+  (dispatch) => {
+    dispatch(infoRequest());
+    api.get('/auth/userLogin')
+      .then(res => (
+        dispatch(infoSuccess(res.data[0]))
+      ))
+      .catch(error => ({
+        type: types.INFO_FAILURE_TYPE,
+        error,
+      }));
+  }
+);
+
+const repInfo = () => (
+  (dispatch) => {
+    dispatch(infoRequest());
+    api.get('/auth/repLogin')
+      .then(res => (
+        dispatch(infoSuccess(res.data[0]))
+      ))
+      .catch(error => ({
+        type: types.INFO_FAILURE_TYPE,
+        error,
+      }));
+  }
+);
+
 const actions = {
   info,
+  adminInfo,
+  repInfo,
+  userInfo,
 };
 
 export default actions;
