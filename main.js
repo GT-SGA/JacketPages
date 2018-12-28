@@ -48,7 +48,7 @@ connection.connect((err) => {
 // Use the database jacketpages_dev
 connection.query('USE jpdev');
 
-const port = (process.env.port || 80);
+const port = (process.env.port || 8081);
 const server = app.listen(port);
 
 const io = require('socket.io').listen(server);
@@ -58,16 +58,9 @@ app.use(express.static('public')); // automatically serves static files home.htm
 console.log('Running on port ' + port);
 
 // Load Routes
-const users = require('./routes/users');
-const bills = require('./routes/bills');
-const index = require('./routes/index');
+const api = require('./routes');
 const auth = require('./routes/auth');
-const voting = require('./routes/voting');
-
 
 // Use Routes
-app.use('/users/api', users);
-app.use('/bills', bills);
-app.use('/api', index);
 app.use('/auth', auth);
-app.use('/voting', voting);
+app.use('/api', api);

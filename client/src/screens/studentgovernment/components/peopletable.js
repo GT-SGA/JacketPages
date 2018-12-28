@@ -37,7 +37,7 @@ class PeopleTable extends Component {
 }
 
 PeopleTable.propTypes = {
-  people: PropTypes.array.isRequired,
+  people: PropTypes.arrayOf(PropTypes.shape).isRequired,
   users: PropTypes.shape.isRequired,
 };
 

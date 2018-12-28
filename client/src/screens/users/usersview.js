@@ -16,15 +16,6 @@ class UsersView extends Component {
 
                   <table className="listing" id="halftable">
                   </table>
-                  <script>
-                      $(function() {
-                          $("#accordion").accordion({
-                              collapsible: true,
-                              heightStyle: "content",
-                              active: false
-                          });
-                      });
-                  </script>
               </div>
           </div>
       </div>
