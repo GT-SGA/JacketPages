@@ -13,8 +13,14 @@ const fetchBillsSuccess = bills => ({
 const fetchBills = () => (
   (dispatch) => {
     dispatch(fetchBillsRequest());
-    return api.get('bills/bills_all')
-      .then(res => dispatch(fetchBillsSuccess(res.data)))
+    return api.get('/api/bills')
+      .then((res) => {
+        const bills = {};
+        res.data.forEach((bill) => {
+          bills[bill.id] = bill;
+        });
+        return dispatch(fetchBillsSuccess(bills));
+      })
       .catch(error => ({
         type: types.FETCH_BILLS_FAILURE,
         error,
@@ -22,29 +28,56 @@ const fetchBills = () => (
   }
 );
 
-const createBillsRequest = () => ({
+const fetchBillAuthorsRequest = () => ({
+  type: types.FETCH_BILL_AUTHORS_REQUEST,
+});
+
+const fetchBillAuthors = () => (
+  (dispatch) => {
+    dispatch(fetchBillAuthorsRequest());
+    return api.get('/api/bills/authors')
+      .then((res) => {
+        const authors = {};
+        res.data.forEach((author) => {
+          authors[author.id] = author;
+        });
+        return dispatch({
+          type: types.FETCH_BILL_AUTHORS_SUCCESS,
+          payload: authors,
+        });
+      })
+      .catch(error => dispatch({
+        type: types.FETCH_BILL_AUTHORS_FAILURE,
+        error,
+      }));
+  }
+);
+
+const createBillRequest = () => ({
   type: types.CREATE_BILLS_REQUEST,
 });
 
-const createBillsSuccess = bills => ({
+const createBillSuccess = bills => ({
   type: types.CREATE_BILLS_SUCCESS,
   payload: bills,
 });
 
-const createBills = () => (
+const createBill = () => (
   (dispatch) => {
-    dispatch(createBillsRequest());
-    // return api.get('bills/bills_all')
-    //   .then(res => dispatch(createBillsSuccess(res.data)))
-    //   .catch(error => ({
-    //     type: types.CREATE_BILLS_FAILURE,
-    //     error,
-    //   }));
+    dispatch(createBillRequest());
+    return api.post('/api/bills/')
+      .then(res => dispatch(createBillSuccess(res.data)))
+      .catch(error => ({
+        type: types.CREATE_BILLS_FAILURE,
+        error,
+      }));
   }
 );
 
 const actions = {
   fetchBills,
+  fetchBillAuthors,
+  createBill,
 };
 
 export default actions;

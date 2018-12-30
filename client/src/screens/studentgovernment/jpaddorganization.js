@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import actions from '../../redux/organizations/actions';
 
 class JPAddOrganization extends Component {
   constructor(props) {
@@ -34,7 +37,7 @@ class JPAddOrganization extends Component {
         <div className="clearfix">
           <div className="links left-nav" id="sidebar">
             <ul>
-              <li><a href="http://jacketpages.gatech.edu/bills/add">Add Organization</a></li>
+              <li><a href="/addOrganization">Add Organization</a></li>
             </ul>
           </div>
           <div id="middle">
@@ -88,4 +91,8 @@ JPAddOrganization.propTypes = {
   addOrganization: PropTypes.func.isRequired,
 };
 
-export default JPAddOrganization;
+const mapDispatchToProps = dispatch => ({
+  addOrganization: info => dispatch(actions.addOrganization(info)),
+});
+
+export default connect(null, mapDispatchToProps)(JPAddOrganization);

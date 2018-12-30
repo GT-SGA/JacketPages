@@ -1,28 +1,21 @@
 const express = require('express');
-const mysql = require('mysql');
 
 const router = express.Router();
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-});
-
-connection.connect((err) => {
-  if (err) throw err;
-  console.log('Connected!');
-});
-
-// Use the database jacketpages_dev
-connection.query('USE jpdev');
-
+// Load Routes
 const bills = require('./bills');
+const budgets = require('./budgets');
 const users = require('./users');
 const voting = require('./voting');
+const sgaPeople = require('./sgaPeople');
+const organizations = require('./organizations');
 
+// Use Routes
 router.use('/bills', bills);
+router.use('/budgets', budgets);
 router.use('/users', users);
 router.use('/voting', voting);
+router.use('/sgaPeople', sgaPeople);
+router.use('/organizations', organizations);
 
 module.exports = router;

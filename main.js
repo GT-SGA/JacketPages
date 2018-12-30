@@ -58,8 +58,8 @@ app.use(express.static('public')); // automatically serves static files home.htm
 console.log('Running on port ' + port);
 
 // Load Routes
-const api = require('./routes');
 const auth = require('./routes/auth');
+const api = require('./routes');
 
 // Use Routes
 app.use('/auth', auth);

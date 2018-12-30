@@ -12,74 +12,92 @@ class JPBills extends Component {
     super(props);
 
     this.state = {
-      bills: this.props.bills.bills,
+      search: '',
+      alphabetValue: '',
+      fromStatus: 1,
+      toStatus: 1,
+      category: 'All',
+      showFilters: false,
     };
-    // this.filterBills = this.filterBills.bind(this);
+    this.filterBills = this.filterBills.bind(this);
+    this.toggleShowFilters = this.toggleShowFilters.bind(this);
+    this.onChangeAlphabet = this.onChangeAlphabet.bind(this);
   }
 
-  getDerivedStateFromProps(nextProps) {
-    this.setState({ bills: nextProps.bills.bills });
+  onChangeAlphabet(value) {
+    this.setState({ alphabetValue: value });
   }
 
-  /* TODO: search bills in frontend */
-  keywordSearch() {
-  //   updatebilldata(`http://localhost:8081/bills_keyword?keyword=${document.getElementById('search').value}`);
-  //   return false;
-  };
+  toggleShowFilters() {
+    if (this.state.showFilters) {
+      this.setState({ showFilters: false });
+    } else {
+      this.setState({ showFilters: true });
+    }
+  }
 
-  /* TODO: filter bills in frontend */
-  statusSearch() {
-  //   let billCat = document.getElementById('BillCategory').value;
-  //   if (billCat === "All") {
-  //     updatebilldata(`http://localhost:8081/bills_filtered?from=${document.getElementById('BillFrom').value}&to=${document.getElementById('BillTo').value}`);
-  //     return false;
-  //   } else {
-  //     updatebilldata(`http://localhost:8081/bills_filteredwithcategory?from=${document.getElementById('BillFrom').value}&to=${document.getElementById('BillTo').value}&category=${billCat}`);
-  //     return false;
-  //   }
-  };
+  filterBills() {
+    const { bills } = this.props;
 
-  /* TODO: search date in frontend */
-  dateSearch() {
-  //   updatebilldata(`http://localhost:8081/bills_filtereddate?from=${document.getElementById('BillFromDate').value}&to=${document.getElementById('BillToDate').value}`);
-  //   return false;
-  };
+    return Object.values(bills).filter((bill) => {
+      const title = bill.title.toLowerCase();
+      const search = this.state.search.toLowerCase();
+
+      return title.includes(search) && title.startsWith(this.state.alphabetValue.toLowerCase());
+    });
+  }
 
   render() {
     return (
       <div>
         <div className="links left-nav" id="sidebar">
           <ul>
-            <li><a href="http://jacketpages.gatech.edu/bills/add">Create New Bill</a></li>
+            <li><a href="/create_bill">Create New Bill</a></li>
           </ul>
         </div>
         <div id="middle">
           <div id="page_title">All Bills</div>
           <div id="alphabet">
             <div id="leftHalf">
-              {/* TODO: Replace this with a JS function */}
-              <form id="BillMyBillsForm" action="/bills" method="post" onSubmit="return keywordSearch()" acceptCharset="utf-8">
+              <div className="form">
                 <div className="input text">
-                  <label for="search" style={{display: 'inline'}}>Search</label>
-                  <input name="data_Bill_keyword" id="search" width="80%" type="text" />
+                  <label htmlFor="search" style={{ display: 'inline' }}>Search</label>
+                  <input
+                    id="search"
+                    width="80%"
+                    type="text"
+                    onChange={e => this.setState({ search: e.target.value })}
+                  />
                 </div>
-              </form>
+              </div>
             </div>
             <div id="rightHalf">
-              <Alphabet />
+              <Alphabet onChangeSelect={this.onChangeAlphabet} />
             </div>
           </div>
-          <div id="accordion" className="ui-accordion ui-widget ui-helper-reset" role="tablist">
-            <a href="#" className="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons" role="tab" id="ui-accordion-accordion-header-0" aria-controls="ui-accordion-accordion-panel-0" aria-selected="false" aria-expanded="false" tabIndex="0">
+          <div
+            id="accordion"
+            className="ui-accordion ui-widget ui-helper-reset"
+            role="tablist"
+          >
+            <button type="button" onClick={this.toggleShowFilters}>
               <span className="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e" />
               Filters
-            </a>
-            <div className="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" style={{ display: 'none' }} id="ui-accordion-accordion-panel-0" aria-labelledby="ui-accordion-accordion-header-0" role="tabpanel" aria-hidden="true">
+            </button>
+            <div
+              className="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"
+              style={this.state.showFilters ? { maxHeight: 'wrap-content' } : { display: 'none' }}
+              id="ui-accordion-accordion-panel-0"
+            >
               <div style={{ float: 'left', width: '45%' }}>
                 <ul>
                   <div className="input select">
-                    <label for="BillFrom">From Status</label>
-                    <select name="data_Bill_from" id="BillFrom">
+                    <label htmlFor="BillFrom">From Status</label>
+                    <select
+                      id="BillFrom"
+                      onChange={e => this.setState({ fromStatus: e.target.value })}
+                      value={this.state.fromStatus}
+                    >
                       <option value="1" selected="selected">Created</option>
                       <option value="2">Awaiting Author</option>
                       <option value="3">Authored</option>
@@ -91,8 +109,12 @@ class JPBills extends Component {
                     </select>
                   </div>
                   <div className="input select">
-                    <label for="BillTo">To Status</label>
-                    <select name="data_Bill_to" id="BillTo">
+                    <label htmlFor="BillTo">To Status</label>
+                    <select
+                      id="BillTo"
+                      onChange={e => this.setState({ toStatus: e.target.value })}
+                      value={this.state.toStatus}
+                    >
                       <option value="1">Created</option>
                       <option value="2">Awaiting Author</option>
                       <option value="3">Authored</option>
@@ -105,38 +127,41 @@ class JPBills extends Component {
                   </div>
                 </ul>
               </div>
-                <div style={{ float: 'right', width: '45%' }}>
-                  <div className="input select required">
-                    <label for="BillCategory">Category</label>
-                    <select name="data_Bill_category" id="BillCategory">
-                      <option value="All" selected="selected">All</option>
-                      <option value="Joint">Joint</option>
-                      <option value="Undergraduate">Undergraduate</option>
-                      <option value="Graduate">Graduate</option>
-                    </select>
-                  </div>
-                  <br />
-                  <div className="submit" style={{ display: 'inline-block' }}>
-                    <input value="Submit" type="submit" onClick="return statusSearch()" />
-                  </div>
-                  <div className="submit" style={{ display: 'inline-block' }}>
-                    <input name="submit" value="Clear" type="submit" />
-                  </div>
-                  <div style={{ float: 'left' }}>
-                    <label for="BillFromDate">From</label>
-                    <input type="date" id="BillFromDate" />
-                    <label for="BillToDate">To</label>
-                    <input type="date" id="BillToDate" />
-                    <input type="submit" value="Search By Date" onClick="return dateSearch()" />
-                  </div>
+              <div style={{ float: 'right', width: '45%' }}>
+                <div className="input select required">
+                  <label htmlFor="BillCategory">Category</label>
+                  <select
+                    id="BillCategory"
+                    onChange={e => this.setState({ category: e.target.value })}
+                    value={this.state.category}
+                  >
+                    <option value="All" selected="selected">All</option>
+                    <option value="Joint">Joint</option>
+                    <option value="Undergraduate">Undergraduate</option>
+                    <option value="Graduate">Graduate</option>
+                  </select>
                 </div>
+                <br />
+                <div className="submit" style={{ display: 'inline-block' }}>
+                  <button type="submit" onClick="return statusSearch()">Submit</button>
+                </div>
+                <div className="submit" style={{ display: 'inline-block' }}>
+                  <input name="submit" value="Clear" type="submit" />
+                </div>
+                <div style={{ float: 'left' }}>
+                  <label htmlFor="BillFromDate">From</label>
+                  <input type="date" id="BillFromDate" />
+                  <label htmlFor="BillToDate">To</label>
+                  <input type="date" id="BillToDate" />
+                  <input type="submit" value="Search By Date" onClick="return dateSearch()" />
+                </div>
+              </div>
               <br />
             </div>
           </div>
-          {/* TODO: change this to use state so that filtering in the frontend can be done */}
           <div id="forupdate">
             <BillsTable
-              bills={this.props.bills.bills}
+              bills={this.filterBills()}
             />
           </div>
         </div>
@@ -151,7 +176,7 @@ JPBills.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  bills: state.bills,
+  bills: state.bills.bills,
 });
 
 const mapDispatchToProps = dispatch => ({

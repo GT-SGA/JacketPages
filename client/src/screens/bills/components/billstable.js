@@ -1,40 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
+import { Link } from 'react-router-dom';
 
 const billRow = bill => (
   <tr>
-    <td>{bill.title}</td>
+    <td><Link to={{ pathname: '/viewBill', state: { bill } }}>{bill.title}</Link></td>
     <td>{bill.num}</td>
     <td>{bill.category}</td>
-    <td>{(() => {
-      switch(bill.status) {
-        case 1:
-          return "Created";
-          break;
-        case 2:
-          return "Awaiting Author";
-          break;
-        case 3:
-          return "Authored";
-          break;
-        case 4:
-          return "Agenda";
-          break;
-        case 5:
-          return "Conference";
-          break;
-        case 6:
-          return "Passed";
-          break;
-        case 7:
-          return "Failed";
-          break;
-        case 8:
-          return "Tabled";
-          break;
-      }
-    })()}
+    <td>
+      {(
+        () => {
+          switch (bill.status) {
+            case 1:
+              return 'Created';
+            case 2:
+              return 'Awaiting Author';
+            case 3:
+              return 'Authored';
+            case 4:
+              return 'Agenda';
+            case 5:
+              return 'Conference';
+            case 6:
+              return 'Passed';
+            case 7:
+              return 'Failed';
+            case 8:
+              return 'Tabled';
+            default: return '';
+          }
+        }
+      )}
     </td>
     <td>{bill.date}</td>
   </tr>
@@ -46,31 +43,25 @@ class BillsTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      offset: 0
+      offset: 0,
     };
 
     this.handlePageClick = this.handlePageClick.bind(this);
-    this.handleBreakClick = this.handleBreakClick.bind(this);
-  }
-
-  handleBreakClick() {
   }
 
   handlePageClick(page) {
-    let selected = page.selected;
-    let offset = Math.ceil(selected * itemLimit);
+    const { selected } = page;
+    const offset = Math.ceil(selected * itemLimit);
 
-    this.setState({
-      offset: offset
-    });
+    this.setState({ offset });
   }
 
   render() {
-    const { bills } = this.props;
+    const bills = Object.values(this.props.bills);
 
     const billsToDisplay = bills.slice(
       this.state.offset,
-      this.state.offset + itemLimit
+      this.state.offset + itemLimit,
     );
 
     return (
@@ -88,23 +79,23 @@ class BillsTable extends Component {
           </tbody>
         </table>
 
-        <div ref="pagination">
+        <div id="pagination">
           <ReactPaginate
-            previousLabel={"previous"}
-            nextLabel={"next"}
-            breakLabel={<span onClick={this.handleBreakClick}>...</span>}
+            previousLabel="previous"
+            nextLabel="next"
+            breakLabel={<div>...</div>}
             pageCount={bills.length / itemLimit}
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
             onPageChange={this.handlePageClick}
-            containerClassName={"pagination"}
-            activeClassName={"active"}
+            containerClassName="pagination"
+            activeClassName="active"
           />
         </div>
 
         <div>
-          Showing {billsToDisplay.length} records out of {bills.length} total,
-          starting on record {this.state.offset + 1}, ending on {this.state.offset + billsToDisplay.length}
+          {`Showing ${billsToDisplay.length} records out of ${bills.length} total,
+          starting on record ${this.state.offset + 1}, ending on ${this.state.offset + billsToDisplay.length}`}
         </div>
       </div>
     );
@@ -112,7 +103,7 @@ class BillsTable extends Component {
 }
 
 BillsTable.propTypes = {
-  bills: PropTypes.array.isRequired,
+  bills: PropTypes.shape.isRequired,
 };
 
 export default BillsTable;

@@ -18,9 +18,21 @@ function get(url) {
     .then(response => response.json());
 }
 
+function patch(url, data = {}) {
+  return fetch(url, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => response.json());
+}
+
 const api = {
   post,
   get,
+  patch,
 };
 
 export default api;

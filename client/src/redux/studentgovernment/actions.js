@@ -21,7 +21,7 @@ const fetchSGAPeopleFailure = error => ({
 const fetchSGAPeople = () => (
   (dispatch) => {
     dispatch(fetchSGAPeopleRequest());
-    return api.get('/users/api/people')
+    return api.get('api/sgaPeople')
       .then(res => dispatch(fetchSGAPeopleSuccess(res)))
       .catch(error => dispatch(fetchSGAPeopleFailure(error)));
   }
@@ -50,6 +50,16 @@ const fetchAgendaBills = () => (
       }));
   }
 );
+
+const fetchOrganizationsRequest = () => ({
+  type: types.FETCH_ORGANIZATIONS_REQUEST,
+})
+
+const fetchOrganizations = () => (
+  (dispatch) => {
+    
+  }
+)
 
 const startBillVotingRequest = () => ({
   type: types.START_BILL_VOTING_REQUEST,

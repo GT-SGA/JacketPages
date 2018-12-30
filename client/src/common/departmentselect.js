@@ -9,7 +9,7 @@ const DepartmentSelect = props => (
       id="SgaPersonDepartment"
       onChange={e => props.onChange(e.target.value)}
     >
-      <option value="all" selected="selected">All</option>
+      <option value="" selected="selected">All</option>
       <option value="AE">AE</option>
       <option value="Aerospace">Aerospace</option>
       <option value="Aerospace ">Aerospace </option>

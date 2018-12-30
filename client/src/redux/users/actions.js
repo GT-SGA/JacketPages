@@ -13,7 +13,7 @@ const fetchUsersSuccess = users => ({
 const fetchUsers = () => (
   (dispatch) => {
     dispatch(fetchUsersRequest());
-    return api.get('/users/api/users')
+    return api.get('/api/users')
       .then((res) => {
         const users = {};
         res.data.forEach((user) => {
