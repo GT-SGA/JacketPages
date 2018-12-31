@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import actions from '../../redux/bills/actions';
+import userActions from '../../redux/users/actions';
+import sgActions from '../../redux/studentgovernment/actions';
 
 import Alphabet from '../../common/alphabet';
 import BillsTable from './components/billstable';
@@ -162,6 +164,9 @@ class JPBills extends Component {
           <div id="forupdate">
             <BillsTable
               bills={this.filterBills()}
+              billAuthors={this.props.billAuthors}
+              users={this.props.users}
+              sga_people={this.props.sga_people}
             />
           </div>
         </div>
@@ -173,14 +178,23 @@ class JPBills extends Component {
 /* TODO: Change this to the correct prop type for an array */
 JPBills.propTypes = {
   bills: PropTypes.shape.isRequired,
+  users: PropTypes.shape.isRequired,
+  billAuthors: PropTypes.shape.isRequired,
+  sga_people: PropTypes.shape.isRequired,
 };
 
 const mapStateToProps = state => ({
   bills: state.bills.bills,
+  users: state.users.users,
+  billAuthors: state.bills.bill_authors,
+  sga_people: state.studentgovernment.sga_people,
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchBills: dispatch(actions.fetchBills()),
+  fetchBillAuthors: dispatch(actions.fetchBillAuthors()),
+  fetchUsers: dispatch(userActions.fetchUsers()),
+  fetchSGAPeople: dispatch(sgActions.fetchSGAPeople()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JPBills);

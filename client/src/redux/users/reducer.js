@@ -1,7 +1,7 @@
 import types from './types';
 
 const initialState = {
-  users: [],
+  users: {},
   isFetching: false,
   error: null,
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const StatusFilter = (props) => {
   const { name, id } = props;
@@ -15,6 +16,11 @@ const StatusFilter = (props) => {
       <option value="8">Tabled</option>
     </select>
   );
+};
+
+StatusFilter.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default StatusFilter;

@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 });
 
 // Gets user in user table based on id
-router.get('/:id', (req, res) => {
+router.get('/id=:id', (req, res) => {
   connection.query(`SELECT * FROM users WHERE id=${req.params.id}`, (err, rows) => {
     res.send({ data: rows });
   });
@@ -53,7 +53,7 @@ router.get('/last_member', (req, res) => {
 });
 
 // Deletes a user from user table using their id passed in through the url
-router.delete('/:id', (req, res) => {
+router.delete('/id=:id', (req, res) => {
   // debugging
   res.write('You deleted the user with the id "' + req.query.id+'".\n');
   connection.query(`DELETE FROM users WHERE id=${req.query.id}`, (err, rows) => {
@@ -62,7 +62,7 @@ router.delete('/:id', (req, res) => {
 });
 
 // Edits a user from user table using their id passed in through the url
-router.patch('/:id', (req, res) => {
+router.patch('/id=:id', (req, res) => {
   // Debugging
   res.write('You sent the name "' + req.body.firstname+'".\n');
   res.write('You sent the level"' + req.body.level+'".\n');

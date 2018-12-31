@@ -62,10 +62,13 @@ const createBillSuccess = bills => ({
   payload: bills,
 });
 
-const createBill = () => (
+const createBill = (authorInfo, billInfo) => (
   (dispatch) => {
     dispatch(createBillRequest());
-    return api.post('/api/bills/')
+    return api.post('/api/bills/', {
+      authors: authorInfo,
+      bill: billInfo,
+    })
       .then(res => dispatch(createBillSuccess(res.data)))
       .catch(error => ({
         type: types.CREATE_BILLS_FAILURE,

@@ -7,7 +7,7 @@ import billActions from '../../redux/bills/actions';
 import orgActions from '../../redux/organizations/actions';
 
 import LineItemTable from './components/lineItemTable';
-import OrganizationsSelect from './components/organizationsSelect';
+import OrganizationsSelect from '../../common/organizationsSelect';
 
 class AdministerBudgets extends Component {
   constructor(props) {
@@ -23,8 +23,8 @@ class AdministerBudgets extends Component {
     this.filterLineItems = this.filterLineItems.bind(this);
   }
 
-  onChangeOrganization(organization) {
-    this.setState({ organization });
+  onChangeOrganization(orgID) {
+    this.setState({ organization: this.props.organizations[orgID] });
   }
 
   onChangeLineItemAmount(item, amount) {
@@ -116,7 +116,7 @@ class AdministerBudgets extends Component {
                     <OrganizationsSelect
                       organizations={organizations}
                       tier={this.state.tier}
-                      onChange={this.onChangeOrganization}
+                      onChange={e => this.onChangeOrganization(e)}
                     />
                   </div>
                 </td>

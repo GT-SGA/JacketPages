@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 // Get an individual bill's data
 // Still prone to SQL injection attacks.
-router.get('/:id', (req, res) => {
+router.get('/id=:id', (req, res) => {
   // Return all bills belonging to a certain submitter. Still prone to SQL injection attacks.
   connection.query(`SELECT * FROM bills WHERE id=${req.params.id}`, (err, rows) => {
     res.send({ data: rows });
@@ -43,6 +43,7 @@ router.get('/bill_votes', (req, res) => {
 });
 
 router.get('/authors', (req, res) => {
+  console.log('authors endpoint');
   connection.query('SELECT * FROM bill_authors', (err, rows) => {
     res.send({ data: rows });
   });
@@ -123,50 +124,41 @@ router.patch('/:id/sign_vf', (req, res) => {
     dues,
     ugMembers,
     gMembers,
+    line_items,
   }
 */
 router.post('/', (req, res) => {
   connection.query(
     `INSERT INTO bill_authors (undr_auth_id, grad_auth_id) VALUES (
-      '${req.query["data_Authors_undr_auth_id"]}',
-      '${req.query["data_Authors_grad_auth_id"]}')`,
-    (err, rows) => {
-      if (err) console.log(err);
-      const cat = req.query['data_Bill_category'];
-      const catChar = cat === 'Joint' ? 'J' : cat === 'Undergraduate' ? 'U' : cat === 'Graduate' ? 'G' : 'B';
+      '${req.body.authors.undr_auth_id}',
+      '${req.body.authors.grad_auth_id}')`,
+    (authErr, rows) => {
+      if (authErr) console.log(authErr);
+      const cat = req.body.bill.category;
+      const catChar = cat.charAt(0);
       function pad(n, width, z = '0') {
         n += '';
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
       }
       const { insertId } = rows;
 
-      connection.query(`SELECT substr(number,4) as num, NOW() as now FROM bills WHERE substr(number,3,1) = '${catChar}' ORDER BY num DESC LIMIT 1`, (err, rows) => {
-        if (err) console.log(err);
+      connection.query(`SELECT substr(number,4) as num, NOW() as now FROM bills WHERE substr(number,3,1) = '${catChar}' ORDER BY num DESC LIMIT 1`, (billsErr, rows) => {
+        if (billsErr) console.log(billsErr);
         const number = `${Number(rows[0].now.toLocaleDateString().split('-')[0].substring(1)) + 1}${catChar}${rows[0].num ? pad((Number(rows[0].num) + 1).toString(), 3) : '001'}`;
         connection.query(`INSERT INTO bills (create_date, last_mod_date, title, description, fundraising, type, category, org_id, dues, ugMembers, gMembers, auth_id, status, number) VALUES
-          (NOW(), NOW(), '${req.query.bill.title}', '${req.query.bill.description}', '${req.query["data_Bill_fundraising"]}', '${req.query["data_Bill_type"]}',
-          '${req.query["data_Bill_category"]}', ${req.query["data_Bill_org_id"]}, '${req.query["data_Bill_dues"]}', '${req.query["data_Bill_ugMembers"]}',
-          ${req.query["data_Bill_gMembers"]}, ${insertId}, 1, '${number}')`,
+          (NOW(), NOW(), '${req.body.bill.title}', '${req.query.bill.description}', '${req.body.bill.fundraising}', '${req.body.bill.type}',
+          '${req.body.bill.category}', ${req.body.bill.org_id}, '${req.body.bill.dues}', '${req.body.bill.ugMembers}', ${req.body.bill.gMembers}, ${insertId}, 1, '${number}')`,
         (err, rows) => {
           if (err) console.log(err);
           const billId = insertId;
-          if (req.query['data_Bill_type'] !== 'Resolution') {
-            for (let i = 0; req.query[`data_${i}_LineItem_line_number`]; i += 1) {
-              const line_number = req.query[`data_${i}_LineItem_line_number`];
-              const name = req.query[`data_${i}_LineItem_name`];
-              const cost_per_unit = req.query[`data_${i}_LineItem_cost_per_unit`];
-              const quantity = req.query[`data_${i}_LineItem_quantity`];
-              const total_cost = req.query[`data_${i}_LineItem_total_cost`];
-              const amount = req.query[`data_${i}_LineItem_amount`];
-              const account = req.query[`data_${i}_LineItem_account`];
-              const type = req.query[`data_${i}_LineItem_type`];
-              const comments = req.query[`data_${i}_LineItem_comments`];
+          if (req.body.bill.type !== 'Resolution') {
+            req.body.line_items.forEach((item) => {
               connection.query(`INSERT INTO line_items (line_number, bill_id, name, cost_per_unit, quantity, total_cost, amount, account, type, comments, last_mod_date) VALUES
-                (${line_number}, ${billId}, '${name}', ${cost_per_unit}, ${quantity}, ${total_cost}, ${amount}, '${account}', '${type ? type : ""}', ${comments ? comments : null}, NOW())`,
-              (err, rows) => {
-                if (err) console.log(err);
+                (${item.number}, ${billId}, '${item.name}', ${item.cost}, ${item.quantity}, ${item.total_cost}, ${item.amount}, '${item.account}', '${item.type || ''}', ${item.comments || null}, NOW())`,
+              (itemsErr, rows) => {
+                if (itemsErr) console.log(itemsErr);
               });
-            }
+            });
           }
           res.send('done');
         });

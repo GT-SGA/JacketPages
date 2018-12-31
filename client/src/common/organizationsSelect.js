@@ -21,7 +21,7 @@ class OrganizationsSelect extends Component {
 
   render() {
     return (
-      <select onChange={this.props.onChange} id="budgetOrgSelect">
+      <select onChange={e => this.props.onChange(e.target.value)} id="budgetOrgSelect">
         <option value="0">All</option>
         {this.filterOrgs().map(org => orgRow(org))}
       </select>
