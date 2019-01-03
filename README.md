@@ -17,16 +17,30 @@ fall in the tabs.
 The backend runs on Node.js and Express. The backend is just an api that returns JSON to the frontend with each request.
 
 ### Routes Structure:
-/auth
-  GET /login - redirects to CAS login page
-  GET /info - makes a request to the CAS auth system to get the current logged in user
-  GET /logout - ends the current CAS session and logs the user out
-/api
-  /bills
-    GET / - returns all bills in the bills table
-    POST / - creates a new bill with the given info
-    GET /:id - returns the bill with the given id from the bills table
-    PATCH /:id - edits the bill with the given id
-    DELETE /:id - deletes the bill with the given id
-  /users
-  /voting
+
+* /auth
+  * GET /login - redirects to CAS login page
+  * GET /info - makes a request to the CAS auth system to get the current logged in user
+  * GET /logout - ends the current CAS session and logs the user out
+
+* /api
+  * /bills
+    * GET / - returns all bills in the bills table
+    * POST / - creates a new bill with the given info
+    * GET /:id - returns the bill with the given id from the bills table
+    * PATCH /:id - edits the bill with the given id
+    * DELETE /:id - deletes the bill with the given id
+  * /users
+    * GET / - returns all users in the users table
+    * GET /:id - returns user with the given id
+    * GET /last_member - returns the recently added user in the users table
+    * DELETE /:id - deletes the user with the given id
+    * PATCH /:id - edits the user with the given id
+    * POST / - creates a new user with the given info
+  * /voting
+    * GET /currentBill - returns the current bill being voted on
+    * GET /getResults - returns the results of the bill voted on
+    * POST /startVoting - creates redis key-value pair for the voting with the given id
+    * POST /stopVoting - removes the current voting key from the redis store
+    * POST /vote - updates the redis store with the given vote
+    
