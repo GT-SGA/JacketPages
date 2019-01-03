@@ -35,9 +35,10 @@ app.use(session({
 
 // Connect to the MySQL database
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
+  host: process.env.RDS_HOSTNAME,
+  user: process.env.RDS_USERNAME,
+  password: process.env.RDS_PASSWORD,
+  port: process.env.RDS_PORT,
 });
 
 connection.connect((err) => {
@@ -48,7 +49,7 @@ connection.connect((err) => {
 // Use the database jacketpages_dev
 connection.query('USE jpdev');
 
-const port = (process.env.port || 8081);
+const port = (process.env.PORT || 8081);
 const server = app.listen(port);
 
 const io = require('socket.io').listen(server);
