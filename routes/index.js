@@ -1,24 +1,21 @@
-const express = require("express");
-const cors = require("cors");
-const mysql = require("mysql");
+const express = require('express');
+
 const router = express.Router();
 
-var connection = mysql.createConnection({
-    host        :   "localhost",
-    user        :   "root",
-    password    :   "password"
-});
+// Load Routes
+const bills = require('./bills');
+const budgets = require('./budgets');
+const users = require('./users');
+const voting = require('./voting');
+const sgaPeople = require('./sgaPeople');
+const organizations = require('./organizations');
 
-connection.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-// Use the database jacketpages_dev
-connection.query("USE jpdev");
-
-//sga people page
-router.get('/sgapeople', function(req, res){    // SGAPEOPLE
-  res.sendfile('public/sgapeople.html');
-});
+// Use Routes
+router.use('/bills', bills);
+router.use('/budgets', budgets);
+router.use('/users', users);
+router.use('/voting', voting);
+router.use('/sgaPeople', sgaPeople);
+router.use('/organizations', organizations);
 
 module.exports = router;

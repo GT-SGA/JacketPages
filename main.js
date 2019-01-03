@@ -35,9 +35,10 @@ app.use(session({
 
 // Connect to the MySQL database
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
+  host: 'aanf3sb0p160r2.cgutnqwmdujn.us-east-1.rds.amazonaws.com',
+  user: 'jacketpages',
   password: 'password',
+  port: '3306',
 });
 
 connection.connect((err) => {
@@ -48,7 +49,7 @@ connection.connect((err) => {
 // Use the database jacketpages_dev
 connection.query('USE jpdev');
 
-const port = (process.env.port || 80);
+const port = (process.env.PORT || 8081);
 const server = app.listen(port);
 
 const io = require('socket.io').listen(server);
@@ -58,16 +59,9 @@ app.use(express.static('public')); // automatically serves static files home.htm
 console.log('Running on port ' + port);
 
 // Load Routes
-const users = require('./routes/users');
-const bills = require('./routes/bills');
-const index = require('./routes/index');
 const auth = require('./routes/auth');
-const voting = require('./routes/voting');
-
+const api = require('./routes');
 
 // Use Routes
-app.use('/users/api', users);
-app.use('/bills', bills);
-app.use('/api', index);
 app.use('/auth', auth);
-app.use('/voting', voting);
+app.use('/api', api);

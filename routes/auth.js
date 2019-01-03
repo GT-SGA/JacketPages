@@ -8,9 +8,10 @@ const CASAuthentication = require('cas-authentication-gt');
 const session = require('express-session');
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
+  host: 'aanf3sb0p160r2.cgutnqwmdujn.us-east-1.rds.amazonaws.com',
+  user: 'jacketpages',
   password: 'password',
+  port: '3306',
 });
 
 connection.connect((err) => {

@@ -2,38 +2,6 @@ import types from './types';
 
 import api from '../../common/api';
 
-const fetchUsersRequest = () => ({
-  type: types.FETCH_USERS_REQUEST,
-  isFetching: true,
-});
-
-const fetchUsersSuccess = users => ({
-  type: types.FETCH_USERS_SUCCESS,
-  isFetching: false,
-  payload: users,
-});
-
-const fetchUsersFailure = error => ({
-  type: types.FETCH_USERS_FAILURE,
-  isFetching: false,
-  error,
-});
-
-const fetchUsers = () => (
-  (dispatch) => {
-    dispatch(fetchUsersRequest());
-    return api.get('/users/api/users')
-      .then((res) => {
-        const users = {};
-        res.data.forEach((user) => {
-          users[user.id] = user;
-        });
-        dispatch(fetchUsersSuccess(users));
-      })
-      .catch(error => dispatch(fetchUsersFailure(error)));
-  }
-);
-
 const fetchSGAPeopleRequest = () => ({
   type: types.FETCH_SGA_PEOPLE_REQUEST,
   isFetching: true,
@@ -53,7 +21,7 @@ const fetchSGAPeopleFailure = error => ({
 const fetchSGAPeople = () => (
   (dispatch) => {
     dispatch(fetchSGAPeopleRequest());
-    return api.get('/users/api/people')
+    return api.get('api/sgaPeople')
       .then(res => dispatch(fetchSGAPeopleSuccess(res)))
       .catch(error => dispatch(fetchSGAPeopleFailure(error)));
   }
@@ -82,6 +50,16 @@ const fetchAgendaBills = () => (
       }));
   }
 );
+
+const fetchOrganizationsRequest = () => ({
+  type: types.FETCH_ORGANIZATIONS_REQUEST,
+})
+
+const fetchOrganizations = () => (
+  (dispatch) => {
+    
+  }
+)
 
 const startBillVotingRequest = () => ({
   type: types.START_BILL_VOTING_REQUEST,
@@ -150,7 +128,7 @@ const vote = (billId, repVote) => (
   (dispatch) => {
     dispatch(voteRequest());
     api.post('/voting/vote', {
-      bill: "875",
+      bill: billId,
       vote: repVote,
     }).then(() => dispatch({
       type: types.VOTE_SUCCESS,
@@ -182,12 +160,12 @@ const getCurrentBill = () => (
 
 const actions = {
   fetchSGAPeople,
-  fetchUsers,
   fetchAgendaBills,
   startBillVoting,
   stopBillVoting,
   vote,
   getCurrentBill,
+  getResults,
 };
 
 export default actions;

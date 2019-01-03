@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import actions from '../redux/auth/actions';
 
 class Masthead extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      admin: false,
-      user: null,
-    };
 
     this.onLogin = this.onLogin.bind(this);
   }
@@ -55,35 +52,45 @@ class Masthead extends Component {
               <div id="nav">
                 <div id="main-menu-wrapper">
                   <ul className="menu">
-                    <li className="expanded first"></li>
-                    <li className="expanded"></li>
+                    <li className="expanded first" />
+                    <li className="expanded" />
                     <AccountTab
-                      user={this.props.auth.user}
+                      user={this.props.user}
                       adminInfo={this.props.adminInfo}
                       repInfo={this.props.repInfo}
                       userInfo={this.props.userInfo}
                     />
-                    <li className="expanded"></li>
+                    <li className="expanded" />
                     <li className="expanded">
-                      <a href="organizations.html"><span>Organizations</span></a>
+                      <a href="/organizations"><span>Organizations</span></a>
                     </li>
-                    <li className="expanded"></li>
+                    <li className="expanded" />
                     <li className="expanded">
                       <a href="/sgapeople"><span>Student Government</span></a>
                       <ul className="menu">
                         <li className="leaf first">
                           <a href="/sgapeople">View SGA Members</a>
                         </li>
-                        {this.props.auth.user &&
-                          (this.props.auth.user.level === 'sga_user' || this.props.auth.user.level === 'admin') &&
-                          (
+                        {this.props.user
+                          && (this.props.user.level === 'sga_user' || this.props.user.level === 'admin')
+                          && (
                             <li className="leaf">
                               <a href="/bill_voting">Vote on Bills</a>
                             </li>
                           )}
+                        {this.props.user && this.props.user.level === 'admin' && (
+                          <li className="leaf">
+                            <a href="/administerBudgets">Administer Budgets</a>
+                          </li>
+                        )}
+                        {this.props.user && this.props.user.level === 'admin' && (
+                          <li className="leaf">
+                            <a href="/budgetSubmissions">Budget Submissions</a>
+                          </li>
+                        )}
                       </ul>
                     </li>
-                    <li className="expanded"></li>
+                    <li className="expanded" />
                     <li className="expanded">
                       <a href="/bills"><span>Bills</span></a>
                       <ul className="menu">
@@ -98,7 +105,7 @@ class Masthead extends Component {
                         </li>
                       </ul>
                     </li>
-                    <li className="expanded"></li>
+                    <li className="expanded" />
                     <li className="expanded">
                       <a href="http://localhost:3000/help"><span>Help</span></a>
                     </li>
@@ -112,6 +119,11 @@ class Masthead extends Component {
     );
   }
 }
+
+Masthead.propTypes = {
+  login: PropTypes.func.isRequired,
+  user: PropTypes.shape,
+};
 
 const AccountTab = (props) => {
   if (props.user) {
@@ -150,8 +162,12 @@ const AccountTab = (props) => {
   );
 };
 
+AccountTab.propTypes = {
+  user: PropTypes.shape,
+};
+
 const mapStateToProps = state => ({
-  auth: state.auth,
+  user: state.auth.user,
 });
 
 const mapDispatchToProps = dispatch => ({
