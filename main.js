@@ -32,10 +32,6 @@ app.use(session({
 // });
 
 /* SERVER & DB SETUP */
-console.log('host', process.env.RDS_HOSTNAME);
-console.log('user', process.env.RDS_USERNAME);
-console.log('password', process.env.RDS_PASSWORD);
-console.log('port', process.env.RDS_PORT);
 
 // Connect to the MySQL database
 const connection = mysql.createConnection({
