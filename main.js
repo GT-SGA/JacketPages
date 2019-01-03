@@ -32,13 +32,17 @@ app.use(session({
 // });
 
 /* SERVER & DB SETUP */
+console.log('host', process.env.RDS_HOSTNAME);
+console.log('user', process.env.RDS_USERNAME);
+console.log('password', process.env.RDS_PASSWORD);
+console.log('port', process.env.RDS_PORT);
 
 // Connect to the MySQL database
 const connection = mysql.createConnection({
-  host: process.env.RDS_HOSTNAME,
-  user: process.env.RDS_USERNAME,
-  password: process.env.RDS_PASSWORD,
-  port: process.env.RDS_PORT,
+  host: 'aanf3sb0p160r2.cgutnqwmdujn.us-east-1.rds.amazonaws.com',
+  user: 'jacketpages',
+  password: 'password',
+  port: '3306',
 });
 
 connection.connect((err) => {
