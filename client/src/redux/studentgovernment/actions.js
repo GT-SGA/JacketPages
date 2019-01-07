@@ -51,16 +51,6 @@ const fetchAgendaBills = () => (
   }
 );
 
-const fetchOrganizationsRequest = () => ({
-  type: types.FETCH_ORGANIZATIONS_REQUEST,
-})
-
-const fetchOrganizations = () => (
-  (dispatch) => {
-    
-  }
-)
-
 const startBillVotingRequest = () => ({
   type: types.START_BILL_VOTING_REQUEST,
 });

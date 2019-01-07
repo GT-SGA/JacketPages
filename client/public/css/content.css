@@ -10,7 +10,7 @@
 /**
  * Horizontal Landing page
  */
-body.node-type-horizontal-landing-page #main .row {
+ body.node-type-horizontal-landing-page #main .row {
   padding: 0;
   max-width: 100%;
 }

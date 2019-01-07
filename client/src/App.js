@@ -9,6 +9,7 @@ import Footer from './common/footer';
 
 import Home from './screens/home';
 import SGAPeople from './screens/studentgovernment/sgapeople';
+import Help from './screens/help';
 
 import Users from './screens/users/users';
 import UsersAdd from './screens/users/usersadd';
@@ -58,6 +59,7 @@ class App extends Component {
                 <Route path="/editOrganization" component={JPEditOrganization} />
                 <Route path="/budgetSubmissions" component={SubmittedBudgets} />
                 <Route path="/administerBudgets" component={AdministerBudgets} />
+                <Route path="/help" component={Help} />
               </div>
             </div>
             <Footer />

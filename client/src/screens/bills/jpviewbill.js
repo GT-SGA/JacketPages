@@ -12,7 +12,6 @@ class JPViewBill extends Component {
   }
 
   render() {
-    console.log('location state', this.props.location);
     const { bill } = this.props.location.state;
 
     return (

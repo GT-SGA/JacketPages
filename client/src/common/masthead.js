@@ -91,20 +91,22 @@ class Masthead extends Component {
                       </ul>
                     </li>
                     <li className="expanded" />
-                    <li className="expanded">
-                      <a href="/bills"><span>Bills</span></a>
-                      <ul className="menu">
-                        <li className="leaf first">
-                          <a href="/create_bill">Submit Bill</a>
-                        </li>
-                        <li className="leaf">
-                          <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
-                        </li>
-                        <li className="leaf last">
-                          <a href="/bills">View All Bills</a>
-                        </li>
-                      </ul>
-                    </li>
+                    {this.props.user && (
+                      <li className="expanded">
+                        <a href="/bills"><span>Bills</span></a>
+                        <ul className="menu">
+                          <li className="leaf first">
+                            <a href="/create_bill">Submit Bill</a>
+                          </li>
+                          <li className="leaf">
+                            <a href="http://jacketpages.gatech.edu/bills/my_bills">View My Bills</a>
+                          </li>
+                          <li className="leaf last">
+                            <a href="/bills">View All Bills</a>
+                          </li>
+                        </ul>
+                      </li>
+                    )}
                     <li className="expanded" />
                     <li className="expanded">
                       <a href="http://localhost:3000/help"><span>Help</span></a>
@@ -123,6 +125,10 @@ class Masthead extends Component {
 Masthead.propTypes = {
   login: PropTypes.func.isRequired,
   user: PropTypes.shape,
+};
+
+Masthead.defaultProps = {
+  user: undefined,
 };
 
 const AccountTab = (props) => {
