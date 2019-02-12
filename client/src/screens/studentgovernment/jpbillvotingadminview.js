@@ -33,7 +33,7 @@ class JPBillVotingAdminView extends Component {
   }
 
   renderBillView() {
-    <p>Organization: {this.state.bill.organization}</p>
+    return <p>Organization: {this.state.bill.organization}</p>
   }
 
   showResults() {
