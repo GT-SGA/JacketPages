@@ -6,6 +6,7 @@
   "scripts": {
     "server": "sudo node ./node_modules/nodemon/bin/nodemon.js main.js",
     "client": "cd client && npm start",
+    "preinstall": "npm install eslint@5.12.0 webpack@4.28.3",
     "start": "node ./node_modules/nodemon/bin/nodemon.js main.js",
     "test": "echo \"Hi\""
   },
